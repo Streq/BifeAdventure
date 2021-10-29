@@ -39,7 +39,7 @@ func request_interact(pawn, direction):
 			var act = get_cell_pawn(cell_target)
 			var pawn_name = act.name
 			print_debug("Cell %s contains %s" % [cell_target, pawn_name])
-			act.interact()
+			act.interact(pawn, direction)
 
 func update_pawn_position(pawn, cell_start, cell_target):
 	set_cellv(cell_target, pawn.type)
