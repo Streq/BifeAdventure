@@ -3,12 +3,16 @@ extends "pawn.gd"
 onready var Grid = get_parent()
 
 var flip_vertical_walk = false
-
+var look_dir : Vector2
 func _ready():
-	update_look_direction(Vector2(1, 0))
+	update_look_direction(Vector2.DOWN)
 
 func _process(delta):
 	var input_direction = get_input_direction()
+	var interact = Input.is_action_just_pressed("A")
+	if interact:
+		Grid.request_interact(self, look_dir)
+	
 	if not input_direction:
 		return
 	update_look_direction(input_direction)
@@ -30,6 +34,7 @@ func get_input_direction():
 
 func update_look_direction(direction):
 #	$Sprite.rotation = direction.angle()
+	look_dir = direction
 	pass
 
 func move_to(target_position):
@@ -71,6 +76,15 @@ func move_to(target_position):
 
 func bump():
 	set_process(false)
-	$AnimationPlayer.play("bump")
+	match look_dir:
+		Vector2.DOWN:
+			$AnimationPlayer.play("idle_down")
+		Vector2.UP:
+			$AnimationPlayer.play("idle_up")
+		Vector2.LEFT:
+			$AnimationPlayer.play("idle_left")
+		Vector2.RIGHT:
+			$AnimationPlayer.play("idle_right")
+#	$AnimationPlayer.play("bump")
 	yield($AnimationPlayer, "animation_finished")
 	set_process(true)

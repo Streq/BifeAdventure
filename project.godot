@@ -13,6 +13,10 @@ config_version=4
 config/name="BifeAdventure"
 config/icon="res://icon.png"
 
+[autoload]
+
+Signals="*res://global/signals/signals.gd"
+
 [display]
 
 window/size/width=320
