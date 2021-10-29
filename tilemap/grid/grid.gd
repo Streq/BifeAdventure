@@ -3,6 +3,8 @@ extends TileMap
 enum { EMPTY = -1, OBSTACLE, ACTOR, OBJECT}
 
 func _ready():
+	self_modulate.a = 0.0
+	update()
 	for child in get_children():
 		set_cellv(world_to_map(child.position), child.type)
 		
