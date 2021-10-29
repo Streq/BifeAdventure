@@ -180,7 +180,7 @@ tracks/0/keys = {
 "values": [ 4, 1 ]
 }
 
-[node name="animation_player" type="AnimationPlayer"]
+[node name="AnimationPlayer" type="AnimationPlayer"]
 autoplay = "idle_down"
 anims/bump = SubResource( 1 )
 anims/idle_down = SubResource( 2 )

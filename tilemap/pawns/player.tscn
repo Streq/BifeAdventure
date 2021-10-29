@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
-[ext_resource path="res://asset/texture/pokemon/pokemon_gsc_overworld_characters_grey.png" type="Texture" id=1]
+[ext_resource path="res://sprite/pokemon_overworld_character_sprite/sprite.tscn" type="PackedScene" id=1]
 [ext_resource path="res://tilemap/pawns/actor.gd" type="Script" id=2]
 [ext_resource path="res://shader/underwater_screen.shader" type="Shader" id=3]
+[ext_resource path="res://sprite/pokemon_overworld_character_sprite/animation_player.tscn" type="PackedScene" id=4]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 3 )
@@ -16,7 +17,7 @@ length = 0.2
 resource_local_to_scene = true
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("Sprite:current_frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -44,7 +45,7 @@ tracks/1/keys = {
 resource_local_to_scene = true
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("Sprite:current_frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -72,7 +73,7 @@ tracks/1/keys = {
 resource_local_to_scene = true
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("Sprite:current_frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -100,7 +101,7 @@ tracks/1/keys = {
 resource_local_to_scene = true
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("Sprite:current_frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -128,7 +129,7 @@ tracks/1/keys = {
 resource_local_to_scene = true
 length = 0.25
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("Sprite:current_frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -144,7 +145,7 @@ tracks/0/keys = {
 resource_local_to_scene = true
 length = 0.25
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("Sprite:current_frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -160,7 +161,7 @@ tracks/0/keys = {
 resource_local_to_scene = true
 length = 0.25
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("Sprite:current_frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -176,7 +177,7 @@ tracks/0/keys = {
 resource_local_to_scene = true
 length = 0.25
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("Sprite:current_frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -191,21 +192,14 @@ tracks/0/keys = {
 [node name="player" type="Node2D"]
 script = ExtResource( 2 )
 
-[node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 1 )
-hframes = 8
-vframes = 77
-frame = 1
-region_rect = Rect2( 2, 2, 16, 16 )
-
-[node name="Camera2D" type="Camera2D" parent="Sprite"]
+[node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2( 8, 0 )
 current = true
 
-[node name="CanvasLayer" type="CanvasLayer" parent="Sprite/Camera2D"]
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
 layer = 6
 
-[node name="ColorRect" type="ColorRect" parent="Sprite/Camera2D/CanvasLayer"]
+[node name="ColorRect" type="ColorRect" parent="Camera2D/CanvasLayer"]
 visible = false
 material = SubResource( 1 )
 margin_right = 160.0
@@ -215,8 +209,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "idle_down"
+[node name="Tween" type="Tween" parent="."]
+
+[node name="Sprite" parent="." instance=ExtResource( 1 )]
+frame = 33
+
+[node name="AnimationPlayer" parent="." instance=ExtResource( 4 )]
 anims/bump = SubResource( 2 )
 anims/idle_down = SubResource( 3 )
 anims/idle_left = SubResource( 4 )
@@ -226,5 +224,3 @@ anims/walk_down = SubResource( 7 )
 anims/walk_left = SubResource( 8 )
 anims/walk_right = SubResource( 9 )
 anims/walk_up = SubResource( 10 )
-
-[node name="Tween" type="Tween" parent="."]

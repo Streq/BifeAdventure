@@ -1,9 +1,8 @@
-tool
 extends Sprite
 
 
 
-onready var idle_down_frame = frame 
+onready var idle_down_frame = frame
 var current_frame := 0 setget set_current_frame
 
 func _process(delta):

@@ -210,5 +210,9 @@ position = Vector2( 104, 88 )
 init_look_dir = 2
 interact_text = PoolStringArray( "hola gordo que onda" )
 
+[node name="peto3" parent="grid" instance=ExtResource( 8 )]
+position = Vector2( 152, -72 )
+interact_text = PoolStringArray( "te re baila el jopo cuando caminas" )
+
 [connection signal="text_display_finished" from="textbox" to="." method="_on_textbox_text_display_finished"]
 [connection signal="text_display_started" from="textbox" to="." method="_on_textbox_text_display_started"]
