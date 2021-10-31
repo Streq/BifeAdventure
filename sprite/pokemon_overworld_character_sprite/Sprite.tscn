@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://asset/texture/pokemon/pokemon_gsc_overworld_characters_grey.png" type="Texture" id=2]
+
+[node name="Sprite" type="Sprite"]
+texture = ExtResource( 2 )
+hframes = 8
+vframes = 77
+frame = 480

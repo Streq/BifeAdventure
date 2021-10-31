@@ -4,6 +4,9 @@ onready var Grid = get_parent()
 
 var flip_vertical_walk = false
 var look_dir : Vector2
+
+onready var anim = $character_sprite/AnimationPlayer
+
 func _ready():
 	update_look_direction(Vector2.DOWN)
 
@@ -47,29 +50,25 @@ func move_to(target_position):
 
 	
 	if (move_direction.x>0):
-		$AnimationPlayer.play("walk_right")
-		$Sprite.flip_h = true
+		anim.play("walk_right")
 	elif (move_direction.x<0):
-		$AnimationPlayer.play("walk_left")
-		$Sprite.flip_h = false
+		anim.play("walk_left")
 	elif (move_direction.y>0):
-		$AnimationPlayer.play("walk_down")
-		$Sprite.flip_h = !$Sprite.flip_h
+		anim.play("walk_down")
 	elif (move_direction.y<0):
-		$AnimationPlayer.play("walk_up")	
-		$Sprite.flip_h = !$Sprite.flip_h
+		anim.play("walk_up")
 	
 	
 	$Tween.interpolate_property(
 		self,"position",
 		position,target_position,
-		$AnimationPlayer.current_animation_length,
+		anim.current_animation_length,
 		Tween.TRANS_LINEAR, Tween.EASE_IN)
 
 	$Tween.start()
 
 	# Stop the function execution until the animation finished
-	yield($AnimationPlayer, "animation_finished")
+	yield(anim, "animation_finished")
 	
 	set_process(true)
 
@@ -78,13 +77,13 @@ func bump():
 	set_process(false)
 	match look_dir:
 		Vector2.DOWN:
-			$AnimationPlayer.play("idle_down")
+			anim.play("idle_down")
 		Vector2.UP:
-			$AnimationPlayer.play("idle_up")
+			anim.play("idle_up")
 		Vector2.LEFT:
-			$AnimationPlayer.play("idle_left")
+			anim.play("idle_left")
 		Vector2.RIGHT:
-			$AnimationPlayer.play("idle_right")
-#	$AnimationPlayer.play("bump")
-	yield($AnimationPlayer, "animation_finished")
+			anim.play("idle_right")
+#	anim.play("bump")
+	yield(anim, "animation_finished")
 	set_process(true)
