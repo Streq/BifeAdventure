@@ -1,15 +1,17 @@
 extends "pawn.gd"
 
 onready var Grid = get_parent()
+onready var anim = $character_sprite/AnimationPlayer
 
 var flip_vertical_walk = false
 var look_dir : Vector2
 
-onready var anim = $character_sprite/AnimationPlayer
+export (float) var speed := 1.0 setget set_speed
+
 
 func _ready():
 	update_look_direction(Vector2.DOWN)
-
+	self.speed = speed
 func _process(delta):
 	var input_direction = get_input_direction()
 	var interact = Input.is_action_just_pressed("A")
@@ -36,7 +38,6 @@ func get_input_direction():
 	return ret
 
 func update_look_direction(direction):
-#	$Sprite.rotation = direction.angle()
 	look_dir = direction
 	pass
 
@@ -46,8 +47,6 @@ func move_to(target_position):
 	# Move the node to the target cell instantly,
 	# and animate the sprite moving from the start to the target cell
 	var move_direction = (target_position - position).normalized()
-	
-
 	
 	if (move_direction.x>0):
 		anim.play("walk_right")
@@ -62,7 +61,7 @@ func move_to(target_position):
 	$Tween.interpolate_property(
 		self,"position",
 		position,target_position,
-		anim.current_animation_length,
+		anim.current_animation_length / anim.get_playing_speed(),
 		Tween.TRANS_LINEAR, Tween.EASE_IN)
 
 	$Tween.start()
@@ -87,3 +86,8 @@ func bump():
 #	anim.play("bump")
 	yield(anim, "animation_finished")
 	set_process(true)
+	
+func set_speed(val):
+	speed = val
+	$character_sprite/AnimationPlayer.playback_speed = val
+	

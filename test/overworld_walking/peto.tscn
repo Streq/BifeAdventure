@@ -9,4 +9,4 @@ script = ExtResource( 2 )
 [node name="Tween" type="Tween" parent="."]
 
 [node name="character_sprite" parent="." instance=ExtResource( 1 )]
-idle_down_frame = 480
+idle_down_frame = 195
