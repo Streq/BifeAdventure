@@ -2,6 +2,8 @@ extends "pawn.gd"
 
 onready var Grid = get_parent()
 onready var anim = $character_sprite/AnimationPlayer
+onready var controller = $controller
+
 
 var flip_vertical_walk = false
 var look_dir : Vector2
@@ -12,30 +14,23 @@ export (float) var speed := 1.0 setget set_speed
 func _ready():
 	update_look_direction(Vector2.DOWN)
 	self.speed = speed
+	
 func _process(delta):
-	var input_direction = get_input_direction()
-	var interact = Input.is_action_just_pressed("A")
+	var move_direction = controller.get_direction(self)
+	var interact = controller.get_interact(self)
 	if interact:
 		Grid.request_interact(self, look_dir)
 	
-	if not input_direction:
+	if not move_direction:
 		return
-	update_look_direction(input_direction)
+	update_look_direction(move_direction)
 
-	var target_position = Grid.request_move(self, input_direction)
+	var target_position = Grid.request_move(self, move_direction)
 	if target_position:
 		move_to(target_position)
 	else:
 		bump()
 
-func get_input_direction():
-	var ret = Vector2(
-		int(Input.is_action_pressed("ui_right")) - int(Input.is_action_pressed("ui_left")),
-		int(Input.is_action_pressed("ui_down")) - int(Input.is_action_pressed("ui_up"))
-	)
-	if ret.x:
-		ret.y = 0
-	return ret
 
 func update_look_direction(direction):
 	look_dir = direction

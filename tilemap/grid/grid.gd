@@ -8,7 +8,7 @@ func _ready():
 		
 func get_cell_pawn(coordinates):
 	for node in get_children():
-		if world_to_map(node.position) == coordinates:
+		if world_to_map(node.grid_position) == coordinates:
 			return(node)
 
 func request_move(pawn, direction):
@@ -44,8 +44,10 @@ func request_interact(pawn, direction):
 func update_pawn_position(pawn, cell_start, cell_target):
 	set_cellv(cell_target, pawn.type)
 	set_cellv(cell_start, EMPTY)
-	return map_to_world(cell_target) + cell_size / 2
-
+	var ret = map_to_world(cell_target) + cell_size / 2
+	pawn.grid_position = ret
+	return ret
+	
 func pause():
 	for child in get_children():
 		child.set_process(false)

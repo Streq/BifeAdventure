@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://test/textbox/textbox_test.gd" type="Script" id=1]
 [ext_resource path="res://textbox/textbox.tscn" type="PackedScene" id=2]
@@ -8,6 +8,8 @@
 [ext_resource path="res://tilemap/grid/grid.tscn" type="PackedScene" id=6]
 [ext_resource path="res://tilemap/pawns/player.tscn" type="PackedScene" id=7]
 [ext_resource path="res://test/overworld_walking/peto.tscn" type="PackedScene" id=8]
+[ext_resource path="res://tilemap/pawns/character.tscn" type="PackedScene" id=9]
+[ext_resource path="res://tilemap/pawns/path_controller.tscn" type="PackedScene" id=10]
 
 [sub_resource type="TileSet" id=1]
 0/name = "pokemon_gsc_tileset_day.png 0"
@@ -198,6 +200,18 @@ tile_data = PoolIntArray( -1441798, 0, 0, -1441797, 0, 0, -1441796, 0, 0, -14417
 
 [node name="player" parent="grid" instance=ExtResource( 7 )]
 position = Vector2( 152, 88 )
+
+[node name="character" parent="grid" instance=ExtResource( 9 )]
+position = Vector2( 152, 72 )
+
+[node name="controller" parent="grid/character" instance=ExtResource( 10 )]
+commands = PoolVector2Array( 6, 0, 0, -6, -6, 0, 0, 6 )
+
+[node name="character2" parent="grid" instance=ExtResource( 9 )]
+position = Vector2( 88, 24 )
+
+[node name="controller" parent="grid/character2" instance=ExtResource( 10 )]
+commands = PoolVector2Array( 3, 3, -3, -3 )
 
 [node name="peto" parent="grid" instance=ExtResource( 8 )]
 position = Vector2( 104, -8 )
