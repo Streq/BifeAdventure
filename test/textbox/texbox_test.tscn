@@ -201,9 +201,6 @@ tile_data = PoolIntArray( -1441798, 0, 0, -1441797, 0, 0, -1441796, 0, 0, -14417
 [node name="player" parent="grid" instance=ExtResource( 7 )]
 position = Vector2( 136, 88 )
 
-[node name="character_sprite" parent="grid/player" index="1"]
-idle_down_frame = 27
-
 [node name="character" parent="grid" instance=ExtResource( 9 )]
 position = Vector2( 152, 88 )
 speed = 1.5
@@ -248,6 +245,5 @@ interact_text = PoolStringArray( "te re baila el jopo cuando caminas" )
 [connection signal="text_display_finished" from="textbox" to="." method="_on_textbox_text_display_finished"]
 [connection signal="text_display_started" from="textbox" to="." method="_on_textbox_text_display_started"]
 
-[editable path="grid/player"]
 [editable path="grid/character3"]
 [editable path="grid/character2"]
