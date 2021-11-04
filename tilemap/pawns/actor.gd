@@ -78,7 +78,6 @@ func bump():
 			anim.play("idle_left")
 		Vector2.RIGHT:
 			anim.play("idle_right")
-#	anim.play("bump")
 	yield(anim, "animation_finished")
 	set_process(true)
 	

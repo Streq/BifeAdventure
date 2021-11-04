@@ -4,26 +4,25 @@ enum Type{
 	ONCE, LOOP, BACK_FORTH
 }
 export (Type) var type := Type.ONCE
-export (PoolVector2Array) var commands := PoolVector2Array()
+export (PoolVector2Array) var path := PoolVector2Array()
 
-var current_index = 0
-var current_command = Vector2.ZERO
+var current_index = -1
+var current_distance := Vector2.ZERO
+var current_target := Vector2.ZERO
 
-func get_direction(_actor) -> Vector2:
-	if current_command == Vector2.ZERO:
-		current_command = commands[current_index]
-		current_index = (current_index + 1) % commands.size()
+func get_direction(actor) -> Vector2:
+	current_distance = current_target - actor.grid_position
 	
-	var ret = current_command
+	if current_distance == Vector2.ZERO or current_index < 0:
+		current_index = (current_index + 1) % path.size()
+		current_distance = path[current_index]
+		current_target = actor.grid_position + current_distance
 	
-	if abs(ret.x) > abs(ret.y):
-		ret.y = 0
+	if abs(current_distance.x) > abs(current_distance.y):
+		return Vector2(sign(current_distance.x),0)
 	else: 
-		ret.x = 0
-	ret = Vector2(sign(ret.x), sign(ret.y))
-	
-	current_command -= ret
-	return ret
+		return Vector2(0,sign(current_distance.y))
+
 
 func get_interact(_actor) -> bool:
 	return false
