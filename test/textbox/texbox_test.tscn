@@ -227,6 +227,42 @@ idle_down_frame = 69
 [node name="controller" parent="grid/character2" instance=ExtResource( 10 )]
 path = PoolVector2Array( -1, -1, 1, 1 )
 
+[node name="character4" parent="grid" instance=ExtResource( 9 )]
+position = Vector2( 280, 8 )
+
+[node name="character_sprite" parent="grid/character4" index="1"]
+idle_down_frame = 69
+
+[node name="controller" parent="grid/character4" instance=ExtResource( 10 )]
+path = PoolVector2Array( -1, -1, 1, 1 )
+
+[node name="character5" parent="grid" instance=ExtResource( 9 )]
+position = Vector2( 280, -24 )
+
+[node name="character_sprite" parent="grid/character5" index="1"]
+idle_down_frame = 69
+
+[node name="controller" parent="grid/character5" instance=ExtResource( 10 )]
+path = PoolVector2Array( -1, -1, 1, 1 )
+
+[node name="character6" parent="grid" instance=ExtResource( 9 )]
+position = Vector2( 280, -56 )
+
+[node name="character_sprite" parent="grid/character6" index="1"]
+idle_down_frame = 69
+
+[node name="controller" parent="grid/character6" instance=ExtResource( 10 )]
+path = PoolVector2Array( -1, -1, 1, 1 )
+
+[node name="character7" parent="grid" instance=ExtResource( 9 )]
+position = Vector2( 280, -88 )
+
+[node name="character_sprite" parent="grid/character7" index="1"]
+idle_down_frame = 69
+
+[node name="controller" parent="grid/character7" instance=ExtResource( 10 )]
+path = PoolVector2Array( -1, -1, 1, 1 )
+
 [node name="peto" parent="grid" instance=ExtResource( 8 )]
 position = Vector2( 104, -8 )
 init_look_dir = 1
@@ -247,3 +283,7 @@ interact_text = PoolStringArray( "te re baila el jopo cuando caminas" )
 
 [editable path="grid/character3"]
 [editable path="grid/character2"]
+[editable path="grid/character4"]
+[editable path="grid/character5"]
+[editable path="grid/character6"]
+[editable path="grid/character7"]
