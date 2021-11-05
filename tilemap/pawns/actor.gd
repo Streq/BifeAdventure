@@ -4,10 +4,12 @@ onready var Grid = get_parent()
 onready var anim = $character_sprite/AnimationPlayer
 onready var controller = $controller
 onready var interact_action = $interact_action
+onready var tween = $Tween
 
 
 var flip_vertical_walk = false
 var look_dir : Vector2
+var moving := false
 
 export (float) var speed := 1.0 setget set_speed
 
@@ -21,6 +23,8 @@ func interact(pawn, direction):
 		interact_action.interact(self, pawn, direction)
 	
 func _process(delta):
+	if moving:
+		return
 	var move_direction = controller.get_direction(self)
 	var interact = controller.get_interact(self)
 	if interact:
@@ -42,7 +46,7 @@ func update_look_direction(direction):
 	pass
 
 func move_to(target_position):
-	set_process(false)
+	moving = true
 	
 	# Move the node to the target cell instantly,
 	# and animate the sprite moving from the start to the target cell
@@ -58,18 +62,18 @@ func move_to(target_position):
 		anim.play("walk_up")
 	
 	
-	$Tween.interpolate_property(
+	tween.interpolate_property(
 		self,"position",
 		position,target_position,
 		anim.current_animation_length / anim.get_playing_speed(),
 		Tween.TRANS_LINEAR, Tween.EASE_IN)
 
-	$Tween.start()
+	tween.start()
 
 	# Stop the function execution until the animation finished
 	yield(anim, "animation_finished")
 	
-	set_process(true)
+	moving = false
 
 
 func bump():

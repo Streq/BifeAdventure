@@ -11,6 +11,7 @@ config_version=4
 [application]
 
 config/name="BifeAdventure"
+run/main_scene="res://test/textbox/texbox_test.tscn"
 config/icon="res://icon.png"
 
 [autoload]
