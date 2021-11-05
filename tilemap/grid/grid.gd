@@ -2,16 +2,23 @@ extends TileMap
 
 enum { EMPTY = -1, OBSTACLE, ACTOR, OBJECT}
 
+var pause = false
+
+
 func _ready():
 	for child in get_children():
-		set_cellv(world_to_map(child.position), child.type)
+		var tile = world_to_map(child.position)
+		set_cellv(tile, child.type)
+		child.grid_position = tile
 		
 func get_cell_pawn(coordinates):
 	for node in get_children():
-		if world_to_map(node.position) == coordinates:
+		if node.grid_position == coordinates:
 			return(node)
 
 func request_move(pawn, direction):
+	if pause:
+		direction = Vector2.ZERO
 	var cell_start = world_to_map(pawn.position)
 	var cell_target = cell_start + direction
 	
@@ -24,9 +31,9 @@ func request_move(pawn, direction):
 			object_pawn.queue_free()
 			return update_pawn_position(pawn, cell_start, cell_target)
 		ACTOR:
-			var pawn_name = get_cell_pawn(cell_target).name
-			print_debug("Cell %s contains %s" % [cell_target, pawn_name])
-
+#			var pawn_name = get_cell_pawn(cell_target).name
+#			print_debug("Cell %s contains %s" % [cell_target, pawn_name])
+			pass
 func request_interact(pawn, direction):
 	var cell_start = world_to_map(pawn.position)
 	var cell_target = cell_start + direction
@@ -44,11 +51,16 @@ func request_interact(pawn, direction):
 func update_pawn_position(pawn, cell_start, cell_target):
 	set_cellv(cell_target, pawn.type)
 	set_cellv(cell_start, EMPTY)
+	pawn.grid_position = cell_target
 	return map_to_world(cell_target) + cell_size / 2
-
+	
 func pause():
+	pause = true
 	for child in get_children():
 		child.set_process(false)
+	pass
 func unpause():
+	pause = false
 	for child in get_children():
 		child.set_process(true)
+	pass
