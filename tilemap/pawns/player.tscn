@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://tilemap/pawns/input_controller.tscn" type="PackedScene" id=1]
+[ext_resource path="res://tilemap/pawns/controller/input_controller.tscn" type="PackedScene" id=1]
 [ext_resource path="res://tilemap/pawns/character.tscn" type="PackedScene" id=2]
 [ext_resource path="res://shader/underwater_screen.shader" type="Shader" id=3]
 
