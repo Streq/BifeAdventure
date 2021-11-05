@@ -14,8 +14,8 @@ func display_text(text):
 
 
 func _on_textbox_text_display_started(textbox):
-	$grid.pause()
+	get_tree().paused=true
 
 
 func _on_textbox_text_display_finished(textbox):
-	$grid.unpause()
+	get_tree().paused=false
