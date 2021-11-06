@@ -1,11 +1,11 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://autotile/terrain_simple.tscn" type="PackedScene" id=1]
-[ext_resource path="res://asset/texture/pokemon/pokemon_gsc_overworld_characters.png" type="Texture" id=2]
+[ext_resource path="res://asset/texture/dude_sheet.png" type="Texture" id=2]
 [ext_resource path="res://test/fighting/fighter.gd" type="Script" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 8, 8 )
+extents = Vector2( 5, 5 )
 
 [node name="Node2D" type="Node2D"]
 
@@ -21,6 +21,5 @@ shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="fighter"]
 texture = ExtResource( 2 )
-hframes = 52
-vframes = 77
-frame = 2
+hframes = 8
+vframes = 8

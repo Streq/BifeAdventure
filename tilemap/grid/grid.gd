@@ -11,6 +11,11 @@ func _ready():
 		var tile = world_to_map(child.position)
 		set_cellv(tile, child.type)
 		child.grid_position = tile
+	if Globals.spawn_tile:
+		var players = get_tree().get_nodes_in_group("player")
+		if players:
+			var player = players[0]
+			set_pawn_tile(player, Globals.spawn_tile)
 		
 func get_cell_pawn(coordinates):
 	for node in get_children():
@@ -37,6 +42,8 @@ func request_move(pawn, direction):
 #			print_debug("Cell %s contains %s" % [cell_target, pawn_name])
 			pass
 	
+func set_pawn_tile(pawn, tile):
+	pawn.position = update_pawn_position(pawn, pawn.grid_position, tile)
 
 func request_interact(pawn, direction):
 	var cell_start = world_to_map(pawn.position)
