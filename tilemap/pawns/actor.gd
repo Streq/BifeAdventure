@@ -1,5 +1,9 @@
 extends "pawn.gd"
 
+signal start_step()
+signal finish_step()
+
+
 onready var Grid = get_parent()
 onready var anim = $character_sprite/AnimationPlayer
 onready var controller = $controller
@@ -47,10 +51,11 @@ func update_look_direction(direction):
 
 func move_to(target_position):
 	moving = true
+	emit_signal("start_step")
 	
 	# Move the node to the target cell instantly,
 	# and animate the sprite moving from the start to the target cell
-	var move_direction = (target_position - position).normalized()
+	var move_direction = (target_position - position)
 	
 	if (move_direction.x>0):
 		anim.play("walk_right")
@@ -71,13 +76,16 @@ func move_to(target_position):
 	tween.start()
 
 	# Stop the function execution until the animation finished
-	yield(anim, "animation_finished")
+	yield(tween, "tween_all_completed")
 	
+	
+	emit_signal("finish_step")
 	moving = false
+	
 
 
 func bump():
-	set_process(false)
+	moving = true
 	match look_dir:
 		Vector2.DOWN:
 			anim.play("idle_down")
@@ -88,8 +96,7 @@ func bump():
 		Vector2.RIGHT:
 			anim.play("idle_right")
 	yield(anim, "animation_finished")
-	set_process(true)
-
+	moving = false
 func turn(direction):
 	look_dir = direction
 	match direction:
