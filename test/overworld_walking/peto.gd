@@ -16,7 +16,6 @@ var look_dir := Vector2.DOWN
 func interact(_pawn, direction):
 	turn(-direction)
 	Signals.emit_signal("display_text", interact_text)
-	set_process(false)
 
 func _ready():
 	init_look_dir = DIRS[init_look_dir]

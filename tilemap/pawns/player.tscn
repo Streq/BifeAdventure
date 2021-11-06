@@ -1,14 +1,17 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://tilemap/pawns/controller/input_controller.tscn" type="PackedScene" id=1]
 [ext_resource path="res://tilemap/pawns/character.tscn" type="PackedScene" id=2]
 [ext_resource path="res://shader/underwater_screen.shader" type="Shader" id=3]
+[ext_resource path="res://tilemap/pawns/step_counter.gd" type="Script" id=4]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 3 )
 shader_param/blue = 1.0
 
-[node name="player" instance=ExtResource( 2 )]
+[node name="player" groups=[
+"player",
+] instance=ExtResource( 2 )]
 
 [node name="character_sprite" parent="." index="1"]
 idle_down_frame = 410
@@ -31,3 +34,8 @@ color = Color( 1, 1, 1, 0 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="step_counter" type="Node" parent="." index="4"]
+script = ExtResource( 4 )
+
+[connection signal="finish_step" from="." to="step_counter" method="_on_player_finish_step"]
