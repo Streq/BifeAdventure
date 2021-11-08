@@ -50,7 +50,7 @@ func _process(delta):
 			elif textbox_container.visible:
 				hide_textbox()
 		State.READING:
-#			print_debug(label.percent_visible)
+			print_debug(label.percent_visible)
 			if Input.is_action_just_pressed("A"):
 				end_tween_early()
 		State.FINISHED:
@@ -118,13 +118,14 @@ func tween_text():
 #	end_tween_early()
 
 func end_tween_early():
+	$tween.remove_all()
 	label.percent_visible = 1.0
-	$tween.stop_all()
 	finished_reading()
 
 func _on_Tween_tween_completed(object, key):
 	finished_reading()
 
 func finished_reading():
+	emit_signal("text_panel_finished", self)
 	end_symbol.text = "v" if !text_queue.empty() or (label.get_line_count() - label.lines_skipped > max_lines) else ""
 	change_state(State.FINISHED)

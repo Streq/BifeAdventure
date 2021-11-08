@@ -4,7 +4,7 @@ var index = 0
 
 func _ready():
 	$textbox.connect("text_panel_started", self, "next_step")
-	$textbox.connect("text_panel_end", self, "next_step")
+	$textbox.connect("text_panel_finished", self, "next_step")
 	
 	$textbox.add_texts(["En un mundo donde nadie es feliz, y la gente solo sabe llorar,"])
 	$textbox.add_texts(["nace Bife","Un ser con el poder de curar la tristeza con trompadas."])
