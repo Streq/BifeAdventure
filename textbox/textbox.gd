@@ -8,9 +8,10 @@ characters
 
 signal text_display_started(textbox)
 signal text_display_finished(textbox)
+signal text_panel_started(textbox)
+signal text_panel_finished(textbox)
 
-
-const CHAR_READ_RATE = 0.01
+export var CHAR_READ_RATE := 0.01
 enum State {
 	READY,
 	READING,
@@ -49,7 +50,7 @@ func _process(delta):
 			elif textbox_container.visible:
 				hide_textbox()
 		State.READING:
-			print_debug(label.percent_visible)
+#			print_debug(label.percent_visible)
 			if Input.is_action_just_pressed("A"):
 				end_tween_early()
 		State.FINISHED:
@@ -85,6 +86,8 @@ func show_textbox():
 func display_text():
 	if !textbox_container.visible:
 		emit_signal("text_display_started", self)
+	
+	emit_signal("text_panel_started", self)
 	var next_text = text_queue.pop_front()
 	label.text = next_text
 	label.lines_skipped = 0

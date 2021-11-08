@@ -9,9 +9,7 @@
 shader = ExtResource( 3 )
 shader_param/blue = 1.0
 
-[node name="player" groups=[
-"player",
-] instance=ExtResource( 2 )]
+[node name="player" groups=["player"] instance=ExtResource( 2 )]
 
 [node name="character_sprite" parent="." index="1"]
 idle_down_frame = 410
