@@ -14,8 +14,8 @@ func display_text(text):
 
 
 func _on_textbox_text_display_started(textbox):
-	get_tree().paused=true
+	get_tree().paused = true
 
 
 func _on_textbox_text_display_finished(textbox):
-	get_tree().paused=false
+	get_tree().paused = false
