@@ -8,9 +8,10 @@ characters
 
 signal text_display_started(textbox)
 signal text_display_finished(textbox)
+signal text_panel_started(textbox)
+signal text_panel_finished(textbox)
 
-
-const CHAR_READ_RATE = 0.01
+export var CHAR_READ_RATE := 0.01
 enum State {
 	READY,
 	READING,
@@ -85,6 +86,8 @@ func show_textbox():
 func display_text():
 	if !textbox_container.visible:
 		emit_signal("text_display_started", self)
+	
+	emit_signal("text_panel_started", self)
 	var next_text = text_queue.pop_front()
 	label.text = next_text
 	label.lines_skipped = 0
@@ -115,13 +118,14 @@ func tween_text():
 #	end_tween_early()
 
 func end_tween_early():
+	$tween.remove_all()
 	label.percent_visible = 1.0
-	$tween.stop_all()
 	finished_reading()
 
 func _on_Tween_tween_completed(object, key):
 	finished_reading()
 
 func finished_reading():
+	emit_signal("text_panel_finished", self)
 	end_symbol.text = "v" if !text_queue.empty() or (label.get_line_count() - label.lines_skipped > max_lines) else ""
 	change_state(State.FINISHED)
