@@ -10,3 +10,5 @@ func update(delta):
 	p.velocity.y -= p.jump
 	
 	emit_signal("finished", "air", null)
+
+	

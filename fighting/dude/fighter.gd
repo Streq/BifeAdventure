@@ -5,7 +5,8 @@ var speed := 200
 var speed_lerp := 2
 var idle_lerp := 8
 var jump := 200
-var gravity := 300
+var wall_jump := jump
+var gravity := 400
 
 var dir = 1.0
 
