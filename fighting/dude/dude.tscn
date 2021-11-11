@@ -144,8 +144,6 @@ script = ExtResource( 8 )
 
 [node name="wall" type="Node" parent="state"]
 script = ExtResource( 11 )
-angle_up = 45.0
-angle_down = -45.0
 
 [node name="wall_jump" type="Node" parent="state"]
 script = ExtResource( 12 )
