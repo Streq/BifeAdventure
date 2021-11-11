@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://fighting/dude/fighter.gd" type="Script" id=1]
 [ext_resource path="res://fighting/dude/idle.gd" type="Script" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://asset/theme/white_black_text.tres" type="Theme" id=9]
 [ext_resource path="res://fighting/dude/state_label.gd" type="Script" id=10]
 [ext_resource path="res://fighting/dude/wall.gd" type="Script" id=11]
+[ext_resource path="res://fighting/dude/wall_jump.gd" type="Script" id=12]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 4.5 )
@@ -45,6 +46,22 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "jump"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 16 ]
 }
 
 [sub_resource type="Animation" id=4]
@@ -99,6 +116,7 @@ __meta__ = {
 texture = ExtResource( 5 )
 hframes = 8
 vframes = 8
+frame = 17
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 0.5 )
@@ -126,19 +144,17 @@ script = ExtResource( 8 )
 
 [node name="wall" type="Node" parent="state"]
 script = ExtResource( 11 )
-angle_up = 60.0
-angle_neutral = 45.0
-angle_down = -30.0
+angle_up = 45.0
+angle_down = -45.0
 
-[node name="Line2D" type="Line2D" parent="state/wall"]
-rotation = -0.785398
-points = PoolVector2Array( 10, 0, 0, 0 )
-width = 1.0
+[node name="wall_jump" type="Node" parent="state"]
+script = ExtResource( 12 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "idle"
 anims/air = SubResource( 3 )
 anims/idle = SubResource( 2 )
+anims/jump = SubResource( 6 )
 anims/run = SubResource( 4 )
 anims/wall = SubResource( 5 )
 

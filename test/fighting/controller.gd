@@ -8,6 +8,9 @@ func get_direction():
 
 func get_jump():
 	return Input.is_action_just_pressed("A")
+	
+func is_pressing_jump():
+	return Input.is_action_pressed("A")
 
 func get_attack():
 	return Input.is_action_just_pressed("B")

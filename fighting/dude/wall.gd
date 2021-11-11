@@ -1,12 +1,5 @@
 extends "res://util/state/state.gd"
 
-export var angle_up := 0.0
-export var angle_neutral := 0.0
-export var angle_down := 0.0
-
-onready var jump_vec_up := Vector2(cos(deg2rad(angle_up)),sin(deg2rad(angle_up)))
-onready var jump_vec_neutral := Vector2(cos(deg2rad(angle_neutral)),sin(deg2rad(angle_neutral)))
-onready var jump_vec_down := Vector2(cos(deg2rad(angle_down)),sin(deg2rad(angle_down)))
 
 func enter():
 	owner.get_node("AnimationPlayer").play("wall")
@@ -31,13 +24,5 @@ func update(delta):
 	elif !p.is_on_wall():
 		emit_signal("finished", "air", null)
 	elif jump:
-		p.dir = -p.dir
-		var jump_vec
-		match input_direction.y:
-			-1.0: 
-				jump_vec = jump_vec_up
-			0.0: 
-				jump_vec = jump_vec_neutral
-			1.0: 
-				jump_vec = jump_vec_down
-		p.velocity += Vector2(p.dir, -1) * jump_vec * p.wall_jump
+		emit_signal("finished", "wall_jump", null)
+	
