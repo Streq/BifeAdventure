@@ -2,7 +2,8 @@ extends "res://util/state/state.gd"
 
 
 func enter():
-	owner.get_node("AnimationPlayer").play("idle")
+	owner.get_node("AnimationPlayer").stop()
+	owner.get_node("AnimationPlayer").play("jab")
 
 func update(delta):
 	var p = owner
