@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 var max_health := 100
-var speed := 200
+var speed := 300
 var speed_lerp := 2
 var idle_lerp := 8
 var jump := 200
