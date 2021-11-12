@@ -12,6 +12,7 @@ func update(delta):
 	
 	var input_direction = controller.get_direction()
 	var jump = controller.get_jump()
+	var pressing_jump = controller.is_pressing_jump()
 	
 	p.velocity.x = lerp(p.velocity.x, p.speed*input_direction.x, delta * p.speed_lerp * 0.5)
 	p.velocity.y = lerp(p.velocity.y, 0, delta*5)

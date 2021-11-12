@@ -7,8 +7,8 @@ var active_hitbox := false
 
 func enter():
 	owner.get_node("AnimationPlayer").stop()
-	owner.get_node("AnimationPlayer").play("jab")
-	owner.velocity.x += 50.0*owner.dir
+	owner.get_node("AnimationPlayer").play("air_kick")
+#	owner.velocity.x += 50.0*owner.dir
 	hitbox = jab.instance()
 
 func update(delta):
@@ -21,13 +21,12 @@ func update(delta):
 	var jump = controller.get_jump()
 	var attack = controller.get_attack()
 	
-	p.velocity.x = lerp(p.velocity.x, 0,  delta * p.idle_lerp)
 	
-	if !p.is_on_floor():
-		emit_signal("finished", "air", null)
+	if p.is_on_floor():
+		emit_signal("finished", "idle", null)
 
 func _on_animation_finished(anim_name):
-	emit_signal("finished", "idle", null)
+	emit_signal("finished", "air", null)
 func exit():
 	deactivate_hitbox()
 	

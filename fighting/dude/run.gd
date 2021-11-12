@@ -11,12 +11,14 @@ func update(delta):
 	
 	var input_direction = controller.get_direction()
 	var jump = controller.get_jump()
-	
+	var attack = controller.get_attack()
 	
 	p.velocity.x = lerp(p.velocity.x, p.speed*input_direction.x, delta * p.speed_lerp)
 	
 	if p.is_on_floor():
-		if jump:
+		if attack:
+			emit_signal("finished", "jab", null)
+		elif jump:
 			emit_signal("finished", "jump", null)
 		elif !input_direction.x:
 			emit_signal("finished", "idle", null)
