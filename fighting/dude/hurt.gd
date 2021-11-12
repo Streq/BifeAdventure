@@ -2,7 +2,6 @@ extends "res://util/state/state.gd"
 
 func enter():
 	owner.get_node("AnimationPlayer").play("hurt")
-	owner.velocity += Vector2(-owner.dir, -1)*100
 	
 func update(delta):
 	var p = owner

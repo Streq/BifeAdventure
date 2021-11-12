@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://fighting/dude/fighter.gd" type="Script" id=1]
 [ext_resource path="res://fighting/dude/idle.gd" type="Script" id=2]
@@ -14,6 +14,8 @@
 [ext_resource path="res://fighting/dude/wall_jump.gd" type="Script" id=12]
 [ext_resource path="res://fighting/dude/hurt.gd" type="Script" id=13]
 [ext_resource path="res://fighting/dude/jab.gd" type="Script" id=14]
+[ext_resource path="res://fighting/dude/attacks/jab.tscn" type="PackedScene" id=15]
+[ext_resource path="res://fighting/dude/air_kick.gd" type="Script" id=16]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 4.5 )
@@ -32,6 +34,36 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ 17 ]
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "air_kick"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 50 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("state/air_kick")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "activate_hitbox"
+} ]
 }
 
 [sub_resource type="Animation" id=7]
@@ -68,6 +100,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=8]
 resource_name = "jab"
+length = 0.18
 step = 0.001
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -76,10 +109,27 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.03, 0.07 ),
+"times": PoolRealArray( 0, 0.03, 0.15 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ 40, 41, 40 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("state/jab")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.03, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "activate_hitbox"
+}, {
+"args": [  ],
+"method": "deactivate_hitbox"
+} ]
 }
 
 [sub_resource type="Animation" id=6]
@@ -131,7 +181,8 @@ tracks/0/keys = {
 "values": [ 18 ]
 }
 
-[node name="dude" type="KinematicBody2D"]
+[node name="dude" type="KinematicBody2D" groups=["fighter"]]
+collision_mask = 0
 script = ExtResource( 1 )
 
 [node name="state_label" type="Label" parent="."]
@@ -150,7 +201,7 @@ __meta__ = {
 texture = ExtResource( 5 )
 hframes = 8
 vframes = 8
-frame = 41
+frame = 50
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 0.5 )
@@ -177,6 +228,11 @@ script = ExtResource( 13 )
 
 [node name="jab" type="Node" parent="state"]
 script = ExtResource( 14 )
+jab = ExtResource( 15 )
+
+[node name="air_kick" type="Node" parent="state"]
+script = ExtResource( 16 )
+jab = ExtResource( 15 )
 
 [node name="wall" type="Node" parent="state"]
 script = ExtResource( 11 )
@@ -187,6 +243,7 @@ script = ExtResource( 12 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "idle"
 anims/air = SubResource( 3 )
+anims/air_kick = SubResource( 9 )
 anims/hurt = SubResource( 7 )
 anims/idle = SubResource( 2 )
 anims/jab = SubResource( 8 )
@@ -197,4 +254,7 @@ anims/wall = SubResource( 5 )
 [node name="controller" type="Node" parent="."]
 script = ExtResource( 4 )
 
+[node name="Area2D" type="Area2D" parent="."]
+
 [connection signal="state_changed" from="state" to="state_label" method="_on_state_state_changed"]
+[connection signal="animation_finished" from="AnimationPlayer" to="state" method="_on_animation_finished"]
