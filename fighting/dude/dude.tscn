@@ -112,7 +112,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.03, 0.15 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ 40, 41, 40 ]
+"values": [ 24, 41, 40 ]
 }
 tracks/1/type = "method"
 tracks/1/path = NodePath("state/jab")
@@ -201,7 +201,7 @@ __meta__ = {
 texture = ExtResource( 5 )
 hframes = 8
 vframes = 8
-frame = 50
+frame = 40
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 0.5 )
@@ -251,7 +251,7 @@ anims/jump = SubResource( 6 )
 anims/run = SubResource( 4 )
 anims/wall = SubResource( 5 )
 
-[node name="controller" type="Node" parent="."]
+[node name="controller" type="Node" parent="." groups=["controller"]]
 script = ExtResource( 4 )
 
 [node name="Area2D" type="Area2D" parent="."]
