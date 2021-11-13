@@ -11,4 +11,4 @@ func get_direction(_actor) -> Vector2:
 	return ret
 	
 func get_interact(_actor) -> bool:
-	return Input.is_action_just_pressed("A")
+	return Input.is_action_just_pressed("A0")

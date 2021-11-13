@@ -33,7 +33,6 @@ func get_attack():
 func _input(event):
 	if !event.is_echo():
 		if event.is_action(A):
-			print_debug("A")
 			buttonA.pressed(event.is_pressed())
 		if event.is_action(B):
 			buttonB.pressed(event.is_pressed())

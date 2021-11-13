@@ -27,7 +27,7 @@ _global_script_class_icons={
 [application]
 
 config/name="BifeAdventure"
-run/main_scene="res://test/fighting/fighting.tscn"
+run/main_scene="res://test/textbox/texbox_test.tscn"
 config/icon="res://icon.png"
 
 [autoload]
