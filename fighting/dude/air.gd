@@ -14,7 +14,12 @@ func update(delta):
 	var jump = controller.get_jump()
 	var attack = controller.get_attack()
 	
-	p.velocity.x = lerp(p.velocity.x, p.speed*input_direction.x, delta * p.speed_lerp * 0.5)
+	if(input_direction.x):
+		p.velocity.x = lerp(p.velocity.x, p.speed*input_direction.x, delta * p.air_speed_lerp)
+	else:
+		p.velocity.x = lerp(p.velocity.x, 0, delta * p.air_idle_lerp)
+	
+	
 	if attack:
 		emit_signal("finished", "air_kick", null)
 	elif p.is_on_floor():
