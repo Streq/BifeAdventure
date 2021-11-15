@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://fighting/dude/fighter.gd" type="Script" id=1]
 [ext_resource path="res://fighting/dude/idle.gd" type="Script" id=2]
@@ -16,6 +16,10 @@
 [ext_resource path="res://fighting/dude/jab.gd" type="Script" id=14]
 [ext_resource path="res://fighting/dude/attacks/jab.tscn" type="PackedScene" id=15]
 [ext_resource path="res://fighting/dude/air_kick.gd" type="Script" id=16]
+[ext_resource path="res://fighting/dude/attacks/kick.tscn" type="PackedScene" id=17]
+[ext_resource path="res://fighting/dude/attacks/jab_attack.tscn" type="PackedScene" id=18]
+[ext_resource path="res://fighting/dude/attack_list.gd" type="Script" id=19]
+[ext_resource path="res://fighting/dude/attacks/kick_attack.tscn" type="PackedScene" id=20]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 4.5 )
@@ -186,6 +190,7 @@ collision_mask = 0
 script = ExtResource( 1 )
 
 [node name="state_label" type="Label" parent="."]
+visible = false
 margin_left = -20.0
 margin_top = -16.0
 margin_right = 20.0
@@ -232,13 +237,20 @@ jab = ExtResource( 15 )
 
 [node name="air_kick" type="Node" parent="state"]
 script = ExtResource( 16 )
-jab = ExtResource( 15 )
+jab = ExtResource( 17 )
 
 [node name="wall" type="Node" parent="state"]
 script = ExtResource( 11 )
 
 [node name="wall_jump" type="Node" parent="state"]
 script = ExtResource( 12 )
+
+[node name="attack_list" type="Node" parent="."]
+script = ExtResource( 19 )
+
+[node name="kick_attack" parent="attack_list" instance=ExtResource( 20 )]
+
+[node name="jab" parent="attack_list" instance=ExtResource( 18 )]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "idle"
