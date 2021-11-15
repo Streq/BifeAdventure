@@ -12,7 +12,6 @@ func update(delta):
 	
 	var input_direction = controller.get_direction()
 	var jump = controller.get_jump()
-	var attack = controller.get_attack()
 	
 	if(input_direction.x):
 		p.velocity.x = lerp(p.velocity.x, p.speed*input_direction.x, delta * p.air_speed_lerp)
@@ -20,9 +19,7 @@ func update(delta):
 		p.velocity.x = lerp(p.velocity.x, 0, delta * p.air_idle_lerp)
 	
 	
-	if attack:
-		emit_signal("finished", "air_kick", null)
-	elif p.is_on_floor():
+	if p.is_on_floor():
 		emit_signal("finished", "idle", null)
 	elif p.is_on_wall():
 		var count = p.get_slide_count()

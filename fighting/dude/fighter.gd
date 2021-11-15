@@ -10,6 +10,10 @@ export var jump :float = 200
 export var wall_jump :float = 200
 export var gravity :float = 400
 
+onready var state = $state
+onready var sprite = $Sprite
+onready var controller = $controller
+
 var _break = true
 
 var dir = 1.0
@@ -22,7 +26,7 @@ var velocity := Vector2.ZERO
 func _move(delta):
 	velocity.y += gravity*delta
 	velocity = move_and_slide(velocity, Vector2.UP)
-	$Sprite.flip_h = dir < 0.0
+	sprite.flip_h = dir < 0.0
 	if is_on_floor() and velocity.y > 0 or is_on_ceiling() and velocity.y < 0:
 		velocity.y = 0
 	if is_on_wall():

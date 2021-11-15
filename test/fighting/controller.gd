@@ -12,6 +12,10 @@ onready var B = "B"+str(pj)
 onready var buttonA = InputButton.new()
 onready var buttonB = InputButton.new()
 
+var attack:bool setget,get_attack
+var jump:bool setget,get_jump
+var direction:Vector2 setget,get_direction
+
 func _init():
 	process_priority = 10
 
