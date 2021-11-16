@@ -11,3 +11,4 @@ func check_satisfy():
 
 func enter():
 	owner.state._change_state(state_to, null)
+	
