@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=2]
-
-[ext_resource path="res://fighting/dude/attacks/tilt_attack.gd" type="Script" id=1]
-
-[node name="kick_attack" type="Node"]
-script = ExtResource( 1 )
-states_from = PoolStringArray( "air" )
-state_to = "air_kick"

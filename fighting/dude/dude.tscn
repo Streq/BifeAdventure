@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://fighting/dude/fighter.gd" type="Script" id=1]
 [ext_resource path="res://fighting/dude/idle.gd" type="Script" id=2]
@@ -17,9 +17,10 @@
 [ext_resource path="res://fighting/dude/attacks/jab.tscn" type="PackedScene" id=15]
 [ext_resource path="res://fighting/dude/air_kick.gd" type="Script" id=16]
 [ext_resource path="res://fighting/dude/attacks/kick.tscn" type="PackedScene" id=17]
-[ext_resource path="res://fighting/dude/attacks/jab_attack.tscn" type="PackedScene" id=18]
+[ext_resource path="res://fighting/dude/attacks/input_patterns/tilt_attack.tscn" type="PackedScene" id=18]
 [ext_resource path="res://fighting/dude/attack_list.gd" type="Script" id=19]
-[ext_resource path="res://fighting/dude/attacks/kick_attack.tscn" type="PackedScene" id=20]
+[ext_resource path="res://fighting/dude/attacks/fireball.tscn" type="PackedScene" id=20]
+[ext_resource path="res://fighting/dude/fireball.gd" type="Script" id=21]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 4.5 )
@@ -67,6 +68,37 @@ tracks/1/keys = {
 "values": [ {
 "args": [  ],
 "method": "activate_hitbox"
+} ]
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "fireball"
+length = 0.18
+step = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.03, 0.15 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 24, 41, 40 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("state/fireball")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.03 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "cast_fireball"
 } ]
 }
 
@@ -206,7 +238,7 @@ __meta__ = {
 texture = ExtResource( 5 )
 hframes = 8
 vframes = 8
-frame = 40
+frame = 24
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 0.5 )
@@ -235,6 +267,10 @@ script = ExtResource( 13 )
 script = ExtResource( 14 )
 jab = ExtResource( 15 )
 
+[node name="fireball" type="Node" parent="state"]
+script = ExtResource( 21 )
+fireball = ExtResource( 20 )
+
 [node name="air_kick" type="Node" parent="state"]
 script = ExtResource( 16 )
 jab = ExtResource( 17 )
@@ -248,14 +284,21 @@ script = ExtResource( 12 )
 [node name="attack_list" type="Node" parent="."]
 script = ExtResource( 19 )
 
-[node name="kick_attack" parent="attack_list" instance=ExtResource( 20 )]
+[node name="fireball" parent="attack_list" instance=ExtResource( 18 )]
+state_to = "fireball"
+dirs = PoolVector2Array( 0, 1, -1, 1, 1, 1 )
 
 [node name="jab" parent="attack_list" instance=ExtResource( 18 )]
+
+[node name="nair" parent="attack_list" instance=ExtResource( 18 )]
+states_from = PoolStringArray( "air" )
+state_to = "air_kick"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "idle"
 anims/air = SubResource( 3 )
 anims/air_kick = SubResource( 9 )
+anims/fireball = SubResource( 10 )
 anims/hurt = SubResource( 7 )
 anims/idle = SubResource( 2 )
 anims/jab = SubResource( 8 )
