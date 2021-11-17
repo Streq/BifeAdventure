@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://fighting/dude/fighter.gd" type="Script" id=1]
 [ext_resource path="res://fighting/dude/idle.gd" type="Script" id=2]
@@ -21,6 +21,7 @@
 [ext_resource path="res://fighting/dude/attack_list.gd" type="Script" id=19]
 [ext_resource path="res://fighting/dude/attacks/fireball.tscn" type="PackedScene" id=20]
 [ext_resource path="res://fighting/dude/fireball.gd" type="Script" id=21]
+[ext_resource path="res://fighting/dude/healthbar.gd" type="Script" id=22]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 4.5 )
@@ -73,7 +74,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id=10]
 resource_name = "fireball"
-length = 0.18
+length = 0.4
 step = 0.001
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -82,10 +83,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.03, 0.15 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 24, 41, 40 ]
+"values": [ 24, 41 ]
 }
 tracks/1/type = "method"
 tracks/1/path = NodePath("state/fireball")
@@ -94,7 +95,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.03 ),
+"times": PoolRealArray( 0.2 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
@@ -217,7 +218,7 @@ tracks/0/keys = {
 "values": [ 18 ]
 }
 
-[node name="dude" type="KinematicBody2D" groups=["fighter"]]
+[node name="dude" type="KinematicBody2D" groups=["fighter", "player"]]
 collision_mask = 0
 script = ExtResource( 1 )
 
@@ -309,7 +310,27 @@ anims/wall = SubResource( 5 )
 [node name="controller" type="Node" parent="." groups=["controller"]]
 script = ExtResource( 4 )
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="hurtbox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 8
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox"]
+position = Vector2( 0, 0.5 )
+shape = SubResource( 1 )
+
+[node name="healthbar" type="ProgressBar" parent="."]
+modulate = Color( 1, 1, 1, 0.368627 )
+margin_left = -25.9971
+margin_top = -19.8949
+margin_right = 26.0029
+margin_bottom = -5.89489
+value = 100.0
+script = ExtResource( 22 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="health_changed" from="." to="healthbar" method="_on_dude_health_changed"]
 [connection signal="state_changed" from="state" to="state_label" method="_on_state_state_changed"]
 [connection signal="animation_finished" from="AnimationPlayer" to="state" method="_on_animation_finished"]
+[connection signal="area_entered" from="hurtbox" to="." method="_on_hurtbox_area_entered"]

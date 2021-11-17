@@ -10,9 +10,11 @@ extents = Vector2( 4, 4 )
 [node name="fireball" type="Node2D"]
 script = ExtResource( 2 )
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="hitbox" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 4
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -47,4 +49,4 @@ gravity = Vector2( 0, 0 )
 initial_velocity = 100.0
 color_ramp = ExtResource( 3 )
 
-[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="body_entered" from="hitbox" to="." method="_on_Area2D_body_entered"]

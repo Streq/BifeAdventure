@@ -16,7 +16,7 @@ func _on_Area2D_body_entered(body):
 			body.health -= damage
 			body.dir = -direction.x
 			body.get_node("state")._change_state("hurt", null)
-		$Area2D.monitoring = false
+		$Area2D.set_deferred("monitoring",false)
 		$Sprite.visible = false
 		$particles_active.emitting = false
 		$particles_blast.emitting = true
