@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://asset/texture/attack.png" type="Texture" id=1]
 [ext_resource path="res://fighting/dude/attacks/fireball.gd" type="Script" id=2]
 [ext_resource path="res://asset/gradient/fire_gradient.tres" type="Gradient" id=3]
+[ext_resource path="res://fighting/hitbox/hitbox.gd" type="Script" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 4 )
@@ -12,7 +13,10 @@ script = ExtResource( 2 )
 
 [node name="hitbox" type="Area2D" parent="."]
 collision_layer = 8
-collision_mask = 4
+collision_mask = 7
+script = ExtResource( 4 )
+knockback = Vector2( 200, -75 )
+damage = 20.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
 shape = SubResource( 1 )

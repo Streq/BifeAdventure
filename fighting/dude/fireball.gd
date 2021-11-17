@@ -31,5 +31,6 @@ func cast_fireball():
 	var world = caster.owner
 	ball.direction = Vector2(caster.dir, 0)
 	ball.caster = caster
+	ball.dir = caster.dir
 	world.add_child(ball)
 	ball.global_position = caster.global_position

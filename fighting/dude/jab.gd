@@ -10,6 +10,9 @@ func enter():
 	owner.get_node("AnimationPlayer").play("jab")
 	owner.velocity.x += 50.0*owner.dir
 	hitbox = jab.instance()
+	hitbox.body = owner
+		
+	
 
 func update(delta):
 	var p = owner
@@ -35,6 +38,7 @@ func activate_hitbox():
 	if !active_hitbox:
 		owner.call_deferred("add_child",hitbox)
 		active_hitbox = true
+		
 func deactivate_hitbox():
 	if active_hitbox:
 		owner.call_deferred("remove_child",hitbox)

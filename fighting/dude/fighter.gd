@@ -37,10 +37,12 @@ func _move(delta):
 
 
 func _on_hurtbox_area_entered(area):
-	if area.owner != self:
+	if area.body != self:
+		var hitter = area.body
 		state._change_state("hurt",null)
-		velocity += area.knockback
-		health -= area.damage
+		dir = -area.body.dir
+		area.apply_damage(self)
+		area.apply_knockback(self)
 	
 func set_health(val):
 	health = val
