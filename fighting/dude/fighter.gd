@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+signal health_changed(val)
+
 export var max_health :float = 100
 export var speed :float = 300
 export var speed_lerp :float = 2
@@ -14,11 +16,12 @@ onready var state = $state
 onready var sprite = $Sprite
 onready var controller = $controller
 
+
 var _break = true
 
 var dir = 1.0
 
-var health := max_health
+var health := max_health setget set_health
 var velocity := Vector2.ZERO
 
 
@@ -31,3 +34,15 @@ func _move(delta):
 		velocity.y = 0
 	if is_on_wall():
 		velocity.x = 0
+
+
+func _on_hurtbox_area_entered(area):
+	if !area.is_whitelisted(self):
+		var hitter = area.body
+		state._change_state("hurt",null)
+		area.apply_damage(self)
+		area.apply_knockback(self)
+	
+func set_health(val):
+	health = val
+	emit_signal("health_changed",val)

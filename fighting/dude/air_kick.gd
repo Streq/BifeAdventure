@@ -8,8 +8,8 @@ var active_hitbox := false
 func enter():
 	owner.get_node("AnimationPlayer").stop()
 	owner.get_node("AnimationPlayer").play("air_kick")
-#	owner.velocity.x += 50.0*owner.dir
 	hitbox = jab.instance()
+	hitbox.body = owner
 
 func update(delta):
 	var p = owner
