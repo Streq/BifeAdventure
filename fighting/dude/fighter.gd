@@ -37,7 +37,7 @@ func _move(delta):
 
 
 func _on_hurtbox_area_entered(area):
-	if area.body != self:
+	if !area.is_whitelisted(self):
 		var hitter = area.body
 		state._change_state("hurt",null)
 		area.apply_damage(self)

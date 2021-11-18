@@ -7,7 +7,8 @@ var damage = 20
 var dir = 1.0
 
 func _ready():
-	$hitbox.body = caster
+	$hitbox.body = self
+	$hitbox.caster = caster
 
 func _physics_process(delta):
 	position += speed * direction * delta
