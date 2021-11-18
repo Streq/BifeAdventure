@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://fighting/mobs/floaty/hitbox.gd" type="Script" id=1]
+[ext_resource path="res://fighting/hitbox/hitbox.gd" type="Script" id=1]
 [ext_resource path="res://fighting/mobs/floaty/floaty.gd" type="Script" id=2]
 [ext_resource path="res://asset/texture/mob.png" type="Texture" id=3]
 
@@ -21,7 +21,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=2]
 resource_name = "die"
-length = 0.5
+length = 2.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -41,21 +41,24 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.5 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
 "values": [ {
+"args": [  ],
+"method": "stop_monitoring"
+}, {
 "args": [  ],
 "method": "queue_free"
 } ]
 }
 
 [sub_resource type="CircleShape2D" id=3]
-radius = 156.0
+radius = 512.0
 
 [sub_resource type="CircleShape2D" id=4]
 radius = 6.0
 
-[node name="floaty" type="Node2D" groups=["fighter"]]
+[node name="floaty" type="Node2D" groups=["fighter", "mob"]]
 script = ExtResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -64,6 +67,7 @@ anims/chase = SubResource( 1 )
 anims/die = SubResource( 2 )
 
 [node name="fov" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="fov"]
 shape = SubResource( 3 )
@@ -78,7 +82,8 @@ frame = 1
 collision_layer = 8
 collision_mask = 4
 script = ExtResource( 1 )
-knockback = Vector2( 50, -50 )
+knockback = Vector2( 100, -50 )
+damage = 5.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
 shape = SubResource( 4 )

@@ -13,12 +13,22 @@ func _physics_process(delta):
 	position += speed * direction * delta
 
 
-func _on_Area2D_body_entered(body):
-	if body != caster: 
-		$hitbox.set_deferred("monitoring",false)
-		$Sprite.visible = false
-		$particles_active.emitting = false
-		$particles_blast.emitting = true
-		yield(get_tree().create_timer(1.0),"timeout")
-		queue_free()
-		
+func _on_hitbox_area_entered(area):
+	if area.owner != caster: 
+		explode()
+
+func _on_terrainbox_body_entered(body):
+	explode()
+	
+
+func explode():
+	$hitbox.set_deferred("monitoring",false)
+	$hitbox.set_deferred("monitorable",false)
+	$Sprite.visible = false
+	$particles_active.emitting = false
+	$particles_blast.emitting = true
+	yield(get_tree().create_timer(1.0),"timeout")
+	queue_free()
+
+
+

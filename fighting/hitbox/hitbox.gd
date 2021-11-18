@@ -12,4 +12,7 @@ func apply_damage(target):
 	target.health -= damage
 	
 func apply_knockback(target):
-	target.velocity += knockback*Vector2(body.dir,1.0)
+	var knock = knockback*Vector2(body.dir,1.0)
+	target.velocity += knock
+	if knock.x:
+		target.dir = -sign(knock.x)

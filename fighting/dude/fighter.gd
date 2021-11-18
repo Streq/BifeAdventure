@@ -40,7 +40,6 @@ func _on_hurtbox_area_entered(area):
 	if area.body != self:
 		var hitter = area.body
 		state._change_state("hurt",null)
-		dir = -area.body.dir
 		area.apply_damage(self)
 		area.apply_knockback(self)
 	
