@@ -13,6 +13,7 @@ func enter():
 	hitbox = jab.instance()
 	hitbox.body = owner
 	can_move = false
+	locked = true
 	
 
 func update(delta):
@@ -53,3 +54,4 @@ func deactivate_hitbox():
 
 func enable_movement():
 	can_move = true
+

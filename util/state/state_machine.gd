@@ -20,6 +20,7 @@ func _ready():
 	for child in get_children():
 		states_map[child.name] = child
 		child.connect("finished", self, "_change_state")
+		child.connect("unlocked", self, "_next_state")
 	initialize(START_STATE)
 
 func initialize(start_state):
@@ -65,6 +66,16 @@ func _change_state(state_name, param):
 	
 	if state_name != "previous":
 		_enter()
+
+func _change_state_soft(state_name, param):
+	if current_state.is_locked():
+		animation_queue.push_back(state_name)
+	else:
+		_change_state(state_name, param)
+
+func _next_state():
+	if !animation_queue.empty():
+		_change_state(animation_queue.pop_front(), null)
 
 func _enter():
 	current_state.enter()

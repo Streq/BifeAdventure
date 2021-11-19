@@ -3,6 +3,16 @@ extends Node
 class_name State
 
 signal finished(next_state_name)
+signal unlocked()
+
+var locked = false setget set_locked,is_locked
+func is_locked():
+	return locked
+	
+func set_locked(val):
+	if !val and locked:
+		emit_signal("unlocked")
+	locked = val
 
 # Initialize the state. E.g. change the animation
 func enter():
