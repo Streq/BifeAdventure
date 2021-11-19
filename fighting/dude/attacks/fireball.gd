@@ -25,6 +25,8 @@ func _on_terrainbox_body_entered(body):
 func explode():
 	$hitbox.set_deferred("monitoring",false)
 	$hitbox.set_deferred("monitorable",false)
+	$terrainbox.set_deferred("monitoring",false)
+	$terrainbox.set_deferred("monitorable",false)
 	$Sprite.visible = false
 	$particles_active.emitting = false
 	$particles_blast.emitting = true

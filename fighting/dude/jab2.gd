@@ -4,15 +4,14 @@ export var jab : PackedScene
 
 var hitbox
 var active_hitbox := false
-var can_move = false
 
 func enter():
 	owner.get_node("AnimationPlayer").stop()
-	owner.get_node("AnimationPlayer").play("jab")
-	owner.velocity.x += 75.0*owner.dir
+	owner.get_node("AnimationPlayer").play("jab2")
+	owner.velocity.x += 150.0*owner.dir
 	hitbox = jab.instance()
 	hitbox.body = owner
-	can_move = false
+		
 	
 
 func update(delta):
@@ -29,15 +28,9 @@ func update(delta):
 	
 	if !p.is_on_floor():
 		emit_signal("finished", "air", null)
-	elif can_move:
-		if jump:
-			emit_signal("finished", "jump", null)
-		elif input_direction.x:
-			emit_signal("finished", "run", null)
 
 func _on_animation_finished(anim_name):
 	emit_signal("finished", "idle", null)
-	
 func exit():
 	deactivate_hitbox()
 	
@@ -50,6 +43,3 @@ func deactivate_hitbox():
 	if active_hitbox:
 		owner.call_deferred("remove_child",hitbox)
 		active_hitbox = false
-
-func enable_movement():
-	can_move = true

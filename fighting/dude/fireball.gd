@@ -11,25 +11,26 @@ func update(delta):
 	var p = owner
 	p._move(delta)
 	
-	var controller = owner.get_node("controller")
 	
-	var input_direction = controller.get_direction()
-	var jump = controller.get_jump()
-	var attack = controller.get_attack()
+	if p.is_on_floor():
+		p.velocity.x = lerp(p.velocity.x, 0,  delta * p.idle_lerp)
 	
-	p.velocity.x = lerp(p.velocity.x, 0,  delta * p.idle_lerp)
-	
-	if !p.is_on_floor():
-		emit_signal("finished", "air", null)
+
 
 func _on_animation_finished(anim_name):
-	emit_signal("finished", "idle", null)
+	if owner.is_on_floor():
+		emit_signal("finished", "idle", null)
+	else:
+		emit_signal("finished", "air", null)
 
 func cast_fireball():
+	var controller = owner.get_node("controller")
+	var input_direction = controller.get_direction()
+	
 	var ball = fireball.instance()
 	var caster = owner
 	var world = caster.owner
-	ball.direction = Vector2(caster.dir, 0)
+	ball.direction = Vector2(caster.dir, input_direction.y).normalized()
 	ball.caster = caster
 	ball.dir = caster.dir
 	world.add_child(ball)
