@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://fighting/dude/fighter.gd" type="Script" id=1]
 [ext_resource path="res://fighting/dude/idle.gd" type="Script" id=2]
@@ -22,6 +22,9 @@
 [ext_resource path="res://fighting/dude/attacks/fireball.tscn" type="PackedScene" id=20]
 [ext_resource path="res://fighting/dude/fireball.gd" type="Script" id=21]
 [ext_resource path="res://fighting/dude/healthbar.gd" type="Script" id=22]
+[ext_resource path="res://fighting/dude/dead.gd" type="Script" id=23]
+[ext_resource path="res://fighting/dude/jab2.gd" type="Script" id=24]
+[ext_resource path="res://fighting/dude/attacks/jab2.tscn" type="PackedScene" id=25]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 4.5 )
@@ -72,6 +75,21 @@ tracks/1/keys = {
 } ]
 }
 
+[sub_resource type="Animation" id=11]
+resource_name = "dead"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 20 ]
+}
+
 [sub_resource type="Animation" id=10]
 resource_name = "fireball"
 length = 0.4
@@ -86,7 +104,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 24, 41 ]
+"values": [ 26, 25 ]
 }
 tracks/1/type = "method"
 tracks/1/path = NodePath("state/fireball")
@@ -137,7 +155,55 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=8]
 resource_name = "jab"
-length = 0.18
+length = 0.25
+step = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.03, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 24, 25, 26 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("state/jab")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.03, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "activate_hitbox"
+}, {
+"args": [  ],
+"method": "deactivate_hitbox"
+} ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath("state/jab")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "enable_movement"
+} ]
+}
+
+[sub_resource type="Animation" id=12]
+resource_name = "jab2"
+length = 0.3
 step = 0.001
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -149,10 +215,10 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.03, 0.15 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ 24, 41, 40 ]
+"values": [ 27, 28, 29 ]
 }
 tracks/1/type = "method"
-tracks/1/path = NodePath("state/jab")
+tracks/1/path = NodePath("state/jab2")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -223,7 +289,6 @@ collision_mask = 0
 script = ExtResource( 1 )
 
 [node name="state_label" type="Label" parent="."]
-visible = false
 margin_left = -20.0
 margin_top = -16.0
 margin_right = 20.0
@@ -239,7 +304,7 @@ __meta__ = {
 texture = ExtResource( 5 )
 hframes = 8
 vframes = 8
-frame = 24
+frame = 27
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 0.5 )
@@ -268,6 +333,10 @@ script = ExtResource( 13 )
 script = ExtResource( 14 )
 jab = ExtResource( 15 )
 
+[node name="jab2" type="Node" parent="state"]
+script = ExtResource( 24 )
+jab = ExtResource( 25 )
+
 [node name="fireball" type="Node" parent="state"]
 script = ExtResource( 21 )
 fireball = ExtResource( 20 )
@@ -282,14 +351,24 @@ script = ExtResource( 11 )
 [node name="wall_jump" type="Node" parent="state"]
 script = ExtResource( 12 )
 
+[node name="dead" type="Node" parent="state"]
+script = ExtResource( 23 )
+
 [node name="attack_list" type="Node" parent="."]
 script = ExtResource( 19 )
 
 [node name="fireball" parent="attack_list" instance=ExtResource( 18 )]
+states_from = PoolStringArray( "idle", "run", "air" )
 state_to = "fireball"
-dirs = PoolVector2Array( 0, 1, -1, 1, 1, 1 )
+action = "special_attack"
+
+[node name="jab2" parent="attack_list" instance=ExtResource( 18 )]
+states_from = PoolStringArray( "jab" )
+state_to = "jab2"
+on_finish = true
 
 [node name="jab" parent="attack_list" instance=ExtResource( 18 )]
+state_to = "jab"
 
 [node name="nair" parent="attack_list" instance=ExtResource( 18 )]
 states_from = PoolStringArray( "air" )
@@ -299,10 +378,12 @@ state_to = "air_kick"
 autoplay = "idle"
 anims/air = SubResource( 3 )
 anims/air_kick = SubResource( 9 )
+anims/dead = SubResource( 11 )
 anims/fireball = SubResource( 10 )
 anims/hurt = SubResource( 7 )
 anims/idle = SubResource( 2 )
 anims/jab = SubResource( 8 )
+anims/jab2 = SubResource( 12 )
 anims/jump = SubResource( 6 )
 anims/run = SubResource( 4 )
 anims/wall = SubResource( 5 )

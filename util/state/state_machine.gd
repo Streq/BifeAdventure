@@ -13,6 +13,9 @@ var current_state = null
 var current := ""
 var _active = false setget set_active
 
+var animation_queue := []
+
+
 func _ready():
 	for child in get_children():
 		states_map[child.name] = child
@@ -42,13 +45,16 @@ func _physics_process(delta):
 func _on_animation_finished(anim_name):
 	if not _active:
 		return
-	current_state._on_animation_finished(anim_name)
+	if !animation_queue.empty():
+		_change_state(animation_queue.pop_front(), null)
+	else:
+		current_state._on_animation_finished(anim_name)
 
 func _change_state(state_name, param):
 	if not _active:
 		return
 	current_state.exit()
-	
+	animation_queue.clear()
 	if state_name == "previous":
 		states_stack.pop_front()
 	else:

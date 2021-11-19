@@ -15,6 +15,7 @@ export var gravity :float = 400
 onready var state = $state
 onready var sprite = $Sprite
 onready var controller = $controller
+onready var attack_list = $attack_list
 
 
 var _break = true
@@ -23,7 +24,11 @@ var dir = 1.0
 
 var health := max_health setget set_health
 var velocity := Vector2.ZERO
-
+func _input(event):
+	if event.is_action_pressed("A1"):
+		health = max(health,0)
+		self.health+=10.0
+		health = min(health,100)
 
 
 func _move(delta):
@@ -46,3 +51,11 @@ func _on_hurtbox_area_entered(area):
 func set_health(val):
 	health = val
 	emit_signal("health_changed",val)
+	if health <= 0:
+		state._change_state("dead", null)
+		
+func learn(attack):
+	attack_list.add_child(attack)
+
+func unlearn(attack):
+	attack_list.remove_child(attack)

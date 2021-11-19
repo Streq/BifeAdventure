@@ -6,6 +6,13 @@ export var limit := 0
 var instances := 0
 
 func _on_Timer_timeout():
+	spawn()
+
+func _input(event):
+	if event.is_action_pressed("B1"):
+		spawn()
+
+func spawn():
 	instances += 1
 	if limit and instances == limit:
 		$Timer.stop()
