@@ -17,6 +17,6 @@ func apply_damage(target):
 	
 func apply_knockback(target):
 	var knock = knockback*Vector2(body.dir,1.0)
-	target.velocity += knock
+	target.velocity = knock
 	if knock.x:
 		target.dir = -sign(knock.x)
