@@ -1,6 +1,7 @@
 extends "res://util/state/state.gd"
 
 export var jab : PackedScene
+export var animation := "jab"
 
 var hitbox
 var active_hitbox := false
@@ -8,11 +9,11 @@ var can_move = false
 
 func enter():
 	owner.get_node("AnimationPlayer").stop()
-	owner.get_node("AnimationPlayer").play("jab")
-	owner.velocity.x += 75.0*owner.dir
+	owner.get_node("AnimationPlayer").play(animation)
 	hitbox = jab.instance()
 	hitbox.body = owner
 	can_move = false
+	locked = true
 	
 
 func update(delta):
@@ -53,3 +54,6 @@ func deactivate_hitbox():
 
 func enable_movement():
 	can_move = true
+
+func step_forward(amount):
+	owner.velocity.x += amount*owner.dir

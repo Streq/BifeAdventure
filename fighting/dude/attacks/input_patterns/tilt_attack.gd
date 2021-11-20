@@ -12,7 +12,7 @@ func check_satisfy():
 
 func enter():
 	if on_finish:
-		owner.state.animation_queue.push_back(state_to)
+		owner.state._change_state_soft(state_to, null)
 	else:
 		owner.state._change_state(state_to, null)
 	
