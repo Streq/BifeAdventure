@@ -14,5 +14,7 @@ border_width_bottom = 2
 border_color = Color( 1, 1, 1, 1 )
 
 [resource]
+Label/colors/disabled_font_color = Color( 0.466667, 0.466667, 0.466667, 1 )
+Label/colors/font_color_shadow = Color( 0.392157, 0.392157, 0.392157, 1 )
 Label/fonts/font = SubResource( 1 )
 Panel/styles/panel = SubResource( 2 )

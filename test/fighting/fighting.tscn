@@ -23,6 +23,9 @@ current = true
 [node name="dude2" parent="." instance=ExtResource( 2 )]
 position = Vector2( 136, 120 )
 
+[node name="jab2" parent="dude2/state" index="6"]
+animation = "jab"
+
 [node name="controller" parent="dude2" index="6"]
 pj = 1
 
