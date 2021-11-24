@@ -21,7 +21,6 @@ func _input(event):
 	elif event.is_action_pressed("A0"):
 		emit_signal("selected", selected_entry.name)
 	
-	
 	if dir and !entries.empty():
 		_offset_index(dir)
 		while !_can_select(entries_index):

@@ -6,7 +6,7 @@ func _ready():
 func start_menu():
 	$menu.visible = true
 	$menu.add_entry("play", "play", true)
-	$menu.add_entry("continue", "continue", true)
+	$menu.add_entry("continue", "continue", false)
 	
 	$menu.connect("selected",self,"_selected")
 	

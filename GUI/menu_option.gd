@@ -17,6 +17,10 @@ func set_enabled(val):
 	enabled = val
 	if !enabled:
 		$text.add_color_override("font_color", disabled_color)
+		$text.add_color_override("font_color_shadow", Color.transparent)
+	else:
+		$text.set("custom_colors/font_color", null)
+		$text.set("custom_colors/font_color_shadow", null)
 		update()
 
 func set_selected(val):
