@@ -23,7 +23,7 @@ func _on_terrainbox_body_entered(body):
 	
 
 func explode():
-	$particles_blast.direction = Vector2(-dir,0)
+	$particles_blast.direction = -direction
 	speed = 0
 	$hitbox.set_deferred("monitoring",false)
 	$hitbox.set_deferred("monitorable",false)

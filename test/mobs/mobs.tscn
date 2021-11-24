@@ -11,7 +11,7 @@ _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 320, 0, 0, 0, 0, 0, 320, 288, 0, 0, 0, 0, 0, 288, 0, 0, 0, 0, 0, 0 )
 }
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D2" type="Node2D"]
 position = Vector2( 16, 16 )
 
 [node name="terrain_simple" parent="." instance=ExtResource( 3 )]

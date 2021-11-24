@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://fighting/dude/fighter.gd" type="Script" id=1]
 [ext_resource path="res://fighting/dude/idle.gd" type="Script" id=2]
@@ -23,6 +23,7 @@
 [ext_resource path="res://fighting/dude/fireball.gd" type="Script" id=21]
 [ext_resource path="res://fighting/dude/healthbar.gd" type="Script" id=22]
 [ext_resource path="res://fighting/dude/dead.gd" type="Script" id=23]
+[ext_resource path="res://fighting/dude/attacks/tackle.tscn" type="PackedScene" id=24]
 [ext_resource path="res://fighting/dude/attacks/jab2.tscn" type="PackedScene" id=25]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -299,6 +300,53 @@ tracks/0/keys = {
 "values": [ 9, 10, 11, 10 ]
 }
 
+[sub_resource type="Animation" id=13]
+resource_name = "tackle"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 31, 26 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("state/tackle")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "activate_hitbox"
+}, {
+"args": [  ],
+"method": "deactivate_hitbox"
+} ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath("state/tackle")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ 100.0 ],
+"method": "step_forward"
+} ]
+}
+
 [sub_resource type="Animation" id=5]
 resource_name = "wall"
 length = 0.001
@@ -335,7 +383,7 @@ __meta__ = {
 texture = ExtResource( 5 )
 hframes = 8
 vframes = 8
-frame = 27
+frame = 31
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 0.5 )
@@ -369,6 +417,11 @@ script = ExtResource( 14 )
 jab = ExtResource( 25 )
 animation = "jab2"
 
+[node name="tackle" type="Node" parent="state"]
+script = ExtResource( 14 )
+jab = ExtResource( 24 )
+animation = "tackle"
+
 [node name="fireball" type="Node" parent="state"]
 script = ExtResource( 21 )
 fireball = ExtResource( 20 )
@@ -400,13 +453,17 @@ state_to = "jab2"
 on_finish = true
 
 [node name="jab" parent="attack_list" instance=ExtResource( 18 )]
-states_from = PoolStringArray( "idle", "run", "jab2" )
+states_from = PoolStringArray( "idle", "jab2" )
 state_to = "jab"
 on_finish = true
 
 [node name="nair" parent="attack_list" instance=ExtResource( 18 )]
 states_from = PoolStringArray( "air" )
 state_to = "air_kick"
+
+[node name="dash" parent="attack_list" instance=ExtResource( 18 )]
+states_from = PoolStringArray( "run" )
+state_to = "tackle"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "idle"
@@ -420,6 +477,7 @@ anims/jab = SubResource( 8 )
 anims/jab2 = SubResource( 12 )
 anims/jump = SubResource( 6 )
 anims/run = SubResource( 4 )
+anims/tackle = SubResource( 13 )
 anims/wall = SubResource( 5 )
 
 [node name="controller" type="Node" parent="." groups=["controller"]]
