@@ -5,6 +5,8 @@ var index = 0
 func _ready():
 	$textbox.connect("text_panel_started", self, "next_step_textbox")
 	$textbox.connect("text_panel_finished", self, "next_step_textbox")
+	$textbox.connect("text_display_started", self, "next_step_textbox")
+	$textbox.connect("text_display_finished", self, "next_step_textbox")
 	$AnimatedSprite.connect("animation_finished", self, "next_step")
 	
 	$textbox.add_texts(["En un mundo donde nadie es feliz, y la gente solo sabe llorar,"])
@@ -20,11 +22,11 @@ func next_step_textbox(textbox):
 func next_step():
 	print_debug(index)
 	match index:
-		3:
+		4:
 			$AnimatedSprite.visible = true
-		11:
+		13:
 			$AnimatedSprite.play("default")
-		12:
+		14:
 			$AnimatedSprite.visible = false
 			$Sprite.visible = true
 			yield(get_tree().create_timer(0.5),"timeout")
