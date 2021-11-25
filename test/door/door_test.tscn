@@ -1,12 +1,12 @@
 [gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://tilemap/trigger/teleport_trigger.gd" type="Script" id=1]
-[ext_resource path="res://tilemap/grid/map.tscn" type="PackedScene" id=2]
-[ext_resource path="res://tilemap/pawns/player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://overworld/tilemap/trigger/teleport_trigger.gd" type="Script" id=1]
+[ext_resource path="res://overworld/tilemap/grid/map.tscn" type="PackedScene" id=2]
+[ext_resource path="res://overworld/tilemap/pawns/player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://asset/texture/terrain_simple.png" type="Texture" id=4]
 [ext_resource path="res://textbox/textbox.tscn" type="PackedScene" id=5]
 [ext_resource path="res://autotile/terrain_simple.tscn" type="PackedScene" id=6]
-[ext_resource path="res://tilemap/trigger/scene_change_trigger.tscn" type="PackedScene" id=7]
+[ext_resource path="res://overworld/tilemap/trigger/scene_change_trigger.tscn" type="PackedScene" id=7]
 
 [sub_resource type="TileSet" id=1]
 0/name = "terrain_simple.png 0"

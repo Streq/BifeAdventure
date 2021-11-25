@@ -1,5 +1,7 @@
 extends Node2D
 
+export(String, FILE, "*.tscn") var next_scene
+
 var index = 0
 
 func _ready():
@@ -30,6 +32,6 @@ func next_step():
 			$AnimatedSprite.visible = false
 			$Sprite.visible = true
 			yield(get_tree().create_timer(0.5),"timeout")
-			get_tree().change_scene("res://test/textbox/texbox_test.tscn")
+			get_tree().change_scene(next_scene)
 	index += 1
 
