@@ -36,6 +36,7 @@ config/icon="res://icon.png"
 Signals="*res://global/signals/signals.gd"
 Globals="*res://global/globals/globals.gd"
 Slowmo="*res://global/slowmo.gd"
+Overworld="*res://global/overworld.gd"
 
 [display]
 
@@ -45,6 +46,10 @@ window/size/test_width=960
 window/size/test_height=864
 window/stretch/mode="viewport"
 window/stretch/aspect="keep"
+
+[global]
+
+grid=true
 
 [input]
 
