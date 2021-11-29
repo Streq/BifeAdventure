@@ -2,7 +2,7 @@ extends "res://util/state/state.gd"
 
 var frame_counter := 0
 var charge_counter := 0
-const duration_frames := 3
+export var duration_frames := 3
 
 var half_jump_factor = 0.6
 

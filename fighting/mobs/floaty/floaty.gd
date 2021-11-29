@@ -1,5 +1,7 @@
 extends Node2D
 
+export var speed := 100.0
+
 
 var velocity := Vector2.ZERO
 
@@ -22,7 +24,7 @@ func _physics_process(delta):
 		STATE.DIE:
 			pass
 		STATE.CHASE:
-			velocity += Vector2(target.position - position).normalized()*delta*100
+			velocity += Vector2(target.position - position).normalized()*delta*speed
 	velocity = lerp(velocity, Vector2.ZERO, delta)
 	position += velocity * delta
 

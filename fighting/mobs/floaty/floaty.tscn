@@ -76,7 +76,6 @@ shape = SubResource( 3 )
 texture = ExtResource( 3 )
 hframes = 10
 vframes = 10
-frame = 1
 
 [node name="hitbox" type="Area2D" parent="."]
 collision_layer = 8

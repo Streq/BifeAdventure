@@ -395,6 +395,7 @@ START_STATE = NodePath("idle")
 
 [node name="jump" type="Node" parent="state"]
 script = ExtResource( 7 )
+duration_frames = 5
 
 [node name="idle" type="Node" parent="state"]
 script = ExtResource( 2 )
