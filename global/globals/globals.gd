@@ -7,6 +7,7 @@ enum ROOM {
 	my_hometown_basement,
 	endurance_round
 }
+const TILE_SIZE = 16
 
 
 var step_counter : int = 0 setget set_step_counter
