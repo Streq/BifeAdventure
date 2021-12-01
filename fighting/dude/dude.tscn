@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://fighting/dude/fighter.gd" type="Script" id=1]
 [ext_resource path="res://fighting/dude/idle.gd" type="Script" id=2]
@@ -363,6 +363,12 @@ tracks/0/keys = {
 "values": [ 18 ]
 }
 
+[sub_resource type="StyleBoxFlat" id=14]
+bg_color = Color( 0, 1, 0, 1 )
+
+[sub_resource type="StyleBoxFlat" id=15]
+bg_color = Color( 0.341176, 0, 0, 1 )
+
 [node name="dude" type="KinematicBody2D" groups=["fighter", "player"]]
 collision_mask = 0
 script = ExtResource( 1 )
@@ -395,6 +401,7 @@ START_STATE = NodePath("idle")
 
 [node name="jump" type="Node" parent="state"]
 script = ExtResource( 7 )
+duration_frames = 5
 
 [node name="idle" type="Node" parent="state"]
 script = ExtResource( 2 )
@@ -492,12 +499,14 @@ position = Vector2( 0, 0.5 )
 shape = SubResource( 1 )
 
 [node name="healthbar" type="ProgressBar" parent="."]
-modulate = Color( 1, 1, 1, 0.368627 )
-margin_left = -25.9971
-margin_top = -19.8949
-margin_right = 26.0029
-margin_bottom = -5.89489
+margin_left = -26.0
+margin_top = -16.0
+margin_right = 26.0
+margin_bottom = -15.0
+custom_styles/fg = SubResource( 14 )
+custom_styles/bg = SubResource( 15 )
 value = 100.0
+percent_visible = false
 script = ExtResource( 22 )
 __meta__ = {
 "_edit_use_anchors_": false

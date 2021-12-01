@@ -11,7 +11,7 @@ func _ready():
 		var tile = world_to_map(child.position)
 		set_cellv(tile, child.type)
 		child.grid_position = tile
-	if Globals.spawn_tile:
+	if Globals.spawn_tile != null:
 		var players = get_tree().get_nodes_in_group("player")
 		if players:
 			var player = players[0]

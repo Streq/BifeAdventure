@@ -3,9 +3,10 @@ extends Node
 const map = {
 	Globals.ROOM.my_room : preload("res://scenes/overworld/my_room.tscn"),
 	Globals.ROOM.my_living_room : preload("res://scenes/overworld/my_living_room.tscn"),
-	Globals.ROOM.my_hometown : preload("res://test/textbox/texbox_test.tscn"),
+	Globals.ROOM.my_hometown : preload("res://scenes/overworld/hometown.tscn"),
 	Globals.ROOM.my_hometown_basement : preload("res://test/door/door_test.tscn"),
-	Globals.ROOM.endurance_round : preload("res://test/mobs/mobs.tscn")
+	Globals.ROOM.endurance_round : preload("res://test/mobs/mobs.tscn"),
+	Globals.ROOM.tutorial : preload("res://scenes/fighting/tutorial.tscn")
 }
 
 
