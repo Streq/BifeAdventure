@@ -6,7 +6,8 @@ enum ROOM {
 	my_hometown,
 	my_hometown_basement,
 	endurance_round,
-	tutorial
+	tutorial,
+	pepe_house
 }
 const TILE_SIZE = 16
 
