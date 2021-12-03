@@ -1,4 +1,4 @@
-extends "pawn.gd"
+extends "res://overworld/tilemap/pawns/pawn.gd"
 
 enum Direction {down, up, right, left}
 const DIRS = [Vector2.DOWN, Vector2.UP, Vector2.RIGHT, Vector2.LEFT]

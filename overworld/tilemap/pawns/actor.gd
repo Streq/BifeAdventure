@@ -1,4 +1,4 @@
-extends "pawn.gd"
+extends "res://overworld/tilemap/pawns/pawn.gd"
 
 signal start_step()
 signal finish_step()
