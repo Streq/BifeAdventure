@@ -37,3 +37,7 @@ texture = ExtResource( 3 )
 hframes = 8
 vframes = 77
 frame = 410
+
+[node name="Camera2D" type="Camera2D" parent="Sprite"]
+offset = Vector2( 8, 8 )
+current = true

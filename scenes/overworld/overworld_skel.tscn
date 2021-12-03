@@ -138,12 +138,7 @@ tile_data = PoolIntArray( 262147, 0, 0, 262148, 0, 0, 262149, 0, 0, 262150, 0, 0
 [node name="player" parent="map/grid" index="0" instance=ExtResource( 7 )]
 position = Vector2( 152, 152 )
 
-[node name="scene_change" parent="map/triggers" index="0"]
-position = Vector2( 232, 88 )
-to = 1
-
 [connection signal="text_display_finished" from="textbox" to="." method="_on_textbox_text_display_finished"]
 [connection signal="text_display_started" from="textbox" to="." method="_on_textbox_text_display_started"]
 
 [editable path="map"]
-[editable path="map/triggers/scene_change"]
