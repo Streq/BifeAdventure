@@ -41,7 +41,17 @@ func request_move(pawn, direction):
 #			var pawn_name = get_cell_pawn(cell_target).name
 #			print_debug("Cell %s contains %s" % [cell_target, pawn_name])
 			pass
+
+
+func request_remove(pawn, tile_to_replace: int = EMPTY):
+	var tile = world_to_map(pawn.position)
+	pawn.queue_free()
+	set_cellv(tile, tile_to_replace)
 	
+func request_clear_tile(pawn, tile_to_replace: int = EMPTY):
+	var tile = world_to_map(pawn.position)
+	set_cellv(tile, tile_to_replace)
+
 func set_pawn_tile(pawn, tile):
 	pawn.position = update_pawn_position(pawn, pawn.grid_position, tile)
 
