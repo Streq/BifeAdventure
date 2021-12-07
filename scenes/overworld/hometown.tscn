@@ -212,7 +212,7 @@ position = Vector2( 9, 11 )
 
 [node name="door_to_malovich" parent="map/triggers" index="1" instance=ExtResource( 2 )]
 position = Vector2( 216, 232 )
-to = 1
+to = 7
 relative_spawn_pos = false
 is_world_coords = false
 
