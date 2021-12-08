@@ -22,7 +22,7 @@ var _break = true
 
 var dir = 1.0
 
-var health := max_health setget set_health
+onready var health := max_health setget set_health
 var velocity := Vector2.ZERO
 func _input(event):
 	if event.is_action_pressed("A1"):

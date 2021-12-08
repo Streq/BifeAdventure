@@ -1,0 +1,311 @@
+[gd_scene load_steps=30 format=2]
+
+[ext_resource path="res://asset/theme/white_black_text.tres" type="Theme" id=1]
+[ext_resource path="res://test/fighting/controller.gd" type="Script" id=2]
+[ext_resource path="res://fighting/malovich/malovich.gd" type="Script" id=3]
+[ext_resource path="res://util/state/state_machine.gd" type="Script" id=4]
+[ext_resource path="res://fighting/dude/hurt.gd" type="Script" id=5]
+[ext_resource path="res://fighting/malovich/air.gd" type="Script" id=6]
+[ext_resource path="res://fighting/dude/attacks/jab.tscn" type="PackedScene" id=8]
+[ext_resource path="res://fighting/dude/jab.gd" type="Script" id=10]
+[ext_resource path="res://fighting/dude/jump.gd" type="Script" id=11]
+[ext_resource path="res://fighting/dude/idle.gd" type="Script" id=13]
+[ext_resource path="res://fighting/dude/state_label.gd" type="Script" id=14]
+[ext_resource path="res://fighting/dude/run.gd" type="Script" id=15]
+[ext_resource path="res://fighting/dude/attacks/tackle.tscn" type="PackedScene" id=16]
+[ext_resource path="res://fighting/dude/healthbar.gd" type="Script" id=17]
+[ext_resource path="res://fighting/dude/attack_list.gd" type="Script" id=20]
+[ext_resource path="res://fighting/dude/dead.gd" type="Script" id=21]
+[ext_resource path="res://fighting/dude/attacks/input_patterns/tilt_attack.tscn" type="PackedScene" id=23]
+[ext_resource path="res://asset/texture/malovich.png" type="Texture" id=24]
+
+[sub_resource type="RectangleShape2D" id=1]
+resource_local_to_scene = true
+extents = Vector2( 4, 7.5 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "air"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "dead"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 17 ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "hurt"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 16 ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "idle"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "jab"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 8, 9, 10 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("state/jab")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.1, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "activate_hitbox"
+}, {
+"args": [  ],
+"method": "deactivate_hitbox"
+} ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath("state/jab")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"values": [ {
+"args": [ 50.0 ],
+"method": "step_forward"
+}, {
+"args": [ 75.0 ],
+"method": "step_forward"
+}, {
+"args": [ false ],
+"method": "set_locked"
+}, {
+"args": [  ],
+"method": "enable_movement"
+} ]
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "jump"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=12]
+resource_name = "ram"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 24, 25 ]
+}
+
+[sub_resource type="Animation" id=11]
+resource_name = "run"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 1, 0 ]
+}
+
+[sub_resource type="StyleBoxFlat" id=14]
+bg_color = Color( 0, 1, 0, 1 )
+
+[sub_resource type="StyleBoxFlat" id=15]
+bg_color = Color( 0.341176, 0, 0, 1 )
+
+[node name="malovich" type="KinematicBody2D"]
+script = ExtResource( 3 )
+max_health = 200.0
+speed = 150.0
+jump = 150.0
+gravity = 800.0
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 24 )
+hframes = 8
+vframes = 8
+frame = 17
+
+[node name="state_label" type="Label" parent="."]
+margin_left = -20.0
+margin_top = -16.0
+margin_right = 20.0
+margin_bottom = -2.0
+theme = ExtResource( 1 )
+align = 1
+script = ExtResource( 14 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 0.5 )
+shape = SubResource( 1 )
+
+[node name="state" type="Node" parent="."]
+script = ExtResource( 4 )
+START_STATE = NodePath("idle")
+
+[node name="jump" type="Node" parent="state"]
+script = ExtResource( 11 )
+duration_frames = 5
+
+[node name="idle" type="Node" parent="state"]
+script = ExtResource( 13 )
+
+[node name="run" type="Node" parent="state"]
+script = ExtResource( 15 )
+
+[node name="air" type="Node" parent="state"]
+script = ExtResource( 6 )
+
+[node name="hurt" type="Node" parent="state"]
+script = ExtResource( 5 )
+
+[node name="jab" type="Node" parent="state"]
+script = ExtResource( 10 )
+jab = ExtResource( 8 )
+
+[node name="ram" type="Node" parent="state"]
+script = ExtResource( 10 )
+jab = ExtResource( 16 )
+animation = "tackle"
+
+[node name="dead" type="Node" parent="state"]
+script = ExtResource( 21 )
+
+[node name="attack_list" type="Node" parent="."]
+script = ExtResource( 20 )
+
+[node name="jab" parent="attack_list" instance=ExtResource( 23 )]
+states_from = PoolStringArray( "idle", "jab2" )
+state_to = "jab"
+on_finish = true
+
+[node name="ram" parent="attack_list" instance=ExtResource( 23 )]
+states_from = PoolStringArray( "run" )
+state_to = "ram"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "idle"
+anims/air = SubResource( 2 )
+anims/dead = SubResource( 4 )
+anims/hurt = SubResource( 6 )
+anims/idle = SubResource( 7 )
+anims/jab = SubResource( 8 )
+anims/jump = SubResource( 10 )
+anims/ram = SubResource( 12 )
+anims/run = SubResource( 11 )
+
+[node name="controller" type="Node" parent="." groups=["controller"]]
+script = ExtResource( 2 )
+
+[node name="hurtbox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox"]
+position = Vector2( 0, 0.5 )
+shape = SubResource( 1 )
+
+[node name="healthbar" type="ProgressBar" parent="."]
+margin_left = -26.0
+margin_top = -16.0
+margin_right = 26.0
+margin_bottom = -15.0
+custom_styles/fg = SubResource( 14 )
+custom_styles/bg = SubResource( 15 )
+value = 100.0
+percent_visible = false
+script = ExtResource( 17 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="health_changed" from="." to="healthbar" method="_on_health_changed"]
+[connection signal="area_entered" from="hurtbox" to="." method="_on_hurtbox_area_entered"]
