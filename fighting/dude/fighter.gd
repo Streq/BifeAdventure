@@ -20,7 +20,7 @@ onready var attack_list = $attack_list
 
 var _break = true
 
-var dir = 1.0
+export var dir = 1.0
 
 var health := max_health setget set_health
 var velocity := Vector2.ZERO
@@ -28,7 +28,7 @@ func _input(event):
 	if event.is_action_pressed("A1"):
 		health = max(health,0)
 		self.health+=10.0
-		health = min(health,100)
+		health = min(health,max_health)
 
 
 func _move(delta):

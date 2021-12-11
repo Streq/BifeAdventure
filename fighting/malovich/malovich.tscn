@@ -1,7 +1,7 @@
 [gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://asset/theme/white_black_text.tres" type="Theme" id=1]
-[ext_resource path="res://test/fighting/controller.gd" type="Script" id=2]
+[ext_resource path="res://fighting/malovich/ai_controller.gd" type="Script" id=2]
 [ext_resource path="res://fighting/malovich/malovich.gd" type="Script" id=3]
 [ext_resource path="res://util/state/state_machine.gd" type="Script" id=4]
 [ext_resource path="res://fighting/malovich/hurt.gd" type="Script" id=5]
@@ -337,9 +337,6 @@ anims/jump = SubResource( 10 )
 anims/ram = SubResource( 12 )
 anims/run = SubResource( 11 )
 
-[node name="controller" type="Node" parent="." groups=["controller"]]
-script = ExtResource( 2 )
-
 [node name="hurtbox" type="Area2D" parent="."]
 collision_layer = 4
 collision_mask = 8
@@ -361,6 +358,9 @@ script = ExtResource( 17 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="controller" type="Node2D" parent="."]
+script = ExtResource( 2 )
 
 [connection signal="health_changed" from="." to="healthbar" method="_on_health_changed"]
 [connection signal="state_changed" from="state" to="state_label" method="_on_state_state_changed"]

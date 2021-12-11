@@ -19,7 +19,7 @@ frame = 9
 
 [node name="hitbox" parent="." instance=ExtResource( 3 )]
 knockback = Vector2( 100, -100 )
-damage = 2.0
+damage = 30.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
 position = Vector2( 8, 0 )
