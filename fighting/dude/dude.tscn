@@ -27,7 +27,7 @@
 [ext_resource path="res://fighting/dude/attacks/jab2.tscn" type="PackedScene" id=25]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 4, 4.5 )
+extents = Vector2( 4, 5.5 )
 
 [sub_resource type="Animation" id=3]
 resource_name = "air"
@@ -389,7 +389,7 @@ __meta__ = {
 texture = ExtResource( 5 )
 hframes = 8
 vframes = 8
-frame = 31
+frame = 17
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 0.5 )
@@ -449,11 +449,6 @@ script = ExtResource( 23 )
 [node name="attack_list" type="Node" parent="."]
 script = ExtResource( 19 )
 
-[node name="fireball" parent="attack_list" instance=ExtResource( 18 )]
-states_from = PoolStringArray( "idle", "run", "air" )
-state_to = "fireball"
-action = "special_attack"
-
 [node name="jab2" parent="attack_list" instance=ExtResource( 18 )]
 states_from = PoolStringArray( "jab" )
 state_to = "jab2"
@@ -471,6 +466,13 @@ state_to = "air_kick"
 [node name="dash" parent="attack_list" instance=ExtResource( 18 )]
 states_from = PoolStringArray( "run" )
 state_to = "tackle"
+
+[node name="disabled_attacks" type="Node" parent="."]
+
+[node name="fireball" parent="disabled_attacks" instance=ExtResource( 18 )]
+states_from = PoolStringArray( "idle", "run", "air" )
+state_to = "fireball"
+action = "special_attack"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "idle"
@@ -512,7 +514,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[connection signal="health_changed" from="." to="healthbar" method="_on_dude_health_changed"]
+[connection signal="health_changed" from="." to="healthbar" method="_on_health_changed"]
 [connection signal="state_changed" from="state" to="state_label" method="_on_state_state_changed"]
 [connection signal="animation_finished" from="AnimationPlayer" to="state" method="_on_animation_finished"]
 [connection signal="area_entered" from="hurtbox" to="." method="_on_hurtbox_area_entered"]

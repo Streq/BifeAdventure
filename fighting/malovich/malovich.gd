@@ -17,12 +17,13 @@ onready var sprite = $Sprite
 onready var controller = $controller
 onready var attack_list = $attack_list
 
+var invulnerable = false
 
 var _break = true
 
 export var dir = 1.0
 
-var health := max_health setget set_health
+onready var health := max_health setget set_health
 var velocity := Vector2.ZERO
 func _input(event):
 	if event.is_action_pressed("A1"):
@@ -40,9 +41,14 @@ func _move(delta):
 	if is_on_wall():
 		velocity.x = 0
 
+func set_untouchable(val):
+	$hurtbox.set_deferred("monitoring",val)
+	$hurtbox.set_deferred("monitorable",val)
+func set_invulnerable(val):
+	invulnerable = val
 
 func _on_hurtbox_area_entered(area):
-	if !area.is_whitelisted(self):
+	if !area.is_whitelisted(self) and !invulnerable:
 		var hitter = area.body
 		state._change_state("hurt",null)
 		area.apply_damage(self)
