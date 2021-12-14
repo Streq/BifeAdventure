@@ -13,6 +13,7 @@ var direction:Vector2 = Vector2.ZERO
 
 
 
+
 func _ready():
 	if get_tree().has_group("player"):
 		target = get_tree().get_nodes_in_group("player")[0]
@@ -40,22 +41,12 @@ func _physics_process(delta):
 	buttonA.clear_frame()
 	buttonB.clear_frame()
 	buttonC.clear_frame()
-	if target:
-		var dist : Vector2= _target_distance()
-		direction.x = sign(dist.x)
-		var length_squared : float = dist.length_squared()
-		if(length_squared < 48*48):
-			buttonB.pressed(true)
-		if(length_squared > 128*128):
-			buttonC.pressed(true)
-	
-	
-	
-	
+	if $strategy.current_state:
+		$strategy.current_state.handle(owner, self)
 
 func _target_distance():
 	if target:
-		return target.position - get("global_position")
+		return target.position - owner.global_position
 
 class InputButton extends Node:
 	var is_pressed := false
