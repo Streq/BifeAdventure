@@ -2,6 +2,8 @@ extends KinematicBody2D
 
 signal health_changed(val, max_health)
 
+signal hurt()
+
 export var max_health :float = 100
 export var speed :float = 300
 export var speed_lerp :float = 2
@@ -20,6 +22,7 @@ onready var attack_list = $attack_list
 var invulnerable = false
 
 var _break = true
+var dead = false
 
 export var dir = 1.0
 
@@ -59,7 +62,12 @@ func set_health(val):
 	emit_signal("health_changed", val, max_health)
 	if health <= 0:
 		state._change_state("dead", null)
-		
+		dead = true
+
+func _physics_process(delta):
+	if dead:
+		state._change_state("dead", null)
+
 func learn(attack):
 	attack_list.add_child(attack)
 

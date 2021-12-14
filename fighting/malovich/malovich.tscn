@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://asset/theme/white_black_text.tres" type="Theme" id=1]
 [ext_resource path="res://fighting/malovich/ai_controller.gd" type="Script" id=2]
@@ -15,7 +15,10 @@
 [ext_resource path="res://fighting/dude/idle.gd" type="Script" id=13]
 [ext_resource path="res://fighting/dude/state_label.gd" type="Script" id=14]
 [ext_resource path="res://fighting/dude/run.gd" type="Script" id=15]
+[ext_resource path="res://fighting/malovich/strategy/follow.gd" type="Script" id=16]
 [ext_resource path="res://fighting/dude/healthbar.gd" type="Script" id=17]
+[ext_resource path="res://fighting/malovich/strategy/punch.gd" type="Script" id=18]
+[ext_resource path="res://fighting/malovich/strategy/ram.gd" type="Script" id=19]
 [ext_resource path="res://fighting/dude/attack_list.gd" type="Script" id=20]
 [ext_resource path="res://fighting/dude/dead.gd" type="Script" id=21]
 [ext_resource path="res://fighting/dude/attacks/input_patterns/tilt_attack.tscn" type="PackedScene" id=23]
@@ -244,12 +247,12 @@ bg_color = Color( 0.341176, 0, 0, 1 )
 [node name="malovich" type="KinematicBody2D"]
 collision_mask = 0
 script = ExtResource( 3 )
-max_health = 200.0
+max_health = 500.0
 speed = 75.0
 speed_lerp = 3.0
 idle_lerp = 15.0
 jump = 150.0
-gravity = 800.0
+gravity = 700.0
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 1, 0 )
@@ -280,6 +283,7 @@ START_STATE = NodePath("idle")
 
 [node name="jump" type="Node" parent="state"]
 script = ExtResource( 11 )
+stunned = true
 duration_frames = 5
 
 [node name="idle" type="Node" parent="state"]
@@ -293,20 +297,25 @@ script = ExtResource( 6 )
 
 [node name="hurt" type="Node" parent="state"]
 script = ExtResource( 5 )
+stunned = true
 
 [node name="jab" type="Node" parent="state"]
 script = ExtResource( 7 )
+stunned = true
 jab = ExtResource( 8 )
 
 [node name="ram" type="Node" parent="state"]
 script = ExtResource( 9 )
+stunned = true
 jab = ExtResource( 10 )
 
 [node name="dead" type="Node" parent="state"]
 script = ExtResource( 21 )
+stunned = true
 
 [node name="dizzy" type="Node" parent="state"]
 script = ExtResource( 12 )
+stunned = true
 
 [node name="Timer" type="Timer" parent="state/dizzy"]
 wait_time = 3.0
@@ -362,8 +371,50 @@ __meta__ = {
 [node name="controller" type="Node2D" parent="."]
 script = ExtResource( 2 )
 
+[node name="strategy" type="Node2D" parent="controller"]
+script = ExtResource( 4 )
+START_STATE = NodePath("follow")
+
+[node name="follow" type="Node2D" parent="controller/strategy"]
+script = ExtResource( 16 )
+
+[node name="Timer" type="Timer" parent="controller/strategy/follow"]
+wait_time = 3.0
+one_shot = true
+
+[node name="punch" type="Node2D" parent="controller/strategy"]
+script = ExtResource( 18 )
+
+[node name="cooldown" type="Timer" parent="controller/strategy/punch"]
+wait_time = 0.6
+one_shot = true
+
+[node name="ram" type="Node2D" parent="controller/strategy"]
+script = ExtResource( 19 )
+
+[node name="Timer" type="Timer" parent="controller/strategy/ram"]
+wait_time = 0.05
+one_shot = true
+
+[node name="state_label" type="Label" parent="controller"]
+margin_left = -20.0115
+margin_top = -32.0
+margin_right = 19.9885
+margin_bottom = -18.0
+theme = ExtResource( 1 )
+text = "dsad"
+align = 1
+script = ExtResource( 14 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [connection signal="health_changed" from="." to="healthbar" method="_on_health_changed"]
 [connection signal="state_changed" from="state" to="state_label" method="_on_state_state_changed"]
 [connection signal="timeout" from="state/dizzy/Timer" to="state/dizzy" method="_on_Timer_timeout"]
 [connection signal="animation_finished" from="AnimationPlayer" to="state" method="_on_animation_finished"]
 [connection signal="area_entered" from="hurtbox" to="." method="_on_hurtbox_area_entered"]
+[connection signal="state_changed" from="controller/strategy" to="controller/state_label" method="_on_state_state_changed"]
+[connection signal="timeout" from="controller/strategy/follow/Timer" to="controller/strategy/follow" method="_on_Timer_timeout"]
+[connection signal="timeout" from="controller/strategy/punch/cooldown" to="controller/strategy/punch" method="_on_cooldown_timeout"]
+[connection signal="timeout" from="controller/strategy/ram/Timer" to="controller/strategy/ram" method="_on_Timer_timeout"]
