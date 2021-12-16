@@ -8,6 +8,7 @@ extends Label
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	visible = OS.is_debug_build()
 	pass # Replace with function body.
 
 

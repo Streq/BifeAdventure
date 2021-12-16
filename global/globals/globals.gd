@@ -21,7 +21,7 @@ var step_counter : int = 0 setget set_step_counter
 
 var spawn_tile = null
 
-var things_that_happened : = {EVENTS.tutorial_completed:true}
+var things_that_happened : = {}
 
 func set_step_counter(val):
 	step_counter = val

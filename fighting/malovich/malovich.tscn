@@ -393,7 +393,7 @@ one_shot = true
 script = ExtResource( 19 )
 
 [node name="Timer" type="Timer" parent="controller/strategy/ram"]
-wait_time = 0.05
+wait_time = 0.2
 one_shot = true
 
 [node name="state_label" type="Label" parent="controller"]
