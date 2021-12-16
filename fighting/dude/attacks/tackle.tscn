@@ -10,8 +10,8 @@ extents = Vector2( 4, 4 )
 script = ExtResource( 2 )
 
 [node name="hitbox" parent="." instance=ExtResource( 1 )]
-knockback = Vector2( 100, -100 )
-damage = 2.0
+knockback = Vector2( 200, -100 )
+damage = 20.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
 position = Vector2( 4, 0 )
