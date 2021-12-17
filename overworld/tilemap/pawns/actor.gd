@@ -7,7 +7,7 @@ signal finish_step()
 onready var Grid = get_parent()
 onready var anim = $character_sprite/AnimationPlayer
 onready var controller = $controller
-onready var interact_action = $interact_action
+onready var interact_action = $interact_action if has_node("interact_action") else null
 onready var tween = $Tween
 
 
