@@ -50,7 +50,7 @@ func _process(delta):
 			elif textbox_container.visible:
 				hide_textbox()
 		State.READING:
-			print_debug(label.percent_visible)
+#			print_debug(label.percent_visible)
 			if Input.is_action_just_pressed("A0"):
 				end_tween_early()
 		State.FINISHED:
