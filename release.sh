@@ -12,5 +12,5 @@ git merge main --no-edit || exit "$?"
 godot --export "HTML5"
 git add .
 git commit -m"release"
-./increment-tag.sh -v ${VERSION}
+./increment_version.sh -v ${VERSION}
 git checkout main
