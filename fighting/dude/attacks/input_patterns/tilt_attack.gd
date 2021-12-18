@@ -1,6 +1,6 @@
 extends Node
 
-export (PoolStringArray) var states_from := ["idle"]
+export (PoolStringArray) var states_from : Array = ["idle"]
 export (String) var state_to := ""
 export (PoolVector2Array) var dirs := []
 export (String) var action := "attack"
