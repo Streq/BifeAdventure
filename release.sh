@@ -1,8 +1,16 @@
 #!/bin/bash
+#get parameters
+VERSION = minor
+while getopts v: flag
+do
+  case "${flag}" in
+    v) VERSION=${OPTARG};;
+  esac
+done
 git checkout gh-pages || exit "$?"
 git merge main --no-edit || exit "$?"
 godot --export "HTML5"
 git add .
-git commit -m"version 0"
-git push
+git commit -m"release"
+./increment-tag.sh -v ${VERSION}
 git checkout main
