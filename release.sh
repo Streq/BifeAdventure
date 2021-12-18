@@ -7,9 +7,8 @@ do
     v) VERSION=${OPTARG};;
   esac
 done
-git checkout gh-pages || exit "$?"
-git merge main --no-edit || exit "$?"
 godot --export "HTML5"
+git checkout gh-pages || exit "$?"
 git add .
 git commit -m"release"
 ./increment_version.sh -v ${VERSION}
