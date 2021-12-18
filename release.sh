@@ -1,15 +1,11 @@
 #!/bin/bash
 #get parameters
-VERSION=minor
-while getopts v: flag
-do
-  case "${flag}" in
-    v) VERSION=${OPTARG};;
-  esac
-done
+./increment_version.sh "$@"
 godot --export "HTML5"
-git checkout gh-pages || exit "$?"
 git add .
+git stash
+git checkout gh-pages || exit "$?"
+git checkout stash -- .
 git commit -m"release"
-./increment_version.sh -v ${VERSION}
+git push
 git checkout main
