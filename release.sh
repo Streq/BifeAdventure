@@ -1,6 +1,6 @@
 #!/bin/bash
 #get parameters
-VERSION = minor
+VERSION=minor
 while getopts v: flag
 do
   case "${flag}" in
