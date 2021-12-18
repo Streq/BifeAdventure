@@ -31,9 +31,12 @@ VNUM3=${CURRENT_VERSION_PARTS[2]}
 if [[ $VERSION == 'major' ]]
 then
   VNUM1=$((VNUM1+1))
+  VNUM2=0
+  VNUM3=0
 elif [[ $VERSION == 'minor' ]]
 then
   VNUM2=$((VNUM2+1))
+  VNUM3=0
 elif [[ $VERSION == 'patch' ]]
 then
   VNUM3=$((VNUM3+1))
@@ -54,9 +57,7 @@ NEEDS_TAG=`git describe --contains $GIT_COMMIT 2>/dev/null`
 #only tag if no tag already
 #to publish, need to be logged in to npm, and with clean working directory: `npm login; git stash`
 if [ -z "$NEEDS_TAG" ]; then
-  npm version $NEW_TAG
-  npm publish --access public
-  echo "Tagged with $NEW_TAG"
+  git tag $NEW_TAG
   git push --tags
   git push
 else
