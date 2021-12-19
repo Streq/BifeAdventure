@@ -1,5 +1,5 @@
 #!/bin/bash
-#get parameters
+./require_clean_work_tree.sh || exit "$?"
 ./increment_version.sh "$@"
 godot --export "HTML5"
 git add .
