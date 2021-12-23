@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://asset/theme/white_black_text.tres" type="Theme" id=1]
 [ext_resource path="res://fighting/malovich/ai_controller.gd" type="Script" id=2]
@@ -21,6 +21,7 @@
 [ext_resource path="res://fighting/malovich/strategy/ram.gd" type="Script" id=19]
 [ext_resource path="res://fighting/dude/attack_list.gd" type="Script" id=20]
 [ext_resource path="res://fighting/dude/dead.gd" type="Script" id=21]
+[ext_resource path="res://fighting/dude/hitstun.gd" type="Script" id=22]
 [ext_resource path="res://fighting/dude/attacks/input_patterns/tilt_attack.tscn" type="PackedScene" id=23]
 [ext_resource path="res://asset/texture/malovich.png" type="Texture" id=24]
 
@@ -96,6 +97,22 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 16 ]
+}
+
+[sub_resource type="Animation" id=18]
+resource_name = "hitstun"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
@@ -299,6 +316,9 @@ script = ExtResource( 6 )
 script = ExtResource( 5 )
 stunned = true
 
+[node name="hitstun" type="Node" parent="state"]
+script = ExtResource( 22 )
+
 [node name="jab" type="Node" parent="state"]
 script = ExtResource( 7 )
 stunned = true
@@ -339,6 +359,7 @@ anims/RESET = SubResource( 16 )
 anims/air = SubResource( 2 )
 anims/dead = SubResource( 4 )
 anims/dizzy = SubResource( 17 )
+anims/hitstun = SubResource( 18 )
 anims/hurt = SubResource( 6 )
 anims/idle = SubResource( 7 )
 anims/jab = SubResource( 8 )

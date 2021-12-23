@@ -13,6 +13,7 @@ export var air_idle_lerp :float = 1
 export var jump :float = 200
 export var wall_jump :float = 200
 export var gravity :float = 400
+export var hitstun :float = 0.3
 
 onready var state = $state
 onready var sprite = $Sprite
@@ -51,11 +52,14 @@ func set_invulnerable(val):
 	invulnerable = val
 
 func _on_hurtbox_area_entered(area):
-	if !area.is_whitelisted(self) and !invulnerable:
+	if !area.is_whitelisted(self):
 		var hitter = area.body
-		state._change_state("hurt",null)
+		if area.get_knockdown():
+			state._change_state("knocked",null)
+		else:
+			state._change_state("hitstun",null)
+		area.apply_knockback(self)		
 		area.apply_damage(self)
-		area.apply_knockback(self)
 	
 func set_health(val):
 	health = val

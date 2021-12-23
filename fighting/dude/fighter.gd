@@ -11,6 +11,8 @@ export var air_idle_lerp :float = 1
 export var jump :float = 200
 export var wall_jump :float = 200
 export var gravity :float = 400
+export var hitstun :float = 0.3
+
 
 onready var state = $state
 onready var sprite = $Sprite
@@ -22,7 +24,7 @@ var _break = true
 
 export var dir = 1.0
 
-var health := max_health setget set_health
+onready var health := max_health setget set_health
 var velocity := Vector2.ZERO
 func _input(event):
 	if event.is_action_pressed("A1"):
@@ -44,9 +46,13 @@ func _move(delta):
 func _on_hurtbox_area_entered(area):
 	if !area.is_whitelisted(self):
 		var hitter = area.body
-		state._change_state("hurt",null)
+		if area.get_knockdown():
+			state._change_state("knocked",null)
+		else:
+			state._change_state("hitstun",null)
+		area.apply_knockback(self)		
 		area.apply_damage(self)
-		area.apply_knockback(self)
+		
 	
 func set_health(val):
 	health = val

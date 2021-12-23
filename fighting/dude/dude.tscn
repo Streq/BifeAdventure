@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=44 format=2]
 
 [ext_resource path="res://fighting/dude/fighter.gd" type="Script" id=1]
 [ext_resource path="res://fighting/dude/idle.gd" type="Script" id=2]
@@ -25,6 +25,7 @@
 [ext_resource path="res://fighting/dude/dead.gd" type="Script" id=23]
 [ext_resource path="res://fighting/dude/attacks/tackle.tscn" type="PackedScene" id=24]
 [ext_resource path="res://fighting/dude/attacks/jab2.tscn" type="PackedScene" id=25]
+[ext_resource path="res://fighting/dude/hitstun.gd" type="Script" id=26]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 5.5 )
@@ -119,6 +120,22 @@ tracks/1/keys = {
 "args": [  ],
 "method": "cast_fireball"
 } ]
+}
+
+[sub_resource type="Animation" id=16]
+resource_name = "hitstun"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 21 ]
 }
 
 [sub_resource type="Animation" id=7]
@@ -283,6 +300,22 @@ tracks/0/keys = {
 "values": [ 16 ]
 }
 
+[sub_resource type="Animation" id=17]
+resource_name = "knocked"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 20 ]
+}
+
 [sub_resource type="Animation" id=4]
 resource_name = "run"
 length = 0.8
@@ -389,7 +422,7 @@ __meta__ = {
 texture = ExtResource( 5 )
 hframes = 8
 vframes = 8
-frame = 26
+frame = 21
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 0.5 )
@@ -411,6 +444,9 @@ script = ExtResource( 6 )
 
 [node name="air" type="Node" parent="state"]
 script = ExtResource( 8 )
+
+[node name="hitstun" type="Node" parent="state"]
+script = ExtResource( 26 )
 
 [node name="hurt" type="Node" parent="state"]
 script = ExtResource( 13 )
@@ -480,11 +516,13 @@ anims/air = SubResource( 3 )
 anims/air_kick = SubResource( 9 )
 anims/dead = SubResource( 11 )
 anims/fireball = SubResource( 10 )
+anims/hitstun = SubResource( 16 )
 anims/hurt = SubResource( 7 )
 anims/idle = SubResource( 2 )
 anims/jab = SubResource( 8 )
 anims/jab2 = SubResource( 12 )
 anims/jump = SubResource( 6 )
+anims/knocked = SubResource( 17 )
 anims/run = SubResource( 4 )
 anims/tackle = SubResource( 13 )
 anims/wall = SubResource( 5 )
