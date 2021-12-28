@@ -42,6 +42,8 @@ Overworld="*res://global/overworld.gd"
 
 window/size/width=320
 window/size/height=288
+window/size/test_width=960
+window/size/test_height=864
 window/stretch/mode="viewport"
 window/stretch/aspect="keep"
 

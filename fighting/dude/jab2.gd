@@ -7,7 +7,7 @@ var active_hitbox := false
 
 func enter():
 	owner.get_node("AnimationPlayer").stop()
-	owner.get_node("AnimationPlayer").play("jab2")
+	owner.get_node("AnimationPlayer").play("jab3")
 	hitbox = jab.instance()
 	hitbox.body = owner
 		
