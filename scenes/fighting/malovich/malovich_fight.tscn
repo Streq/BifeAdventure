@@ -20,4 +20,4 @@ position = Vector2( 272, 184 )
 dir = -1.0
 
 [node name="dude" parent="." instance=ExtResource( 2 )]
-position = Vector2( 56, 184 )
+position = Vector2( 56, 185 )
