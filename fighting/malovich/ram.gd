@@ -1,19 +1,16 @@
 extends "res://util/state/state.gd"
 
-export var jab : PackedScene
 export var animation := "ram"
 export var speed := 200.0
 export var speed_lerp := 30.0
 
-var hitbox
+onready var hitbox = owner.get_node("pivot/hitbox/ram")
 var active_hitbox := false
 var can_move = false
 
 func enter():
 	owner.get_node("AnimationPlayer").stop()
 	owner.get_node("AnimationPlayer").play(animation)
-	hitbox = jab.instance()
-	hitbox.body = owner
 	can_move = false
 	locked = true
 	activate_hitbox()
@@ -51,12 +48,14 @@ func exit():
 	
 func activate_hitbox():
 	if !active_hitbox:
-		owner.call_deferred("add_child",hitbox)
+		hitbox.monitoring = true
+		hitbox.monitorable = true
 		active_hitbox = true
-		
+
 func deactivate_hitbox():
 	if active_hitbox:
-		owner.call_deferred("remove_child",hitbox)
+		hitbox.monitoring = false
+		hitbox.monitorable = false
 		active_hitbox = false
 
 func enable_movement():

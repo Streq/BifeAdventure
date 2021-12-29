@@ -16,7 +16,10 @@ export var gravity :float = 400
 export var hitstun :float = 0.3
 
 onready var state = $state
-onready var sprite = $Sprite
+onready var sprite = $pivot/display/Sprite
+onready var display = $pivot/display
+onready var hitbox = $pivot/hitbox
+onready var pivot = $pivot
 onready var controller = $controller
 onready var attack_list = $attack_list
 
@@ -29,6 +32,11 @@ export var dir = 1.0
 
 onready var health := max_health setget set_health
 var velocity := Vector2.ZERO
+
+func _ready():
+	for child in hitbox.get_children():
+		child.body = self
+
 func _input(event):
 	if event.is_action_pressed("A1"):
 		health = max(health,0)
@@ -36,14 +44,17 @@ func _input(event):
 		health = min(health,max_health)
 
 
-func _move(delta):
+func _move(delta, bounce_h = false, bounce_y = false):
 	velocity.y += gravity*delta
+	var aux_vel = velocity
 	velocity = move_and_slide(velocity, Vector2.UP)
-	sprite.flip_h = dir < 0.0
-	if is_on_floor() and velocity.y > 0 or is_on_ceiling() and velocity.y < 0:
-		velocity.y = 0
-	if is_on_wall():
-		velocity.x = 0
+	if bounce_y and (is_on_floor() or is_on_ceiling()):
+		velocity.y = -aux_vel.y
+	if bounce_h and is_on_wall():
+		velocity.x = -aux_vel.x
+		dir = -dir
+	pivot.scale.x = dir
+
 
 func set_untouchable(val):
 	$hurtbox.set_deferred("monitoring",val)
@@ -77,3 +88,15 @@ func learn(attack):
 
 func unlearn(attack):
 	attack_list.remove_child(attack)
+
+func step_forward(amount):
+	velocity.x += amount*dir
+	
+func set_locked(val):
+	state.current_state.set_locked(val)
+
+func activate_hitbox(id):
+	pass
+	
+func deactivate_hitbox(id):
+	pass

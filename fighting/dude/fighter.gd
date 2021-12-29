@@ -33,15 +33,17 @@ func _input(event):
 		health = min(health,max_health)
 
 
-func _move(delta):
+func _move(delta, bounce_h = false, bounce_y = false):
 	velocity.y += gravity*delta
+	var aux_vel = velocity
 	velocity = move_and_slide(velocity, Vector2.UP)
+	if bounce_y and (is_on_floor() or is_on_ceiling()):
+		velocity.y = -aux_vel.y
+	if bounce_h and is_on_wall():
+		velocity.x = -aux_vel.x
+		dir = -dir
 	sprite.flip_h = dir < 0.0
-	if is_on_floor() and velocity.y > 0 or is_on_ceiling() and velocity.y < 0:
-		velocity.y = 0
-	if is_on_wall():
-		velocity.x = 0
-
+	
 
 func _on_hurtbox_area_entered(area):
 	if !area.is_whitelisted(self):

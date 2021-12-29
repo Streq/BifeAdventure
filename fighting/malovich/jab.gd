@@ -1,17 +1,15 @@
 extends "res://util/state/state.gd"
 
-export var jab : PackedScene
+onready var hitbox = owner.get_node("pivot/hitbox/jab")
+onready var display = owner.get_node("pivot/display/jab")
 export var animation := "jab"
 
-var hitbox
 var active_hitbox := false
 var can_move = false
 
 func enter():
 	owner.get_node("AnimationPlayer").stop()
 	owner.get_node("AnimationPlayer").play(animation)
-	hitbox = jab.instance()
-	hitbox.body = owner
 	can_move = false
 	locked = true
 	
@@ -42,14 +40,29 @@ func _on_animation_finished(anim_name):
 func exit():
 	deactivate_hitbox()
 	
+#func activate_hitbox():
+#	if !active_hitbox:
+#		owner.call_deferred("add_child",hitbox)
+#		active_hitbox = true
+
+
+#func deactivate_hitbox():
+#	if active_hitbox:
+#		owner.call_deferred("remove_child",hitbox)
+#		active_hitbox = false
 func activate_hitbox():
 	if !active_hitbox:
-		owner.call_deferred("add_child",hitbox)
+		display.visible = true
+		hitbox.monitoring = true
+		hitbox.monitorable = true
 		active_hitbox = true
-		
+
+
 func deactivate_hitbox():
 	if active_hitbox:
-		owner.call_deferred("remove_child",hitbox)
+		display.visible = false
+		hitbox.monitoring = false
+		hitbox.monitorable = false
 		active_hitbox = false
 
 func enable_movement():

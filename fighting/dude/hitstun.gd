@@ -17,7 +17,7 @@ func enter():
 	
 func update(delta):
 	var p = owner
-	p._move(delta)
+	p._move(delta, true)
 	
 	var controller = owner.get_node("controller")
 	if timeout:

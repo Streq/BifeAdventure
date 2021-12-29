@@ -21,7 +21,7 @@ func update(delta):
 	
 func exit():
 	var p = owner
-	p.get_node("Sprite").position.x = 0
+	p.pivot.position.x = 0
 
 func _on_Timer_timeout():
 	emit_signal("finished", "idle", null)
