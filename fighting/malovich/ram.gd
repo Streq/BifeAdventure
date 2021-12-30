@@ -4,8 +4,6 @@ export var animation := "ram"
 export var speed := 200.0
 export var speed_lerp := 30.0
 
-onready var hitbox = owner.get_node("pivot/hitbox/ram")
-var active_hitbox := false
 var can_move = false
 
 func enter():
@@ -13,7 +11,7 @@ func enter():
 	owner.get_node("AnimationPlayer").play(animation)
 	can_move = false
 	locked = true
-	activate_hitbox()
+	owner.activate_hitbox("ram")
 	
 
 func update(delta):
@@ -44,19 +42,7 @@ func _on_animation_finished(anim_name):
 	emit_signal("finished", "idle", null)
 	
 func exit():
-	deactivate_hitbox()
-	
-func activate_hitbox():
-	if !active_hitbox:
-		hitbox.monitoring = true
-		hitbox.monitorable = true
-		active_hitbox = true
-
-func deactivate_hitbox():
-	if active_hitbox:
-		hitbox.monitoring = false
-		hitbox.monitorable = false
-		active_hitbox = false
+	owner.deactivate_hitbox("ram")
 
 func enable_movement():
 	can_move = true

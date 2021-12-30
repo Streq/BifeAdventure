@@ -168,25 +168,33 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.7 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.7, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 8, 9, 10 ]
+"values": [ 8, 9, 10, 8 ]
 }
-tracks/1/type = "value"
-tracks/1/path = NodePath("pivot/hitbox/jab:monitoring")
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.7, 0.9 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, false ]
+"times": PoolRealArray( 0, 0.7, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"values": [ {
+"args": [ 50.0 ],
+"method": "step_forward"
+}, {
+"args": [ 600.0 ],
+"method": "step_forward"
+}, {
+"args": [ false ],
+"method": "set_locked"
+} ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("pivot/hitbox/jab:monitorable")
+tracks/2/path = NodePath("pivot/display/jab:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -204,30 +212,15 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 0.7, 0.9 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"values": [ {
-"args": [ 50.0 ],
-"method": "step_forward"
-}, {
-"args": [ 600.0 ],
-"method": "step_forward"
-}, {
-"args": [ false ],
-"method": "set_locked"
-} ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("pivot/display/jab:visible")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
 "times": PoolRealArray( 0.7, 0.9 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, false ]
+"values": [ {
+"args": [ "jab" ],
+"method": "activate_hitbox"
+}, {
+"args": [ "jab" ],
+"method": "deactivate_hitbox"
+} ]
 }
 
 [sub_resource type="Animation" id=10]
@@ -306,7 +299,7 @@ position = Vector2( 1, 0 )
 texture = ExtResource( 24 )
 hframes = 8
 vframes = 8
-frame = 24
+frame = 8
 
 [node name="jab" type="Sprite" parent="pivot/display"]
 visible = false
@@ -319,6 +312,7 @@ frame = 11
 [node name="hitbox" type="Node2D" parent="pivot"]
 
 [node name="jab" parent="pivot/hitbox" instance=ExtResource( 8 )]
+visible = false
 monitoring = false
 monitorable = false
 knockback = Vector2( 200, -200 )
@@ -329,6 +323,7 @@ position = Vector2( 12.5, 0 )
 shape = SubResource( 19 )
 
 [node name="ram" parent="pivot/hitbox" instance=ExtResource( 8 )]
+visible = false
 monitoring = false
 monitorable = false
 knockback = Vector2( 200, -300 )

@@ -38,35 +38,9 @@ func _on_animation_finished(anim_name):
 	emit_signal("finished", "idle", null)
 	
 func exit():
-	deactivate_hitbox()
+	owner.deactivate_hitbox("jab")
+	owner.get_node("pivot/display/jab").visible = false
 	
-#func activate_hitbox():
-#	if !active_hitbox:
-#		owner.call_deferred("add_child",hitbox)
-#		active_hitbox = true
-
-
-#func deactivate_hitbox():
-#	if active_hitbox:
-#		owner.call_deferred("remove_child",hitbox)
-#		active_hitbox = false
-func activate_hitbox():
-	if !active_hitbox:
-		display.visible = true
-		hitbox.monitoring = true
-		hitbox.monitorable = true
-		active_hitbox = true
-
-
-func deactivate_hitbox():
-	if active_hitbox:
-		display.visible = false
-		hitbox.monitoring = false
-		hitbox.monitorable = false
-		active_hitbox = false
-
+	
 func enable_movement():
 	can_move = true
-
-func step_forward(amount):
-	owner.velocity.x += amount*owner.dir

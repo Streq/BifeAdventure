@@ -96,7 +96,20 @@ func set_locked(val):
 	state.current_state.set_locked(val)
 
 func activate_hitbox(id):
-	pass
-	
+	call_deferred("_deferred_activate_hitbox", id)
+
 func deactivate_hitbox(id):
-	pass
+	call_deferred("_deferred_deactivate_hitbox", id)
+
+
+func _deferred_activate_hitbox(id):
+	hitbox = $pivot/hitbox.get_node(id)
+	hitbox.visible = true
+	hitbox.monitorable = true
+	hitbox.monitoring = true
+	
+func _deferred_deactivate_hitbox(id):
+	hitbox = $pivot/hitbox.get_node(id)
+	hitbox.visible = false
+	hitbox.monitorable = false
+	hitbox.monitoring = false
