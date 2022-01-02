@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://asset/theme/white_black_text.tres" type="Theme" id=1]
 [ext_resource path="res://asset/texture/fighter_avatar/vs.png" type="Texture" id=2]
@@ -6,9 +6,12 @@
 [ext_resource path="res://asset/texture/fighter_avatar/bife.png" type="Texture" id=4]
 [ext_resource path="res://scenes/fight_transition/fight_transition.gd" type="Script" id=5]
 [ext_resource path="res://asset/texture/fighter_avatar/malovich.png" type="Texture" id=6]
+[ext_resource path="res://util/blink_timer.tscn" type="PackedScene" id=7]
+[ext_resource path="res://start_text.gd" type="Script" id=8]
+[ext_resource path="res://overworld/tilemap/trigger/scene_change_trigger.tscn" type="PackedScene" id=9]
 
 [sub_resource type="Animation" id=1]
-resource_name = "intro"
+resource_name = "play"
 length = 2.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("right_half:position")
@@ -20,7 +23,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 240, 0 ), Vector2( 0, 0 ) ]
+"values": [ Vector2( 260, 0 ), Vector2( 0, 0 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("left_half:position")
@@ -32,7 +35,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( -240, 0 ), Vector2( 0, 0 ) ]
+"values": [ Vector2( -260, 0 ), Vector2( 0, 0 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Vs:visible")
@@ -77,7 +80,7 @@ tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 2 ),
+"times": PoolRealArray( 1 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [ true ],
@@ -85,11 +88,11 @@ tracks/5/keys = {
 } ]
 }
 
-[node name="fight_transition" type="Node2D"]
+[node name="fight_transition" type="CanvasLayer"]
 script = ExtResource( 5 )
 
 [node name="left_half" type="Node2D" parent="."]
-position = Vector2( -240, 0 )
+position = Vector2( -260, 0 )
 
 [node name="FighterHalf" type="Sprite" parent="left_half"]
 position = Vector2( 123, 144 )
@@ -113,7 +116,7 @@ __meta__ = {
 }
 
 [node name="right_half" type="Node2D" parent="."]
-position = Vector2( 240, 0 )
+position = Vector2( 260, 0 )
 
 [node name="FighterHalf" type="Sprite" parent="right_half"]
 position = Vector2( 207, 144 )
@@ -141,10 +144,36 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "intro"
-anims/intro = SubResource( 1 )
+anims/play = SubResource( 1 )
 
 [node name="Vs" type="Sprite" parent="."]
 visible = false
 position = Vector2( 160, 144 )
 texture = ExtResource( 2 )
+
+[node name="start_text" type="Label" parent="Vs"]
+anchor_left = 0.5
+anchor_top = 0.92
+anchor_right = 0.5
+anchor_bottom = 0.92
+margin_left = -92.0
+margin_top = 0.4
+margin_right = 34.0
+margin_bottom = 14.4
+theme = ExtResource( 1 )
+text = "Press [Z] to start"
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="blink_timer" parent="Vs/start_text" instance=ExtResource( 7 )]
+
+[node name="scene_change" parent="." instance=ExtResource( 9 )]
+position = Vector2( 232, 88 )
+to = 8
+relative_spawn_pos = false
+is_world_coords = false
+wait_step = false
+
+[editable path="scene_change"]

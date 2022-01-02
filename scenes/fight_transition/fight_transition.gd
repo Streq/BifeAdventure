@@ -1,4 +1,7 @@
-extends Node2D
+extends Node
+
+func play():
+	$AnimationPlayer.play("play")
 
 func _ready():
 	set_process_input(false)
@@ -9,4 +12,4 @@ func _input(event):
 		_start_fight()
 
 func _start_fight():
-	pass
+	$scene_change.trigger(null, null, null, null)
