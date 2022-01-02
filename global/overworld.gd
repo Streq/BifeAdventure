@@ -9,6 +9,7 @@ const map = {
 	Globals.ROOM.tutorial : preload("res://scenes/fighting/tutorial.tscn"),
 	Globals.ROOM.pepe_house : preload("res://scenes/overworld/casa_pepe.tscn"),
 	Globals.ROOM.malovich_house : preload("res://scenes/overworld/malovich_living_room.tscn"),
+	Globals.ROOM.malovich_room : preload("res://scenes/overworld/malovich_room.tscn"),
 	Globals.ROOM.malovich_fight_room : preload("res://scenes/fighting/malovich/malovich_fight.tscn")
 }
 

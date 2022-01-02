@@ -24,7 +24,7 @@ func _ready():
 	
 func interact(pawn, direction):
 	if interact_action:
-		interact_action.interact(self, pawn, direction)
+		interact_action.interact(self, pawn, direction, Grid)
 	
 func _process(delta):
 	if moving:

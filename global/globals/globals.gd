@@ -10,6 +10,7 @@ enum ROOM {
 	pepe_house,
 	malovich_house,
 	malovich_fight_room,
+	malovich_room,
 }
 const TILE_SIZE = 16
 
