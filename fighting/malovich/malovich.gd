@@ -3,6 +3,7 @@ extends KinematicBody2D
 signal health_changed(val, max_health)
 
 signal hurt()
+signal dead()
 
 export var max_health :float = 100
 export var speed :float = 300
@@ -78,6 +79,7 @@ func set_health(val):
 	if health <= 0:
 		state._change_state("dead", null)
 		dead = true
+		emit_signal("dead")
 
 func _physics_process(delta):
 	if dead:

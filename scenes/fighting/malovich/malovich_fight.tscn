@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://autotile/terrain_simple.tscn" type="PackedScene" id=1]
 [ext_resource path="res://fighting/dude/dude.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://fighting/malovich/malovich.tscn" type="PackedScene" id=4]
 [ext_resource path="res://textbox/textbox.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/fighting/malovich/malovich_fight.gd" type="Script" id=6]
+[ext_resource path="res://overworld/tilemap/trigger/scene_change_trigger.tscn" type="PackedScene" id=7]
 
 [node name="fighting_scene" type="Node2D"]
 script = ExtResource( 6 )
@@ -26,3 +27,17 @@ dir = -1.0
 position = Vector2( 56, 185 )
 
 [node name="textbox" parent="." instance=ExtResource( 5 )]
+
+[node name="scene_change" parent="." instance=ExtResource( 7 )]
+position = Vector2( 232, 88 )
+to = 9
+relative_spawn_pos = false
+is_world_coords = false
+wait_step = false
+
+[node name="spawn_pos" parent="scene_change" index="0"]
+position = Vector2( 12, 8 )
+
+[connection signal="dead" from="malovich" to="." method="player_win"]
+
+[editable path="scene_change"]

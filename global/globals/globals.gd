@@ -14,16 +14,18 @@ enum ROOM {
 }
 const TILE_SIZE = 16
 
-enum EVENTS {
-	tutorial_completed
+enum EVENT {
+	tutorial_completed,
+	malovich_defeated
 }
 
 var step_counter : int = 0 setget set_step_counter
 
 var spawn_tile = null
 
-var things_that_happened : = {}
+var events : = {}
 
 func set_step_counter(val):
 	step_counter = val
 #	print_debug("steps:", val)
+

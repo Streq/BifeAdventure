@@ -1,6 +1,6 @@
 extends Area2D
 
-export(Globals.EVENTS) var event = Globals.EVENTS.tutorial_completed
+export(Globals.EVENT) var event = Globals.EVENT.tutorial_completed
 
 
 func _ready():
@@ -16,4 +16,4 @@ func _on_door_body_exited(body):
 
 func _input(e):
 	if e.is_action_pressed("A0"):
-		Globals.things_that_happened[event] = true
+		Globals.events[event] = true
