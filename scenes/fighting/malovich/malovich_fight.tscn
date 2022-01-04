@@ -38,6 +38,11 @@ wait_step = false
 [node name="spawn_pos" parent="scene_change" index="0"]
 position = Vector2( 12, 8 )
 
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
 [connection signal="dead" from="malovich" to="." method="player_win"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 
 [editable path="scene_change"]
