@@ -12,13 +12,3 @@ const map = {
 	Globals.ROOM.malovich_room : preload("res://scenes/overworld/malovich_room.tscn"),
 	Globals.ROOM.malovich_fight_room : preload("res://scenes/fighting/malovich/malovich_fight.tscn")
 }
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
