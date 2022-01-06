@@ -223,26 +223,6 @@ tile_data = PoolIntArray( 393221, 1, 65538, 393225, 1, 65538, 458763, 1, 65538, 
 tile_set = SubResource( 1 )
 cell_size = Vector2( 16, 16 )
 
-[node name="malovich" parent="." instance=ExtResource( 13 )]
-visible = false
-position = Vector2( 120, 120 )
-
-[node name="character_sprite" parent="malovich" index="0"]
-idle_down_frame = 24
-
-[node name="interact_action" type="Node" parent="malovich"]
-script = ExtResource( 18 )
-
-[node name="0" parent="malovich/interact_action" instance=ExtResource( 12 )]
-interact_text = PoolStringArray( "SANTI MALOVICH: quien pija sos y quien te dejo entrar\? MAMA, QUE TE DIJE\?", "BIFE: soy tu vecino de hace como 8 años", "SANTI: ah", "SANTI: te vas a tener que ir porque si no te rompo la cara", "BIFE: bueno", "...", "SANTI: bueno y te vas\?", "BIFE: no", "SANTI: ok te rompo la jeta", "BIFE: ok", "SANTI: ok" )
-
-[node name="1" type="Node" parent="malovich/interact_action"]
-script = ExtResource( 16 )
-
-[node name="fight_transition" parent="malovich/interact_action/1" instance=ExtResource( 15 )]
-
-[node name="controller" parent="malovich" instance=ExtResource( 14 )]
-
 [node name="map" parent="." instance=ExtResource( 1 )]
 self_modulate = Color( 1, 1, 1, 0 )
 hide_tiles = true
@@ -251,11 +231,8 @@ hide_tiles = true
 tile_set = SubResource( 3 )
 tile_data = PoolIntArray( 262147, 0, 0, 262148, 0, 0, 262149, 0, 0, 262150, 0, 0, 262151, 0, 0, 262152, 0, 0, 262153, 0, 0, 262154, 0, 0, 262155, 0, 0, 262156, 0, 0, 262157, 0, 0, 262158, 0, 0, 262159, 0, 0, 327683, 0, 0, 327695, 0, 0, 393219, 0, 0, 393231, 0, 0, 458755, 0, 0, 458767, 0, 0, 524291, 0, 0, 524303, 0, 0, 589827, 0, 0, 589839, 0, 0, 655363, 0, 0, 655375, 0, 0, 720899, 0, 0, 720911, 0, 0, 786435, 0, 0, 786436, 0, 0, 786437, 0, 0, 786438, 0, 0, 786439, 0, 0, 786440, 0, 0, 786441, 0, 0, 786442, 0, 0, 786443, 0, 0, 786444, 0, 0, 786445, 0, 0, 786446, 0, 0, 786447, 0, 0 )
 
-[node name="player" parent="map/grid" index="0" instance=ExtResource( 2 )]
-position = Vector2( 200, 120 )
-
-[node name="ko_malovich" type="Node2D" parent="map/grid" index="1"]
-position = Vector2( 120, 120 )
+[node name="ko_malovich" type="Node2D" parent="map/grid" index="0"]
+position = Vector2( 136, 120 )
 script = ExtResource( 11 )
 interact_text = PoolStringArray( "GYM de PEPE", "Para PETONES que no saben los CONTROLES" )
 
@@ -264,6 +241,29 @@ texture = ExtResource( 17 )
 hframes = 8
 vframes = 8
 frame = 17
+
+[node name="player" parent="map/grid" index="1" instance=ExtResource( 2 )]
+position = Vector2( 200, 120 )
+
+[node name="malovich" parent="map/grid" index="2" instance=ExtResource( 13 )]
+visible = false
+position = Vector2( 120, 120 )
+
+[node name="character_sprite" parent="map/grid/malovich" index="0"]
+idle_down_frame = 24
+
+[node name="interact_action" type="Node" parent="map/grid/malovich"]
+script = ExtResource( 18 )
+
+[node name="0" parent="map/grid/malovich/interact_action" instance=ExtResource( 12 )]
+interact_text = PoolStringArray( "SANTI MALOVICH: quien pija sos y quien te dejo entrar\? MAMA, QUE TE DIJE\?", "BIFE: soy tu vecino de hace como 8 años", "SANTI: ah", "SANTI: te vas a tener que ir porque si no te rompo la cara", "BIFE: bueno", "...", "SANTI: bueno y te vas\?", "BIFE: no", "SANTI: ok te rompo la jeta", "BIFE: ok", "SANTI: ok" )
+
+[node name="1" type="Node" parent="map/grid/malovich/interact_action"]
+script = ExtResource( 16 )
+
+[node name="fight_transition" parent="map/grid/malovich/interact_action/1" instance=ExtResource( 15 )]
+
+[node name="controller" parent="map/grid/malovich" instance=ExtResource( 14 )]
 
 [node name="scene_change" parent="map/triggers" index="0" instance=ExtResource( 5 )]
 position = Vector2( 232, 88 )
@@ -300,12 +300,15 @@ interact_text = PoolStringArray( "Rompele la jeta Bife" )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 script = ExtResource( 19 )
+textbox_path = NodePath("../textbox")
+malovich_muerto = NodePath("../map/grid/ko_malovich")
+malovich = NodePath("../map/grid/malovich")
 
 [connection signal="text_display_finished" from="textbox" to="." method="_on_textbox_text_display_finished"]
 [connection signal="text_display_started" from="textbox" to="." method="_on_textbox_text_display_started"]
 
-[editable path="malovich"]
 [editable path="map"]
+[editable path="map/grid/malovich"]
 [editable path="map/triggers/scene_change"]
 [editable path="map/mom"]
 [editable path="map/pops"]
