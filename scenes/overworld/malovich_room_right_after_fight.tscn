@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://overworld/tilemap/grid/map.tscn" type="PackedScene" id=1]
 [ext_resource path="res://overworld/tilemap/pawns/player.tscn" type="PackedScene" id=2]
@@ -10,7 +10,6 @@
 [ext_resource path="res://scenes/overworld/overworld_skel.gd" type="Script" id=8]
 [ext_resource path="res://textbox/textbox.tscn" type="PackedScene" id=9]
 [ext_resource path="res://autotile/terrain_simple.tscn" type="PackedScene" id=10]
-[ext_resource path="res://overworld/tilemap/pawns/sign/sign.gd" type="Script" id=11]
 [ext_resource path="res://overworld/tilemap/pawns/interact_action/interact_text.tscn" type="PackedScene" id=12]
 [ext_resource path="res://overworld/tilemap/pawns/character/character.tscn" type="PackedScene" id=13]
 [ext_resource path="res://overworld/tilemap/pawns/controller/nothing_controller.tscn" type="PackedScene" id=14]
@@ -223,6 +222,13 @@ tile_data = PoolIntArray( 393221, 1, 65538, 393225, 1, 65538, 458763, 1, 65538, 
 tile_set = SubResource( 1 )
 cell_size = Vector2( 16, 16 )
 
+[node name="ko_malovich" type="Sprite" parent="."]
+position = Vector2( 136, 120 )
+texture = ExtResource( 17 )
+hframes = 8
+vframes = 8
+frame = 17
+
 [node name="map" parent="." instance=ExtResource( 1 )]
 self_modulate = Color( 1, 1, 1, 0 )
 hide_tiles = true
@@ -231,23 +237,12 @@ hide_tiles = true
 tile_set = SubResource( 3 )
 tile_data = PoolIntArray( 262147, 0, 0, 262148, 0, 0, 262149, 0, 0, 262150, 0, 0, 262151, 0, 0, 262152, 0, 0, 262153, 0, 0, 262154, 0, 0, 262155, 0, 0, 262156, 0, 0, 262157, 0, 0, 262158, 0, 0, 262159, 0, 0, 327683, 0, 0, 327695, 0, 0, 393219, 0, 0, 393231, 0, 0, 458755, 0, 0, 458767, 0, 0, 524291, 0, 0, 524303, 0, 0, 589827, 0, 0, 589839, 0, 0, 655363, 0, 0, 655375, 0, 0, 720899, 0, 0, 720911, 0, 0, 786435, 0, 0, 786436, 0, 0, 786437, 0, 0, 786438, 0, 0, 786439, 0, 0, 786440, 0, 0, 786441, 0, 0, 786442, 0, 0, 786443, 0, 0, 786444, 0, 0, 786445, 0, 0, 786446, 0, 0, 786447, 0, 0 )
 
-[node name="ko_malovich" type="Node2D" parent="map/grid" index="0"]
-position = Vector2( 136, 120 )
-script = ExtResource( 11 )
-interact_text = PoolStringArray( "GYM de PEPE", "Para PETONES que no saben los CONTROLES" )
-
-[node name="Sprite" type="Sprite" parent="map/grid/ko_malovich"]
-texture = ExtResource( 17 )
-hframes = 8
-vframes = 8
-frame = 17
-
-[node name="player" parent="map/grid" index="1" instance=ExtResource( 2 )]
+[node name="player" parent="map/grid" index="0" instance=ExtResource( 2 )]
 position = Vector2( 200, 120 )
 
-[node name="malovich" parent="map/grid" index="2" instance=ExtResource( 13 )]
+[node name="malovich" parent="map/grid" index="1" instance=ExtResource( 13 )]
 visible = false
-position = Vector2( 120, 120 )
+position = Vector2( 136, 120 )
 
 [node name="character_sprite" parent="map/grid/malovich" index="0"]
 idle_down_frame = 24
@@ -265,6 +260,28 @@ script = ExtResource( 16 )
 
 [node name="controller" parent="map/grid/malovich" instance=ExtResource( 14 )]
 
+[node name="pops" parent="map/grid" index="2" instance=ExtResource( 13 )]
+position = Vector2( 216, 88 )
+
+[node name="character_sprite" parent="map/grid/pops" index="0"]
+idle_down_frame = 18
+
+[node name="controller" parent="map/grid/pops" instance=ExtResource( 14 )]
+
+[node name="interact_action" parent="map/grid/pops" instance=ExtResource( 12 )]
+interact_text = PoolStringArray( "Rompele la jeta Bife" )
+
+[node name="mom" parent="map/grid" index="3" instance=ExtResource( 13 )]
+position = Vector2( 200, 88 )
+
+[node name="character_sprite" parent="map/grid/mom" index="0"]
+idle_down_frame = 12
+
+[node name="interact_action" parent="map/grid/mom" instance=ExtResource( 12 )]
+interact_text = PoolStringArray( "Mi hijo es bueno, te juro que es bueno, pero no se que le pasa, esta sacadisimo, ya no se que hacer." )
+
+[node name="controller" parent="map/grid/mom" instance=ExtResource( 14 )]
+
 [node name="scene_change" parent="map/triggers" index="0" instance=ExtResource( 5 )]
 position = Vector2( 232, 88 )
 to = 7
@@ -276,32 +293,13 @@ cell_size = Vector2( 16, 16 )
 format = 1
 script = ExtResource( 4 )
 
-[node name="mom" parent="map" instance=ExtResource( 13 )]
-position = Vector2( 200, 88 )
-
-[node name="character_sprite" parent="map/mom" index="0"]
-idle_down_frame = 12
-
-[node name="interact_action" parent="map/mom" instance=ExtResource( 12 )]
-interact_text = PoolStringArray( "Mi hijo es bueno, te juro que es bueno, pero no se que le pasa, esta sacadisimo, ya no se que hacer." )
-
-[node name="controller" parent="map/mom" instance=ExtResource( 14 )]
-
-[node name="pops" parent="map" instance=ExtResource( 13 )]
-position = Vector2( 216, 88 )
-
-[node name="character_sprite" parent="map/pops" index="0"]
-idle_down_frame = 18
-
-[node name="controller" parent="map/pops" instance=ExtResource( 14 )]
-
-[node name="interact_action" parent="map/pops" instance=ExtResource( 12 )]
-interact_text = PoolStringArray( "Rompele la jeta Bife" )
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 script = ExtResource( 19 )
 textbox_path = NodePath("../textbox")
-malovich_muerto = NodePath("../map/grid/ko_malovich")
+mom = NodePath("../map/grid/mom")
+dad = NodePath("../map/grid/pops")
+bife = NodePath("../map/grid/player")
+malovich_muerto = NodePath("../ko_malovich")
 malovich = NodePath("../map/grid/malovich")
 
 [connection signal="text_display_finished" from="textbox" to="." method="_on_textbox_text_display_finished"]
@@ -309,6 +307,6 @@ malovich = NodePath("../map/grid/malovich")
 
 [editable path="map"]
 [editable path="map/grid/malovich"]
+[editable path="map/grid/pops"]
+[editable path="map/grid/mom"]
 [editable path="map/triggers/scene_change"]
-[editable path="map/mom"]
-[editable path="map/pops"]

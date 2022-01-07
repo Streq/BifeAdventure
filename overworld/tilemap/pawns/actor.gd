@@ -10,7 +10,6 @@ onready var controller = $controller
 onready var interact_action = $interact_action if has_node("interact_action") else null
 onready var tween = $Tween
 
-
 var flip_vertical_walk = false
 var look_dir : Vector2
 var moving := false
