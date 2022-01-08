@@ -296,11 +296,11 @@ script = ExtResource( 4 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 script = ExtResource( 19 )
 textbox_path = NodePath("../textbox")
-mom = NodePath("../map/grid/mom")
-dad = NodePath("../map/grid/pops")
-bife = NodePath("../map/grid/player")
-malovich_muerto = NodePath("../ko_malovich")
-malovich = NodePath("../map/grid/malovich")
+mom_path = NodePath("../map/grid/mom")
+dad_path = NodePath("../map/grid/pops")
+bife_path = NodePath("../map/grid/player")
+malovich_muerto_path = NodePath("../ko_malovich")
+malovich_path = NodePath("../map/grid/malovich")
 
 [connection signal="text_display_finished" from="textbox" to="." method="_on_textbox_text_display_finished"]
 [connection signal="text_display_started" from="textbox" to="." method="_on_textbox_text_display_started"]

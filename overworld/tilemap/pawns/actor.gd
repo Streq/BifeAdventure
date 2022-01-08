@@ -1,5 +1,5 @@
 extends "res://overworld/tilemap/pawns/pawn.gd"
-
+class_name OverworldCharacter
 signal start_step()
 signal finish_step()
 

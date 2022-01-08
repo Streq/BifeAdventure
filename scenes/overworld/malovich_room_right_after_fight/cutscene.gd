@@ -1,21 +1,35 @@
 extends AnimationPlayer
 
 export (NodePath) var textbox_path : NodePath
-export (NodePath) var mom : NodePath
-export (NodePath) var dad : NodePath
-export (NodePath) var bife : NodePath
-export (NodePath) var malovich_muerto : NodePath
-export (NodePath) var malovich : NodePath
+export (NodePath) var mom_path : NodePath
+onready var mom: OverworldCharacter = get_node(mom_path)
+
+export (NodePath) var dad_path : NodePath
+onready var dad: OverworldCharacter = get_node(dad_path)
+
+export (NodePath) var bife_path : NodePath
+onready var bife: OverworldCharacter = get_node(bife_path)
+
+export (NodePath) var malovich_muerto_path : NodePath
+onready var malovich_muerto: Sprite = get_node(malovich_muerto_path)
+
+export (NodePath) var malovich_path : NodePath
+onready var malovich: OverworldCharacter = get_node(malovich_path)
+
+
+
 var malovich_house_entrance
 func _ready():
 	yield(get_tree().root, "ready")
 	animate()
 
 func animate():
-	var pj = get_node(bife)
-	pj.controller.active = false
+	malovich.turn(Vector2.RIGHT)
+	bife.turn(Vector2.LEFT)
+	
+	bife.controller.active = false
 	yield(text_prompt(["MAMA: Dios mio!"]), "completed")
-	yield(walk(get_node(mom),[Vector2(-4,0), Vector2(0,1)]), "completed")
+	yield(walk(mom,[Vector2(-4,0), Vector2(0,1)]), "completed")
 	yield(text_prompt(["MAMA: Hijo, estas bien?"]), "completed")
 	yield(wait(1.0), "completed")
 	yield(text_prompt([
@@ -23,15 +37,24 @@ func animate():
 		"PAPA: Lo hiciste mierda Bife",
 		"BIFE: xD"]), "completed")
 	yield(wait(0.5), "completed")
-	get_node(malovich_muerto).visible = false
-	get_node(malovich).visible = true
+	malovich_muerto.visible = false
+	malovich.visible = true
 	yield(get_tree(),"idle_frame")
 	yield(wait(0.5), "completed")
 	yield(text_prompt([
 		"MAMA: Hijo!", 
 		"MAMA: como te sentis?", 
 		"SANTI: creo q"]), "completed")
-	yield(wait(0.5), "completed")
+	yield(wait(0.4), "completed")
+	malovich.turn(Vector2.DOWN)
+	yield(wait(0.4), "completed")
+	malovich.turn(Vector2.UP)
+	yield(wait(0.4), "completed")
+	malovich.turn(Vector2.LEFT)
+	yield(wait(0.4), "completed")
+	malovich.turn(Vector2.RIGHT)
+	yield(wait(0.4), "completed")
+	
 	yield(text_prompt([
 		"SANTI: creo que nunca estuve tan feliz en mi vida",
 		"PAPA: ah ta muy bueno eso!!",
@@ -40,11 +63,18 @@ func animate():
 		"MAMA: que alegria, no sabes el susto que me pegue",
 		"SANTI: no entiendo por que, pero esa paliza desperto algo en mi",
 		"BIFE: es porque tengo poderes",
-		"PAPA: ah si?",
+		"PAPA: ah si?"]),"completed")
+	
+	bife.turn(Vector2.UP)
+	yield(wait(0.2), "completed")
+	yield(text_prompt([
 		"BIFE: si",
 		"PAPA: y que tipo haces feliz a la gente con trompadas?",
 		"BIFE: si exactamente",
-		"SANTI: perdon Bife, perdon de corazon, y gracias por todo",
+		"SANTI: perdon Bife, perdon de corazon, y gracias por todo"]), "completed")
+	bife.turn(Vector2.LEFT)
+	yield(wait(0.2), "completed")
+	yield(text_prompt([
 		"BIFE: te perdono y denada",
 		"PAPA: gracias Bife",
 		"BIFE: denada",
@@ -53,7 +83,7 @@ func animate():
 	yield(fade_out(), "completed")
 	overworld_goto(Overworld.map[Globals.ROOM.my_hometown], malovich_house_entrance)
 	
-	pj.controller.active = true
+	bife.controller.active = true
 	
 		
 #	var cutscene = [

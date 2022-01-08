@@ -14,4 +14,4 @@ func trigger(pawn = null, grid = null, cell_start = null, cell_target = null):
 		Globals.spawn_tile = pos / Globals.TILE_SIZE
 	else:
 		Globals.spawn_tile = pos
-	get_tree().change_scene_to(Overworld.map[to])
+	get_tree().change_scene_to(Overworld.get_room(to))

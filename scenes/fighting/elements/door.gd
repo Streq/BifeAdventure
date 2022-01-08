@@ -17,4 +17,4 @@ func _on_door_body_exited(body):
 func _input(event):
 	if event.is_action_pressed("A0"):
 		Globals.spawn_tile = $spawn_pos.position
-		get_tree().change_scene_to(Overworld.map[to])
+		get_tree().change_scene_to(Overworld.get_room(to))
