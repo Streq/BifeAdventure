@@ -8,5 +8,4 @@ func interact(interacted, interactor, direction, grid):
 	Signals.emit_signal("display_text", interact_text)
 	var textbox = get_tree().get_nodes_in_group("textbox")[0]
 	yield(textbox, "text_display_finished")
-	print_debug("hola")
-
+	

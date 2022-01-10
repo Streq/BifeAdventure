@@ -1,4 +1,6 @@
-extends AnimationPlayer
+extends Node
+
+signal over
 
 export (NodePath) var textbox_path : NodePath
 export (NodePath) var mom_path : NodePath
@@ -17,10 +19,11 @@ export (NodePath) var malovich_path : NodePath
 onready var malovich: OverworldCharacter = get_node(malovich_path)
 
 
-
 var malovich_house_entrance
 
-func animate():
+func trigger():
+	if Globals.get_event(Globals.EVENT.malovich_defeated_cutscene_over):
+		return
 	malovich.turn(Vector2.RIGHT)
 	bife.turn(Vector2.LEFT)
 	
@@ -81,7 +84,7 @@ func animate():
 	overworld_goto(Overworld.map[Globals.ROOM.my_hometown], malovich_house_entrance)
 	
 	bife.controller.active = true
-	
+	emit_signal("over")
 		
 #	var cutscene = [
 #		TextSeq.new(["MAMA: Dios mio!"]),

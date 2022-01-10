@@ -16,4 +16,4 @@ func _on_door_body_exited(body):
 
 func _input(e):
 	if e.is_action_pressed("A0"):
-		Globals.events[event] = true
+		Globals.set_event(event, true)

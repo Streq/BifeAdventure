@@ -4,4 +4,4 @@ export (Globals.EVENT) var event
 
 
 func trigger():
-	Globals.events[Globals.EVENT] = true
+	Globals.set_event(event, true)

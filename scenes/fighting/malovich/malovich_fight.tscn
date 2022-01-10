@@ -21,6 +21,7 @@ tile_data = PoolIntArray( 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 
 
 [node name="malovich" parent="." instance=ExtResource( 4 )]
 position = Vector2( 272, 184 )
+max_health = 5.0
 dir = -1.0
 
 [node name="dude" parent="." instance=ExtResource( 2 )]
@@ -36,7 +37,7 @@ is_world_coords = false
 wait_step = false
 
 [node name="spawn_pos" parent="scene_change" index="0"]
-position = Vector2( 12, 8 )
+position = Vector2( 12, 7 )
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 2.0
