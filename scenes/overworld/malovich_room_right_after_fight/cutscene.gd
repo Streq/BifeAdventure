@@ -19,9 +19,6 @@ onready var malovich: OverworldCharacter = get_node(malovich_path)
 
 
 var malovich_house_entrance
-func _ready():
-	yield(get_tree().root, "ready")
-	animate()
 
 func animate():
 	malovich.turn(Vector2.RIGHT)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://overworld/tilemap/grid/map.tscn" type="PackedScene" id=1]
 [ext_resource path="res://overworld/tilemap/pawns/player.tscn" type="PackedScene" id=2]
@@ -10,13 +10,11 @@
 [ext_resource path="res://scenes/overworld/overworld_skel.gd" type="Script" id=8]
 [ext_resource path="res://textbox/textbox.tscn" type="PackedScene" id=9]
 [ext_resource path="res://autotile/terrain_simple.tscn" type="PackedScene" id=10]
+[ext_resource path="res://events/event_node.gd" type="Script" id=11]
 [ext_resource path="res://overworld/tilemap/pawns/interact_action/interact_text.tscn" type="PackedScene" id=12]
 [ext_resource path="res://overworld/tilemap/pawns/character/character.tscn" type="PackedScene" id=13]
 [ext_resource path="res://overworld/tilemap/pawns/controller/nothing_controller.tscn" type="PackedScene" id=14]
-[ext_resource path="res://scenes/fight_transition/fight_transition.tscn" type="PackedScene" id=15]
-[ext_resource path="res://overworld/tilemap/pawns/interact_action/fight_transition_action.gd" type="Script" id=16]
 [ext_resource path="res://asset/texture/malovich.png" type="Texture" id=17]
-[ext_resource path="res://overworld/tilemap/pawns/interact_action/interact_chain_action.gd" type="Script" id=18]
 [ext_resource path="res://scenes/overworld/malovich_room_right_after_fight/cutscene.gd" type="Script" id=19]
 
 [sub_resource type="TileSet" id=1]
@@ -247,16 +245,8 @@ position = Vector2( 136, 120 )
 [node name="character_sprite" parent="map/grid/malovich" index="0"]
 idle_down_frame = 24
 
-[node name="interact_action" type="Node" parent="map/grid/malovich"]
-script = ExtResource( 18 )
-
-[node name="0" parent="map/grid/malovich/interact_action" instance=ExtResource( 12 )]
-interact_text = PoolStringArray( "SANTI MALOVICH: quien pija sos y quien te dejo entrar\? MAMA, QUE TE DIJE\?", "BIFE: soy tu vecino de hace como 8 años", "SANTI: ah", "SANTI: te vas a tener que ir porque si no te rompo la cara", "BIFE: bueno", "...", "SANTI: bueno y te vas\?", "BIFE: no", "SANTI: ok te rompo la jeta", "BIFE: ok", "SANTI: ok" )
-
-[node name="1" type="Node" parent="map/grid/malovich/interact_action"]
-script = ExtResource( 16 )
-
-[node name="fight_transition" parent="map/grid/malovich/interact_action/1" instance=ExtResource( 15 )]
+[node name="interact_action" parent="map/grid/malovich" instance=ExtResource( 12 )]
+interact_text = PoolStringArray( "Gracias bife, te estoy eternamente agradecido.", "Y si alguna vez queres pararte de manos, por amor al arte veni a verme." )
 
 [node name="controller" parent="map/grid/malovich" instance=ExtResource( 14 )]
 
@@ -302,6 +292,11 @@ bife_path = NodePath("../map/grid/player")
 malovich_muerto_path = NodePath("../ko_malovich")
 malovich_path = NodePath("../map/grid/malovich")
 
+[node name="event_trigger" type="Node" parent="."]
+script = ExtResource( 11 )
+
+[connection signal="ready" from="." to="AnimationPlayer" method="animate"]
+[connection signal="ready" from="." to="event_trigger" method="trigger"]
 [connection signal="text_display_finished" from="textbox" to="." method="_on_textbox_text_display_finished"]
 [connection signal="text_display_started" from="textbox" to="." method="_on_textbox_text_display_started"]
 
