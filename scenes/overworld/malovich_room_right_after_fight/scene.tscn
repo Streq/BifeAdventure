@@ -316,8 +316,8 @@ event = 2
 [connection signal="text_display_finished" from="textbox" to="." method="_on_textbox_text_display_finished"]
 [connection signal="text_display_started" from="textbox" to="." method="_on_textbox_text_display_started"]
 [connection signal="over" from="cutscene" to="event_trigger" method="trigger"]
-[connection signal="happened" from="event_check_trigger" to="map/grid/malovich/displayer" method="trigger"]
 [connection signal="happened" from="event_check_trigger" to="ko_malovich/hider" method="trigger"]
+[connection signal="happened" from="event_check_trigger" to="map/grid/malovich/displayer" method="trigger"]
 [connection signal="not_happened" from="event_check_trigger" to="cutscene" method="trigger"]
 
 [editable path="map"]
