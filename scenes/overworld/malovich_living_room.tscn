@@ -14,8 +14,8 @@
 [ext_resource path="res://overworld/tilemap/pawns/interact_action/interact_text.tscn" type="PackedScene" id=12]
 [ext_resource path="res://overworld/tilemap/pawns/character/character.tscn" type="PackedScene" id=13]
 [ext_resource path="res://overworld/tilemap/pawns/controller/nothing_controller.tscn" type="PackedScene" id=14]
-[ext_resource path="res://util/parent_deleter.gd" type="Script" id=15]
-[ext_resource path="res://util/event_condition_trigger.gd" type="Script" id=16]
+[ext_resource path="res://util/parent_delete_trigger.gd" type="Script" id=15]
+[ext_resource path="res://util/event_check_trigger.gd" type="Script" id=16]
 
 [sub_resource type="TileSet" id=1]
 0/name = "pokemon_gsc_tileset_day.png 0"
@@ -280,15 +280,15 @@ cell_size = Vector2( 16, 16 )
 format = 1
 script = ExtResource( 4 )
 
-[node name="event_condition_trigger" type="Node" parent="."]
+[node name="event_check_trigger" type="Node" parent="."]
 script = ExtResource( 16 )
 event = 2
 
-[connection signal="ready" from="." to="event_condition_trigger" method="trigger"]
+[connection signal="ready" from="." to="event_check_trigger" method="trigger"]
 [connection signal="text_display_finished" from="textbox" to="." method="_on_textbox_text_display_finished"]
 [connection signal="text_display_started" from="textbox" to="." method="_on_textbox_text_display_started"]
-[connection signal="trigger" from="event_condition_trigger" to="map/grid/mom/parent_deleter" method="trigger"]
-[connection signal="trigger" from="event_condition_trigger" to="map/grid/pop/parent_deleter" method="trigger"]
+[connection signal="happened" from="event_check_trigger" to="map/grid/mom/parent_deleter" method="trigger"]
+[connection signal="happened" from="event_check_trigger" to="map/grid/pop/parent_deleter" method="trigger"]
 
 [editable path="map"]
 [editable path="map/grid/mom"]
