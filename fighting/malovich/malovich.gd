@@ -4,6 +4,7 @@ signal health_changed(val, max_health)
 
 signal hurt()
 signal dead()
+signal regained_control()
 
 export var max_health :float = 100
 export var speed :float = 300
