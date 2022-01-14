@@ -1,6 +1,6 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=34 format=2]
 
-[ext_resource path="res://asset/texture/malovich.png" type="Texture" id=1]
+[ext_resource path="res://asset/texture/bobby.png" type="Texture" id=1]
 [ext_resource path="res://asset/theme/white_black_text.tres" type="Theme" id=2]
 [ext_resource path="res://fighting/dude/idle.gd" type="Script" id=3]
 [ext_resource path="res://fighting/dude/run.gd" type="Script" id=4]
@@ -10,6 +10,7 @@
 [ext_resource path="res://fighting/dude/dead.gd" type="Script" id=8]
 [ext_resource path="res://fighting/malovich/ai_controller.gd" type="Script" id=9]
 [ext_resource path="res://fighting/mobs/bobby/follow.gd" type="Script" id=10]
+[ext_resource path="res://util/remote_method_call_trigger.gd" type="Script" id=11]
 [ext_resource path="res://fighting/dude/jump.gd" type="Script" id=13]
 [ext_resource path="res://util/state/state_machine.gd" type="Script" id=14]
 [ext_resource path="res://fighting/malovich/hurt.gd" type="Script" id=15]
@@ -20,11 +21,11 @@
 
 [sub_resource type="RectangleShape2D" id=19]
 resource_local_to_scene = true
-extents = Vector2( 4.49159, 7.49795 )
+extents = Vector2( 4, 4 )
 
 [sub_resource type="RectangleShape2D" id=20]
 resource_local_to_scene = true
-extents = Vector2( 4, 7.5 )
+extents = Vector2( 4, 4 )
 
 [sub_resource type="Animation" id=16]
 length = 0.001
@@ -260,6 +261,7 @@ bg_color = Color( 0.341176, 0, 0, 1 )
 [node name="bobby" type="KinematicBody2D"]
 collision_mask = 0
 script = ExtResource( 19 )
+team = 1
 max_health = 20.0
 speed = 75.0
 speed_lerp = 3.0
@@ -282,20 +284,27 @@ frame = 16
 [node name="hitbox" type="Node2D" parent="pivot"]
 
 [node name="idle" parent="pivot/hitbox" instance=ExtResource( 5 )]
-position = Vector2( -1, 0 )
-knockback = Vector2( 200, -200 )
+knockback = Vector2( 100, -100 )
 damage = 20.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="pivot/hitbox/idle"]
-position = Vector2( 0.5625, 0.4375 )
+position = Vector2( -1, 4 )
 shape = SubResource( 19 )
+
+[node name="disabler" type="Node" parent="pivot/hitbox/idle"]
+script = ExtResource( 11 )
+method = "deactivate"
+
+[node name="enabler" type="Node" parent="pivot/hitbox/idle"]
+script = ExtResource( 11 )
+method = "activate"
 
 [node name="hurtbox" type="Area2D" parent="pivot"]
 collision_layer = 4
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="pivot/hurtbox"]
-position = Vector2( 0, 0.5 )
+position = Vector2( -1, 4 )
 shape = SubResource( 20 )
 
 [node name="state_label" type="Label" parent="."]
@@ -311,7 +320,7 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 0.5 )
+position = Vector2( 0, 4 )
 shape = SubResource( 20 )
 
 [node name="state" type="Node" parent="."]
@@ -397,7 +406,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[connection signal="dead" from="." to="pivot/hitbox/idle/disabler" method="trigger"]
 [connection signal="health_changed" from="." to="healthbar" method="_on_health_changed"]
+[connection signal="hurt" from="." to="pivot/hitbox/idle/disabler" method="trigger"]
+[connection signal="regained_control" from="." to="pivot/hitbox/idle/enabler" method="trigger"]
 [connection signal="area_entered" from="pivot/hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="state_changed" from="state" to="state_label" method="_on_state_state_changed"]
 [connection signal="animation_finished" from="AnimationPlayer" to="state" method="_on_animation_finished"]

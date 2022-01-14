@@ -6,6 +6,7 @@ signal hurt()
 signal dead()
 signal regained_control()
 
+export var team: int = 0
 export var max_health :float = 100
 export var speed :float = 300
 export var speed_lerp :float = 2
@@ -99,20 +100,9 @@ func set_locked(val):
 	state.current_state.set_locked(val)
 
 func activate_hitbox(id):
-	call_deferred("_deferred_activate_hitbox", id)
+	hitbox = $pivot/hitbox.get_node(id)
+	hitbox.call_deferred("activate")
 
 func deactivate_hitbox(id):
-	call_deferred("_deferred_deactivate_hitbox", id)
-
-
-func _deferred_activate_hitbox(id):
 	hitbox = $pivot/hitbox.get_node(id)
-	hitbox.visible = true
-	hitbox.monitorable = true
-	hitbox.monitoring = true
-	
-func _deferred_deactivate_hitbox(id):
-	hitbox = $pivot/hitbox.get_node(id)
-	hitbox.visible = false
-	hitbox.monitorable = false
-	hitbox.monitoring = false
+	hitbox.call_deferred("deactivate")

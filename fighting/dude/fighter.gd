@@ -2,6 +2,11 @@ extends KinematicBody2D
 
 signal health_changed(val, max_health)
 
+signal dead()
+signal hurt()
+signal regained_control()
+
+export var team :int = 0
 export var max_health :float = 100
 export var speed :float = 300
 export var speed_lerp :float = 2
@@ -12,7 +17,6 @@ export var jump :float = 200
 export var wall_jump :float = 200
 export var gravity :float = 400
 export var hitstun :float = 0.3
-
 
 onready var state = $state
 onready var sprite = $Sprite

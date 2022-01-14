@@ -11,6 +11,7 @@ func _init():
 
 func enter():
 	owner.get_node("AnimationPlayer").play("hitstun")
+	owner.emit_signal("hurt")
 	timer.wait_time = owner.hitstun
 	timer.start()
 	timeout = false
@@ -21,6 +22,7 @@ func update(delta):
 	
 	var controller = owner.get_node("controller")
 	if timeout:
+		owner.emit_signal("regained_control")
 		if p.is_on_floor():
 			emit_signal("finished", "idle", null)
 		else:

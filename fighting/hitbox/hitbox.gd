@@ -10,8 +10,18 @@ var caster = null
 func _init():
 	body = owner
 
+func activate():
+	visible = true
+	monitorable = true
+	monitoring = true
+	
+func deactivate():
+	visible = false
+	monitorable = false
+	monitoring = false
+	
 func is_whitelisted(target):
-	return target == body or target == caster
+	return target == body or target == caster or body.team && body.team == target.team
 
 func apply_damage(target):
 	target.health -= damage
