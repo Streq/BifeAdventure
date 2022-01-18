@@ -11,6 +11,12 @@ func is_pressing_jump() -> bool:
 
 func get_attack() -> bool:
 	return false
+
+func is_pressing_attack():
+	return false
 	
-func get_special_attack() -> bool:
+func get_special():
+	return false
+
+func is_pressing_special():
 	return false

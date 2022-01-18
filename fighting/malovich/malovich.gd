@@ -43,7 +43,7 @@ func _ready():
 func _input(event):
 	if event.is_action_pressed("A1"):
 		health = max(health,0)
-		self.health+=10.0
+		set_health(0)
 		health = min(health,max_health)
 
 

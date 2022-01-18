@@ -26,6 +26,7 @@ func update(delta):
 	var jump = controller.get_jump()
 	var attack = controller.get_attack()
 	
+	
 	p.velocity.x = lerp(p.velocity.x, 0,  delta * p.idle_lerp)
 	
 	if !p.is_on_floor():
@@ -34,7 +35,7 @@ func update(delta):
 		if jump:
 			emit_signal("finished", "jump", null)
 		elif input_direction.x:
-			emit_signal("finished", "run", null)
+			emit_signal("finished", "walk", null)
 
 func _on_animation_finished(anim_name):
 	emit_signal("finished", "idle", null)

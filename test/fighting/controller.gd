@@ -15,7 +15,7 @@ onready var buttonB = InputButton.new()
 onready var buttonC = InputButton.new()
 
 var attack:bool setget,get_attack
-var special_attack:bool setget,get_special_attack
+var special_attack:bool setget,get_special
 var jump:bool setget,get_jump
 var direction:Vector2 setget,get_direction
 
@@ -36,9 +36,16 @@ func is_pressing_jump():
 
 func get_attack():
 	return buttonB.just_pressed
+
+func is_pressing_attack():
+	return buttonB.is_pressed
 	
-func get_special_attack():
+func get_special():
 	return buttonC.just_pressed
+
+func is_pressing_special():
+	return buttonC.is_pressed
+
 
 func _input(event):
 	if !event.is_echo():

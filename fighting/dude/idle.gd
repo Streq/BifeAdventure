@@ -19,7 +19,7 @@ func update(delta):
 		if jump:
 			emit_signal("finished", "jump", null)
 		elif input_direction.x:
-			emit_signal("finished", "run", null)
+			emit_signal("finished", "walk", null)
 	else:
 		emit_signal("finished", "air", null)
 	

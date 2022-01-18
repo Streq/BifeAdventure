@@ -210,6 +210,18 @@ tracks/2/keys = {
 "method": "deactivate_hitbox"
 } ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("pivot/display/jab:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.7, 0.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
 
 [sub_resource type="Animation" id=10]
 resource_name = "jump"
@@ -286,7 +298,6 @@ position = Vector2( 1, 0 )
 texture = ExtResource( 24 )
 hframes = 8
 vframes = 8
-frame = 8
 
 [node name="jab" type="Sprite" parent="pivot/display"]
 visible = false
@@ -359,6 +370,9 @@ script = ExtResource( 13 )
 [node name="run" type="Node" parent="state"]
 script = ExtResource( 15 )
 
+[node name="walk" type="Node" parent="state"]
+script = ExtResource( 15 )
+
 [node name="air" type="Node" parent="state"]
 script = ExtResource( 6 )
 
@@ -393,11 +407,12 @@ one_shot = true
 script = ExtResource( 20 )
 
 [node name="jab" parent="attack_list" instance=ExtResource( 23 )]
+states_from = PoolStringArray( "idle", "run", "walk" )
 state_to = "jab"
 on_finish = true
 
 [node name="ram" parent="attack_list" instance=ExtResource( 23 )]
-states_from = PoolStringArray( "run", "idle" )
+states_from = PoolStringArray( "run", "idle", "walk" )
 state_to = "ram"
 action = "special_attack"
 

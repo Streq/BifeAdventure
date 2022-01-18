@@ -1,7 +1,6 @@
 extends "res://util/state/state.gd"
 
 func enter():
-	owner.emit_signal("dead")
 	owner.get_node("AnimationPlayer").play("hurt")
 	
 func update(delta):

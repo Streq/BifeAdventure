@@ -7,7 +7,7 @@ onready var buttonC = InputButton.new()
 var target = null
 
 var attack:bool setget,get_attack
-var special_attack:bool setget,get_special_attack
+var special_attack:bool setget,get_special
 var jump:bool setget,get_jump
 var direction:Vector2 = Vector2.ZERO
 
@@ -34,8 +34,14 @@ func is_pressing_jump() -> bool:
 func get_attack() -> bool:
 	return buttonB.just_pressed
 	
-func get_special_attack() -> bool:
+func is_pressing_attack():
+	return buttonB.is_pressed
+	
+func get_special():
 	return buttonC.just_pressed
+
+func is_pressing_special():
+	return buttonC.is_pressed
 
 func _physics_process(delta):
 	buttonA.clear_frame()

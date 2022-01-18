@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=51 format=2]
 
 [ext_resource path="res://fighting/dude/fighter.gd" type="Script" id=1]
 [ext_resource path="res://fighting/dude/idle.gd" type="Script" id=2]
@@ -27,6 +27,8 @@
 [ext_resource path="res://fighting/dude/jab2.gd" type="Script" id=25]
 [ext_resource path="res://fighting/dude/hitstun.gd" type="Script" id=26]
 [ext_resource path="res://fighting/dude/attacks/jab2.tscn" type="PackedScene" id=27]
+[ext_resource path="res://fighting/dude/walk.gd" type="Script" id=28]
+[ext_resource path="res://fighting/dude/attacks/side_jab.tscn" type="PackedScene" id=29]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 5.5 )
@@ -171,7 +173,7 @@ tracks/0/keys = {
 "values": [ 0 ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=19]
 resource_name = "jab"
 length = 0.5
 step = 0.05
@@ -185,7 +187,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1, 0.3 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ 30, 25, 26 ]
+"values": [ 26, 41, 26 ]
 }
 tracks/1/type = "method"
 tracks/1/path = NodePath("state/jab")
@@ -214,10 +216,10 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 0.1, 0.3, 0.5 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "values": [ {
-"args": [ 50.0 ],
+"args": [ 0.0 ],
 "method": "step_forward"
 }, {
-"args": [ 75.0 ],
+"args": [ 0.0 ],
 "method": "step_forward"
 }, {
 "args": [ false ],
@@ -228,7 +230,7 @@ tracks/2/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=18]
+[sub_resource type="Animation" id=20]
 resource_name = "jab2"
 length = 0.5
 step = 0.05
@@ -242,7 +244,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1, 0.3 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ 30, 25, 26 ]
+"values": [ 26, 41, 26 ]
 }
 tracks/1/type = "method"
 tracks/1/path = NodePath("state/jab2")
@@ -271,10 +273,10 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 0.1, 0.3, 0.5 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "values": [ {
-"args": [ 50.0 ],
+"args": [ 0.0 ],
 "method": "step_forward"
 }, {
-"args": [ 75.0 ],
+"args": [ 0.0 ],
 "method": "step_forward"
 }, {
 "args": [ false ],
@@ -288,7 +290,7 @@ tracks/2/keys = {
 [sub_resource type="Animation" id=12]
 resource_name = "jab3"
 length = 0.5
-step = 0.05
+step = 0.01
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -328,7 +330,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 0.1, 0.4, 0.5 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "values": [ {
-"args": [ 50.0 ],
+"args": [ 0.0 ],
 "method": "step_forward"
 }, {
 "args": [ 150.0 ],
@@ -391,6 +393,120 @@ tracks/0/keys = {
 "values": [ 9, 10, 11, 10 ]
 }
 
+[sub_resource type="Animation" id=8]
+resource_name = "side_jab"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 30, 25, 26 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("state/side_jab")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.1, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "activate_hitbox"
+}, {
+"args": [  ],
+"method": "deactivate_hitbox"
+} ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath("state/side_jab")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"values": [ {
+"args": [ 0.0 ],
+"method": "step_forward"
+}, {
+"args": [ 100.0 ],
+"method": "step_forward"
+}, {
+"args": [ false ],
+"method": "set_locked"
+}, {
+"args": [  ],
+"method": "enable_movement"
+} ]
+}
+
+[sub_resource type="Animation" id=18]
+resource_name = "side_jab2"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 30, 25, 26 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("state/jab2")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.1, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "activate_hitbox"
+}, {
+"args": [  ],
+"method": "deactivate_hitbox"
+} ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath("state/jab2")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"values": [ {
+"args": [ 40.0 ],
+"method": "step_forward"
+}, {
+"args": [ 50.0 ],
+"method": "step_forward"
+}, {
+"args": [ false ],
+"method": "set_locked"
+}, {
+"args": [  ],
+"method": "enable_movement"
+} ]
+}
+
 [sub_resource type="Animation" id=13]
 resource_name = "tackle"
 length = 0.35
@@ -433,9 +549,26 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
-"args": [ 100.0 ],
+"args": [ 150.0 ],
 "method": "step_forward"
 } ]
+}
+
+[sub_resource type="Animation" id=21]
+resource_name = "walk"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 26, 24 ]
 }
 
 [sub_resource type="Animation" id=5]
@@ -480,7 +613,7 @@ __meta__ = {
 texture = ExtResource( 5 )
 hframes = 8
 vframes = 8
-frame = 30
+frame = 26
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 0.5 )
@@ -500,6 +633,9 @@ script = ExtResource( 2 )
 [node name="run" type="Node" parent="state"]
 script = ExtResource( 6 )
 
+[node name="walk" type="Node" parent="state"]
+script = ExtResource( 28 )
+
 [node name="air" type="Node" parent="state"]
 script = ExtResource( 8 )
 
@@ -512,6 +648,11 @@ script = ExtResource( 13 )
 [node name="jab" type="Node" parent="state"]
 script = ExtResource( 14 )
 jab = ExtResource( 15 )
+
+[node name="side_jab" type="Node" parent="state"]
+script = ExtResource( 14 )
+jab = ExtResource( 29 )
+animation = "side_jab"
 
 [node name="jab2" type="Node" parent="state"]
 script = ExtResource( 14 )
@@ -557,9 +698,19 @@ states_from = PoolStringArray( "jab" )
 state_to = "jab2"
 on_finish = true
 
+[node name="side_jab2" parent="attack_list" instance=ExtResource( 18 )]
+states_from = PoolStringArray( "side_jab" )
+state_to = "jab3"
+on_finish = true
+
 [node name="jab" parent="attack_list" instance=ExtResource( 18 )]
 states_from = PoolStringArray( "idle" )
 state_to = "jab"
+on_finish = true
+
+[node name="side_jab" parent="attack_list" instance=ExtResource( 18 )]
+states_from = PoolStringArray( "walk" )
+state_to = "side_jab"
 on_finish = true
 
 [node name="nair" parent="attack_list" instance=ExtResource( 18 )]
@@ -586,13 +737,16 @@ anims/fireball = SubResource( 10 )
 anims/hitstun = SubResource( 16 )
 anims/hurt = SubResource( 7 )
 anims/idle = SubResource( 2 )
-anims/jab = SubResource( 8 )
-anims/jab2 = SubResource( 18 )
+anims/jab = SubResource( 19 )
+anims/jab2 = SubResource( 20 )
 anims/jab3 = SubResource( 12 )
 anims/jump = SubResource( 6 )
 anims/knocked = SubResource( 17 )
 anims/run = SubResource( 4 )
+anims/side_jab = SubResource( 8 )
+anims/side_jab2 = SubResource( 18 )
 anims/tackle = SubResource( 13 )
+anims/walk = SubResource( 21 )
 anims/wall = SubResource( 5 )
 
 [node name="controller" type="Node" parent="." groups=["controller"]]

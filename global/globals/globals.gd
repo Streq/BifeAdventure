@@ -21,6 +21,8 @@ enum EVENT {
 	malovich_defeated_cutscene_over
 }
 
+var checkpoint_room : int = ROOM.my_room
+
 var step_counter : int = 0 setget set_step_counter
 
 var spawn_tile = null
@@ -37,3 +39,10 @@ func set_step_counter(val):
 	step_counter = val
 #	print_debug("steps:", val)
 
+func respawn():
+	spawn_tile = null
+	goto_room(checkpoint_room)
+	
+
+func goto_room(to):
+	get_tree().change_scene_to(Overworld.get_room(to))

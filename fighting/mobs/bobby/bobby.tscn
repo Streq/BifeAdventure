@@ -263,7 +263,7 @@ collision_mask = 0
 script = ExtResource( 19 )
 team = 1
 max_health = 50.0
-speed = 75.0
+speed = 50.0
 speed_lerp = 3.0
 idle_lerp = 15.0
 jump = 150.0
@@ -338,6 +338,9 @@ script = ExtResource( 3 )
 [node name="run" type="Node" parent="state"]
 script = ExtResource( 4 )
 
+[node name="walk" type="Node" parent="state"]
+script = ExtResource( 4 )
+
 [node name="air" type="Node" parent="state"]
 script = ExtResource( 17 )
 
@@ -406,10 +409,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[connection signal="dead" from="." to="pivot/hitbox/idle/disabler" method="trigger"]
+[connection signal="dead" from="." to="pivot/hitbox/idle/disabler" method="trigger_deferred"]
 [connection signal="health_changed" from="." to="healthbar" method="_on_health_changed"]
-[connection signal="hurt" from="." to="pivot/hitbox/idle/disabler" method="trigger"]
-[connection signal="regained_control" from="." to="pivot/hitbox/idle/enabler" method="trigger"]
+[connection signal="hurt" from="." to="pivot/hitbox/idle/disabler" method="trigger_deferred"]
+[connection signal="regained_control" from="." to="pivot/hitbox/idle/enabler" method="trigger_deferred"]
 [connection signal="area_entered" from="pivot/hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="state_changed" from="state" to="state_label" method="_on_state_state_changed"]
 [connection signal="animation_finished" from="AnimationPlayer" to="state" method="_on_animation_finished"]

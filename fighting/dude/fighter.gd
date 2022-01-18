@@ -33,7 +33,7 @@ var velocity := Vector2.ZERO
 func _input(event):
 	if event.is_action_pressed("A1"):
 		health = max(health,0)
-		self.health+=10.0
+		set_health(0)
 		health = min(health,max_health)
 
 
@@ -65,6 +65,7 @@ func set_health(val):
 	emit_signal("health_changed", val, max_health)
 	if health <= 0:
 		state._change_state("dead", null)
+		emit_signal("dead")
 		
 func learn(attack):
 	attack_list.add_child(attack)
