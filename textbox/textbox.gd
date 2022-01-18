@@ -25,7 +25,8 @@ onready var start_symbol = $textbox_container/margin_container/hbox_container/st
 onready var end_symbol = $textbox_container/margin_container/hbox_container/end
 onready var label = $textbox_container/margin_container/hbox_container/label
 onready var panel_length = label.text.length()
-
+onready var panel_divider = $panel_divider
+onready var menu = $menu
 
 var current_state = State.READY
 var text_queue = []
@@ -33,7 +34,10 @@ var text_queue = []
 func _ready():
 	print_debug("start State.READY")
 	label.max_lines_visible = max_lines
+	panel_divider.lines = max_lines
+	panel_divider.width = panel_length/max_lines
 	hide_textbox()
+	hide_choose()
 	return
 
 
@@ -55,7 +59,14 @@ func _process(delta):
 				end_tween_early()
 		State.FINISHED:
 			if Input.is_action_just_pressed("A0"):
-				change_state(State.READY)
+				var next_up = text_queue.front()
+				if next_up is Dictionary:
+					match(next_up.type):
+						"choose":
+							display_choose(next_up.options)
+					text_queue.pop_front()
+				else:
+					change_state(State.READY)
 		
 """
 add some text of arbitrary length.
@@ -64,13 +75,32 @@ that fit into the panel and queue those.
 the thing is that wordwrap doesn't give us a consistent length, different
 texts with the same character length can take up a different amount of lines
 """
+
 func add_text(text: String):
-	print_debug("adding: "+text)
-	text_queue.push_back(text)
+	var panels = panel_divider.to_panels(text)
+	print_debug("adding panels: ", panels)
+	add_texts(panels)
 
 func add_texts(texts):
 	for text in texts:
-		add_text(text)
+		add_single_text(text)
+
+func add_single_text(text: String):
+	print_debug("adding: "+text)
+	text_queue.push_back(text)
+
+func add_choose(options: PoolStringArray):
+	text_queue.push_back({"type":"choose", "options":options})
+
+func display_choose(options):
+	menu.clear_entries()
+	for o in options:
+		menu.add_entry(o, o, true)
+	menu.visible = true
+	menu.set_process_input(true)
+func hide_choose():
+	menu.visible = false
+	menu.set_process_input(false)
 
 func hide_textbox():
 	emit_signal("text_display_finished", self)
@@ -131,3 +161,7 @@ func finished_reading():
 	emit_signal("text_panel_finished", self)
 	end_symbol.text = "v" if !text_queue.empty() or (label.get_line_count() - label.lines_skipped > max_lines) else ""
 	change_state(State.FINISHED)
+
+
+func _on_menu_selected(name):
+	hide_choose()

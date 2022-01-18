@@ -1,11 +1,14 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://textbox/textbox.gd" type="Script" id=1]
 [ext_resource path="res://asset/theme/white_black_text.tres" type="Theme" id=2]
+[ext_resource path="res://textbox/panel_divider.tscn" type="PackedScene" id=3]
+[ext_resource path="res://GUI/menu.tscn" type="PackedScene" id=4]
 
 [node name="textbox" type="CanvasLayer" groups=["textbox"]]
 pause_mode = 2
 script = ExtResource( 1 )
+max_lines = 3
 
 [node name="textbox_container" type="MarginContainer" parent="."]
 visible = false
@@ -48,7 +51,7 @@ margin_right = 293.0
 margin_bottom = 48.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-text = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+text = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
 autowrap = true
 clip_text = true
 
@@ -63,4 +66,10 @@ text = "v"
 
 [node name="tween" type="Tween" parent="."]
 
+[node name="panel_divider" parent="." instance=ExtResource( 3 )]
+
+[node name="menu" parent="." instance=ExtResource( 4 )]
+visible = false
+
 [connection signal="tween_completed" from="tween" to="." method="_on_Tween_tween_completed"]
+[connection signal="selected" from="menu" to="." method="_on_menu_selected"]

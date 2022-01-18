@@ -54,6 +54,11 @@ func remove_entry(name:String):
 		entries_node.remove_child(e)
 	entries[name] = null
 
+func clear_entries():
+	entries.clear()
+	for c in entries_node.get_children():
+		entries_node.remove_child(c)
+
 func _select(index):
 	for e in entries_node.get_children():
 		e.selected = false

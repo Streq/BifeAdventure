@@ -1,6 +1,12 @@
 extends Node
 
-func process(text: String, width: int, lines: int) -> PoolStringArray:
+export var width : int = 40
+export var lines : int = 3
+
+func to_panels(text:String):
+	return _to_panels(text, width, lines)
+
+func _to_panels(text: String, width: int, lines: int) -> PoolStringArray:
 	var end := text.length()
 	if width > end:
 		return PoolStringArray([text])

@@ -2,13 +2,11 @@
 
 [ext_resource path="res://textbox/textbox.tscn" type="PackedScene" id=1]
 [ext_resource path="res://test/textbox/textbox_long_text.gd" type="Script" id=2]
-[ext_resource path="res://test/textbox/monospace_text_panel_divider.gd" type="Script" id=3]
+[ext_resource path="res://textbox/panel_divider.tscn" type="PackedScene" id=3]
 
 [node name="textbox_long_text" type="Node2D"]
 script = ExtResource( 2 )
 
 [node name="textbox" parent="." instance=ExtResource( 1 )]
-max_lines = 3
 
-[node name="panel_divider" type="Node" parent="."]
-script = ExtResource( 3 )
+[node name="panel_divider" parent="." instance=ExtResource( 3 )]

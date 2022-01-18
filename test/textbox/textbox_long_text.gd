@@ -8,6 +8,6 @@ func _ready():
 	var my_str2 = "0123456789 0123456789 0123456789 0123456789 0123456789 0123456789 0123456789 0123456789 0123456789 0123456789 0123456789 0123456789"
 	
 	
-	$textbox.add_texts($panel_divider.process(my_str0, 40, 3))
-	$textbox.add_texts($panel_divider.process(my_str1, 40, 3))
-	$textbox.add_texts($panel_divider.process(my_str2, 40, 3))
+	$textbox.add_text(my_str0)
+	$textbox.add_text(my_str1)
+	$textbox.add_text(my_str2)
