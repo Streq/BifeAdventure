@@ -117,6 +117,8 @@ func tween_text():
 	$tween.start()
 #	end_tween_early()
 
+
+
 func end_tween_early():
 	$tween.remove_all()
 	label.percent_visible = 1.0
