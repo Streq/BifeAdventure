@@ -248,16 +248,16 @@ script = ExtResource( 19 )
 
 [node name="parent_deleter" parent="map/grid/pepe" instance=ExtResource( 15 )]
 
-[node name="pato" parent="map/grid" instance=ExtResource( 11 )]
+[node name="pelado" parent="map/grid" instance=ExtResource( 11 )]
 position = Vector2( -56, 616 )
 
-[node name="character_sprite" parent="map/grid/pato" index="0"]
+[node name="character_sprite" parent="map/grid/pelado" index="0"]
 idle_down_frame = 30
 
-[node name="interact_action" parent="map/grid/pato" instance=ExtResource( 12 )]
+[node name="interact_action" parent="map/grid/pelado" instance=ExtResource( 12 )]
 interact_text = PoolStringArray( "PELADO: buenas, vas a cruzar el bosque\?", "BIFE: si", "PELADO: a que no te animas cagon", "BIFE: me re animo", "PELADO: puto cagon no te animas nada", "BIFE: vas a ver como me animo tarado", "PELADO: no para", "PELADO: no te vayas", "PELADO: tengo miedo", "PELADO: tengo que ir a comprar una sopapa porque se tapó el inodoro", "PELADO: (no lo tapé yo)", "PELADO: pero de este lado no venden, y no me animo a cruzar porque hay bichos", "BIFE: pobechito :(", "PELADO: :((", "BIFE: :((((", "PELADO: podés ir a comprarme una sopapa\?", "BIFE: vos me trataste muy mal a mí recién", "PELADO: tenés razón, perdón", "BIFE: me parece que no va, no te tendría que ayudar", "PELADO: me parece justo", "PELADO: hoy aprendí una lección valiosa sobre el respeto", "BIFE: mirá", "BIFE: yo ahora tengo que cruzar a cagarme a palos con la hinchada de Boca", "BIFE: termino y te lo traigo", "PELADO: vas a hacer eso después de cómo te traté\?", "BIFE: si", "PELADO: gracias flaco, no te puedo creer, quiero llorar", "BIFE: denada", "BIFE: pero tenés que prometerme que vas a ser más responsable con tu trato hacia los demás", "PELADO: sí, te lo prometo, me lo prometo a mí y a mis hijos, cómo te llamás\?", "BIFE: bife", "PELADO: yo me llamo Raúl", "BIFE: mirá", "BIFE: bueno Raúl me voy", "PELADO: bueno Bife, gracias y perdón" )
 
-[node name="controller" type="Node" parent="map/grid/pato"]
+[node name="controller" type="Node" parent="map/grid/pelado"]
 script = ExtResource( 19 )
 
 [node name="pepe_guardian" parent="map/grid" instance=ExtResource( 11 )]
@@ -282,7 +282,7 @@ interact_text = PoolStringArray( "GYM de PEPE", "Para PETONES que no saben los C
 
 [node name="sign_vecino" parent="map/grid" instance=ExtResource( 9 )]
 position = Vector2( 184, 232 )
-interact_text = PoolStringArray( "Residencia Malovich", "que mierda miras" )
+interact_text = PoolStringArray( "Residencia Malovich", "que miras bobo" )
 
 [node name="closed_door" parent="map/grid" instance=ExtResource( 9 )]
 position = Vector2( 216, 232 )
@@ -385,7 +385,7 @@ event = 1
 [connection signal="not_happened" from="on_malovich_defeated_trigger" to="map/grid/pepe/parent_deleter" method="trigger"]
 
 [editable path="map/grid/pepe"]
-[editable path="map/grid/pato"]
+[editable path="map/grid/pelado"]
 [editable path="map/grid/pepe_guardian"]
 [editable path="map/triggers/door_to_my_house"]
 [editable path="map/triggers/door_to_forest"]
