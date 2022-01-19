@@ -11,7 +11,8 @@ const map = {
 	Globals.ROOM.malovich_house : preload("res://scenes/overworld/malovich_living_room.tscn"),
 	Globals.ROOM.malovich_room : preload("res://scenes/overworld/malovich_room.tscn"),
 	Globals.ROOM.malovich_room_right_after_fight : preload("res://scenes/overworld/malovich_room_right_after_fight/scene.tscn"),
-	Globals.ROOM.malovich_fight_room : preload("res://scenes/fighting/malovich/malovich_fight.tscn")
+	Globals.ROOM.malovich_fight_room : preload("res://scenes/fighting/malovich/malovich_fight.tscn"),
+	Globals.ROOM.hometown_forest : preload("res://scenes/fighting/bosque/bosque.tscn")
 }
 
 func get_room(room:int, consider_events := true):

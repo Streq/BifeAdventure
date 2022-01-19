@@ -13,8 +13,9 @@ func update(delta):
 	var input_direction = controller.get_direction()
 	var jump = controller.get_jump()
 	
+	var speed = p.speed if controller.is_pressing_special() else p.walk_speed
 	if(input_direction.x):
-		p.velocity.x = lerp(p.velocity.x, p.speed*input_direction.x, delta * p.air_speed_lerp)
+		p.velocity.x = lerp(p.velocity.x, speed*input_direction.x, delta * p.air_speed_lerp)
 	else:
 		p.velocity.x = lerp(p.velocity.x, 0, delta * p.air_idle_lerp)
 	

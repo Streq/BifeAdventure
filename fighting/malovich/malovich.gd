@@ -9,7 +9,9 @@ signal regained_control()
 export var team: int = 0
 export var max_health :float = 100
 export var speed :float = 300
+export var walk_speed :float = 100
 export var speed_lerp :float = 2
+export var walk_speed_lerp :float = 4
 export var air_speed_lerp :float = 1
 export var idle_lerp :float = 8
 export var air_idle_lerp :float = 1
@@ -41,7 +43,7 @@ func _ready():
 		child.body = self
 
 func _input(event):
-	if event.is_action_pressed("A1"):
+	if OS.is_debug_build() and event.is_action_pressed("A1"):
 		health = max(health,0)
 		set_health(0)
 		health = min(health,max_health)

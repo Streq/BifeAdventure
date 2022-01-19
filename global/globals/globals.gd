@@ -11,7 +11,8 @@ enum ROOM {
 	malovich_house,
 	malovich_fight_room,
 	malovich_room,
-	malovich_room_right_after_fight
+	malovich_room_right_after_fight,
+	hometown_forest
 }
 const TILE_SIZE = 16
 	

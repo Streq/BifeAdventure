@@ -13,7 +13,7 @@ func update(delta):
 	var jump = controller.get_jump()
 		
 	if input_direction.x:
-		p.velocity.x = lerp(p.velocity.x, p.speed*input_direction.x/3, delta * p.speed_lerp)
+		p.velocity.x = lerp(p.velocity.x, p.walk_speed*input_direction.x, delta * p.walk_speed_lerp)
 	
 	if p.is_on_floor():
 		if jump:
