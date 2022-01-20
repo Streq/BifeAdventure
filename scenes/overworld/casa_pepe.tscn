@@ -29,7 +29,7 @@ tile_data = PoolIntArray( 262147, 0, 0, 262148, 0, 0, 262149, 0, 0, 262150, 0, 0
 [node name="player" parent="map/grid" index="0" instance=ExtResource( 6 )]
 position = Vector2( 152, 152 )
 
-[node name="sign_vecino" parent="map/grid" index="1" instance=ExtResource( 3 )]
+[node name="diario" parent="map/grid" index="1" instance=ExtResource( 3 )]
 position = Vector2( 120, 184 )
 interact_text = PoolStringArray( "querido DIARIO:", "hoy decore el PISO de PARED" )
 

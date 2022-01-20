@@ -9,8 +9,8 @@ func player_win():
 func player_lose():
 	$Timer.start()
 	yield($Timer,"timeout")
-	$textbox.add_text("comiste")
-	$textbox.add_text("vamos a hacer de cuenta que eso no paso")
+	$textbox.add_text("uh, ehhh")
+	$textbox.add_text("voy a hacer como que eso no paso")
 	yield($textbox,"text_display_finished")
 	Globals.respawn()
 

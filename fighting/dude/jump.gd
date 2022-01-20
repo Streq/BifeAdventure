@@ -7,6 +7,7 @@ export var duration_frames := 3
 var half_jump_factor = 0.6
 
 func enter():
+	locked = true
 	frame_counter = 0
 	charge_counter = 0
 	owner.get_node("AnimationPlayer").play("jump")

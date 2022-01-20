@@ -4,6 +4,7 @@ class_name State
 
 signal finished(next_state_name)
 signal unlocked()
+
 export var stunned = false
 
 var locked = false setget set_locked,is_locked

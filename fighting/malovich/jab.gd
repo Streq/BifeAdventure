@@ -1,8 +1,10 @@
 extends "res://util/state/state.gd"
 
-onready var hitbox = owner.get_node("pivot/hitbox/jab")
-onready var display = owner.get_node("pivot/display/jab")
+export var sprite_name := "hands"
 export var animation := "jab"
+
+onready var display = owner.get_node("pivot/display/"+sprite_name)
+
 
 var active_hitbox := false
 var can_move = false
@@ -38,8 +40,8 @@ func _on_animation_finished(anim_name):
 	emit_signal("finished", "idle", null)
 	
 func exit():
-	owner.deactivate_hitbox("jab")
-	owner.get_node("pivot/display/jab").visible = false
+	owner.emit_signal("state_exit")
+	display.visible = false
 	
 	
 func enable_movement():

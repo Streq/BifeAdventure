@@ -10,15 +10,21 @@ var caster = null
 func _init():
 	body = owner
 
-func activate():
+func _activate_deferred():
 	visible = true
 	monitorable = true
 	monitoring = true
-	
-func deactivate():
+
+func _deactivate_deferred():
 	visible = false
 	monitorable = false
 	monitoring = false
+func activate():
+	call_deferred("_activate_deferred")
+
+
+func deactivate():
+	call_deferred("_deactivate_deferred")
 	
 func is_whitelisted(target):
 	return target == body or target == caster or body.team && body.team == target.team

@@ -2,7 +2,7 @@
 
 [ext_resource path="res://asset/theme/white_black_text.tres" type="Theme" id=1]
 [ext_resource path="res://fighting/malovich/ai_controller.gd" type="Script" id=2]
-[ext_resource path="res://fighting/malovich/malovich.gd" type="Script" id=3]
+[ext_resource path="res://fighting/dude/fighter.gd" type="Script" id=3]
 [ext_resource path="res://util/state/state_machine.gd" type="Script" id=4]
 [ext_resource path="res://fighting/malovich/hurt.gd" type="Script" id=5]
 [ext_resource path="res://fighting/malovich/air.gd" type="Script" id=6]
@@ -211,7 +211,7 @@ tracks/2/keys = {
 } ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("pivot/display/jab:visible")
+tracks/3/path = NodePath("pivot/display/hands:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -282,12 +282,11 @@ bg_color = Color( 0.341176, 0, 0, 1 )
 [node name="malovich" type="KinematicBody2D"]
 collision_mask = 0
 script = ExtResource( 3 )
+max_health = 250.0
 speed = 75.0
-walk_speed = 75.0
-speed_lerp = 3.0
-idle_lerp = 15.0
-jump = 150.0
-gravity = 700.0
+speed_lerp = 4.0
+jump = 100.0
+gravity = 800.0
 
 [node name="pivot" type="Node2D" parent="."]
 position = Vector2( 1, 0 )
@@ -299,8 +298,9 @@ position = Vector2( 1, 0 )
 texture = ExtResource( 24 )
 hframes = 8
 vframes = 8
+frame = 8
 
-[node name="jab" type="Sprite" parent="pivot/display"]
+[node name="hands" type="Sprite" parent="pivot/display"]
 visible = false
 position = Vector2( 16, 0 )
 texture = ExtResource( 24 )
@@ -487,6 +487,8 @@ __meta__ = {
 }
 
 [connection signal="health_changed" from="." to="healthbar" method="_on_health_changed"]
+[connection signal="state_exit" from="." to="pivot/hitbox/jab" method="deactivate"]
+[connection signal="state_exit" from="." to="pivot/hitbox/ram" method="deactivate"]
 [connection signal="area_entered" from="pivot/hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="state_changed" from="state" to="state_label" method="_on_state_state_changed"]
 [connection signal="timeout" from="state/dizzy/Timer" to="state/dizzy" method="_on_Timer_timeout"]
