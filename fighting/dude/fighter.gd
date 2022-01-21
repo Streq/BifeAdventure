@@ -103,10 +103,10 @@ func set_locked(val):
 	state.current_state.set_locked(val)
 
 func activate_hitbox(id):
-	hitbox = $pivot/hitbox.get_node(id)
-	hitbox.activate()
+	var box = hitbox.get_node(id)
+	box.activate()
 
 func deactivate_hitbox(id):
-	hitbox = $pivot/hitbox.get_node(id)
-	hitbox.deactivate()
+	var box = hitbox.get_node(id)
+	box.deactivate()
 

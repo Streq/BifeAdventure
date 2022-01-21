@@ -22,7 +22,7 @@ func update(delta):
 	if controller.is_pressing_jump():
 		charge_counter += 1
 	
-	if !p.is_on_floor() or frame_counter > duration_frames:
+	if !p.is_on_floor():
 		emit_signal("finished", "air", null)
 	elif frame_counter == duration_frames:
 		if charge_counter == frame_counter:

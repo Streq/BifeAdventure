@@ -1,5 +1,8 @@
 extends Area2D
 
+signal applied_knockback(knockback)
+signal applied_damage()
+
 export var knockback := Vector2.ZERO
 export var damage := 0.0
 export var knockdown := false
@@ -30,10 +33,12 @@ func is_whitelisted(target):
 	return target == body or target == caster or body.team && body.team == target.team
 
 func apply_damage(target):
+	emit_signal("applied_damage")
 	target.health -= damage
 	
 func apply_knockback(target):
 	var knock = knockback*Vector2(body.dir,1.0)
+	emit_signal("applied_knockback",knock)
 	target.velocity = knock
 	if knock.x:
 		target.dir = -sign(knock.x)
