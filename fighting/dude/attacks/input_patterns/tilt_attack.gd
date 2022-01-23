@@ -1,8 +1,8 @@
 extends Node
 
-export (Array, String) var states_from := ["idle"]
+export (Array, String) var states_from : Array = ["idle"]
 export (String) var state_to := ""
-export (Array, Vector2) var dirs := []
+export (Array, Vector2) var dirs : Array = []
 export (String) var action := "attack"
 export (bool) var on_finish := false
 func check_satisfy():
