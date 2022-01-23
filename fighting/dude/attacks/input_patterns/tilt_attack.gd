@@ -1,8 +1,8 @@
 extends Node
 
-export (PoolStringArray) var states_from : Array = ["idle"]
+export (Array, String) var states_from := ["idle"]
 export (String) var state_to := ""
-export (PoolVector2Array) var dirs := []
+export (Array, Vector2) var dirs := []
 export (String) var action := "attack"
 export (bool) var on_finish := false
 func check_satisfy():
