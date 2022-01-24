@@ -8,7 +8,8 @@ func _ready():
 func start_menu():
 	$menu.visible = true
 	$menu.add_entry("play", "play", true)
-	$menu.add_entry("continue", "continue", false)
+
+	$menu.add_entry("continue", "continue", ResourceLoader.exists(Globals.SAVE_PATH))
 	
 	$menu.connect("selected",self,"_selected")
 	
@@ -28,4 +29,5 @@ func _play():
 	pass
 	
 func _continue():
+	Globals.load_game()
 	pass

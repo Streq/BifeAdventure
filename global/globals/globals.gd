@@ -49,3 +49,32 @@ func respawn():
 func goto_room(to:int):
 	current_room = to
 	get_tree().change_scene_to(Overworld.get_room(to))
+
+const SAVE_PATH := "user://save.res"
+
+func load_game():
+	var save = ResourceLoader.load(SAVE_PATH)
+	
+	print_debug("recovered savestate:", to_json(save))
+	checkpoint_room = save.checkpoint_room
+	current_room = save.current_room
+	spawn_tile = save.world_position
+	event_flags = save.event_flags
+	world_position = save.world_position
+	goto_room(current_room)
+
+func save_game():
+	var Savestate = load("res://persistence/save/savestate.gd")
+	var s = Savestate.new()
+	s.checkpoint_room = checkpoint_room
+	s.current_room = current_room
+	s.spawn_tile = spawn_tile
+	s.event_flags = event_flags
+	s.world_position = world_position
+	print_debug("savestate to save:", to_json(s))
+	
+	var err = ResourceSaver.save(Globals.SAVE_PATH, s)
+	if !err:
+		print_debug("save succeeded")
+	else:
+		print_debug("save returned status code ",err)

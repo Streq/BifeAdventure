@@ -9,20 +9,20 @@ func _ready():
 	var s = Savestate.new()
 
 	s.checkpoint_room = Globals.ROOM.malovich_house
-	s.current_room = Globals.ROOM.hometown_forest
-	s.spawn_tile = Vector2(2,3)
+	s.current_room = Globals.ROOM.malovich_room
+	s.spawn_tile = Vector2(12,6)
 	s.event_flags = 3
 	s.world_position = Vector2(4,4)
 
 	print("savestate to save:", to_json(s))
 	
-	var err = ResourceSaver.save("user://save.res", s)
+	var err = ResourceSaver.save(Globals.SAVE_PATH, s)
 	if !err:
 		print("save succeeded")
 	else:
 		print_debug("save returned status code ",err)
 	
-	var s2 = ResourceLoader.load("user://save.res")
+	var s2 = ResourceLoader.load(Globals.SAVE_PATH)
 	
 	print("recovered savestate:", to_json(s2))
 	
