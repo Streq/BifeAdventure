@@ -1,22 +1,37 @@
 extends Node2D
 
-
+func assert_prop_equals(prop, o0, o1):
+	assert(o0[prop]==o1[prop])
 func _ready():
 	
 	var Savestate = load("res://persistence/save/savestate.gd")
 	
-	var save = Savestate.new()
+	var s = Savestate.new()
 
-	save.checkpoint_room = Globals.ROOM.malovich_house
-	save.current_room = Globals.ROOM.hometown_forest
-	save.spawn_tile = Vector2(2,3)
-	save.event_flags = 3
-	save.world_position = Vector2(4,4)
+	s.checkpoint_room = Globals.ROOM.malovich_house
+	s.current_room = Globals.ROOM.hometown_forest
+	s.spawn_tile = Vector2(2,3)
+	s.event_flags = 3
+	s.world_position = Vector2(4,4)
 
-	print(to_json(save))
+	print("savestate to save:", to_json(s))
 	
-	print(ResourceSaver.save("user://save.res", save))
+	var err = ResourceSaver.save("user://save.res", s)
+	if !err:
+		print("save succeeded")
+	else:
+		print_debug("save returned status code ",err)
 	
-	var save2 = ResourceLoader.load("user://save.res")
-	print(to_json(save2))
+	var s2 = ResourceLoader.load("user://save.res")
+	
+	print("recovered savestate:", to_json(s2))
+	
+	assert_prop_equals("checkpoint_room", s, s2)
+	assert_prop_equals("current_room", s, s2)
+	assert_prop_equals("spawn_tile", s, s2)
+	assert_prop_equals("event_flags", s, s2)
+	assert_prop_equals("world_position", s, s2)
+	
+	print("both savestates are equal, persistence works!!")
+	
 	pass
