@@ -11,7 +11,7 @@ onready var interact_action = $interact_action if has_node("interact_action") el
 onready var tween = $Tween
 
 var flip_vertical_walk = false
-var look_dir : Vector2
+var look_dir : Vector2 setget turn
 var moving := false
 
 export (float) var speed := 1.0 setget set_speed
@@ -20,6 +20,8 @@ export (float) var speed := 1.0 setget set_speed
 func _ready():
 	update_look_direction(Vector2.DOWN)
 	self.speed = speed
+	print(_save())
+	print(_load(_save()))
 	
 func interact(pawn, direction):
 	if interact_action:
@@ -112,4 +114,27 @@ func turn(direction):
 func set_speed(val):
 	speed = val
 	$character_sprite/AnimationPlayer.playback_speed = val
+
+func _save():
+#	return var2str({
+#		"parent" : var2str(get_parent().get_path()),
+#		"position": var2str(position),
+#		"look_dir": var2str(position),
+#		"speed" : var2str(speed),
+#		"moving" : var2str(moving)
+#	})
+	return var2str({
+		"parent" : get_parent().get_path(),
+		"position" : position,
+		"look_dir" : position,
+		"speed" : speed,
+		"moving" :moving
+	})
+
+
+func _load(string):
+	var dic : Dictionary= str2var(string)
+#	for k in dic.keys():
+#		dic[k] = str2var(dic[k])
+	return dic
 	

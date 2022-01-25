@@ -1,8 +1,16 @@
 extends "controller.gd"
+#block the player's path
 
+#whether to move in horizontal axis
 export var fix_horizontal := false
+
+#whether to move in vertical axis
 export var fix_vertical := false
+
+#closest the player can be in horizontal tiles before we move, infinite if 0
 export var sight_horizontal := 0
+
+#closest the player can be in vertical tiles before we move, infinite if 0
 export var sight_vertical := 0
 
 var target = null
