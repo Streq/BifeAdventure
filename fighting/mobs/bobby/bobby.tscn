@@ -9,7 +9,7 @@
 [ext_resource path="res://fighting/dude/healthbar.gd" type="Script" id=7]
 [ext_resource path="res://fighting/dude/dead.gd" type="Script" id=8]
 [ext_resource path="res://fighting/malovich/ai_controller.gd" type="Script" id=9]
-[ext_resource path="res://fighting/mobs/bobby/follow.gd" type="Script" id=10]
+[ext_resource path="res://fighting/mobs/ai/walk_and_flip_on_wall.gd" type="Script" id=10]
 [ext_resource path="res://util/remote_method_call_trigger.gd" type="Script" id=11]
 [ext_resource path="res://fighting/dude/jump.gd" type="Script" id=13]
 [ext_resource path="res://util/state/state_machine.gd" type="Script" id=14]
@@ -264,7 +264,7 @@ script = ExtResource( 19 )
 team = 1
 max_health = 50.0
 speed = 50.0
-speed_lerp = 3.0
+speed_lerp = 10.0
 idle_lerp = 15.0
 jump = 150.0
 gravity = 700.0
