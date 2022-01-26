@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=2]
+[gd_scene load_steps=55 format=2]
 
 [ext_resource path="res://fighting/dude/fighter.gd" type="Script" id=1]
 [ext_resource path="res://fighting/dude/idle.gd" type="Script" id=2]
@@ -36,6 +36,9 @@ extents = Vector2( 7, 4 )
 
 [sub_resource type="RectangleShape2D" id=24]
 extents = Vector2( 4, 4 )
+
+[sub_resource type="RectangleShape2D" id=27]
+extents = Vector2( 4, 5.5 )
 
 [sub_resource type="RectangleShape2D" id=25]
 extents = Vector2( 4, 4 )
@@ -740,6 +743,87 @@ tracks/2/keys = {
 } ]
 }
 
+[sub_resource type="Animation" id=28]
+resource_name = "utilt"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("pivot/display/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 16, 33, 26 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.1, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [ "utilt" ],
+"method": "activate_hitbox"
+}, {
+"args": [ "utilt" ],
+"method": "deactivate_hitbox"
+} ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"values": [ {
+"args": [ 0.0 ],
+"method": "step_forward"
+}, {
+"args": [ 0.0 ],
+"method": "step_forward"
+}, {
+"args": [ false ],
+"method": "set_locked"
+}, {
+"args": [  ],
+"method": "enable_movement"
+} ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("pivot/display/hands_up:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("pivot/display/hands_up:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+
 [sub_resource type="Animation" id=21]
 resource_name = "walk"
 length = 0.8
@@ -791,11 +875,19 @@ script = ExtResource( 1 )
 texture = ExtResource( 5 )
 hframes = 8
 vframes = 8
-frame = 45
 
 [node name="hands" type="Sprite" parent="pivot/display"]
 visible = false
 position = Vector2( 16, 0 )
+texture = ExtResource( 30 )
+hframes = 8
+vframes = 8
+frame = 1
+
+[node name="hands_up" type="Sprite" parent="pivot/display"]
+visible = false
+position = Vector2( 4, -15 )
+rotation = -1.5708
 texture = ExtResource( 30 )
 hframes = 8
 vframes = 8
@@ -864,6 +956,7 @@ position = Vector2( 8, 0 )
 shape = SubResource( 24 )
 
 [node name="dair" parent="pivot/hitbox" instance=ExtResource( 32 )]
+visible = false
 monitoring = false
 monitorable = false
 knockback = Vector2( 30, 200 )
@@ -876,6 +969,17 @@ shape = SubResource( 24 )
 [node name="spring" type="Node" parent="pivot/hitbox/dair"]
 script = ExtResource( 16 )
 impulse = Vector2( 0, -150 )
+
+[node name="utilt" parent="pivot/hitbox" instance=ExtResource( 32 )]
+visible = false
+monitoring = false
+monitorable = false
+knockback = Vector2( 50, -200 )
+damage = 30.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="pivot/hitbox/utilt"]
+position = Vector2( 3, -8.5 )
+shape = SubResource( 27 )
 
 [node name="tackle" parent="pivot/hitbox" instance=ExtResource( 32 )]
 visible = false
@@ -930,6 +1034,11 @@ script = ExtResource( 13 )
 
 [node name="jab" type="Node" parent="state"]
 script = ExtResource( 31 )
+
+[node name="utilt" type="Node" parent="state"]
+script = ExtResource( 31 )
+sprite_name = "hands_up"
+animation = "utilt"
 
 [node name="side_jab" type="Node" parent="state"]
 script = ExtResource( 31 )
@@ -987,6 +1096,12 @@ states_from = PoolStringArray( "side_jab" )
 state_to = "jab3"
 on_finish = true
 
+[node name="utilt" parent="attack_list" instance=ExtResource( 18 )]
+states_from = PoolStringArray( "idle" )
+state_to = "utilt"
+dirs = [ Vector2( 0, -1 ) ]
+on_finish = true
+
 [node name="jab" parent="attack_list" instance=ExtResource( 18 )]
 states_from = PoolStringArray( "idle" )
 state_to = "jab"
@@ -1036,6 +1151,7 @@ anims/run = SubResource( 4 )
 anims/side_jab = SubResource( 8 )
 anims/side_jab2 = SubResource( 18 )
 anims/tackle = SubResource( 13 )
+anims/utilt = SubResource( 28 )
 anims/walk = SubResource( 21 )
 anims/wall = SubResource( 5 )
 
