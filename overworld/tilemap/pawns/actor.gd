@@ -19,9 +19,10 @@ export (float) var speed := 1.0 setget set_speed
 
 func _ready():
 	update_look_direction(Vector2.DOWN)
-	self.speed = speed
-	print(_save())
-	print(_load(_save()))
+	set_speed(speed)
+	print(filename)
+#	print(_save())
+#	print(_load(_save()))
 	
 func interact(pawn, direction):
 	if interact_action:
@@ -115,26 +116,18 @@ func set_speed(val):
 	speed = val
 	$character_sprite/AnimationPlayer.playback_speed = val
 
-func _save():
-#	return var2str({
-#		"parent" : var2str(get_parent().get_path()),
-#		"position": var2str(position),
-#		"look_dir": var2str(position),
-#		"speed" : var2str(speed),
-#		"moving" : var2str(moving)
-#	})
-	return var2str({
-		"parent" : get_parent().get_path(),
-		"position" : position,
-		"look_dir" : position,
-		"speed" : speed,
-		"moving" :moving
-	})
-
-
-func _load(string):
-	var dic : Dictionary= str2var(string)
-#	for k in dic.keys():
-#		dic[k] = str2var(dic[k])
-	return dic
+#func _save():
+#	return {
+#		"file" : filename,
+#		"path" : get_path(),
+#		"position" : position,
+#		"look_dir" : look_dir,
+#		"speed" : speed,
+#		"moving" : moving
+#	}
+#
+#
+#func _load(save : Dictionary):
+#	for k in save.keys():
+#		self[k] = save[k]
 	

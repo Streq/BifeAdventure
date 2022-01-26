@@ -158,6 +158,10 @@ menu={
 2d_physics/layer_4="hitbox"
 2d_physics/layer_5="killbox"
 
+[network]
+
+limits/debugger_stdout/max_chars_per_second=20480
+
 [physics]
 
 common/enable_pause_aware_picking=true

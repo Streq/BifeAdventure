@@ -26,7 +26,6 @@ export (ROOM) var checkpoint_room : int = ROOM.my_room
 export (ROOM) var current_room : int = ROOM.my_room
 export (Vector2) var spawn_tile = null
 export (EVENT, FLAGS) var event_flags : int = 0
-export var world_position : Vector2 = Vector2.ZERO
 
 var step_counter : int = 0 setget set_step_counter
 
@@ -58,9 +57,8 @@ func load_game():
 	print_debug("recovered savestate:", to_json(save))
 	checkpoint_room = save.checkpoint_room
 	current_room = save.current_room
-	spawn_tile = save.world_position
+	spawn_tile = save.spawn_tile
 	event_flags = save.event_flags
-	world_position = save.world_position
 	goto_room(current_room)
 
 func save_game():
@@ -70,7 +68,12 @@ func save_game():
 	s.current_room = current_room
 	s.spawn_tile = spawn_tile
 	s.event_flags = event_flags
-	s.world_position = world_position
+	var nodes = {}
+	for n in get_tree().get_nodes_in_group("persist"):
+		var save : Dictionary = n._save()
+		var path = save.path
+		save.erase("path")
+
 	print_debug("savestate to save:", to_json(s))
 	
 	var err = ResourceSaver.save(Globals.SAVE_PATH, s)

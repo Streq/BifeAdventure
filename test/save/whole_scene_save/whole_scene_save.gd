@@ -19,9 +19,18 @@ func _on_textbox_text_display_finished(textbox):
 
 func _input(event):
 	if event.is_action_pressed("menu"):
-		save()
+		save_game()
 		display_text(["se guardo la partida"])
+	if event.is_action_pressed("B0"):
+		load_game()
 	pass
-
-func save():
-	Globals.save_game()
+	
+	
+var _save = null
+func save_game():
+	_save = var2str(self)
+	
+func load_game():
+	if _save:
+		get_parent().add_child(str2var(_save))
+		queue_free()
