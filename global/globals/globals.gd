@@ -68,11 +68,7 @@ func save_game():
 	s.current_room = current_room
 	s.spawn_tile = spawn_tile
 	s.event_flags = event_flags
-	var nodes = {}
-	for n in get_tree().get_nodes_in_group("persist"):
-		var save : Dictionary = n._save()
-		var path = save.path
-		save.erase("path")
+	
 
 	print_debug("savestate to save:", to_json(s))
 	
