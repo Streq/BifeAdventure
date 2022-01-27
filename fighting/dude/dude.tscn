@@ -960,6 +960,10 @@ damage = 30.0
 position = Vector2( 8, 0 )
 shape = SubResource( 24 )
 
+[node name="spring" type="Node" parent="pivot/hitbox/air_kick"]
+script = ExtResource( 16 )
+impulse = Vector2( -150, -50 )
+
 [node name="dair" parent="pivot/hitbox" instance=ExtResource( 32 )]
 visible = false
 monitoring = false
@@ -1184,6 +1188,8 @@ __meta__ = {
 [connection signal="health_changed" from="." to="healthbar" method="_on_health_changed"]
 [connection signal="state_exit" from="." to="pivot/hitbox" method="clear"]
 [connection signal="area_entered" from="pivot/hurtbox" to="." method="_on_hurtbox_area_entered"]
+[connection signal="applied_knockback" from="pivot/hitbox/air_kick" to="pivot/hitbox/air_kick" method="deactivate"]
+[connection signal="applied_knockback" from="pivot/hitbox/air_kick" to="pivot/hitbox/air_kick/spring" method="trigger"]
 [connection signal="applied_knockback" from="pivot/hitbox/dair" to="pivot/hitbox/dair/spring" method="trigger"]
 [connection signal="applied_knockback" from="pivot/hitbox/tackle" to="pivot/hitbox/tackle/spring" method="trigger"]
 [connection signal="state_changed" from="state" to="state_label" method="_on_state_state_changed"]
