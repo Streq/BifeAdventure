@@ -25,6 +25,7 @@ onready var state = $state
 onready var sprite = $pivot/display/Sprite
 onready var display = $pivot/display
 onready var hitbox = $pivot/hitbox
+onready var hurtbox = $pivot/hurtbox
 onready var pivot = $pivot
 onready var controller = $controller
 onready var attack_list = $attack_list
@@ -42,6 +43,12 @@ var velocity := Vector2.ZERO
 func _ready():
 	for child in hitbox.get_children():
 		child.body = self
+	for child in hurtbox.get_children():
+		child.body = self
+		child.connect("area_entered", self, "_on_hurtbox_area_entered")
+	hurtbox.activate_hitbox("main")
+	hurtbox.disconnect("clear", hurtbox.get_node("main"), "deactivate")
+	hurtbox.connect("clear", hurtbox.get_node("main"), "activate")
 
 func _input(event):
 	if OS.is_debug_build() and event.is_action_pressed("A1"):
@@ -108,5 +115,13 @@ func activate_hitbox(id):
 
 func deactivate_hitbox(id):
 	var box = hitbox.get_node(id)
+	box.deactivate()
+	
+func activate_hurtbox(id):
+	var box = hurtbox.get_node(id)
+	box.activate()
+
+func deactivate_hurtbox(id):
+	var box = hurtbox.get_node(id)
 	box.deactivate()
 

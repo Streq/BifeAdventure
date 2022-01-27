@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://asset/theme/white_black_text.tres" type="Theme" id=1]
 [ext_resource path="res://fighting/malovich/ai_controller.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://fighting/fighter/state/jab.gd" type="Script" id=7]
 [ext_resource path="res://fighting/hitbox/hitbox.tscn" type="PackedScene" id=8]
 [ext_resource path="res://fighting/malovich/ram.gd" type="Script" id=9]
+[ext_resource path="res://fighting/dude/hitbox_manager.gd" type="Script" id=10]
 [ext_resource path="res://fighting/dude/jump.gd" type="Script" id=11]
 [ext_resource path="res://fighting/malovich/dizzy.gd" type="Script" id=12]
 [ext_resource path="res://fighting/dude/idle.gd" type="Script" id=13]
@@ -23,6 +24,7 @@
 [ext_resource path="res://fighting/dude/hitstun.gd" type="Script" id=22]
 [ext_resource path="res://fighting/dude/attacks/input_patterns/tilt_attack.tscn" type="PackedScene" id=23]
 [ext_resource path="res://asset/texture/malovich.png" type="Texture" id=24]
+[ext_resource path="res://fighting/hitbox/hurtbox.gd" type="Script" id=25]
 
 [sub_resource type="RectangleShape2D" id=19]
 resource_local_to_scene = true
@@ -332,11 +334,15 @@ damage = 20.0
 position = Vector2( 8, 0 )
 shape = SubResource( 20 )
 
-[node name="hurtbox" type="Area2D" parent="pivot"]
+[node name="hurtbox" type="Node2D" parent="pivot"]
+script = ExtResource( 10 )
+
+[node name="main" type="Area2D" parent="pivot/hurtbox"]
 collision_layer = 4
 collision_mask = 8
+script = ExtResource( 25 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="pivot/hurtbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="pivot/hurtbox/main"]
 position = Vector2( 0, 0.5 )
 shape = SubResource( 1 )
 
@@ -489,7 +495,7 @@ __meta__ = {
 [connection signal="health_changed" from="." to="healthbar" method="_on_health_changed"]
 [connection signal="state_exit" from="." to="pivot/hitbox/jab" method="deactivate"]
 [connection signal="state_exit" from="." to="pivot/hitbox/ram" method="deactivate"]
-[connection signal="area_entered" from="pivot/hurtbox" to="." method="_on_hurtbox_area_entered"]
+[connection signal="area_entered" from="pivot/hurtbox/main" to="." method="_on_hurtbox_area_entered"]
 [connection signal="state_changed" from="state" to="state_label" method="_on_state_state_changed"]
 [connection signal="timeout" from="state/dizzy/Timer" to="state/dizzy" method="_on_Timer_timeout"]
 [connection signal="animation_finished" from="AnimationPlayer" to="state" method="_on_animation_finished"]
