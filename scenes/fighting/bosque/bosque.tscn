@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://autotile/terrain_simple.tscn" type="PackedScene" id=1]
 [ext_resource path="res://fighting/dude/dude.tscn" type="PackedScene" id=2]
@@ -8,6 +8,8 @@
 [ext_resource path="res://fighting/mobs/bobby/bobby.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/fighting/elements/dummy_spawner.gd" type="Script" id=7]
 [ext_resource path="res://fighting/mobs/dummy/dummy.tscn" type="PackedScene" id=8]
+[ext_resource path="res://textbox/textbox.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/fighting/bosque/bosque.gd" type="Script" id=10]
 
 [sub_resource type="TileSet" id=1]
 0/name = "forest.png 0"
@@ -26,6 +28,7 @@
 0/z_index = 0
 
 [node name="bosque" type="Node2D"]
+script = ExtResource( 10 )
 
 [node name="terrain_simple" parent="." instance=ExtResource( 1 )]
 visible = false
@@ -89,5 +92,12 @@ script = ExtResource( 7 )
 
 [node name="dummy" parent="dummy_spawner2/spawn" instance=ExtResource( 8 )]
 position = Vector2( 310.042, -26.6325 )
+
+[node name="textbox" parent="." instance=ExtResource( 9 )]
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="dead" from="dude" to="." method="player_lose"]
 
 [editable path="spikes"]

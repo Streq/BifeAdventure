@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://scenes/overworld/overworld_skel.gd" type="Script" id=1]
 [ext_resource path="res://overworld/tilemap/trigger/scene_change_trigger.tscn" type="PackedScene" id=2]
@@ -19,6 +19,7 @@
 [ext_resource path="res://overworld/tilemap/grid/grid.gd" type="Script" id=17]
 [ext_resource path="res://overworld/tilemap/grid/map.gd" type="Script" id=18]
 [ext_resource path="res://overworld/tilemap/pawns/controller/controller.gd" type="Script" id=19]
+[ext_resource path="res://overworld/tilemap/trigger/checkpoint_trigger.gd" type="Script" id=20]
 
 [sub_resource type="TileSet" id=1]
 0/name = "pokemon_gsc_tileset_day.png 0"
@@ -349,6 +350,16 @@ is_world_coords = false
 [node name="spawn_pos" parent="map/triggers/door_to_forest" index="0"]
 position = Vector2( 9, 11 )
 
+[node name="checkpoint" parent="map/triggers" instance=ExtResource( 2 )]
+position = Vector2( -136, 648 )
+script = ExtResource( 20 )
+relative_spawn_pos = false
+is_world_coords = false
+wait_step = false
+
+[node name="spawn_pos" parent="map/triggers/checkpoint" index="0"]
+position = Vector2( -9, 40 )
+
 [node name="door_to_malovich" parent="map/triggers" instance=ExtResource( 2 )]
 position = Vector2( 216, 232 )
 to = 7
@@ -389,6 +400,7 @@ event = 1
 [editable path="map/grid/pepe_guardian"]
 [editable path="map/triggers/door_to_my_house"]
 [editable path="map/triggers/door_to_forest"]
+[editable path="map/triggers/checkpoint"]
 [editable path="map/triggers/door_to_malovich"]
 [editable path="map/triggers/door_to_pepe"]
 [editable path="map/triggers/door_to_tutorial"]

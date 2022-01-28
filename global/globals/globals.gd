@@ -25,6 +25,7 @@ enum EVENT {
 export (ROOM) var checkpoint_room : int = ROOM.my_room
 export (ROOM) var current_room : int = ROOM.my_room
 export (Vector2) var spawn_tile = null
+export (Vector2) var checkpoint_tile = null
 export (EVENT, FLAGS) var event_flags : int = 0
 
 var step_counter : int = 0 setget set_step_counter
@@ -41,7 +42,7 @@ func set_step_counter(val):
 #	print_debug("steps:", val)
 
 func respawn():
-	spawn_tile = null
+	spawn_tile = checkpoint_tile
 	goto_room(checkpoint_room)
 	
 
