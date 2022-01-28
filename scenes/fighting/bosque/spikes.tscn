@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://test/fighting/tilemap.tres" type="TileSet" id=1]
+[ext_resource path="res://scenes/fighting/bosque/hitbox.gd" type="Script" id=2]
+[ext_resource path="res://scenes/fighting/bosque/hazard.gd" type="Script" id=3]
+[ext_resource path="res://scenes/fighting/bosque/knockback.gd" type="Script" id=4]
+
+[node name="spikes" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="hitbox" type="Node2D" parent="."]
+
+[node name="spikes" type="Area2D" parent="hitbox"]
+modulate = Color( 1, 0, 0, 1 )
+collision_layer = 8
+collision_mask = 4
+script = ExtResource( 2 )
+
+[node name="TileMap" type="TileMap" parent="hitbox/spikes"]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 16, 16 )
+collision_use_parent = true
+collision_layer = 8
+collision_mask = 4
+format = 1
+
+[node name="knockback" type="Node" parent="hitbox/spikes"]
+script = ExtResource( 4 )
+knockback = Vector2( 100, -200 )
