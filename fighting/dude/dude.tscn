@@ -914,6 +914,7 @@ script = ExtResource( 1 )
 [node name="display" type="Node2D" parent="pivot"]
 
 [node name="Sprite" type="Sprite" parent="pivot/display"]
+use_parent_material = true
 texture = ExtResource( 5 )
 hframes = 8
 vframes = 8
@@ -921,6 +922,7 @@ frame = 17
 
 [node name="hands" type="Sprite" parent="pivot/display"]
 visible = false
+use_parent_material = true
 position = Vector2( 16, 0 )
 texture = ExtResource( 30 )
 hframes = 8
@@ -929,6 +931,7 @@ frame = 1
 
 [node name="hands_up" type="Sprite" parent="pivot/display"]
 visible = false
+use_parent_material = true
 position = Vector2( 4, -15 )
 rotation = -1.5708
 texture = ExtResource( 30 )
@@ -938,6 +941,7 @@ frame = 1
 
 [node name="feet" type="Sprite" parent="pivot/display"]
 visible = false
+use_parent_material = true
 position = Vector2( 0, 16 )
 texture = ExtResource( 30 )
 hframes = 8

@@ -297,6 +297,7 @@ position = Vector2( 1, 0 )
 [node name="display" type="Node2D" parent="pivot"]
 
 [node name="Sprite" type="Sprite" parent="pivot/display"]
+use_parent_material = true
 position = Vector2( 1, 0 )
 texture = ExtResource( 24 )
 hframes = 8
@@ -305,6 +306,7 @@ frame = 8
 
 [node name="hands" type="Sprite" parent="pivot/display"]
 visible = false
+use_parent_material = true
 position = Vector2( 16, 0 )
 texture = ExtResource( 24 )
 hframes = 8

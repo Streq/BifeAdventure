@@ -23,11 +23,11 @@
 [ext_resource path="res://fighting/dude/hitbox_manager.gd" type="Script" id=21]
 [ext_resource path="res://fighting/hitbox/hurtbox.gd" type="Script" id=22]
 
-[sub_resource type="RectangleShape2D" id=19]
+[sub_resource type="RectangleShape2D" id=20]
 resource_local_to_scene = true
 extents = Vector2( 4, 4 )
 
-[sub_resource type="RectangleShape2D" id=20]
+[sub_resource type="RectangleShape2D" id=19]
 resource_local_to_scene = true
 extents = Vector2( 4, 4 )
 
@@ -273,36 +273,12 @@ idle_lerp = 15.0
 jump = 150.0
 gravity = 700.0
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 4 )
+shape = SubResource( 20 )
+
 [node name="pivot" type="Node2D" parent="."]
 position = Vector2( 1, 0 )
-
-[node name="display" type="Node2D" parent="pivot"]
-
-[node name="Sprite" type="Sprite" parent="pivot/display"]
-position = Vector2( 1, 0 )
-texture = ExtResource( 1 )
-hframes = 8
-vframes = 8
-frame = 16
-
-[node name="hitbox" type="Node2D" parent="pivot"]
-script = ExtResource( 21 )
-
-[node name="idle" parent="pivot/hitbox" instance=ExtResource( 5 )]
-knockback = Vector2( 100, -100 )
-damage = 20.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="pivot/hitbox/idle"]
-position = Vector2( -1, 4 )
-shape = SubResource( 19 )
-
-[node name="disabler" type="Node" parent="pivot/hitbox/idle"]
-script = ExtResource( 11 )
-method = "deactivate"
-
-[node name="enabler" type="Node" parent="pivot/hitbox/idle"]
-script = ExtResource( 11 )
-method = "activate"
 
 [node name="hurtbox" type="Node2D" parent="pivot"]
 script = ExtResource( 21 )
@@ -318,6 +294,36 @@ shape = SubResource( 20 )
 
 [node name="parent_deleter" parent="pivot/hurtbox/main" instance=ExtResource( 20 )]
 
+[node name="hitbox" type="Node2D" parent="pivot"]
+script = ExtResource( 21 )
+
+[node name="idle" parent="pivot/hitbox" instance=ExtResource( 5 )]
+visible = false
+knockback = Vector2( 100, -100 )
+damage = 20.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="pivot/hitbox/idle"]
+position = Vector2( -1, 4 )
+shape = SubResource( 19 )
+
+[node name="disabler" type="Node" parent="pivot/hitbox/idle"]
+script = ExtResource( 11 )
+method = "deactivate"
+
+[node name="enabler" type="Node" parent="pivot/hitbox/idle"]
+script = ExtResource( 11 )
+method = "activate"
+
+[node name="display" type="Node2D" parent="pivot"]
+
+[node name="Sprite" type="Sprite" parent="pivot/display"]
+use_parent_material = true
+position = Vector2( 1, 0 )
+texture = ExtResource( 1 )
+hframes = 8
+vframes = 8
+frame = 16
+
 [node name="state_label" type="Label" parent="."]
 margin_left = -20.0
 margin_top = -16.0
@@ -329,10 +335,6 @@ script = ExtResource( 16 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 4 )
-shape = SubResource( 20 )
 
 [node name="state" type="Node" parent="."]
 script = ExtResource( 14 )

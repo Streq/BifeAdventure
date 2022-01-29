@@ -15,4 +15,5 @@ func handle(character : KinematicBody2D, controller):
 		frames = (frames + 1)%frame_reaction_time
 	else:
 		frames = 0
+		dir = character.dir
 	controller.direction.x = dir
