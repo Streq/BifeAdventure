@@ -22,7 +22,7 @@ tile_data = PoolIntArray( 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 
 [node name="malovich" parent="." instance=ExtResource( 4 )]
 position = Vector2( 272, 184 )
 max_health = 500.0
-jump = 150.0
+gravity = 500.0
 dir = -1.0
 
 [node name="dude" parent="." instance=ExtResource( 2 )]

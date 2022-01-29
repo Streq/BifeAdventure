@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=2]
+[gd_scene load_steps=58 format=2]
 
 [ext_resource path="res://fighting/dude/fighter.gd" type="Script" id=1]
 [ext_resource path="res://fighting/dude/idle.gd" type="Script" id=2]
@@ -23,6 +23,7 @@
 [ext_resource path="res://fighting/dude/fireball.gd" type="Script" id=21]
 [ext_resource path="res://fighting/dude/healthbar.gd" type="Script" id=22]
 [ext_resource path="res://fighting/dude/dead.gd" type="Script" id=23]
+[ext_resource path="res://fighting/fighter/hurt_flash.tscn" type="PackedScene" id=24]
 [ext_resource path="res://fighting/dude/hitstun.gd" type="Script" id=26]
 [ext_resource path="res://fighting/dude/walk.gd" type="Script" id=28]
 [ext_resource path="res://asset/texture/attack.png" type="Texture" id=30]
@@ -917,6 +918,7 @@ script = ExtResource( 1 )
 texture = ExtResource( 5 )
 hframes = 8
 vframes = 8
+frame = 17
 
 [node name="hands" type="Sprite" parent="pivot/display"]
 visible = false
@@ -942,6 +944,8 @@ texture = ExtResource( 30 )
 hframes = 8
 vframes = 8
 frame = 8
+
+[node name="hurt_flash" parent="pivot/display" instance=ExtResource( 24 )]
 
 [node name="hitbox" type="Node2D" parent="pivot"]
 script = ExtResource( 15 )
@@ -1239,6 +1243,7 @@ position = Vector2( 0, 0.5 )
 shape = SubResource( 1 )
 
 [connection signal="health_changed" from="." to="healthbar" method="_on_health_changed"]
+[connection signal="hurt" from="." to="pivot/display/hurt_flash" method="trigger"]
 [connection signal="state_exit" from="." to="pivot/hitbox" method="clear"]
 [connection signal="state_exit" from="." to="pivot/hurtbox" method="clear"]
 [connection signal="applied_knockback" from="pivot/hitbox/air_kick" to="pivot/hitbox/air_kick" method="deactivate"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://asset/theme/white_black_text.tres" type="Theme" id=1]
 [ext_resource path="res://fighting/malovich/ai_controller.gd" type="Script" id=2]
@@ -25,6 +25,7 @@
 [ext_resource path="res://fighting/dude/attacks/input_patterns/tilt_attack.tscn" type="PackedScene" id=23]
 [ext_resource path="res://asset/texture/malovich.png" type="Texture" id=24]
 [ext_resource path="res://fighting/hitbox/hurtbox.gd" type="Script" id=25]
+[ext_resource path="res://fighting/fighter/hurt_flash.tscn" type="PackedScene" id=26]
 
 [sub_resource type="RectangleShape2D" id=19]
 resource_local_to_scene = true
@@ -310,6 +311,8 @@ hframes = 8
 vframes = 8
 frame = 11
 
+[node name="hurt_flash" parent="pivot/display" instance=ExtResource( 26 )]
+
 [node name="hitbox" type="Node2D" parent="pivot"]
 
 [node name="jab" parent="pivot/hitbox" instance=ExtResource( 8 )]
@@ -398,6 +401,7 @@ stunned = true
 [node name="ram" type="Node" parent="state"]
 script = ExtResource( 9 )
 stunned = true
+self_knockback = Vector2( 100, -100 )
 
 [node name="dead" type="Node" parent="state"]
 script = ExtResource( 21 )
@@ -494,6 +498,7 @@ __meta__ = {
 }
 
 [connection signal="health_changed" from="." to="healthbar" method="_on_health_changed"]
+[connection signal="hurt" from="." to="pivot/display/hurt_flash" method="trigger"]
 [connection signal="state_exit" from="." to="pivot/hitbox/jab" method="deactivate"]
 [connection signal="state_exit" from="." to="pivot/hitbox/ram" method="deactivate"]
 [connection signal="area_entered" from="pivot/hurtbox/main" to="." method="_on_hurtbox_area_entered"]

@@ -53,7 +53,7 @@ func _ready():
 func _input(event):
 	if OS.is_debug_build() and event.is_action_pressed("A1"):
 		health = max(health,0)
-		set_health(0)
+		set_health(10000)
 		health = min(health,max_health)
 
 
@@ -84,6 +84,7 @@ func _on_hurtbox_area_entered(area):
 			state._change_state("hitstun",null)
 		area.apply_knockback(self)		
 		area.apply_damage(self)
+		
 	
 func set_health(val):
 	health = val

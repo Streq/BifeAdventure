@@ -3,6 +3,7 @@ extends "res://util/state/state.gd"
 export var animation := "ram"
 export var speed := 200.0
 export var speed_lerp := 30.0
+export var self_knockback := Vector2(100, -200)
 
 var can_move = false
 
@@ -33,7 +34,7 @@ func update(delta):
 			if -normal.x == p.dir:
 				emit_signal("finished", "dizzy", null)
 				# bump
-				p.velocity = Vector2(normal.x*100, -200)
+				p.velocity = Vector2(normal.x,1)*self_knockback
 	elif can_move:
 		if jump:
 			emit_signal("finished", "jump", null)
