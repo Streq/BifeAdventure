@@ -29,6 +29,7 @@ onready var hurtbox = $pivot/hurtbox
 onready var pivot = $pivot
 onready var controller = $controller
 onready var attack_list = $attack_list
+onready var status_animation = $status_animation
 
 var invulnerable = false
 
@@ -84,6 +85,7 @@ func _on_hurtbox_area_entered(area):
 			state._change_state("hitstun",null)
 		area.apply_knockback(self)		
 		area.apply_damage(self)
+		status_animation.play("hurt")
 		
 	
 func set_health(val):

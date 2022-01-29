@@ -23,4 +23,4 @@ func update(delta):
 				p.dir = -normal.x
 				# stick to the wall
 				p.velocity.x = lerp(p.velocity.x, p.dir, delta * p.speed_lerp * 0.5)
-	
+

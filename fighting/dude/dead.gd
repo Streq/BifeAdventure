@@ -12,6 +12,7 @@ func update(delta):
 			emit_signal("finished", "idle", null)
 		else:
 			p.get_node("AnimationPlayer").play("dead")
+			p.get_node("status_animation").play("flicker_and_die")
 		p.velocity.x = lerp(p.velocity.x, 0,  delta * p.idle_lerp)
 	else:
 		owner.get_node("AnimationPlayer").play("hurt")

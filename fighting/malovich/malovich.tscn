@@ -25,7 +25,7 @@
 [ext_resource path="res://fighting/dude/attacks/input_patterns/tilt_attack.tscn" type="PackedScene" id=23]
 [ext_resource path="res://asset/texture/malovich.png" type="Texture" id=24]
 [ext_resource path="res://fighting/hitbox/hurtbox.gd" type="Script" id=25]
-[ext_resource path="res://fighting/fighter/hurt_flash.tscn" type="PackedScene" id=26]
+[ext_resource path="res://fighting/fighter/status_animation.tscn" type="PackedScene" id=27]
 
 [sub_resource type="RectangleShape2D" id=19]
 resource_local_to_scene = true
@@ -311,8 +311,6 @@ hframes = 8
 vframes = 8
 frame = 11
 
-[node name="hurt_flash" parent="pivot/display" instance=ExtResource( 26 )]
-
 [node name="hitbox" type="Node2D" parent="pivot"]
 
 [node name="jab" parent="pivot/hitbox" instance=ExtResource( 8 )]
@@ -497,8 +495,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="status_animation" parent="." instance=ExtResource( 27 )]
+
 [connection signal="health_changed" from="." to="healthbar" method="_on_health_changed"]
-[connection signal="hurt" from="." to="pivot/display/hurt_flash" method="trigger"]
 [connection signal="state_exit" from="." to="pivot/hitbox/jab" method="deactivate"]
 [connection signal="state_exit" from="." to="pivot/hitbox/ram" method="deactivate"]
 [connection signal="area_entered" from="pivot/hurtbox/main" to="." method="_on_hurtbox_area_entered"]

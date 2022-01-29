@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=2]
+[gd_scene load_steps=57 format=2]
 
 [ext_resource path="res://fighting/dude/fighter.gd" type="Script" id=1]
 [ext_resource path="res://fighting/dude/idle.gd" type="Script" id=2]
@@ -12,7 +12,7 @@
 [ext_resource path="res://fighting/dude/state_label.gd" type="Script" id=10]
 [ext_resource path="res://fighting/dude/wall.gd" type="Script" id=11]
 [ext_resource path="res://fighting/dude/wall_jump.gd" type="Script" id=12]
-[ext_resource path="res://fighting/dude/hurt.gd" type="Script" id=13]
+[ext_resource path="res://fighting/fighter/status_animation.tscn" type="PackedScene" id=13]
 [ext_resource path="res://fighting/fighter/state/air_jab.gd" type="Script" id=14]
 [ext_resource path="res://fighting/dude/hitbox_manager.gd" type="Script" id=15]
 [ext_resource path="res://fighting/trigger/spring.gd" type="Script" id=16]
@@ -23,7 +23,6 @@
 [ext_resource path="res://fighting/dude/fireball.gd" type="Script" id=21]
 [ext_resource path="res://fighting/dude/healthbar.gd" type="Script" id=22]
 [ext_resource path="res://fighting/dude/dead.gd" type="Script" id=23]
-[ext_resource path="res://fighting/fighter/hurt_flash.tscn" type="PackedScene" id=24]
 [ext_resource path="res://fighting/dude/hitstun.gd" type="Script" id=26]
 [ext_resource path="res://fighting/dude/walk.gd" type="Script" id=28]
 [ext_resource path="res://asset/texture/attack.png" type="Texture" id=30]
@@ -945,8 +944,6 @@ hframes = 8
 vframes = 8
 frame = 8
 
-[node name="hurt_flash" parent="pivot/display" instance=ExtResource( 24 )]
-
 [node name="hitbox" type="Node2D" parent="pivot"]
 script = ExtResource( 15 )
 
@@ -1095,8 +1092,8 @@ script = ExtResource( 8 )
 [node name="hitstun" type="Node" parent="state"]
 script = ExtResource( 26 )
 
-[node name="hurt" type="Node" parent="state"]
-script = ExtResource( 13 )
+[node name="knocked" type="Node" parent="state"]
+script = ExtResource( 26 )
 
 [node name="jab" type="Node" parent="state"]
 script = ExtResource( 31 )
@@ -1242,8 +1239,9 @@ __meta__ = {
 position = Vector2( 0, 0.5 )
 shape = SubResource( 1 )
 
+[node name="status_animation" parent="." instance=ExtResource( 13 )]
+
 [connection signal="health_changed" from="." to="healthbar" method="_on_health_changed"]
-[connection signal="hurt" from="." to="pivot/display/hurt_flash" method="trigger"]
 [connection signal="state_exit" from="." to="pivot/hitbox" method="clear"]
 [connection signal="state_exit" from="." to="pivot/hurtbox" method="clear"]
 [connection signal="applied_knockback" from="pivot/hitbox/air_kick" to="pivot/hitbox/air_kick" method="deactivate"]
