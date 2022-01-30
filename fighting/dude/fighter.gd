@@ -94,10 +94,9 @@ func set_health(val):
 	if health <= 0:
 		state._change_state("dead", null)
 		dead = true
-		emit_signal("dead")
 
 func _physics_process(delta):
-	if dead:
+	if dead and state.current != "dead":
 		state._change_state("dead", null)
 
 func learn(attack):
