@@ -9,7 +9,11 @@ func start_menu():
 	$menu.visible = true
 	$menu.add_entry("play", "play", true)
 
-	$menu.add_entry("continue", "continue", ResourceLoader.exists(Globals.SAVE_PATH))
+	var save_exists = ResourceLoader.exists(Globals.SAVE_PATH)
+	$menu.add_entry("continue", "continue", save_exists)
+	
+	if save_exists:
+		$menu.select_entry("continue")
 	
 	$menu.connect("selected",self,"_selected")
 	

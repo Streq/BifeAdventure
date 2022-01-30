@@ -47,7 +47,7 @@ func add_entry(name:String, text:String, enabled:bool):
 	entries[name] = new_entry
 	if entries.size() == 1:
 		_select(0)
-
+	
 func remove_entry(name:String):
 	var e = entries.get(name)
 	if e != null:
@@ -58,6 +58,9 @@ func clear_entries():
 	entries.clear()
 	for c in entries_node.get_children():
 		entries_node.remove_child(c)
+
+func select_entry(name:String):
+	_select(entries[name].get_index())
 
 func _select(index):
 	for e in entries_node.get_children():
