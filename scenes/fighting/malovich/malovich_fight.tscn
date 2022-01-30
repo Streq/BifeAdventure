@@ -27,7 +27,6 @@ dir = -1.0
 
 [node name="dude" parent="." instance=ExtResource( 2 )]
 position = Vector2( 38.5, 185 )
-speed = 250.0
 
 [node name="textbox" parent="." instance=ExtResource( 5 )]
 

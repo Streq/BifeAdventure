@@ -7,7 +7,7 @@ func enter():
 	timeout = false
 	
 func handle(character, controller):
-	if controller.target:
+	if is_instance_valid(controller.target):
 		var dist : Vector2= controller._target_distance()
 		controller.direction.x = sign(dist.x)
 		if(timeout or character.state.current=="hurt"):

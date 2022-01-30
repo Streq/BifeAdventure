@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://asset/theme/white_black_text.tres" type="Theme" id=1]
 [ext_resource path="res://fighting/malovich/ai_controller.gd" type="Script" id=2]
@@ -25,6 +25,7 @@
 [ext_resource path="res://fighting/dude/attacks/input_patterns/tilt_attack.tscn" type="PackedScene" id=23]
 [ext_resource path="res://asset/texture/malovich.png" type="Texture" id=24]
 [ext_resource path="res://fighting/hitbox/hurtbox.gd" type="Script" id=25]
+[ext_resource path="res://fighting/fighter/state/knocked.gd" type="Script" id=26]
 [ext_resource path="res://fighting/fighter/status_animation.tscn" type="PackedScene" id=27]
 
 [sub_resource type="RectangleShape2D" id=19]
@@ -242,6 +243,21 @@ tracks/0/keys = {
 "values": [ 0 ]
 }
 
+[sub_resource type="Animation" id=21]
+resource_name = "knocked"
+tracks/0/type = "value"
+tracks/0/path = NodePath("pivot/display/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 17 ]
+}
+
 [sub_resource type="Animation" id=12]
 resource_name = "ram"
 length = 0.5
@@ -321,6 +337,7 @@ monitoring = false
 monitorable = false
 knockback = Vector2( 200, -200 )
 damage = 20.0
+knockdown = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="pivot/hitbox/jab"]
 position = Vector2( 12.5, 0 )
@@ -332,6 +349,7 @@ monitoring = false
 monitorable = false
 knockback = Vector2( 200, -300 )
 damage = 20.0
+knockdown = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="pivot/hitbox/ram"]
 position = Vector2( 8, 0 )
@@ -415,6 +433,9 @@ stunned = true
 wait_time = 3.0
 one_shot = true
 
+[node name="knocked" type="Node" parent="state"]
+script = ExtResource( 26 )
+
 [node name="attack_list" type="Node" parent="."]
 script = ExtResource( 20 )
 
@@ -439,6 +460,7 @@ anims/hurt = SubResource( 6 )
 anims/idle = SubResource( 7 )
 anims/jab = SubResource( 8 )
 anims/jump = SubResource( 10 )
+anims/knocked = SubResource( 21 )
 anims/ram = SubResource( 12 )
 anims/run = SubResource( 11 )
 

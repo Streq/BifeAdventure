@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=2]
+[gd_scene load_steps=58 format=2]
 
 [ext_resource path="res://fighting/dude/fighter.gd" type="Script" id=1]
 [ext_resource path="res://fighting/dude/idle.gd" type="Script" id=2]
@@ -23,6 +23,7 @@
 [ext_resource path="res://fighting/dude/fireball.gd" type="Script" id=21]
 [ext_resource path="res://fighting/dude/healthbar.gd" type="Script" id=22]
 [ext_resource path="res://fighting/dude/dead.gd" type="Script" id=23]
+[ext_resource path="res://fighting/fighter/state/knocked.gd" type="Script" id=24]
 [ext_resource path="res://fighting/dude/hitstun.gd" type="Script" id=26]
 [ext_resource path="res://fighting/dude/walk.gd" type="Script" id=28]
 [ext_resource path="res://asset/texture/attack.png" type="Texture" id=30]
@@ -978,6 +979,7 @@ monitoring = false
 monitorable = false
 knockback = Vector2( 150, -100 )
 damage = 30.0
+knockdown = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="pivot/hitbox/cross"]
 position = Vector2( 8, -1 )
@@ -1028,6 +1030,7 @@ shape = SubResource( 27 )
 visible = false
 knockback = Vector2( 200, -100 )
 damage = 20.0
+knockdown = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="pivot/hitbox/tackle"]
 position = Vector2( 5, 0 )
@@ -1097,7 +1100,7 @@ script = ExtResource( 8 )
 script = ExtResource( 26 )
 
 [node name="knocked" type="Node" parent="state"]
-script = ExtResource( 26 )
+script = ExtResource( 24 )
 
 [node name="jab" type="Node" parent="state"]
 script = ExtResource( 31 )

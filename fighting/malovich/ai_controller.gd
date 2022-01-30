@@ -51,7 +51,7 @@ func _physics_process(delta):
 		$strategy.current_state.handle(owner, self)
 
 func _target_distance():
-	if target:
+	if is_instance_valid(target):
 		return target.position - owner.global_position
 
 class InputButton extends Node:
