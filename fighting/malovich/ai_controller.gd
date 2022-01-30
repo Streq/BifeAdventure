@@ -53,6 +53,7 @@ func _physics_process(delta):
 func _target_distance():
 	if is_instance_valid(target):
 		return target.position - owner.global_position
+	return Vector2.ZERO
 
 class InputButton extends Node:
 	var is_pressed := false

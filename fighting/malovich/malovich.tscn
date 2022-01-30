@@ -34,7 +34,7 @@ extents = Vector2( 4.49159, 7.49795 )
 
 [sub_resource type="RectangleShape2D" id=20]
 resource_local_to_scene = true
-extents = Vector2( 4, 4 )
+extents = Vector2( 5, 7 )
 
 [sub_resource type="RectangleShape2D" id=1]
 resource_local_to_scene = true
@@ -306,6 +306,7 @@ speed = 75.0
 speed_lerp = 4.0
 jump = 100.0
 gravity = 800.0
+knockstun = 0.1
 
 [node name="pivot" type="Node2D" parent="."]
 position = Vector2( 1, 0 )
@@ -318,7 +319,7 @@ position = Vector2( 1, 0 )
 texture = ExtResource( 24 )
 hframes = 8
 vframes = 8
-frame = 8
+frame = 24
 
 [node name="hands" type="Sprite" parent="pivot/display"]
 visible = false
@@ -344,7 +345,6 @@ position = Vector2( 12.5, 0 )
 shape = SubResource( 19 )
 
 [node name="ram" parent="pivot/hitbox" instance=ExtResource( 8 )]
-visible = false
 monitoring = false
 monitorable = false
 knockback = Vector2( 200, -300 )
@@ -352,7 +352,7 @@ damage = 20.0
 knockdown = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="pivot/hitbox/ram"]
-position = Vector2( 8, 0 )
+position = Vector2( 7, 0 )
 shape = SubResource( 20 )
 
 [node name="hurtbox" type="Node2D" parent="pivot"]

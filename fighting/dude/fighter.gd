@@ -20,6 +20,7 @@ export var jump :float = 200
 export var wall_jump :float = 200
 export var gravity :float = 400
 export var hitstun :float = 0.3
+export var knockstun :float = 0.3
 
 onready var state = $state
 onready var sprite = $pivot/display/Sprite

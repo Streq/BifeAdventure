@@ -12,7 +12,7 @@ func _init():
 func enter():
 	owner.get_node("AnimationPlayer").play("hitstun")
 	owner.emit_signal("hurt")
-	timer.wait_time = owner.hitstun
+	timer.wait_time = owner.knockstun
 	timeout = false
 	started = false
 	

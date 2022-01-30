@@ -13,7 +13,6 @@ func enter():
 	can_move = false
 	locked = true
 	owner.activate_hitbox("ram")
-	
 
 func update(delta):
 	var p = owner

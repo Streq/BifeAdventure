@@ -1031,6 +1031,7 @@ shape = SubResource( 27 )
 visible = false
 knockback = Vector2( 200, -100 )
 damage = 20.0
+knockdown = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="pivot/hitbox/tackle"]
 position = Vector2( 5, 0 )
