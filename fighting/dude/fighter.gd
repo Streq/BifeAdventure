@@ -53,7 +53,7 @@ func _ready():
 	hurtbox.connect("clear", hurtbox.get_node("main"), "activate")
 
 func _input(event):
-	if OS.is_debug_build() and event.is_action_pressed("A1"):
+	if Globals.DEBUG and event.is_action_pressed("A1"):
 		health = max(health,0)
 		set_health(10000)
 		health = min(health,max_health)

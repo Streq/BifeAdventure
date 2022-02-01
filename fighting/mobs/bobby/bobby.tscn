@@ -406,6 +406,7 @@ anims/ram = SubResource( 12 )
 anims/run = SubResource( 11 )
 
 [node name="healthbar" type="ProgressBar" parent="."]
+visible = false
 margin_left = -26.0
 margin_top = -16.0
 margin_right = 26.0
