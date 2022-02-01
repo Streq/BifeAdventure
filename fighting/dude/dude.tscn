@@ -21,7 +21,7 @@
 [ext_resource path="res://fighting/dude/attack_list.gd" type="Script" id=19]
 [ext_resource path="res://fighting/dude/attacks/fireball.tscn" type="PackedScene" id=20]
 [ext_resource path="res://fighting/dude/fireball.gd" type="Script" id=21]
-[ext_resource path="res://fighting/dude/healthbar.gd" type="Script" id=22]
+[ext_resource path="res://HUD/healthbar.gd" type="Script" id=22]
 [ext_resource path="res://fighting/dude/dead.gd" type="Script" id=23]
 [ext_resource path="res://fighting/fighter/state/knocked.gd" type="Script" id=24]
 [ext_resource path="res://fighting/fighter/change_state.gd" type="Script" id=25]
@@ -1234,6 +1234,7 @@ anims/wall = SubResource( 5 )
 script = ExtResource( 4 )
 
 [node name="healthbar" type="ProgressBar" parent="."]
+visible = false
 margin_left = -26.0
 margin_top = -16.0
 margin_right = 26.0

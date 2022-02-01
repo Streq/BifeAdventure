@@ -13,7 +13,7 @@
 [ext_resource path="res://asset/texture/background/forest_floor.png" type="Texture" id=11]
 [ext_resource path="res://asset/texture/background/forest_ceil.png" type="Texture" id=12]
 [ext_resource path="res://overworld/tilemap/trigger/scene_change_trigger.tscn" type="PackedScene" id=13]
-[ext_resource path="res://asset/texture/health_mock.png" type="Texture" id=14]
+[ext_resource path="res://HUD/HUD.tscn" type="PackedScene" id=14]
 
 [sub_resource type="TileSet" id=1]
 0/name = "forest.png 0"
@@ -166,16 +166,14 @@ collision_layer = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="exit_area"]
 shape = SubResource( 2 )
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="Sprite" type="Sprite" parent="CanvasLayer"]
-texture = ExtResource( 14 )
-centered = false
+[node name="HUD" parent="." instance=ExtResource( 14 )]
 
 [connection signal="dead" from="dude" to="." method="player_lose"]
+[connection signal="health_changed" from="dude" to="HUD/healthbar" method="_on_health_changed"]
 [connection signal="text_display_finished" from="textbox" to="." method="_on_textbox_text_display_finished"]
 [connection signal="text_display_started" from="textbox" to="." method="_on_textbox_text_display_started"]
 [connection signal="body_entered" from="exit_area" to="scene_change" method="trigger"]
 
 [editable path="spikes"]
 [editable path="scene_change"]
+[editable path="HUD"]
