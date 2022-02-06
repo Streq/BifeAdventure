@@ -15,7 +15,7 @@ enum ROOM {
 	hometown_forest
 }
 const TILE_SIZE = 16
-onready var DEBUG = false #OS.is_debug_build()
+onready var DEBUG = OS.is_debug_build()
 	
 enum EVENT {
 	tutorial_completed,

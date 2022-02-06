@@ -35,7 +35,6 @@ tile_data = PoolIntArray( 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 
 [node name="malovich" parent="." instance=ExtResource( 4 )]
 position = Vector2( 272, 184 )
 max_health = 500.0
-air_speed_lerp = 60.0
 gravity = 500.0
 dir = -1.0
 
@@ -50,9 +49,6 @@ shape = SubResource( 3 )
 
 [node name="CollisionShape2D" parent="malovich" index="2"]
 shape = SubResource( 3 )
-
-[node name="healthbar" parent="malovich" index="6"]
-visible = false
 
 [node name="dude" parent="." instance=ExtResource( 2 )]
 position = Vector2( 38.5, 185 )

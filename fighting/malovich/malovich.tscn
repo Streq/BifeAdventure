@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://asset/theme/white_black_text.tres" type="Theme" id=1]
 [ext_resource path="res://fighting/malovich/ai_controller.gd" type="Script" id=2]
@@ -27,6 +27,7 @@
 [ext_resource path="res://fighting/hitbox/hurtbox.gd" type="Script" id=25]
 [ext_resource path="res://fighting/fighter/state/knocked.gd" type="Script" id=26]
 [ext_resource path="res://fighting/fighter/status_animation.tscn" type="PackedScene" id=27]
+[ext_resource path="res://fighting/malovich/dodge.gd" type="Script" id=28]
 
 [sub_resource type="RectangleShape2D" id=19]
 resource_local_to_scene = true
@@ -405,6 +406,11 @@ script = ExtResource( 15 )
 [node name="air" type="Node" parent="state"]
 script = ExtResource( 6 )
 
+[node name="dodge" type="Node" parent="state"]
+script = ExtResource( 28 )
+duration = 0.4
+jump_force = Vector2( -125, -100 )
+
 [node name="hurt" type="Node" parent="state"]
 script = ExtResource( 5 )
 stunned = true
@@ -438,6 +444,12 @@ script = ExtResource( 26 )
 
 [node name="attack_list" type="Node" parent="."]
 script = ExtResource( 20 )
+
+[node name="dodge" parent="attack_list" instance=ExtResource( 23 )]
+states_from = PoolStringArray( "idle", "run", "walk" )
+state_to = "dodge"
+dirs = [ Vector2( 0, 1 ), Vector2( 1, 1 ), Vector2( -1, 1 ) ]
+action = "special_attack"
 
 [node name="jab" parent="attack_list" instance=ExtResource( 23 )]
 states_from = PoolStringArray( "idle", "run", "walk" )

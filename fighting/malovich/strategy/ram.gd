@@ -4,7 +4,7 @@ var jumps = 0
 var max_jumps = 3
 var timeout = false
 var dir = 0
-
+var jumped = false
 
 func enter():
 	timeout = false
@@ -13,6 +13,9 @@ func enter():
 	
 func handle(character, controller):
 	if controller.target and !character.state.current_state.stunned:
+		if character.is_on_wall():
+			jumps = max_jumps
+
 		if !dir:
 			var dist : Vector2 = controller._target_distance()
 			dir = sign(dist.x)
@@ -25,14 +28,19 @@ func handle(character, controller):
 				$Timer.start()
 		elif character.is_on_floor():
 			if jumps != max_jumps:
-					jumps += 1
-					controller.buttonA.pressed(true)
+					if !jumped:
+						jumped = true
+						jumps += 1
+					controller.direction.y = 1.0
+					controller.buttonC.pressed(true)
+					print_debug(jumps, " at state ", character.state.current)
 #					timeout = false
-			else:
+			elif !jumped:
+					controller.direction.y = 0.0
 					controller.buttonC.pressed(true)
 					emit_signal("finished","follow", null)
-			
-
+		else:
+			jumped = false
 
 
 
