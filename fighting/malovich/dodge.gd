@@ -19,7 +19,6 @@ func enter():
 	first_frame = true
 	timer.wait_time = duration
 	timer.start()
-	print_debug("entered dodge")
 	
 	var p = owner
 	p.velocity.y = jump_force.y
@@ -28,7 +27,6 @@ func enter():
 
 func update(delta):
 	
-	print_debug("dodge frame")
 	var p = owner
 	p._move(delta)
 	

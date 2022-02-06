@@ -33,8 +33,6 @@ func handle(character, controller):
 						jumps += 1
 					controller.direction.y = 1.0
 					controller.buttonC.pressed(true)
-					print_debug(jumps, " at state ", character.state.current)
-#					timeout = false
 			elif !jumped:
 					controller.direction.y = 0.0
 					controller.buttonC.pressed(true)
