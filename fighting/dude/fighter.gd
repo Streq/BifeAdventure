@@ -71,9 +71,7 @@ func _move(delta, bounce_h = false, bounce_y = false):
 	pivot.scale.x = dir
 
 
-func set_untouchable(val):
-	$hurtbox.set_deferred("monitoring",val)
-	$hurtbox.set_deferred("monitorable",val)
+	
 func set_invulnerable(val):
 	invulnerable = val
 
@@ -128,3 +126,5 @@ func deactivate_hurtbox(id):
 	var box = hurtbox.get_node(id)
 	box.deactivate()
 
+func deactivate_hurtboxes():
+	hurtbox.deactivate_all()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=2]
+[gd_scene load_steps=61 format=2]
 
 [ext_resource path="res://fighting/dude/fighter.gd" type="Script" id=1]
 [ext_resource path="res://fighting/dude/idle.gd" type="Script" id=2]
@@ -26,6 +26,7 @@
 [ext_resource path="res://fighting/fighter/state/knocked.gd" type="Script" id=24]
 [ext_resource path="res://fighting/fighter/change_state.gd" type="Script" id=25]
 [ext_resource path="res://fighting/dude/hitstun.gd" type="Script" id=26]
+[ext_resource path="res://fighting/hitbox/hurtbox.tscn" type="PackedScene" id=27]
 [ext_resource path="res://fighting/dude/walk.gd" type="Script" id=28]
 [ext_resource path="res://asset/texture/attack.png" type="Texture" id=30]
 [ext_resource path="res://fighting/fighter/state/jab.gd" type="Script" id=31]
@@ -43,7 +44,7 @@ extents = Vector2( 4, 5.5 )
 [sub_resource type="RectangleShape2D" id=25]
 extents = Vector2( 4, 4 )
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=30]
 extents = Vector2( 4, 5.5 )
 
 [sub_resource type="RectangleShape2D" id=29]
@@ -907,6 +908,9 @@ bg_color = Color( 0, 1, 0, 1 )
 [sub_resource type="StyleBoxFlat" id=15]
 bg_color = Color( 0.341176, 0, 0, 1 )
 
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 4, 5.5 )
+
 [node name="dude" type="KinematicBody2D" groups=["fighter", "player"]]
 collision_mask = 0
 script = ExtResource( 1 )
@@ -951,6 +955,7 @@ vframes = 8
 frame = 8
 
 [node name="hitbox" type="Node2D" parent="pivot"]
+modulate = Color( 1, 0, 0, 1 )
 script = ExtResource( 15 )
 
 [node name="jab" parent="pivot/hitbox" instance=ExtResource( 32 )]
@@ -1046,20 +1051,19 @@ script = ExtResource( 25 )
 state = "knocked"
 
 [node name="hurtbox" type="Node2D" parent="pivot"]
+modulate = Color( 1, 1, 0, 1 )
 script = ExtResource( 15 )
 
-[node name="main" type="Area2D" parent="pivot/hurtbox"]
-visible = false
-collision_layer = 4
-collision_mask = 8
-script = ExtResource( 17 )
+[node name="main" parent="pivot/hurtbox" instance=ExtResource( 27 )]
+modulate = Color( 1, 1, 0, 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="pivot/hurtbox/main"]
 position = Vector2( 0, 0.5 )
-shape = SubResource( 1 )
+shape = SubResource( 30 )
 
 [node name="tackle" type="Area2D" parent="pivot/hurtbox"]
 visible = false
+modulate = Color( 1, 1, 0, 1 )
 position = Vector2( -4, 0 )
 collision_layer = 4
 collision_mask = 8
@@ -1260,7 +1264,6 @@ shape = SubResource( 1 )
 [connection signal="applied_knockback" from="pivot/hitbox/air_kick" to="pivot/hitbox/air_kick/spring" method="trigger"]
 [connection signal="applied_knockback" from="pivot/hitbox/dair" to="pivot/hitbox/dair/spring" method="trigger"]
 [connection signal="applied_knockback" from="pivot/hitbox/tackle" to="pivot/hitbox/tackle/spring" method="trigger"]
-[connection signal="area_entered" from="pivot/hurtbox/main" to="." method="_on_hurtbox_area_entered"]
 [connection signal="area_entered" from="pivot/hurtbox/tackle" to="." method="_on_hurtbox_area_entered"]
 [connection signal="state_changed" from="state" to="state_label" method="_on_state_state_changed"]
 [connection signal="animation_finished" from="AnimationPlayer" to="state" method="_on_animation_finished"]

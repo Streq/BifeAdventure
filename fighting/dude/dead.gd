@@ -6,11 +6,11 @@ func enter():
 	owner.get_node("AnimationPlayer").play("hurt")
 	owner.emit_signal("dead")
 	was_on_air = false
+	owner.deactivate_hurtboxes()
 	
 func update(delta):
 	var p = owner
 	p._move(delta)
-	
 	if p.is_on_floor():
 		if p.health > 0.0:
 			emit_signal("finished", "idle", null)

@@ -44,6 +44,10 @@ Signals="*res://global/signals/signals.gd"
 Slowmo="*res://global/slowmo.gd"
 Overworld="*res://global/overworld.gd"
 
+[debug]
+
+shapes/collision/shape_color=Color( 1, 1, 1, 0.392157 )
+
 [display]
 
 window/size/width=320

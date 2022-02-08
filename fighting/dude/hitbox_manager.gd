@@ -15,6 +15,9 @@ func deactivate_hitbox(id):
 	var hitbox = get_node(id)
 	hitbox.deactivate()
 
-
+func deactivate_all():
+	for hitbox in get_children():
+		hitbox.deactivate()
+		
 func clear():
 	emit_signal("clear")

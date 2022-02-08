@@ -320,7 +320,6 @@ position = Vector2( 1, 0 )
 texture = ExtResource( 24 )
 hframes = 8
 vframes = 8
-frame = 24
 
 [node name="hands" type="Sprite" parent="pivot/display"]
 visible = false
@@ -332,6 +331,7 @@ vframes = 8
 frame = 11
 
 [node name="hitbox" type="Node2D" parent="pivot"]
+modulate = Color( 1, 0, 0, 1 )
 
 [node name="jab" parent="pivot/hitbox" instance=ExtResource( 8 )]
 visible = false
@@ -346,6 +346,7 @@ position = Vector2( 12.5, 0 )
 shape = SubResource( 19 )
 
 [node name="ram" parent="pivot/hitbox" instance=ExtResource( 8 )]
+visible = false
 monitoring = false
 monitorable = false
 knockback = Vector2( 200, -300 )
@@ -357,6 +358,7 @@ position = Vector2( 7, 0 )
 shape = SubResource( 20 )
 
 [node name="hurtbox" type="Node2D" parent="pivot"]
+modulate = Color( 1, 1, 0, 1 )
 script = ExtResource( 10 )
 
 [node name="main" type="Area2D" parent="pivot/hurtbox"]
