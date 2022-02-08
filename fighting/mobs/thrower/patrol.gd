@@ -13,11 +13,14 @@ func handle(character : KinematicBody2D, controller):
 	sight.scale.x = character.dir
 	return current.handle(character, controller)
 
+func _on_sight_body_entered(body):
+	if body.is_in_group("player"):
+		current.exit()
+		current = attack
+		current.enter()
 
-
-func target_out_of_sight():
-	current = peace
-	pass
-	
-func target_sneaked_past():
-	pass
+func _on_sight_body_exited(body):
+	if body.is_in_group("player"):
+		current.exit()
+		current = peace
+		current.enter()
