@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://autotile/terrain_simple.tscn" type="PackedScene" id=1]
 [ext_resource path="res://fighting/dude/dude.tscn" type="PackedScene" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://overworld/tilemap/trigger/scene_change_trigger.tscn" type="PackedScene" id=13]
 [ext_resource path="res://HUD/HUD.tscn" type="PackedScene" id=14]
 [ext_resource path="res://fighting/mobs/thrower/thrower.tscn" type="PackedScene" id=15]
+[ext_resource path="res://fighting/dude/fighter.gd" type="Script" id=16]
 
 [sub_resource type="TileSet" id=1]
 0/name = "forest.png 0"
@@ -94,6 +95,7 @@ knockback = Vector2( 0, -200 )
 
 [node name="fighter" parent="." instance=ExtResource( 15 )]
 position = Vector2( -727.378, 149.429 )
+script = ExtResource( 16 )
 
 [node name="bobby" parent="." instance=ExtResource( 6 )]
 position = Vector2( 224, 312 )

@@ -32,6 +32,6 @@ func cast_fireball():
 	var world = caster.owner
 	ball.direction = input_direction.normalized()
 	ball.caster = caster
-	ball.dir = caster.dir
+	ball.dir = sign(caster.dir)
 	world.add_child(ball)
 	ball.global_position = caster.global_position

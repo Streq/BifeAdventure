@@ -21,7 +21,7 @@ func update(delta):
 		elif !input_direction.x:
 			emit_signal("finished", "idle", null)
 		else:
-			p.dir = input_direction.x
+			p.dir = sign(input_direction.x)
 			if controller.is_pressing_special():
 				emit_signal("finished", "run", null)
 		
