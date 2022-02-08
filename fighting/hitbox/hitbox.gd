@@ -30,7 +30,7 @@ func deactivate():
 	call_deferred("_deactivate_deferred")
 	
 func is_whitelisted(target):
-	return target == body or target == caster or body.team and body.team == target.team
+	return target == body or target == caster or body.get("team") and body.team == target.team
 
 func apply_damage(target):
 	emit_signal("applied_damage")

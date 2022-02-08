@@ -1,0 +1,70 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://fighting/dude/attacks/input_patterns/tilt_attack.tscn" type="PackedScene" id=1]
+[ext_resource path="res://fighting/fighter/fighter.tscn" type="PackedScene" id=2]
+[ext_resource path="res://fighting/mobs/thrower/throw.gd" type="Script" id=3]
+[ext_resource path="res://fighting/dude/attacks/fireball.tscn" type="PackedScene" id=4]
+[ext_resource path="res://fighting/mobs/thrower/aim_attack.gd" type="Script" id=5]
+
+[sub_resource type="RectangleShape2D" id=1]
+resource_local_to_scene = true
+extents = Vector2( 4, 4 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "fireball"
+tracks/0/type = "value"
+tracks/0/path = NodePath("pivot/display/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("state/throw")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "cast_fireball"
+} ]
+}
+
+[node name="fighter" instance=ExtResource( 2 )]
+
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource( 1 )
+
+[node name="Sprite" parent="pivot/display" index="0"]
+modulate = Color( 1, 0.678431, 0, 1 )
+frame = 1
+
+[node name="CollisionShape2D" parent="pivot/hurtbox/main" index="0"]
+shape = SubResource( 1 )
+
+[node name="throw" type="Node" parent="state" index="9"]
+script = ExtResource( 3 )
+fireball = ExtResource( 4 )
+
+[node name="throw" parent="attack_list" index="0" instance=ExtResource( 1 )]
+states_from = PoolStringArray( "idle", "walk" )
+state_to = "throw"
+on_finish = true
+
+[node name="AnimationPlayer" parent="." index="5"]
+anims/fireball = SubResource( 2 )
+
+[node name="strategy" parent="controller" index="0"]
+START_STATE = NodePath("aim_attack")
+
+[node name="aim_attack" type="Node2D" parent="controller/strategy" index="0"]
+script = ExtResource( 5 )
