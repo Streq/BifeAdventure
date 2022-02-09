@@ -36,7 +36,7 @@
 extents = Vector2( 7, 4 )
 
 [sub_resource type="RectangleShape2D" id=24]
-extents = Vector2( 4, 4 )
+extents = Vector2( 4, 4.5 )
 
 [sub_resource type="RectangleShape2D" id=27]
 extents = Vector2( 4, 5.5 )
@@ -992,14 +992,13 @@ position = Vector2( 8, -1 )
 shape = SubResource( 22 )
 
 [node name="air_kick" parent="pivot/hitbox" instance=ExtResource( 32 )]
-visible = false
 monitoring = false
 monitorable = false
 knockback = Vector2( 100, -100 )
 damage = 30.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="pivot/hitbox/air_kick"]
-position = Vector2( 8, 0 )
+position = Vector2( 8, 0.5 )
 shape = SubResource( 24 )
 
 [node name="spring" type="Node" parent="pivot/hitbox/air_kick"]

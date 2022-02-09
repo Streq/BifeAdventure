@@ -23,11 +23,17 @@ _global_script_classes=[ {
 "class": "StateMachine",
 "language": "GDScript",
 "path": "res://util/state/state_machine.gd"
+}, {
+"base": "CanvasLayer",
+"class": "TextBox",
+"language": "GDScript",
+"path": "res://textbox/textbox.gd"
 } ]
 _global_script_class_icons={
 "OverworldCharacter": "",
 "State": "",
-"StateMachine": ""
+"StateMachine": "",
+"TextBox": ""
 }
 
 [application]

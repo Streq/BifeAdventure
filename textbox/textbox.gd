@@ -1,5 +1,5 @@
 extends CanvasLayer
-
+class_name TextBox
 """
 TextBox HUD, works perfectly for chaining short messages.
 Can't handle long messages given it lacks context regarding length of visible

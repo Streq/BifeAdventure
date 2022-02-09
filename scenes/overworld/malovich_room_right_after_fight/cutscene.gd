@@ -3,6 +3,8 @@ extends Node
 signal over
 
 export (NodePath) var textbox_path : NodePath
+onready var textbox: TextBox = get_node(textbox_path)
+
 export (NodePath) var mom_path : NodePath
 onready var mom: OverworldCharacter = get_node(mom_path)
 
@@ -101,7 +103,6 @@ func play_cutscene(cutscene):
 		yield(step.play(), "completed")
 
 func text_prompt(text):
-	var textbox = get_node(textbox_path)
 	textbox.add_texts(text)
 	yield(textbox,"text_display_finished")
 
