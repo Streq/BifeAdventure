@@ -24,9 +24,9 @@ func _physics_process(delta):
 		STATE.DIE:
 			pass
 		STATE.CHASE:
-			velocity += Vector2(target.position - position).normalized()*delta*speed
+			velocity += Vector2(target.global_position - global_position).normalized()*delta*speed
 	velocity = lerp(velocity, Vector2.ZERO, delta)
-	position += velocity * delta
+	global_position += velocity * delta
 
 func _enter_state(_state):
 	state = _state
@@ -58,7 +58,7 @@ func _on_fov_body_exited(body):
 
 func _on_hitbox_area_entered(area):
 	if area.owner != self:
-		velocity += position.direction_to(area.owner.position)*-100
+		velocity += global_position.direction_to(area.owner.global_position)*-100
 
 
 func _on_hurtbox_area_entered(area):

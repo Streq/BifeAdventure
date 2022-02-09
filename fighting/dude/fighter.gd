@@ -22,6 +22,8 @@ export var gravity :float = 400
 export var hitstun :float = 0.3
 export var knockstun :float = 0.3
 
+onready var health := max_health setget set_health
+
 onready var state = $state
 onready var sprite = $pivot/display/Sprite
 onready var display = $pivot/display
@@ -39,7 +41,6 @@ var dead = false
 
 export var dir = 1.0
 
-onready var health := max_health setget set_health
 var velocity := Vector2.ZERO
 
 func _ready():
@@ -88,9 +89,9 @@ func _on_hurtbox_area_entered(area):
 		
 	
 func set_health(val):
-	health = val
+	health = clamp(val, 0, max_health)
 	emit_signal("health_changed", val, max_health)
-	if health <= 0:
+	if health == 0.0:
 		state._change_state("dead", null)
 		dead = true
 
