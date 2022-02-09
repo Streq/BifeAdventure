@@ -42,11 +42,11 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 0.5, 0.5 )
-
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 96.5472, 101.5 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 0.5, 0.5 )
 
 [node name="fighter" instance=ExtResource( 2 )]
 
@@ -72,38 +72,39 @@ on_finish = true
 [node name="AnimationPlayer" parent="." index="5"]
 anims/fireball = SubResource( 2 )
 
-[node name="strategy" parent="controller" index="0"]
-START_STATE = NodePath("patrol")
-
-[node name="patrol" type="Node2D" parent="controller/strategy" index="0"]
+[node name="patrol" type="Node2D" parent="." index="8"]
 script = ExtResource( 7 )
+strategy = NodePath("../controller/strategy")
 
-[node name="aim_attack" type="Node2D" parent="controller/strategy/patrol" index="0"]
-script = ExtResource( 5 )
+[node name="sight" type="Area2D" parent="patrol" index="0"]
+collision_layer = 0
 
-[node name="Timer" type="Timer" parent="controller/strategy/patrol/aim_attack" index="0"]
-process_mode = 0
-one_shot = true
+[node name="CollisionShape2D" type="CollisionShape2D" parent="patrol/sight" index="0"]
+position = Vector2( 96.9528, 0.999996 )
+shape = SubResource( 4 )
 
-[node name="walk_around" type="Node2D" parent="controller/strategy/patrol" index="1"]
+[node name="strategy" parent="controller" index="0"]
+START_STATE = NodePath("walk_around")
+
+[node name="walk_around" type="Node2D" parent="controller/strategy" index="0"]
 script = ExtResource( 6 )
 
-[node name="floor_checker" type="Area2D" parent="controller/strategy/patrol/walk_around" index="0"]
+[node name="floor_checker" type="Area2D" parent="controller/strategy/walk_around" index="0"]
 collision_layer = 0
 collision_mask = 258
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="controller/strategy/patrol/walk_around/floor_checker" index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="controller/strategy/walk_around/floor_checker" index="0"]
 modulate = Color( 1, 0, 0, 1 )
 position = Vector2( 4.5, 8.5 )
 shape = SubResource( 3 )
 
-[node name="sight" type="Area2D" parent="controller/strategy/patrol" index="2"]
-collision_layer = 0
+[node name="aim_attack" type="Node2D" parent="controller/strategy" index="1"]
+script = ExtResource( 5 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="controller/strategy/patrol/sight" index="0"]
-position = Vector2( 96.9528, 0.999996 )
-shape = SubResource( 4 )
+[node name="Timer" type="Timer" parent="controller/strategy/aim_attack" index="0"]
+process_mode = 0
+one_shot = true
 
-[connection signal="timeout" from="controller/strategy/patrol/aim_attack/Timer" to="controller/strategy/patrol/aim_attack" method="_on_Timer_timeout"]
-[connection signal="body_entered" from="controller/strategy/patrol/sight" to="controller/strategy/patrol" method="_on_sight_body_entered"]
-[connection signal="body_exited" from="controller/strategy/patrol/sight" to="controller/strategy/patrol" method="_on_sight_body_exited"]
+[connection signal="body_entered" from="patrol/sight" to="patrol" method="_on_sight_body_entered"]
+[connection signal="body_exited" from="patrol/sight" to="patrol" method="_on_sight_body_exited"]
+[connection signal="timeout" from="controller/strategy/aim_attack/Timer" to="controller/strategy/aim_attack" method="_on_Timer_timeout"]
