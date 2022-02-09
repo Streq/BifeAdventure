@@ -15,12 +15,15 @@ func _physics_process(delta):
 
 
 func _on_hitbox_area_entered(area):
-	if area.owner != caster: 
+	if area.owner != self and area.owner != caster: 
 		explode()
 
 func _on_terrainbox_body_entered(body):
 	explode()
 	
+func _on_hurtbox_area_entered(area):
+	if area.owner != self and area.owner != caster:
+		explode()
 
 func explode():
 	$particles_blast.direction = -direction
@@ -34,6 +37,3 @@ func explode():
 	$particles_blast.emitting = true
 	yield(get_tree().create_timer(1.0),"timeout")
 	queue_free()
-
-
-
