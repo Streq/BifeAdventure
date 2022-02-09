@@ -141,7 +141,7 @@ position = Vector2( -572.349, 200.481 )
 position = Vector2( -401.4, 309.583 )
 
 [node name="dude" parent="." instance=ExtResource( 2 )]
-position = Vector2( -1250.81, 302.911 )
+position = Vector2( 461.204, 309.261 )
 dir = -1.0
 
 [node name="Camera2D" type="Camera2D" parent="dude"]
