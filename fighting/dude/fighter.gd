@@ -52,6 +52,7 @@ func _ready():
 	hurtbox.activate_hitbox("main")
 	hurtbox.disconnect("clear", hurtbox.get_node("main"), "deactivate")
 	hurtbox.connect("clear", hurtbox.get_node("main"), "activate")
+	$healthbar.visible = Globals.DEBUG
 
 func _input(event):
 	if Globals.DEBUG and event.is_action_pressed("A1"):

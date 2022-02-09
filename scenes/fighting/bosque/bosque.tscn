@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://autotile/terrain_simple.tscn" type="PackedScene" id=1]
 [ext_resource path="res://fighting/dude/dude.tscn" type="PackedScene" id=2]
@@ -20,6 +20,7 @@
 [ext_resource path="res://test/mobs/PathFollow2D.gd" type="Script" id=18]
 [ext_resource path="res://fighting/mobs/floaty/floaty.tscn" type="PackedScene" id=19]
 [ext_resource path="res://fighting/mago/mago.tscn" type="PackedScene" id=20]
+[ext_resource path="res://fighting/dude/fighter.gd" type="Script" id=21]
 
 [sub_resource type="TileSet" id=1]
 0/name = "forest.png 0"
@@ -110,6 +111,7 @@ collision_layer = 256
 tile_data = PoolIntArray( 720800, 1, 0, 720801, 1, 0, 720802, 1, 0, 786342, 1, 0, 786343, 1, 0, 917419, 1, 0, 917420, 1, 0, 917467, 1, 0, 917468, 1, 0, 917469, 1, 0, 983024, 1, 0, 983025, 1, 0, 1048480, 1, 0, 1048481, 1, 0, 1048486, 1, 0, 1048487, 1, 0, 1048564, 1, 0, 1048565, 1, 0, 1048566, 1, 0, 1048567, 1, 0, 1114111, 1, 0, 1048576, 1, 0, 1048577, 1, 0, 1179563, 1, 0, 1179564, 1, 0, 1114118, 1, 0, 1114119, 1, 0, 1114120, 1, 0, 1114121, 1, 0, 1114122, 1, 0, 1114123, 1, 0, 1441757, 1, 0, 1572829, 1, 0 )
 
 [node name="spikes" parent="." instance=ExtResource( 5 )]
+visible = false
 
 [node name="spikes" parent="spikes/hitbox" index="0"]
 damage = 25.0
@@ -122,9 +124,11 @@ knockback = Vector2( 0, -200 )
 
 [node name="thrower" parent="." instance=ExtResource( 15 )]
 position = Vector2( -238.166, 211.115 )
+script = ExtResource( 21 )
 
 [node name="thrower2" parent="." instance=ExtResource( 15 )]
 position = Vector2( -1063.93, 289.292 )
+script = ExtResource( 21 )
 
 [node name="bobby6" parent="." instance=ExtResource( 6 )]
 position = Vector2( 104, 263.724 )
@@ -213,6 +217,7 @@ autostart = true
 
 [node name="mago" parent="." instance=ExtResource( 20 )]
 position = Vector2( -1513.86, 147.195 )
+script = ExtResource( 21 )
 
 [connection signal="dead" from="dude" to="." method="player_lose"]
 [connection signal="health_changed" from="dude" to="HUD/healthbar" method="_on_health_changed"]
