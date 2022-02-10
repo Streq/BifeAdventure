@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://fighting/mobs/floaty/floaty.tscn" type="PackedScene" id=1]
+[ext_resource path="res://test/mobs/PathFollow2D.gd" type="Script" id=2]
+[ext_resource path="res://scenes/fighting/bosque/mago_boss_node.gd" type="Script" id=3]
+[ext_resource path="res://fighting/mago/mago.tscn" type="PackedScene" id=4]
+
+[sub_resource type="Curve2D" id=3]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 320, 0, 0, 0, 0, 0, 320, 288, 0, 0, 0, 0, 0, 288, 0, 0, 0, 0, 0, 0 )
+}
+
+[node name="mago_boss_node" type="Node2D"]
+position = Vector2( -87, 250 )
+script = ExtResource( 3 )
+
+[node name="Path2D" type="Path2D" parent="."]
+position = Vector2( -1499, -163 )
+curve = SubResource( 3 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+script = ExtResource( 2 )
+mob = ExtResource( 1 )
+limit = 1
+
+[node name="Timer" type="Timer" parent="Path2D/PathFollow2D"]
+wait_time = 3.0
+
+[node name="mago" parent="." groups=["mago"] instance=ExtResource( 4 )]
+position = Vector2( -1426.86, -102.805 )
+
+[connection signal="start_timer" from="." to="Path2D/PathFollow2D/Timer" method="start"]
+[connection signal="timeout" from="Path2D/PathFollow2D/Timer" to="Path2D/PathFollow2D" method="_on_Timer_timeout"]
+[connection signal="dead" from="mago" to="Path2D" method="queue_free"]
+[connection signal="health_changed" from="mago" to="." method="_on_mago_health_changed"]

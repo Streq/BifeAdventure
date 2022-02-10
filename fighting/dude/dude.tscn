@@ -924,7 +924,7 @@ use_parent_material = true
 texture = ExtResource( 5 )
 hframes = 8
 vframes = 8
-frame = 26
+frame = 17
 
 [node name="hands" type="Sprite" parent="pivot/display"]
 visible = false

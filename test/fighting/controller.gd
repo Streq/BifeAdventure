@@ -1,6 +1,7 @@
-extends Node
+extends Controller
 
 export (int) var pj
+export var enabled = true
 
 onready var U = "up"+str(pj)
 onready var D = "down"+str(pj)
@@ -26,7 +27,7 @@ func get_direction():
 	var input_direction = Vector2()
 	input_direction.x = int(Input.is_action_pressed(R)) - int(Input.is_action_pressed(L))
 	input_direction.y = int(Input.is_action_pressed(D)) - int(Input.is_action_pressed(U))
-	return input_direction
+	return input_direction*float(enabled)
 
 func get_jump():
 	return buttonA.just_pressed
@@ -48,7 +49,7 @@ func is_pressing_special():
 
 
 func _input(event):
-	if !event.is_echo():
+	if !event.is_echo() and enabled:
 		if event.is_action(A):
 			buttonA.pressed(event.is_pressed())
 		if event.is_action(B):

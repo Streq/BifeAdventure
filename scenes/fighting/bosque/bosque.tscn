@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://autotile/terrain_simple.tscn" type="PackedScene" id=1]
 [ext_resource path="res://fighting/dude/dude.tscn" type="PackedScene" id=2]
@@ -17,10 +17,10 @@
 [ext_resource path="res://fighting/mobs/thrower/thrower.tscn" type="PackedScene" id=15]
 [ext_resource path="res://asset/texture/down_x_mark.png" type="Texture" id=16]
 [ext_resource path="res://scenes/fighting/items/health.tscn" type="PackedScene" id=17]
-[ext_resource path="res://test/mobs/PathFollow2D.gd" type="Script" id=18]
-[ext_resource path="res://fighting/mobs/floaty/floaty.tscn" type="PackedScene" id=19]
-[ext_resource path="res://fighting/mago/mago.tscn" type="PackedScene" id=20]
-[ext_resource path="res://scenes/fighting/bosque/bossfight_event.gd" type="Script" id=21]
+[ext_resource path="res://scenes/fighting/bosque/mago_boss_node.tscn" type="PackedScene" id=18]
+[ext_resource path="res://scenes/fighting/bosque/mago_teleport_spot.tscn" type="PackedScene" id=19]
+[ext_resource path="res://scenes/fighting/bosque/boss_teleport_positions.gd" type="Script" id=20]
+[ext_resource path="res://scenes/fighting/bosque/bossfight_event.gd" type="Script" id=22]
 
 [sub_resource type="TileSet" id=1]
 0/name = "forest.png 0"
@@ -69,11 +69,6 @@
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 155.387, 648.163 )
 
-[sub_resource type="Curve2D" id=3]
-_data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 320, 0, 0, 0, 0, 0, 320, 288, 0, 0, 0, 0, 0, 288, 0, 0, 0, 0, 0, 0 )
-}
-
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 10, 240.325 )
 
@@ -100,13 +95,6 @@ tile_data = PoolIntArray( 720800, 536870914, 589826, 720801, 2, 589825, 720802, 
 visible = false
 collision_layer = 2
 tile_data = PoolIntArray( 720848, 0, 0, 720849, 0, 0, 720850, 0, 0, 786384, 0, 0, 786385, 0, 0, 786386, 0, 0, 851920, 0, 0, 851921, 0, 0, 851922, 0, 0, 917456, 0, 0, 917457, 0, 0, 917458, 0, 0, 982992, 0, 0, 982993, 0, 0, 982994, 0, 0, 1048528, 0, 0, 1048529, 0, 0, 1048530, 0, 0, 1048542, 0, 0, 1048543, 0, 0, 1048544, 0, 0, 1114064, 0, 0, 1114065, 0, 0, 1114066, 0, 0, 1114078, 0, 0, 1114079, 0, 0, 1114080, 0, 0, 1114105, 0, 0, 1114106, 0, 0, 1114107, 0, 0, 1179600, 0, 0, 1179601, 0, 0, 1179602, 0, 0, 1179614, 0, 0, 1179615, 0, 0, 1179616, 0, 0, 1179641, 0, 0, 1179642, 0, 0, 1179643, 0, 0, 1245150, 0, 0, 1245151, 0, 0, 1245152, 0, 0, 1245177, 0, 0, 1245178, 0, 0, 1245179, 0, 0, 1310653, 0, 0, 1310686, 0, 0, 1310687, 0, 0, 1310688, 0, 0, 1310713, 0, 0, 1310714, 0, 0, 1310715, 0, 0, 1245201, 0, 0, 1245202, 0, 0, 1245203, 0, 0, 1376116, 0, 0, 1376117, 0, 0, 1376118, 0, 0, 1376119, 0, 0, 1376120, 0, 0, 1376121, 0, 0, 1376122, 0, 0, 1376123, 0, 0, 1376124, 0, 0, 1376125, 0, 0, 1376126, 0, 0, 1376127, 0, 0, 1376128, 0, 0, 1376129, 0, 0, 1376130, 0, 0, 1376131, 0, 0, 1376132, 0, 0, 1376133, 0, 0, 1376134, 0, 0, 1376135, 0, 0, 1376136, 0, 0, 1376137, 0, 0, 1376138, 0, 0, 1376139, 0, 0, 1376140, 0, 0, 1376141, 0, 0, 1376142, 0, 0, 1376143, 0, 0, 1376144, 0, 0, 1376145, 0, 0, 1376146, 0, 0, 1376147, 0, 0, 1376148, 0, 0, 1376149, 0, 0, 1376150, 0, 0, 1376151, 0, 0, 1376152, 0, 0, 1376153, 0, 0, 1376154, 0, 0, 1376155, 0, 0, 1376156, 0, 0, 1376157, 0, 0, 1376158, 0, 0, 1376159, 0, 0, 1376160, 0, 0, 1376161, 0, 0, 1376162, 0, 0, 1376163, 0, 0, 1376164, 0, 0, 1376165, 0, 0, 1376166, 0, 0, 1376167, 0, 0, 1376168, 0, 0, 1376169, 0, 0, 1376170, 0, 0, 1376171, 0, 0, 1376172, 0, 0, 1376173, 0, 0, 1376174, 0, 0, 1376175, 0, 0, 1376176, 0, 0, 1376177, 0, 0, 1376178, 0, 0, 1376179, 0, 0, 1376180, 0, 0, 1376181, 0, 0, 1376182, 0, 0, 1376183, 0, 0, 1376184, 0, 0, 1376189, 0, 0, 1376190, 0, 0, 1376191, 0, 0, 1376192, 0, 0, 1376193, 0, 0, 1376194, 0, 0, 1376195, 0, 0, 1376196, 0, 0, 1376197, 0, 0, 1376198, 0, 0, 1376199, 0, 0, 1376200, 0, 0, 1376201, 0, 0, 1376202, 0, 0, 1376203, 0, 0, 1376204, 0, 0, 1376205, 0, 0, 1376206, 0, 0, 1376217, 0, 0, 1376218, 0, 0, 1376219, 0, 0, 1376222, 0, 0, 1376223, 0, 0, 1376224, 0, 0, 1376225, 0, 0, 1376226, 0, 0, 1376227, 0, 0, 1376228, 0, 0, 1376229, 0, 0, 1376230, 0, 0, 1376231, 0, 0, 1376232, 0, 0, 1376233, 0, 0, 1376234, 0, 0, 1376235, 0, 0, 1376236, 0, 0, 1376237, 0, 0, 1376238, 0, 0, 1376239, 0, 0, 1376240, 0, 0, 1376241, 0, 0, 1376242, 0, 0, 1376243, 0, 0, 1376244, 0, 0, 1376245, 0, 0, 1376246, 0, 0, 1376247, 0, 0, 1376248, 0, 0, 1376249, 0, 0, 1376250, 0, 0, 1376251, 0, 0, 1376252, 0, 0, 1376253, 0, 0, 1376254, 0, 0, 1376255, 0, 0, 1310720, 0, 0, 1310721, 0, 0, 1310722, 0, 0, 1310731, 0, 0, 1310732, 0, 0, 1310733, 0, 0, 1310734, 0, 0, 1310735, 0, 0, 1310736, 0, 0, 1310737, 0, 0, 1310738, 0, 0, 1310739, 0, 0, 1310740, 0, 0, 1310741, 0, 0, 1310742, 0, 0, 1310743, 0, 0, 1310744, 0, 0, 1310745, 0, 0, 1310746, 0, 0, 1310747, 0, 0, 1310748, 0, 0, 1310749, 0, 0, 1310750, 0, 0, 1310751, 0, 0, 1441720, 0, 0, 1441721, 0, 0, 1441722, 0, 0, 1441723, 0, 0, 1441724, 0, 0, 1441725, 0, 0, 1441742, 0, 0, 1441753, 0, 0, 1441754, 0, 0, 1441755, 0, 0, 1441758, 0, 0, 1376258, 0, 0, 1376267, 0, 0, 1507278, 0, 0, 1507294, 0, 0, 1441794, 0, 0, 1441795, 0, 0, 1441796, 0, 0, 1441797, 0, 0, 1441798, 0, 0, 1441799, 0, 0, 1441800, 0, 0, 1441801, 0, 0, 1441802, 0, 0, 1441803, 0, 0, 1572814, 0, 0, 1572830, 0, 0, 1638350, 0, 0, 1638361, 0, 0, 1638362, 0, 0, 1638363, 0, 0, 1638364, 0, 0, 1638365, 0, 0, 1638366, 0, 0, 1703886, 0, 0, 1703887, 0, 0, 1703888, 0, 0, 1703889, 0, 0, 1703890, 0, 0, 1703891, 0, 0, 1703892, 0, 0, 1703893, 0, 0, 1703894, 0, 0, 1703895, 0, 0, 1703896, 0, 0, 1703897, 0, 0 )
-
-[node name="boss_walls_sprite" parent="." instance=ExtResource( 1 )]
-tile_data = PoolIntArray( 65437, 2, 655360, 130973, 2, 655360, 196509, 2, 655360, 262045, 2, 655360, 327581, 2, 655360, 393117, 2, 655360, 458653, 2, 655360, 524189, 2, 655360, 589725, 2, 655360, 655261, 2, 655360, 720797, 2, 655360, 786333, 2, 655360, 851869, 2, 655360, 917405, 2, 655360, 982941, 2, 655360, 1048477, 2, 655360, 1114013, 2, 655360, 1179549, 2, 655360, 1245085, 2, 655360, 1310621, 2, 655360 )
-
-[node name="boss_walls" parent="." instance=ExtResource( 3 )]
-collision_layer = 2
-tile_data = PoolIntArray( 65437, 0, 0, 130973, 0, 0, 196509, 0, 0, 262045, 0, 0, 327581, 0, 0, 393117, 0, 0, 458653, 0, 0, 524189, 0, 0, 589725, 0, 0, 655261, 0, 0, 720797, 0, 0, 786333, 0, 0, 851869, 0, 0, 917405, 0, 0, 982941, 0, 0, 1048477, 0, 0, 1114013, 0, 0, 1179549, 0, 0, 1245085, 0, 0, 1310621, 0, 0 )
 
 [node name="terrain_projectile_ignore" parent="." instance=ExtResource( 3 )]
 visible = false
@@ -141,7 +129,7 @@ position = Vector2( -572.349, 200.481 )
 position = Vector2( -401.4, 309.583 )
 
 [node name="dude" parent="." instance=ExtResource( 2 )]
-position = Vector2( 461.204, 309.261 )
+position = Vector2( 438.804, 312.186 )
 dir = -1.0
 
 [node name="Camera2D" type="Camera2D" parent="dude"]
@@ -200,27 +188,14 @@ position = Vector2( -1224, 315 )
 [node name="health2" parent="." instance=ExtResource( 17 )]
 position = Vector2( -87, 250 )
 
-[node name="Path2D" type="Path2D" parent="."]
-position = Vector2( -1586, 87 )
-curve = SubResource( 3 )
-
-[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
-script = ExtResource( 18 )
-mob = ExtResource( 19 )
-limit = 2
-
-[node name="Timer" type="Timer" parent="Path2D/PathFollow2D"]
-wait_time = 3.0
-autostart = true
-
-[node name="mago" parent="." instance=ExtResource( 20 )]
-position = Vector2( -1513.86, 147.195 )
-
 [node name="bossfight_event" type="Node2D" parent="."]
-position = Vector2( -1296.61, 305.632 )
-script = ExtResource( 21 )
+position = Vector2( -1296, 305 )
+script = ExtResource( 22 )
 textbox_path = NodePath("../textbox")
+player_path = NodePath("../dude")
 player_camera_path = NodePath("../dude/Camera2D")
+walls_path = NodePath("walls_sprite")
+boss_node = ExtResource( 18 )
 
 [node name="boss_fight_event_zone" type="Area2D" parent="bossfight_event"]
 collision_layer = 0
@@ -234,13 +209,41 @@ position = Vector2( -127.387, -73.6317 )
 [node name="Tween" type="Tween" parent="bossfight_event"]
 playback_process_mode = 0
 
+[node name="walls_sprite" parent="bossfight_event" instance=ExtResource( 1 )]
+position = Vector2( 1297, -545 )
+tile_data = PoolIntArray( 65437, 2, 655360, 65456, 2, 655360, 130973, 2, 655360, 130992, 2, 655360, 196509, 2, 655360, 196528, 2, 655360, 262045, 2, 655360, 262064, 2, 655360, 327581, 2, 655360, 327600, 2, 655360, 393117, 2, 655360, 393136, 2, 655360, 458653, 2, 655360, 458672, 2, 655360, 524189, 2, 655360, 524208, 2, 655360, 589725, 2, 655360, 589744, 2, 655360, 655261, 2, 655360, 655280, 2, 655360, 720797, 2, 655360, 720816, 2, 655360, 786333, 2, 655360, 786352, 2, 655360, 851869, 2, 655360, 851888, 2, 655360, 917405, 2, 655360, 917424, 2, 655360, 982941, 2, 655360, 982960, 2, 655360, 1048477, 2, 655360, 1048496, 2, 655360, 1114013, 2, 655360, 1114032, 2, 655360, 1179549, 2, 655360, 1179568, 2, 655360, 1245085, 2, 655360, 1245104, 2, 655360, 1310621, 2, 655360, 1310640, 2, 655360 )
+
+[node name="walls" parent="bossfight_event/walls_sprite" instance=ExtResource( 3 )]
+visible = false
+collision_layer = 2
+tile_data = PoolIntArray( -99, 0, 0, -98, 0, 0, -97, 0, 0, -96, 0, 0, -95, 0, 0, -94, 0, 0, -93, 0, 0, -92, 0, 0, -91, 0, 0, -90, 0, 0, -89, 0, 0, -88, 0, 0, -87, 0, 0, -86, 0, 0, -85, 0, 0, -84, 0, 0, -83, 0, 0, -82, 0, 0, -81, 0, 0, -80, 0, 0, 65437, 0, 0, 65456, 0, 0, 130973, 0, 0, 130992, 0, 0, 196509, 0, 0, 196528, 0, 0, 262045, 0, 0, 262064, 0, 0, 327581, 0, 0, 327600, 0, 0, 393117, 0, 0, 393136, 0, 0, 458653, 0, 0, 458672, 0, 0, 524189, 0, 0, 524208, 0, 0, 589725, 0, 0, 589744, 0, 0, 655261, 0, 0, 655280, 0, 0, 720797, 0, 0, 720816, 0, 0, 786333, 0, 0, 786352, 0, 0, 851869, 0, 0, 851888, 0, 0, 917405, 0, 0, 917424, 0, 0, 982941, 0, 0, 982960, 0, 0, 1048477, 0, 0, 1048496, 0, 0, 1114013, 0, 0, 1114032, 0, 0, 1179549, 0, 0, 1179568, 0, 0, 1245085, 0, 0, 1245104, 0, 0, 1310621, 0, 0, 1310640, 0, 0 )
+
+[node name="boss_teleport_positions" type="Node2D" parent="bossfight_event"]
+script = ExtResource( 20 )
+
+[node name="0" parent="bossfight_event/boss_teleport_positions" instance=ExtResource( 19 )]
+position = Vector2( -47.8271, -108.71 )
+
+[node name="1" parent="bossfight_event/boss_teleport_positions" instance=ExtResource( 19 )]
+position = Vector2( -225.287, -77.4555 )
+
+[node name="2" parent="bossfight_event/boss_teleport_positions" instance=ExtResource( 19 )]
+position = Vector2( -127.287, -142.083 )
+
+[node name="3" parent="bossfight_event/boss_teleport_positions" instance=ExtResource( 19 )]
+position = Vector2( -54.1838, -49.9095 )
+
+[node name="4" parent="bossfight_event/boss_teleport_positions" instance=ExtResource( 19 )]
+position = Vector2( -132.584, -79.0447 )
+
+[node name="5" parent="bossfight_event/boss_teleport_positions" instance=ExtResource( 19 )]
+position = Vector2( -214.163, -157.975 )
+
 [connection signal="dead" from="dude" to="." method="player_lose"]
 [connection signal="health_changed" from="dude" to="HUD/healthbar" method="_on_health_changed"]
 [connection signal="text_display_finished" from="textbox" to="." method="_on_textbox_text_display_finished"]
 [connection signal="text_display_started" from="textbox" to="." method="_on_textbox_text_display_started"]
 [connection signal="body_entered" from="exit_area" to="scene_change" method="trigger"]
-[connection signal="timeout" from="Path2D/PathFollow2D/Timer" to="Path2D/PathFollow2D" method="_on_Timer_timeout"]
-[connection signal="dead" from="mago" to="Path2D" method="queue_free"]
 [connection signal="body_entered" from="bossfight_event/boss_fight_event_zone" to="bossfight_event" method="_on_boss_fight_event_zone_body_entered"]
 
 [editable path="spikes"]

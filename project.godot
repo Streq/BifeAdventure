@@ -9,6 +9,16 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node",
+"class": "Controller",
+"language": "GDScript",
+"path": "res://fighting/controller.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Fighter",
+"language": "GDScript",
+"path": "res://fighting/dude/fighter.gd"
+}, {
 "base": "Node2D",
 "class": "OverworldCharacter",
 "language": "GDScript",
@@ -30,6 +40,8 @@ _global_script_classes=[ {
 "path": "res://textbox/textbox.gd"
 } ]
 _global_script_class_icons={
+"Controller": "",
+"Fighter": "",
 "OverworldCharacter": "",
 "State": "",
 "StateMachine": "",

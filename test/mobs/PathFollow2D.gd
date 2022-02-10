@@ -21,7 +21,7 @@ func decrease():
 		timer.start()
 func spawn():
 	instances += 1
-	if limit and instances == limit:
+	if limit != -1 and instances >= limit:
 		timer.stop()
 	self.unit_offset = rand_range(0.0, 1.0)
 	var _mob = mob.instance()
