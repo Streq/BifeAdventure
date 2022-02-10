@@ -129,7 +129,7 @@ position = Vector2( -572.349, 200.481 )
 position = Vector2( -401.4, 309.583 )
 
 [node name="dude" parent="." instance=ExtResource( 2 )]
-position = Vector2( 438.804, 312.186 )
+position = Vector2( 450, 314 )
 dir = -1.0
 
 [node name="Camera2D" type="Camera2D" parent="dude"]
@@ -222,22 +222,22 @@ tile_data = PoolIntArray( -99, 0, 0, -98, 0, 0, -97, 0, 0, -96, 0, 0, -95, 0, 0,
 script = ExtResource( 20 )
 
 [node name="0" parent="bossfight_event/boss_teleport_positions" instance=ExtResource( 19 )]
-position = Vector2( -47.8271, -108.71 )
+position = Vector2( -48, -105 )
 
 [node name="1" parent="bossfight_event/boss_teleport_positions" instance=ExtResource( 19 )]
-position = Vector2( -225.287, -77.4555 )
+position = Vector2( -225, -73 )
 
 [node name="2" parent="bossfight_event/boss_teleport_positions" instance=ExtResource( 19 )]
-position = Vector2( -127.287, -142.083 )
+position = Vector2( -128, -137 )
 
 [node name="3" parent="bossfight_event/boss_teleport_positions" instance=ExtResource( 19 )]
-position = Vector2( -54.1838, -49.9095 )
+position = Vector2( -51, -41 )
 
 [node name="4" parent="bossfight_event/boss_teleport_positions" instance=ExtResource( 19 )]
-position = Vector2( -132.584, -79.0447 )
+position = Vector2( -128, -73 )
 
 [node name="5" parent="bossfight_event/boss_teleport_positions" instance=ExtResource( 19 )]
-position = Vector2( -214.163, -157.975 )
+position = Vector2( -216, -153 )
 
 [connection signal="dead" from="dude" to="." method="player_lose"]
 [connection signal="health_changed" from="dude" to="HUD/healthbar" method="_on_health_changed"]

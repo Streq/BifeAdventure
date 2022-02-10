@@ -22,10 +22,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 0 ]
+"values": [ 8, 0 ]
 }
 tracks/1/type = "method"
 tracks/1/path = NodePath("state/throw")
@@ -50,6 +50,7 @@ shape = SubResource( 1 )
 
 [node name="Sprite" parent="pivot/display" index="0"]
 texture = ExtResource( 5 )
+frame = 8
 
 [node name="CollisionShape2D" parent="pivot/hurtbox/main" index="0"]
 shape = SubResource( 1 )

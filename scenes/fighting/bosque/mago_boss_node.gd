@@ -18,6 +18,6 @@ func set_strategy(name):
 
 func _on_mago_health_changed(val, max_health):
 	var missing_health = max_health - val
-	if missing_health > (1+is_hurt_enough_to_teleport)*50.0:
+	if missing_health > (1+is_hurt_enough_to_teleport)*150.0:
 		emit_signal("is_hurt_enough_to_teleport")
-		is_hurt_enough_to_teleport = int(missing_health/50.0)
+		is_hurt_enough_to_teleport = int(missing_health/150.0)
