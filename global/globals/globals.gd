@@ -12,7 +12,8 @@ enum ROOM {
 	malovich_fight_room,
 	malovich_room,
 	malovich_room_right_after_fight,
-	hometown_forest
+	hometown_forest,
+	boquita,
 }
 const TILE_SIZE = 16
 onready var DEBUG = OS.is_debug_build()

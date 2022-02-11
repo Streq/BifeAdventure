@@ -10,6 +10,8 @@ export var player_camera_path: NodePath
 onready var player_camera : Camera2D = get_node(player_camera_path)
 export var walls_path: NodePath
 onready var walls : TileMap = get_node(walls_path)
+export var boss_healthbar_path: NodePath
+onready var boss_healthbar : TextureProgress = get_node(boss_healthbar_path)
 
 export var boss_node : PackedScene
 
@@ -54,7 +56,9 @@ func trigger():
 		]), "completed")
 	
 	yield(lower_walls(), "completed")
-	
+	yield(fill_boss_healthbar(), "completed")
+	mago.connect("health_changed", boss_healthbar, "_on_health_changed")
+
 	yield(text_prompt([
 		"BIFE: fua"
 		]), "completed")
@@ -67,6 +71,14 @@ func trigger():
 	$boss_teleport_positions.queue_free()
 	$walls_sprite.queue_free()
 	
+	yield(get_tree().create_timer(1.0), "timeout")
+	yield(text_prompt([
+		"TUTUJO: ahhh la cadera"
+		]), "completed")
+	
+	boss_healthbar.visible = false
+	
+	yield(move_focus_to_camera(), "completed")
 
 
 func _on_boss_fight_event_zone_body_entered(body):
@@ -89,9 +101,26 @@ func move_camera_to_focus():
 	$Tween.start()
 	yield($Tween,"tween_completed")
 
+func move_focus_to_camera():
+	var camera = $Camera2D
+	var current_position = camera.global_position
+	var final_position = player_camera.global_position
+	$Tween.interpolate_property(camera, "global_position", current_position, final_position, 1.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$Tween.start()
+	yield($Tween,"tween_completed")
+	player_camera.current = true
+	
+
 func lower_walls():
 	for i in range(0,15):
 		walls.position.y += 16
 		yield(get_tree().create_timer(0.05),"timeout")
 
-
+func fill_boss_healthbar():
+	boss_healthbar.value = 0
+	boss_healthbar.visible = true
+	boss_healthbar.step = 5
+	$Tween.interpolate_property(boss_healthbar, "value", 0, 100, 1.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$Tween.start()
+	yield($Tween,"tween_completed")
+	boss_healthbar.step = 1

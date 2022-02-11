@@ -28,7 +28,6 @@ func trigger():
 	bife.turn(Vector2.LEFT)
 	
 	bife.controller.active = false
-	Node.new().active=false
 	yield(text_prompt(["MAMA: Dios mio!"]), "completed")
 	yield(walk(mom,[Vector2(-4,0), Vector2(0,1)]), "completed")
 	yield(text_prompt(["MAMA: Hijo, estas bien?"]), "completed")

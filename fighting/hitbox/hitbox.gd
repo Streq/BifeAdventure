@@ -5,6 +5,7 @@ signal applied_damage()
 
 export var knockback := Vector2.ZERO
 export var damage := 0.0
+export var hitstun := true
 export var knockdown := false
 
 var body = null
@@ -43,6 +44,9 @@ func apply_knockback(target):
 	if knock.x:
 		target.dir = -sign(knock.x)
 
+func get_hitstun(target):
+	return hitstun
 
-func get_knockdown():
+
+func get_knockdown(target):
 	return knockdown

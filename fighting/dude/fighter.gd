@@ -80,14 +80,16 @@ func set_invulnerable(val):
 func _on_hurtbox_area_entered(area):
 	if !area.is_whitelisted(self):
 		var hitter = area.body
-		if area.get_knockdown():
-			state._change_state("knocked",null)
-		else:
-			state._change_state("hitstun",null)
-		area.apply_knockback(self)		
+		var hitstun = area.get_hitstun(self)
+		if hitstun:
+			status_animation.play("hurt")
+			if area.get_knockdown(self):
+				state._change_state("knocked", null)
+			else:
+				state._change_state("hitstun", null)
+		area.apply_knockback(self)
 		area.apply_damage(self)
-		status_animation.play("hurt")
-		
+				
 	
 func set_health(val):
 	health = clamp(val, 0, max_health)

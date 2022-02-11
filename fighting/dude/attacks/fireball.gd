@@ -1,9 +1,9 @@
 extends Node2D
 
 var direction := Vector2.ZERO
-var speed := 200
+export var speed := 200
 var caster = null
-var damage = 20
+export var damage = 20
 var dir = 1.0
 
 func _ready():

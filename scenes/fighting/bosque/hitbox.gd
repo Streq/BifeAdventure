@@ -5,6 +5,7 @@ signal applied_damage()
 
 export var damage := 0.0
 export var knockdown := false
+export var hitstun := true
 
 var body = null
 var caster = null
@@ -39,5 +40,8 @@ func apply_damage(target):
 func apply_knockback(target):
 	knockback.apply_knockback(target, self)
 
-func get_knockdown():
+func get_knockdown(target):
 	return knockdown
+
+func get_hitstun(target):
+	return hitstun

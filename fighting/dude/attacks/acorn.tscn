@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://fighting/dude/attacks/fireball.tscn" type="PackedScene" id=1]
+[ext_resource path="res://asset/texture/acorn.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 4, 4 )
@@ -23,6 +24,7 @@ tracks/0/keys = {
 }
 
 [node name="acorn" instance=ExtResource( 1 )]
+speed = 120
 
 [node name="hurtbox" type="Area2D" parent="." index="1"]
 collision_layer = 4
@@ -31,20 +33,32 @@ collision_mask = 8
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox" index="0"]
 shape = SubResource( 2 )
 
-[node name="Sprite" parent="." index="3"]
+[node name="hurtbox2" type="Area2D" parent="." index="2"]
+collision_layer = 4
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox2" index="0"]
+shape = SubResource( 2 )
+
+[node name="Sprite" parent="." index="4"]
 frame = 3
 
-[node name="particles_active" parent="." index="4"]
+[node name="particles_active" parent="." index="5"]
 emitting = false
 
-[node name="particles_blast" parent="." index="5"]
-amount = 20
-color = Color( 0.270588, 0.176471, 0, 1 )
+[node name="particles_blast" parent="." index="6"]
+amount = 1
+lifetime = 1.0
+texture = ExtResource( 2 )
+gravity = Vector2( 0, 200 )
+initial_velocity = 20.0
+angular_velocity = 342.86
 color_ramp = null
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="6"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="7"]
 autoplay = "spin"
 anims/spin = SubResource( 1 )
 
 [connection signal="area_entered" from="hurtbox" to="." method="_on_hurtbox_area_entered"]
+[connection signal="area_entered" from="hurtbox2" to="." method="_on_hurtbox_area_entered"]
 [connection signal="area_entered" from="terrainbox" to="." method="_on_terrainbox_body_entered"]

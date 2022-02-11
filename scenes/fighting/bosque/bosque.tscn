@@ -129,7 +129,7 @@ position = Vector2( -572.349, 200.481 )
 position = Vector2( -401.4, 309.583 )
 
 [node name="dude" parent="." instance=ExtResource( 2 )]
-position = Vector2( 450, 314 )
+position = Vector2( 460, 313 )
 dir = -1.0
 
 [node name="Camera2D" type="Camera2D" parent="dude"]
@@ -164,6 +164,23 @@ script = ExtResource( 7 )
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
 
+[node name="scene_change2" parent="." instance=ExtResource( 13 )]
+position = Vector2( -26, 40 )
+to = 12
+relative_spawn_pos = false
+is_world_coords = false
+wait_step = false
+
+[node name="spawn_pos" parent="scene_change2" index="0"]
+position = Vector2( -26, 40 )
+
+[node name="exit_area" type="Area2D" parent="."]
+position = Vector2( 664.147, 288.724 )
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="exit_area"]
+shape = SubResource( 2 )
+
 [node name="scene_change" parent="." instance=ExtResource( 13 )]
 position = Vector2( 232, 88 )
 relative_spawn_pos = false
@@ -173,11 +190,11 @@ wait_step = false
 [node name="spawn_pos" parent="scene_change" index="0"]
 position = Vector2( -9, 40 )
 
-[node name="exit_area" type="Area2D" parent="."]
-position = Vector2( 664.147, 288.724 )
+[node name="exit_area2" type="Area2D" parent="."]
+position = Vector2( -1909, 288.724 )
 collision_layer = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="exit_area"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="exit_area2"]
 shape = SubResource( 2 )
 
 [node name="HUD" parent="." instance=ExtResource( 14 )]
@@ -195,6 +212,7 @@ textbox_path = NodePath("../textbox")
 player_path = NodePath("../dude")
 player_camera_path = NodePath("../dude/Camera2D")
 walls_path = NodePath("walls_sprite")
+boss_healthbar_path = NodePath("../HUD/flip_node/healthbar2")
 boss_node = ExtResource( 18 )
 
 [node name="boss_fight_event_zone" type="Area2D" parent="bossfight_event"]
@@ -244,8 +262,10 @@ position = Vector2( -216, -153 )
 [connection signal="text_display_finished" from="textbox" to="." method="_on_textbox_text_display_finished"]
 [connection signal="text_display_started" from="textbox" to="." method="_on_textbox_text_display_started"]
 [connection signal="body_entered" from="exit_area" to="scene_change" method="trigger"]
+[connection signal="body_entered" from="exit_area2" to="scene_change2" method="trigger"]
 [connection signal="body_entered" from="bossfight_event/boss_fight_event_zone" to="bossfight_event" method="_on_boss_fight_event_zone_body_entered"]
 
 [editable path="spikes"]
+[editable path="scene_change2"]
 [editable path="scene_change"]
 [editable path="HUD"]
