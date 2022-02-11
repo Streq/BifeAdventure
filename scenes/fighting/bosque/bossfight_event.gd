@@ -28,31 +28,33 @@ func trigger():
 	
 	yield(move_camera_to_focus(), "completed")
 	yield(text_prompt([
-		"???: Soy el brujo tutujo", 
-		"TUTUJO: y te vua mata",
-		"BIFE: porq???", 
-		"TUTUJO: porque tengo los huevo al plato de la gente que pasa haciendo bochinche, esta es mi casa, prohibido el paso", 
-#		"BIFE: que es un transeunte?",
-#		"TUTUJO: alguien que pasa",
-		"BIFE: pero tu casa es el unico lugar que conecta mi pueblo con un almacen",
-		"BIFE: yo no estoy aca por joder, tengo una familia con necesidades",
-		"BIFE: ahora justo estoy yendo a comprar una sopapa para mi hijo pelado",
-		"BIFE: si no la consigo no se va a poder usar el baño",
-		"BIFE: el unico baño en todo el pueblo",
-		"BIFE: (es posta todo esto)",
-		"TUTUJO: me importa un carajo te dije", 
-		"BIFE: no me dijiste",
-		"TUTUJO: si te dije",
-		"TUTUJO: por ahi no prestaste atencion por que sos medio boludo",
-		"BIFE: bue",
-		"TUTUJO: decile a tu hijo pelado que cague en el pasto",
-		"BIFE: me parece medio mala leche lo que propones",
-#		"TUTUJO: aparte no te creo que ese grandote boludo que esta a la entrada sea tu hijo, parece tu tio",
-#		"BIFE: no se d qien m ablas,,",
-#		"TUTUJO: si sabes, ya vino una vez y lo saque cagando",
-		"TUTUJO: date media vuelta porque empiezo a los cascotazos",
-		"BIFE: che y si paso despacito, tipo sin apretar shift?",
-		"TUTUJO: a donde?"
+		"???: Soy el brujo tutujo",
+		"BIFE: ah",
+		"TUTUJO: y te voy a matar",
+		"BIFE: xq?????",
+		"TUTUJO: porque tengo los huevo al plato de la gente que va y viene haciendo bochinche y rompiendo todo",
+		"TUTUJO: esta es mi casa y a partir de ahora esta prohibido el paso",
+		"BIFE: el bosque entero es tu casa?",
+		"TUTUJO: si",
+		"BIFE: y cuchame tutuje",
+		"TUTUJO: tutujo",
+		"BIFE: tutujo, a vos te parece bien adueñarte del unico camino entre mi pueblo y un almacen?",
+		"BIFE: yo tengo una familia con necesidades",
+		"BIFE: te parece bien que mi hijo pelado no tenga sopapa para destapar el baño?",
+		"TUTUJO: a vos te parece bien que te recague a cascotazos?",
+		"BIFE: sos re malo :(",
+		"TUTUJO: ustedes son re malos, pisando mi pasto, pateando mis animalitos, meando en MIS arboles",
+		"TUTUJO: decile al imbecil de tu hijo pelado que cague en el piso",
+		"TUTUJO: te tendria que matar",
+		"BIFE: es un poco mucho esto que decis",
+		"TUTUJO: y no es un poco mucho fajar a cuatro de mis mascotas?",#TODO hacer un counter
+		"BIFE: esos cositos son tus mascotas?",
+		"TUTUJO: si ",
+		"TUTUJO: hijo de la mierda",
+		"BIFE: mira, si te hace sentir mejor, mis trompadas los hicieron felices, tengo poderes",
+		"TUTUJO: vos me estas pelotudeando?",
+		"BIFE: te juro que no",
+		"TUTUJO: y yo te juro que hoy ",
 		]), "completed")
 	
 	yield(lower_walls(), "completed")
@@ -60,6 +62,7 @@ func trigger():
 	mago.connect("health_changed", boss_healthbar, "_on_health_changed")
 
 	yield(text_prompt([
+		"TUTUJO: te mato",
 		"BIFE: fua"
 		]), "completed")
 	
