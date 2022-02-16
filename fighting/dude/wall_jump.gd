@@ -1,8 +1,8 @@
 extends "res://util/state/state.gd"
 
 
-export var angle_up := 45.0
-export var angle_neutral := 0.0
+export var angle_up := 60.0
+export var angle_neutral := 45.0
 export var angle_down := -45.0
 
 onready var jump_vec_up := Vector2(cos(deg2rad(angle_up)),sin(deg2rad(angle_up)))

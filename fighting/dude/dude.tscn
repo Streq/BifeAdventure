@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=2]
+[gd_scene load_steps=64 format=2]
 
 [ext_resource path="res://fighting/dude/fighter.gd" type="Script" id=1]
 [ext_resource path="res://fighting/dude/idle.gd" type="Script" id=2]
@@ -28,18 +28,22 @@
 [ext_resource path="res://fighting/dude/hitstun.gd" type="Script" id=26]
 [ext_resource path="res://fighting/hitbox/hurtbox.tscn" type="PackedScene" id=27]
 [ext_resource path="res://fighting/dude/walk.gd" type="Script" id=28]
+[ext_resource path="res://fighting/dude/show_something.gd" type="Script" id=29]
 [ext_resource path="res://asset/texture/attack.png" type="Texture" id=30]
 [ext_resource path="res://fighting/fighter/state/jab.gd" type="Script" id=31]
 [ext_resource path="res://fighting/hitbox/hitbox.tscn" type="PackedScene" id=32]
 
 [sub_resource type="RectangleShape2D" id=22]
-extents = Vector2( 7, 4 )
+extents = Vector2( 10.5, 4.5 )
 
 [sub_resource type="RectangleShape2D" id=24]
 extents = Vector2( 4, 4.5 )
 
+[sub_resource type="RectangleShape2D" id=31]
+extents = Vector2( 4, 6.5 )
+
 [sub_resource type="RectangleShape2D" id=27]
-extents = Vector2( 4, 5.5 )
+extents = Vector2( 4.5, 9 )
 
 [sub_resource type="RectangleShape2D" id=25]
 extents = Vector2( 4, 4 )
@@ -788,6 +792,87 @@ tracks/4/keys = {
 } ]
 }
 
+[sub_resource type="Animation" id=32]
+resource_name = "uair"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("pivot/display/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 44, 34, 43 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.1, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [ "utilt" ],
+"method": "activate_hitbox"
+}, {
+"args": [ "utilt" ],
+"method": "deactivate_hitbox"
+} ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"values": [ {
+"args": [ 0.0 ],
+"method": "step_forward"
+}, {
+"args": [ 0.0 ],
+"method": "step_forward"
+}, {
+"args": [ false ],
+"method": "set_locked"
+}, {
+"args": [  ],
+"method": "enable_movement"
+} ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("pivot/display/hands_up:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("pivot/display/hands_up:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+
 [sub_resource type="Animation" id=28]
 resource_name = "utilt"
 length = 0.5
@@ -914,6 +999,8 @@ extents = Vector2( 4, 5.5 )
 [node name="dude" type="KinematicBody2D" groups=["fighter", "player"]]
 collision_mask = 0
 script = ExtResource( 1 )
+speed = 200.0
+speed_lerp = 4.0
 
 [node name="pivot" type="Node2D" parent="."]
 
@@ -924,7 +1011,7 @@ use_parent_material = true
 texture = ExtResource( 5 )
 hframes = 8
 vframes = 8
-frame = 17
+frame = 16
 
 [node name="hands" type="Sprite" parent="pivot/display"]
 visible = false
@@ -965,7 +1052,7 @@ monitorable = false
 damage = 20.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="pivot/hitbox/jab"]
-position = Vector2( 8, -1 )
+position = Vector2( 8.5, -1.5 )
 shape = SubResource( 22 )
 
 [node name="side_jab" parent="pivot/hitbox" instance=ExtResource( 32 )]
@@ -976,7 +1063,7 @@ knockback = Vector2( 50, 0 )
 damage = 20.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="pivot/hitbox/side_jab"]
-position = Vector2( 8, -1 )
+position = Vector2( 8.5, -1.5 )
 shape = SubResource( 22 )
 
 [node name="cross" parent="pivot/hitbox" instance=ExtResource( 32 )]
@@ -988,10 +1075,11 @@ damage = 30.0
 knockdown = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="pivot/hitbox/cross"]
-position = Vector2( 8, -1 )
+position = Vector2( 8.5, -1.5 )
 shape = SubResource( 22 )
 
 [node name="air_kick" parent="pivot/hitbox" instance=ExtResource( 32 )]
+visible = false
 monitoring = false
 monitorable = false
 knockback = Vector2( 100, -100 )
@@ -1013,8 +1101,8 @@ knockback = Vector2( 30, 200 )
 damage = 30.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="pivot/hitbox/dair"]
-position = Vector2( 2, 8 )
-shape = SubResource( 24 )
+position = Vector2( 2, 8.5 )
+shape = SubResource( 31 )
 
 [node name="spring" type="Node" parent="pivot/hitbox/dair"]
 script = ExtResource( 16 )
@@ -1028,7 +1116,7 @@ knockback = Vector2( 50, -200 )
 damage = 30.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="pivot/hitbox/utilt"]
-position = Vector2( 3, -8.5 )
+position = Vector2( 2.5, -9 )
 shape = SubResource( 27 )
 
 [node name="tackle" parent="pivot/hitbox" instance=ExtResource( 32 )]
@@ -1147,6 +1235,11 @@ script = ExtResource( 14 )
 sprite_name = "feet"
 animation = "dair"
 
+[node name="uair" type="Node" parent="state"]
+script = ExtResource( 14 )
+sprite_name = "hands_up"
+animation = "uair"
+
 [node name="wall" type="Node" parent="state"]
 script = ExtResource( 11 )
 
@@ -1195,6 +1288,11 @@ states_from = PoolStringArray( "air" )
 state_to = "dair"
 dirs = PoolVector2Array( 0, 1, -1, 1, 1, 1 )
 
+[node name="uair" parent="attack_list" instance=ExtResource( 18 )]
+states_from = PoolStringArray( "air" )
+state_to = "uair"
+dirs = PoolVector2Array( 0, -1, -1, -1, 1, -1 )
+
 [node name="nair" parent="attack_list" instance=ExtResource( 18 )]
 states_from = PoolStringArray( "air" )
 state_to = "air_kick"
@@ -1229,6 +1327,7 @@ anims/run = SubResource( 4 )
 anims/side_jab = SubResource( 8 )
 anims/side_jab2 = SubResource( 18 )
 anims/tackle = SubResource( 13 )
+anims/uair = SubResource( 32 )
 anims/utilt = SubResource( 28 )
 anims/walk = SubResource( 21 )
 anims/wall = SubResource( 5 )
@@ -1255,6 +1354,19 @@ position = Vector2( 0, 0.5 )
 shape = SubResource( 1 )
 
 [node name="status_animation" parent="." instance=ExtResource( 13 )]
+
+[node name="show_something" type="Label" parent="."]
+visible = false
+margin_left = -20.0
+margin_top = 14.0
+margin_right = 20.0
+margin_bottom = 28.0
+script = ExtResource( 29 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+label = "velocity"
+what = "velocity"
 
 [connection signal="health_changed" from="." to="healthbar" method="_on_health_changed"]
 [connection signal="state_exit" from="." to="pivot/hitbox" method="clear"]
