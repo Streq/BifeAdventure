@@ -115,28 +115,28 @@ tracks/1/keys = {
 } ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("pivot/display/hands:visible")
+tracks/2/path = NodePath("pivot/display/hands:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.1, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ false, true, false ]
+"times": PoolRealArray( 0.1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 10 ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("pivot/display/hands:frame")
+tracks/3/path = NodePath("pivot/display/hands:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0.1 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ 10 ]
+"values": [ false, true, false ]
 }
 
 [sub_resource type="Animation" id=26]
@@ -331,8 +331,8 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.1, 0.3, 0.5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "values": [ {
 "args": [ 0.0 ],
 "method": "step_forward"
@@ -342,9 +342,6 @@ tracks/2/keys = {
 }, {
 "args": [ false ],
 "method": "set_locked"
-}, {
-"args": [  ],
-"method": "enable_movement"
 } ]
 }
 tracks/3/type = "value"
@@ -412,8 +409,8 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.1, 0.3, 0.5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "values": [ {
 "args": [ 0.0 ],
 "method": "step_forward"
@@ -423,9 +420,6 @@ tracks/2/keys = {
 }, {
 "args": [ false ],
 "method": "set_locked"
-}, {
-"args": [  ],
-"method": "enable_movement"
 } ]
 }
 tracks/3/type = "value"
@@ -493,8 +487,8 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.1, 0.4, 0.5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "values": [ {
 "args": [ 0.0 ],
 "method": "step_forward"
@@ -504,9 +498,6 @@ tracks/2/keys = {
 }, {
 "args": [ false ],
 "method": "set_locked"
-}, {
-"args": [  ],
-"method": "enable_movement"
 } ]
 }
 tracks/3/type = "value"
@@ -624,8 +615,8 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.1, 0.3, 0.5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "values": [ {
 "args": [ 0.0 ],
 "method": "step_forward"
@@ -635,9 +626,6 @@ tracks/2/keys = {
 }, {
 "args": [ false ],
 "method": "set_locked"
-}, {
-"args": [  ],
-"method": "enable_movement"
 } ]
 }
 tracks/3/type = "value"
@@ -705,8 +693,8 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.1, 0.3, 0.5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "values": [ {
 "args": [ 40.0 ],
 "method": "step_forward"
@@ -716,9 +704,6 @@ tracks/2/keys = {
 }, {
 "args": [ false ],
 "method": "set_locked"
-}, {
-"args": [  ],
-"method": "enable_movement"
 } ]
 }
 
@@ -847,8 +832,8 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.1, 0.3, 0.5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "values": [ {
 "args": [ 0.0 ],
 "method": "step_forward"
@@ -858,9 +843,6 @@ tracks/2/keys = {
 }, {
 "args": [ false ],
 "method": "set_locked"
-}, {
-"args": [  ],
-"method": "enable_movement"
 } ]
 }
 tracks/3/type = "value"
@@ -928,8 +910,8 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.1, 0.3, 0.5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "values": [ {
 "args": [ 0.0 ],
 "method": "step_forward"
@@ -939,9 +921,6 @@ tracks/2/keys = {
 }, {
 "args": [ false ],
 "method": "set_locked"
-}, {
-"args": [  ],
-"method": "enable_movement"
 } ]
 }
 tracks/3/type = "value"
@@ -1387,6 +1366,5 @@ what = "velocity"
 [connection signal="applied_knockback" from="pivot/hitbox/air_kick" to="pivot/hitbox/air_kick/spring" method="trigger"]
 [connection signal="applied_knockback" from="pivot/hitbox/dair" to="pivot/hitbox/dair/spring" method="trigger"]
 [connection signal="applied_knockback" from="pivot/hitbox/tackle" to="pivot/hitbox/tackle/spring" method="trigger"]
-[connection signal="area_entered" from="pivot/hurtbox/tackle" to="." method="_on_hurtbox_area_entered"]
 [connection signal="state_changed" from="state" to="state_label" method="_on_state_state_changed"]
 [connection signal="animation_finished" from="AnimationPlayer" to="state" method="_on_animation_finished"]

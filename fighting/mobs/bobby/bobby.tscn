@@ -467,7 +467,6 @@ __meta__ = {
 [connection signal="hurt" from="." to="pivot/hitbox/idle/disabler" method="trigger_deferred"]
 [connection signal="ready" from="." to="pivot/hitbox/idle/enabler" method="trigger"]
 [connection signal="regained_control" from="." to="pivot/hitbox/idle/enabler" method="trigger_deferred"]
-[connection signal="area_entered" from="pivot/hurtbox/main" to="." method="_on_hurtbox_area_entered"]
 [connection signal="state_changed" from="state" to="state_label" method="_on_state_state_changed"]
 [connection signal="animation_finished" from="AnimationPlayer" to="state" method="_on_animation_finished"]
 [connection signal="state_changed" from="controller/strategy" to="controller/state_label" method="_on_state_state_changed"]
