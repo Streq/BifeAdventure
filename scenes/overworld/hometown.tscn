@@ -242,7 +242,7 @@ script = ExtResource( 17 )
 position = Vector2( 184, 360 )
 
 [node name="interact_action" parent="map/grid/pepe" instance=ExtResource( 12 )]
-interact_text = PoolStringArray( "PEPE: me entere de la paliza que le diste al PIBE", "PEPE: muy bien BIFE, estoy orgulloso", "PEPE: te pido perdon por lo que efectivamente fue un CRIMEN de RETENCION de LIBERTAD, no lo voy a volver a hacer", "PEPE: no me denuncies por favor, ya tengo demasiados quilombos", "BIFE: naa", "PEPE: IDOLO", "PEPE: me entere que en el pueblo mas al suroeste de aca esta lleno de infelices, creo que esta la hinchada de BOCA", "PEPE: por ahi puedas darles una mano", "BIFE: dale voy total estoy al reverendo pedo no\?  ", "PEPE: jaja igual es verdad", "BIFE: jaja", "BIFE: lpm" )
+interact_text = PoolStringArray( "PEPE: me entere de la paliza que le diste al PIBE", "PEPE: muy bien BIFE, estoy orgulloso", "PEPE: te pido perdon por lo que efectivamente fue un CRIMEN de RETENCION de LIBERTAD, no lo voy a volver a hacer", "PEPE: no me denuncies por favor, ya tengo demasiados quilombos", "BIFE: naa", "PEPE: IDOLO", "PEPE: me entere que en el pueblo mas al suroeste de aca esta lleno de infelices, creo que esta la hinchada de BOCA", "PEPE: por ahi puedas darles una mano" )
 
 [node name="controller" type="Node" parent="map/grid/pepe"]
 script = ExtResource( 19 )
