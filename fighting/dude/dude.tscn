@@ -45,11 +45,11 @@ extents = Vector2( 4, 6.5 )
 [sub_resource type="RectangleShape2D" id=27]
 extents = Vector2( 4.5, 9 )
 
-[sub_resource type="RectangleShape2D" id=57]
-extents = Vector2( 9, 3.5 )
-
 [sub_resource type="RectangleShape2D" id=58]
 extents = Vector2( 9, 6 )
+
+[sub_resource type="RectangleShape2D" id=57]
+extents = Vector2( 9, 3.5 )
 
 [sub_resource type="RectangleShape2D" id=25]
 extents = Vector2( 4, 4 )
@@ -2219,12 +2219,12 @@ shape = SubResource( 27 )
 [node name="fair0" parent="pivot/hitbox" instance=ExtResource( 32 )]
 monitoring = false
 monitorable = false
-knockback = Vector2( 200, 0 )
+knockback = Vector2( 200, -75 )
 damage = 30.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="pivot/hitbox/fair0"]
-position = Vector2( 8, 5.5 )
-shape = SubResource( 57 )
+position = Vector2( 8, -4 )
+shape = SubResource( 58 )
 
 [node name="fair1" parent="pivot/hitbox" instance=ExtResource( 32 )]
 monitoring = false
@@ -2233,8 +2233,8 @@ knockback = Vector2( 75, 200 )
 damage = 30.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="pivot/hitbox/fair1"]
-position = Vector2( 8, -4 )
-shape = SubResource( 58 )
+position = Vector2( 8, 5.5 )
+shape = SubResource( 57 )
 
 [node name="tackle" parent="pivot/hitbox" instance=ExtResource( 32 )]
 visible = false
