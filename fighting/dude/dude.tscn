@@ -37,7 +37,7 @@
 extents = Vector2( 10.5, 4.5 )
 
 [sub_resource type="RectangleShape2D" id=24]
-extents = Vector2( 4, 4.5 )
+extents = Vector2( 9, 4.5 )
 
 [sub_resource type="RectangleShape2D" id=31]
 extents = Vector2( 4, 6.5 )
@@ -84,7 +84,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id=9]
 resource_name = "air_kick"
-length = 0.5
+length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("pivot/display/Sprite:frame")
 tracks/0/interp = 1
@@ -92,10 +92,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ 50 ]
+"values": [ 49, 50, 49 ]
 }
 tracks/1/type = "method"
 tracks/1/path = NodePath(".")
@@ -104,11 +104,14 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0.1, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
 "values": [ {
 "args": [ "air_kick" ],
 "method": "activate_hitbox"
+}, {
+"args": [ "air_kick" ],
+"method": "deactivate_hitbox"
 } ]
 }
 tracks/2/type = "value"
@@ -118,10 +121,22 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ false ]
+"values": [ false, true, false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("pivot/display/hands:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 10 ]
 }
 
 [sub_resource type="Animation" id=26]
@@ -1011,16 +1026,15 @@ use_parent_material = true
 texture = ExtResource( 5 )
 hframes = 8
 vframes = 8
-frame = 16
+frame = 50
 
 [node name="hands" type="Sprite" parent="pivot/display"]
-visible = false
 use_parent_material = true
 position = Vector2( 16, 0 )
 texture = ExtResource( 30 )
 hframes = 8
 vframes = 8
-frame = 1
+frame = 10
 
 [node name="hands_up" type="Sprite" parent="pivot/display"]
 visible = false
@@ -1046,7 +1060,6 @@ modulate = Color( 1, 0, 0, 1 )
 script = ExtResource( 15 )
 
 [node name="jab" parent="pivot/hitbox" instance=ExtResource( 32 )]
-visible = false
 monitoring = false
 monitorable = false
 damage = 20.0
@@ -1079,14 +1092,13 @@ position = Vector2( 8.5, -1.5 )
 shape = SubResource( 22 )
 
 [node name="air_kick" parent="pivot/hitbox" instance=ExtResource( 32 )]
-visible = false
 monitoring = false
 monitorable = false
 knockback = Vector2( 100, -100 )
 damage = 30.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="pivot/hitbox/air_kick"]
-position = Vector2( 8, 0.5 )
+position = Vector2( 7, -1 )
 shape = SubResource( 24 )
 
 [node name="spring" type="Node" parent="pivot/hitbox/air_kick"]
