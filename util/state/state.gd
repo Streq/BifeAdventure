@@ -4,6 +4,7 @@ class_name State
 
 signal finished(next_state_name)
 signal unlocked()
+signal exited()
 
 export var stunned = false
 
@@ -34,3 +35,7 @@ func update(delta):
 
 func _on_animation_finished(anim_name):
 	return
+
+func _exit():
+	emit_signal("exited")
+	exit()

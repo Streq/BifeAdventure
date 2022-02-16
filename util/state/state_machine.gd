@@ -55,7 +55,7 @@ func _on_animation_finished(anim_name):
 func _change_state(state_name, param):
 	if not _active:
 		return
-	current_state.exit()
+	current_state._exit()
 	animation_queue.clear()
 	if state_name == "previous":
 		states_stack.pop_front()

@@ -76,12 +76,15 @@ func _move(delta, bounce_h = false, bounce_y = false):
 	
 func set_invulnerable(val):
 	invulnerable = val
+	
+var frame_untouchable = false
 
 func _on_hurtbox_area_entered(area):
-	if !area.is_whitelisted(self):
+	if !area.is_whitelisted(self) and !frame_untouchable:
 		var hitter = area.body
 		var hitstun = area.get_hitstun(self)
 		if hitstun:
+			frame_untouchable = true
 			status_animation.play("hurt")
 			if area.get_knockdown(self):
 				state._change_state("knocked", null)
@@ -89,7 +92,8 @@ func _on_hurtbox_area_entered(area):
 				state._change_state("hitstun", null)
 		area.apply_knockback(self)
 		area.apply_damage(self)
-				
+		yield(get_tree(), "idle_frame")
+		frame_untouchable = false
 	
 func set_health(val):
 	health = clamp(val, 0, max_health)

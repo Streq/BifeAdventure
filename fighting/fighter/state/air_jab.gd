@@ -2,6 +2,7 @@ extends "res://util/state/state.gd"
 
 export var sprite_name := "hands"
 export var animation := "jab"
+export var cleanup_animation := ""
 
 onready var display = owner.get_node("pivot/display/"+sprite_name)
 
@@ -43,6 +44,8 @@ func _on_animation_finished(anim_name):
 	
 func exit():
 	owner.emit_signal("state_exit")
+	if cleanup_animation != "":
+		owner.get_node("cleanup_animation").play(cleanup_animation)
 	display.visible = false
 	
 	
