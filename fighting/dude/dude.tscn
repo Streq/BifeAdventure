@@ -2084,6 +2084,7 @@ collision_mask = 0
 script = ExtResource( 1 )
 speed = 200.0
 speed_lerp = 4.0
+air_speed_lerp = 3.0
 
 [node name="pivot" type="Node2D" parent="."]
 
