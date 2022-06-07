@@ -17,6 +17,7 @@ tile_data = PoolIntArray( -1, 0, 0, -65536, 0, 0, -65535, 0, 0, -65534, 0, 0, -6
 [node name="dude" parent="." instance=ExtResource( 2 )]
 position = Vector2( 168, 248 )
 max_health = 1000.0
+air_speed_lerp = 1.0
 
 [node name="Camera2D" type="Camera2D" parent="dude"]
 current = true
@@ -24,3 +25,4 @@ current = true
 [node name="dude2" parent="." instance=ExtResource( 2 )]
 position = Vector2( 236, 248 )
 max_health = 1000.0
+air_speed_lerp = 1.0
