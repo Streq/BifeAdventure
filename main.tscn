@@ -32,9 +32,6 @@ __meta__ = {
 margin_right = 40.0
 margin_bottom = 40.0
 texture = ExtResource( 6 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="menu" parent="." instance=ExtResource( 4 )]
 visible = false
