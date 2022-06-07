@@ -61,6 +61,7 @@ Globals="*res://global/globals/globals.tscn"
 Signals="*res://global/signals/signals.gd"
 Slowmo="*res://global/slowmo.gd"
 Overworld="*res://global/overworld.gd"
+Textbox="*res://textbox/textbox.tscn"
 
 [debug]
 

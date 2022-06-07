@@ -1,12 +1,13 @@
 extends Node2D
 
-onready var t = $textbox
 
 func _ready():
 	Signals.connect("display_text", self, "display_text")
+	Textbox.connect("text_display_started", self, "_on_textbox_text_display_started")
+	Textbox.connect("text_display_finished", self, "_on_textbox_text_display_finished")
 
 func display_text(text):
-	$textbox.add_texts(text)
+	Textbox.add_texts(text)
 
 
 func _on_textbox_text_display_started(textbox):
