@@ -71,6 +71,7 @@ anims/die = SubResource( 2 )
 texture = ExtResource( 1 )
 hframes = 10
 vframes = 10
+frame = 1
 
 [node name="hurtbox" type="Area2D" parent="."]
 collision_layer = 4

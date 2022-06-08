@@ -1,12 +1,17 @@
 extends Node
 
+export var disabled := false
 export (NodePath) onready var pepe = get_node(pepe) as Node2D
 
 onready var tween = $Tween
 
+
+
 func _ready():
-	
-	owner.connect("ready",self,"_on_ready")
+	if disabled:
+		queue_free()
+	else:
+		owner.connect("ready",self,"_on_ready")
 
 func _on_ready():
 	if Globals.get_event(Globals.EVENT.tutorial_completed):

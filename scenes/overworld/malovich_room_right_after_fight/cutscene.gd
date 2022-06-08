@@ -3,7 +3,7 @@ extends Node
 signal over
 
 export (NodePath) var textbox_path : NodePath
-onready var textbox: TextBox = get_node(textbox_path)
+onready var textbox: TextBox = Textbox
 
 export (NodePath) var mom_path : NodePath
 onready var mom: OverworldCharacter = get_node(mom_path)
