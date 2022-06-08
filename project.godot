@@ -80,6 +80,12 @@ window/stretch/aspect="keep"
 
 grid=true
 
+[importer_defaults]
+
+texture={
+"flags/filter": false
+}
+
 [input]
 
 ui_accept={

@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://autotile/terrain_simple.tscn" type="PackedScene" id=1]
 [ext_resource path="res://fighting/dude/dude.tscn" type="PackedScene" id=2]
@@ -8,7 +8,6 @@
 [ext_resource path="res://fighting/mobs/bobby/bobby.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/fighting/elements/dummy_spawner.gd" type="Script" id=7]
 [ext_resource path="res://fighting/mobs/dummy/dummy.tscn" type="PackedScene" id=8]
-[ext_resource path="res://textbox/textbox.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/fighting/bosque/bosque.gd" type="Script" id=10]
 [ext_resource path="res://asset/texture/background/forest_floor.png" type="Texture" id=11]
 [ext_resource path="res://asset/texture/background/forest_ceil.png" type="Texture" id=12]
@@ -159,8 +158,6 @@ script = ExtResource( 7 )
 
 [node name="dummy" parent="dummy_spawner5/spawn" instance=ExtResource( 8 )]
 
-[node name="textbox" parent="." instance=ExtResource( 9 )]
-
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
 
@@ -208,7 +205,6 @@ position = Vector2( -87, 250 )
 [node name="bossfight_event" type="Node2D" parent="."]
 position = Vector2( -1296, 305 )
 script = ExtResource( 22 )
-textbox_path = NodePath("../textbox")
 player_path = NodePath("../dude")
 player_camera_path = NodePath("../dude/Camera2D")
 walls_path = NodePath("walls_sprite")
@@ -259,8 +255,6 @@ position = Vector2( -216, -153 )
 
 [connection signal="dead" from="dude" to="." method="player_lose"]
 [connection signal="health_changed" from="dude" to="HUD/healthbar" method="_on_health_changed"]
-[connection signal="text_display_finished" from="textbox" to="." method="_on_textbox_text_display_finished"]
-[connection signal="text_display_started" from="textbox" to="." method="_on_textbox_text_display_started"]
 [connection signal="body_entered" from="exit_area" to="scene_change" method="trigger"]
 [connection signal="body_entered" from="exit_area2" to="scene_change2" method="trigger"]
 [connection signal="body_entered" from="bossfight_event/boss_fight_event_zone" to="bossfight_event" method="_on_boss_fight_event_zone_body_entered"]
