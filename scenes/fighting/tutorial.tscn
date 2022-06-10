@@ -320,6 +320,7 @@ script = ExtResource( 9 )
 
 [node name="dummy2" parent="fight_event_area/fight_event/dummys0" instance=ExtResource( 8 )]
 position = Vector2( 96, 0 )
+health = 21.0
 
 [node name="dummy3" parent="fight_event_area/fight_event/dummys0" instance=ExtResource( 8 )]
 position = Vector2( 136, 0 )

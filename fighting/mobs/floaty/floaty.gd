@@ -1,13 +1,13 @@
 extends Node2D
 
 export var speed := 100.0
-
+export var health := 10.0
 
 var velocity := Vector2.ZERO
 
 var target = null
 var dir = 1.0
-enum STATE {IDLE, CHASE, DIE}
+enum STATE {IDLE, HURT, CHASE, DIE}
 
 var state = STATE.IDLE 
 
@@ -23,6 +23,8 @@ func _physics_process(delta):
 			pass
 		STATE.DIE:
 			pass
+		STATE.HURT:
+			pass
 		STATE.CHASE:
 			velocity += Vector2(target.global_position - global_position).normalized()*delta*speed
 	velocity = lerp(velocity, Vector2.ZERO, delta)
@@ -35,6 +37,8 @@ func _enter_state(_state):
 			$AnimationPlayer.play("chase")
 		STATE.DIE:
 			$AnimationPlayer.play("die")
+		STATE.HURT:
+			$AnimationPlayer.play("hurt")
 
 func _on_fov_body_entered(body):
 	if body.is_in_group("player"):
@@ -64,10 +68,21 @@ func _on_hitbox_area_entered(area):
 func _on_hurtbox_area_entered(area):
 	if area.body != self and !area.body.is_in_group("mob"):
 		area.apply_knockback(self)
-		_enter_state(STATE.DIE)
+		area.apply_damage(self)
+		if health>0:
+			_enter_state(STATE.HURT)
+		else:
+			_enter_state(STATE.DIE)
+		
 
 func stop_monitoring():
 	$hitbox.set_deferred("monitoring",false)
 	$hitbox.set_deferred("monitorable",false)
 	$hurtbox.set_deferred("monitoring",false)
 	$hurtbox.set_deferred("monitorable",false)
+
+
+func _on_animation_finished(anim_name):
+	match state:
+		STATE.HURT:
+			_enter_state(STATE.IDLE)

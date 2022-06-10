@@ -56,7 +56,7 @@ func play(body):
 		"PEPE: muy BIEN BIFE",
 		"BIFE: 8===D",
 		"PEPE: ahora viene lo interesante, tambien puedes hacer ataques distintos",
-		"PEPE: dependiendo la DIRECCION que estes APRETANDO al momento de ATACAR", 
+		"PEPE: dependiendo la DIRECCION que estes APRETANDO al momento de ATACAR, y si estas CORRIENDO, en el AIRE, CAMINANDO, o QUIETO", 
 		"PEPE: Dejo a tu CRITERIO cuando usar que ATAQUE"
 	])
 	yield(Textbox, "text_display_finished")
