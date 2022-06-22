@@ -59,12 +59,15 @@ func _process(delta):
 				end_tween_early()
 		State.FINISHED:
 			if Input.is_action_just_pressed("A0"):
-				var next_up = text_queue.front()
-				if next_up is Dictionary:
-					match(next_up.type):
-						"choose":
-							display_choose(next_up.options)
-					text_queue.pop_front()
+				if !text_queue.empty():
+					var next_up = text_queue.front()
+					if next_up is Dictionary:
+						match(next_up.type):
+							"choose":
+								display_choose(next_up.options)
+						text_queue.pop_front()
+					else:
+						change_state(State.READY)
 				else:
 					change_state(State.READY)
 		

@@ -41,17 +41,18 @@ func play(body):
 		"PEPE: bueno, ya veo que sos un REY del PARCUR, ahora falta aprender a cagarte a PIÑAS",
 		"BIFE: 8===D",
 		"PEPE: vamos primero a lo BASICO:", 
-		"PEPE: con X pegas.\nNada, eso, dale una prueba."
+		"PEPE: con X pegas.",
+		"Nada, eso, dale una prueba."
 	])
 	yield(Textbox, "text_display_finished")
 	
 	$guide/text.visible = true
 	player.controller.enabled = true
-	for i in boundaries.get_shape_owners():
-		var shape_owner = boundaries.shape_owner_get_owner(i)
-		shape_owner.disabled = false
+	set_boundaries_disabled(false)
 	
 	yield($dummys0, "all_dead")
+	player.controller.enabled = false
+	yield(self, "player_is_still")
 	Textbox.add_texts([
 		"PEPE: muy BIEN BIFE",
 		"BIFE: 8===D",
@@ -61,8 +62,29 @@ func play(body):
 	])
 	yield(Textbox, "text_display_finished")
 	
+	tween.interpolate_property(camera, "global_position", 
+		camera.global_position, 
+		current_camera.global_position, 
+		1.0,
+		Tween.TRANS_SINE,
+		Tween.EASE_IN_OUT
+		)
+	tween.start()
+	yield(tween, "tween_all_completed")
+	set_boundaries_disabled(true)
+	player.controller.enabled = true
+	
+	current_camera.current = true
+	
 func _physics_process(delta):
-	if !is_player_still and player.velocity.length_squared() < 25.0:
-		emit_signal("player_is_still")
-		is_player_still = true
-		player.velocity = Vector2.ZERO
+	if player.velocity.length_squared() < 25.0:
+		if !is_player_still:
+			emit_signal("player_is_still")
+			is_player_still = true
+			player.velocity = Vector2.ZERO
+	else:
+		is_player_still = false
+func set_boundaries_disabled(val):
+	for i in boundaries.get_shape_owners():
+		var shape_owner = boundaries.shape_owner_get_owner(i)
+		shape_owner.disabled = val

@@ -2,7 +2,7 @@
 
 [ext_resource path="res://autotile/terrain_simple.tscn" type="PackedScene" id=1]
 [ext_resource path="res://test/fighting/tilemap.tscn" type="PackedScene" id=2]
-[ext_resource path="res://fighting/dude/dude.tscn" type="PackedScene" id=3]
+[ext_resource path="res://fighting/dude/bife.tscn" type="PackedScene" id=3]
 
 [node name="fighting_scene2" type="Node2D"]
 

@@ -2079,7 +2079,7 @@ bg_color = Color( 0.341176, 0, 0, 1 )
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 5.5 )
 
-[node name="dude" type="KinematicBody2D" groups=["fighter", "player"]]
+[node name="bife" type="KinematicBody2D" groups=["fighter", "player"]]
 collision_mask = 0
 script = ExtResource( 1 )
 speed = 200.0
@@ -2148,6 +2148,7 @@ script = ExtResource( 15 )
 [node name="jab" parent="pivot/hitbox" instance=ExtResource( 32 )]
 monitoring = false
 monitorable = false
+knockback = Vector2( 10, 0 )
 damage = 20.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="pivot/hitbox/jab"]
