@@ -49,7 +49,7 @@ func play(body):
 	set_boundaries_disabled(false)
 	
 	$guide/text.visible = true
-	$guide/text.text = "X QUIETO es un JAB (APRETAR VARIAS VECES PARA HACER UN COMBO)"
+	$guide/text.text = "apretar X estando QUIETO hace un JAB (APRETAR VARIAS VECES PARA HACER UN COMBO)"
 	yield(wait_on_hit("jab"), "completed")
 	yield(wait_on_hit("jab2"), "completed")
 	yield(wait_on_hit("jab3"), "completed")
