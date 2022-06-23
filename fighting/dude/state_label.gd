@@ -5,4 +5,4 @@ func _ready():
 
 
 func _on_state_state_changed(current_state):
-	text = current_state.name
+	text = current_state

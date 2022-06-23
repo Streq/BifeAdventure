@@ -24,7 +24,7 @@ export var knockstun :float = 0.3
 
 onready var health := max_health setget set_health
 
-onready var state = $state
+onready var state : StateMachine = $state
 onready var sprite = $pivot/display/Sprite
 onready var display = $pivot/display
 onready var hitbox = $pivot/hitbox

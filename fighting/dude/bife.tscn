@@ -1,4 +1,4 @@
-[gd_scene load_steps=89 format=2]
+[gd_scene load_steps=90 format=2]
 
 [ext_resource path="res://fighting/dude/fighter.gd" type="Script" id=1]
 [ext_resource path="res://fighting/dude/idle.gd" type="Script" id=2]
@@ -32,6 +32,7 @@
 [ext_resource path="res://asset/texture/attack.png" type="Texture" id=30]
 [ext_resource path="res://fighting/fighter/state/jab.gd" type="Script" id=31]
 [ext_resource path="res://fighting/hitbox/hitbox.tscn" type="PackedScene" id=32]
+[ext_resource path="res://fighting/trigger/deactivate_on_knockback.gd" type="Script" id=33]
 
 [sub_resource type="RectangleShape2D" id=22]
 extents = Vector2( 10.5, 4.5 )
@@ -2192,6 +2193,9 @@ shape = SubResource( 24 )
 script = ExtResource( 16 )
 impulse = Vector2( -150, -50 )
 
+[node name="deactivate_on_knockback" type="Node" parent="pivot/hitbox/air_kick"]
+script = ExtResource( 33 )
+
 [node name="dair" parent="pivot/hitbox" instance=ExtResource( 32 )]
 visible = false
 monitoring = false
@@ -2527,8 +2531,8 @@ what = "velocity"
 [connection signal="health_changed" from="." to="healthbar" method="_on_health_changed"]
 [connection signal="state_exit" from="." to="pivot/hitbox" method="clear"]
 [connection signal="state_exit" from="." to="pivot/hurtbox" method="clear"]
-[connection signal="applied_knockback" from="pivot/hitbox/air_kick" to="pivot/hitbox/air_kick" method="deactivate"]
 [connection signal="applied_knockback" from="pivot/hitbox/air_kick" to="pivot/hitbox/air_kick/spring" method="trigger"]
+[connection signal="applied_knockback" from="pivot/hitbox/air_kick" to="pivot/hitbox/air_kick/deactivate_on_knockback" method="trigger"]
 [connection signal="applied_knockback" from="pivot/hitbox/dair" to="pivot/hitbox/dair/spring" method="trigger"]
 [connection signal="applied_knockback" from="pivot/hitbox/tackle" to="pivot/hitbox/tackle/spring" method="trigger"]
 [connection signal="state_changed" from="state" to="state_label" method="_on_state_state_changed"]

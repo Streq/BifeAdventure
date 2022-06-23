@@ -9,6 +9,7 @@ onready var boundaries = $boundaries
 
 var is_player_still = false
 var played = false
+var check_player = false
 func _ready():
 	set_physics_process(false)
 
@@ -18,7 +19,7 @@ func play(body):
 	played = true
 	player.controller.enabled = false
 	set_physics_process(true)
-	
+	check_player = true
 	yield(self, "player_is_still")
 	
 	#transition camera
@@ -52,6 +53,7 @@ func play(body):
 	
 	yield($dummys0, "all_dead")
 	player.controller.enabled = false
+	check_player = true
 	yield(self, "player_is_still")
 	Textbox.add_texts([
 		"PEPE: muy BIEN BIFE",
@@ -77,11 +79,12 @@ func play(body):
 	current_camera.current = true
 	
 func _physics_process(delta):
-	if player.velocity.length_squared() < 25.0:
-		if !is_player_still:
+	if player.velocity.length_squared() < 5.0:
+		if check_player:
 			emit_signal("player_is_still")
 			is_player_still = true
 			player.velocity = Vector2.ZERO
+			check_player = false
 	else:
 		is_player_still = false
 func set_boundaries_disabled(val):

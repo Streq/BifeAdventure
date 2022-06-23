@@ -28,7 +28,7 @@ func initialize(start_state):
 	states_stack.push_front(get_node(start_state))
 	current_state = states_stack[0]
 	_enter()
-	emit_signal("state_changed", current_state)
+	emit_signal("state_changed", current_state.name)
 
 func set_active(value):
 	_active = value
@@ -63,7 +63,7 @@ func _change_state(state_name, param):
 		states_stack[0] = states_map[state_name]
 	
 	current_state = states_stack[0]
-	emit_signal("state_changed", current_state)
+	emit_signal("state_changed", current_state.name)
 	
 	if state_name != "previous":
 		_enter()

@@ -1,5 +1,7 @@
 extends Node2D
 
+signal hurt()
+
 export var speed := 400.0
 export var health := 10.0
 
@@ -40,6 +42,7 @@ func _enter_state(_state):
 		STATE.DIE:
 			$AnimationPlayer.play("die")
 		STATE.HURT:
+			emit_signal("hurt")
 			$AnimationPlayer.play("hurt")
 
 func _on_fov_body_entered(body):
