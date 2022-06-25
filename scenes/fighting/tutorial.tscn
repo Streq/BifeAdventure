@@ -129,7 +129,7 @@ visible = false
 tile_data = PoolIntArray( 1179647, 0, 524288 )
 
 [node name="door_tilemap" parent="." instance=ExtResource( 1 )]
-tile_data = PoolIntArray( 458929, 0, 851970, 524465, 0, 851970, 1114093, 0, 327680 )
+tile_data = PoolIntArray( 458929, 0, 851970, 1114093, 0, 327680 )
 
 [node name="killzone" type="Area2D" parent="."]
 collision_layer = 0

@@ -2096,7 +2096,7 @@ use_parent_material = true
 texture = ExtResource( 5 )
 hframes = 8
 vframes = 8
-frame = 17
+frame = 26
 
 [node name="hands" type="Sprite" parent="pivot/display"]
 visible = false
@@ -2505,9 +2505,6 @@ custom_styles/bg = SubResource( 15 )
 value = 100.0
 percent_visible = false
 script = ExtResource( 22 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="terrain_box" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 0.5 )
