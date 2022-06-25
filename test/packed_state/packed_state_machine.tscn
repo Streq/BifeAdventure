@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://test/packed_state/packed_state_machine.gd" type="Script" id=1]
+
+[node name="packed_state_machine" type="Node2D"]
+script = ExtResource( 1 )

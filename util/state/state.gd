@@ -39,3 +39,6 @@ func _on_animation_finished(anim_name):
 func _exit():
 	emit_signal("exited")
 	exit()
+
+
+

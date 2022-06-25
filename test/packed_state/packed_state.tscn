@@ -1,9 +1,25 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://test/packed_state/packed_state.gd" type="Script" id=1]
 
 [sub_resource type="Animation" id=1]
+resource_name = "enter"
 
-[node name="Node2D" type="Node2D"]
+[sub_resource type="Animation" id=2]
+resource_name = "exit"
+
+[node name="packed_state" type="Node2D"]
 script = ExtResource( 1 )
-animation = SubResource( 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+playback_process_mode = 2
+anims/enter = SubResource( 1 )
+anims/exit = SubResource( 2 )
+
+[connection signal="entered" from="." to="." method="set_visible" binds= [ true ]]
+[connection signal="entered" from="." to="AnimationPlayer" method="play" binds= [ "enter" ]]
+[connection signal="exit" from="." to="." method="set_visible" binds= [ false ]]
+[connection signal="exit" from="." to="AnimationPlayer" method="play" binds= [ "exit" ]]
+[connection signal="exit" from="." to="AnimationPlayer" method="advance" binds= [ 0.0 ]]
+[connection signal="physics_process" from="." to="AnimationPlayer" method="advance"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_finished"]

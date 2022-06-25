@@ -25,9 +25,9 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=4]
-loop = true
+resource_name = "enter"
 tracks/0/type = "value"
-tracks/0/path = NodePath("pivot/display/Sprite:frame")
+tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = false
 tracks/0/imported = false
@@ -94,7 +94,7 @@ shape = SubResource( 1 )
 texture = SubResource( 2 )
 hframes = 4
 vframes = 4
-frame = 8
+frame = 11
 
 [node name="CollisionShape2D" parent="pivot/hurtbox/main" index="0"]
 shape = SubResource( 1 )
