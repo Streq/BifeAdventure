@@ -1,16 +1,17 @@
-extends Node2D
+extends Node
 signal state_changed(state)
 
 export (String) var start_state
 export (NodePath) onready var root = (get_node(root) if is_instance_valid(root) else owner) as Node
 
-const _State = preload("packed_state.gd")
 
-var current: _State = null
+
+var current = null
 var states:= {}
 export var autostart := false
 
 func _ready():
+	yield(root,"ready")
 	if autostart:
 		initialize()
 	else:

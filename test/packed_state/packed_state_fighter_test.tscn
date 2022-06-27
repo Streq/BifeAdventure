@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://util/physics/drawable_collision_polygon.gd" type="Script" id=1]
 [ext_resource path="res://test/packed_state/packed_state_fighter.tscn" type="PackedScene" id=2]
 [ext_resource path="res://test/packed_state/controller.gd" type="Script" id=3]
+[ext_resource path="res://test/distributed_state/distributed_state_fighter.tscn" type="PackedScene" id=4]
 
 [node name="Node2D" type="Node2D"]
 
@@ -22,4 +23,10 @@ polygon = PoolVector2Array( -23, 253, 281, 253, 281, -19, -23, -19, -23, 4, -31,
 position = Vector2( 37, 19 )
 
 [node name="controller" type="Node" parent="fighter"]
+script = ExtResource( 3 )
+
+[node name="KinematicBody2D" parent="." instance=ExtResource( 4 )]
+position = Vector2( 206, 236 )
+
+[node name="controller" type="Node" parent="KinematicBody2D"]
 script = ExtResource( 3 )
