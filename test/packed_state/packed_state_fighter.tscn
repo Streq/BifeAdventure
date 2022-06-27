@@ -31,15 +31,17 @@ script = ExtResource( 6 )
 [node name="jab" type="Node" parent="pivot/packed_state_machine/idle/transitions"]
 script = ExtResource( 7 )
 end_state = "jab"
+B = 1
 
 [node name="walk" parent="pivot/packed_state_machine" instance=ExtResource( 1 )]
 
 [node name="transitions" type="Node" parent="pivot/packed_state_machine/walk"]
 script = ExtResource( 6 )
 
-[node name="jab" type="Node" parent="pivot/packed_state_machine/walk/transitions"]
+[node name="idle" type="Node" parent="pivot/packed_state_machine/walk/transitions"]
 script = ExtResource( 7 )
 end_state = "jab"
+horizontal_dir = 2
 
 [node name="jab" parent="pivot/packed_state_machine" instance=ExtResource( 3 )]
 visible = false

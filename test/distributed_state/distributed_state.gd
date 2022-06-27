@@ -21,8 +21,9 @@ func enter(params):
 	emit_signal("entered")
 	
 	
-func _on_animation_finished():
-	emit_signal("animation_finished")
+func _on_animation_finished(name):
+	if name == animation:
+		emit_signal("animation_finished")
 	
 
 func exit():

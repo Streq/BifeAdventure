@@ -40,10 +40,14 @@ func bool_to_sign(b:bool):
 
 func check(begin_state) -> bool:
 	var i = begin_state.root.input_state
+	var d = i.get_facing_dir()
+	if d.x:
+#		breakpoint
+		pass
 	return (
 		check_input(A, bool_to_sign(i.A)) &&
 		check_input(B, bool_to_sign(i.B)) &&
 		check_input(C, bool_to_sign(i.C)) &&
-		check_input(horizontal_dir, i.dir.x) &&
-		check_input(vertical_dir, i.dir.y)
+		check_input(horizontal_dir, d.x) &&
+		check_input(vertical_dir, d.y)
 	)
