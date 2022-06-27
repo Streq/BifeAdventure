@@ -1,7 +1,6 @@
 [gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://test/packed_state/packed_state.tscn" type="PackedScene" id=1]
-[ext_resource path="res://test/packed_state/packed_state_fighter/jab_state.gd" type="Script" id=2]
 
 [sub_resource type="Animation" id=1]
 loop = true
@@ -31,6 +30,22 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ 8.0, 10.0 ]
+}
+
+[sub_resource type="Animation" id=11]
+resource_name = "exit"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 8 ]
 }
 
 [sub_resource type="Animation" id=4]
@@ -134,6 +149,7 @@ load_path = "res://.import/pepe.png-566e57e6003a0784b9a0210ec9a9e344.stex"
 [node name="AnimationPlayer" parent="." index="0"]
 anims/air_kick = SubResource( 1 )
 anims/enter = SubResource( 3 )
+anims/exit = SubResource( 11 )
 anims/jab2 = SubResource( 4 )
 anims/jab3 = SubResource( 5 )
 anims/jump = SubResource( 6 )
@@ -149,8 +165,3 @@ frame = 8
 __meta__ = {
 "_editor_description_": "YXNlcHJpdGVfd2l6YXJkX2NvbmZpZwpwbGF5ZXJ8PUFuaW1hdGlvblBsYXllcgpzb3VyY2V8PXJlczovL2Fzc2V0L2FzZXByaXRlL3BlcGUuYXNlcHJpdGUKbGF5ZXJ8PQpvcF9leHB8PUZhbHNlCm9fZm9sZGVyfD0Kb19uYW1lfD0Kb25seV92aXNpYmxlfD1GYWxzZQpvX2V4X3B8PQo="
 }
-
-[node name="jab_state" type="Node" parent="." index="2"]
-script = ExtResource( 2 )
-
-[connection signal="physics_process" from="." to="jab_state" method="physics_process"]

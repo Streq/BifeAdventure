@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://test/packed_state/packed_state_fighter/idle.tscn" type="PackedScene" id=1]
 [ext_resource path="res://test/packed_state/packed_state_machine.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://test/packed_state/input_state.gd" type="Script" id=5]
 [ext_resource path="res://test/packed_state/transitions.gd" type="Script" id=6]
 [ext_resource path="res://test/packed_state/jab_transition.gd" type="Script" id=7]
+[ext_resource path="res://test/packed_state/idle_transition.gd" type="Script" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5, 6.5 )
@@ -34,12 +35,16 @@ end_state = "jab"
 [node name="jab" parent="pivot/packed_state_machine" instance=ExtResource( 3 )]
 visible = false
 
+[node name="on_finish" type="Node" parent="pivot/packed_state_machine/jab"]
+script = ExtResource( 8 )
+end_state = "idle"
+
+[node name="transitions" type="Node" parent="pivot/packed_state_machine/jab"]
+script = ExtResource( 6 )
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 1.5 )
 shape = SubResource( 1 )
 
 [node name="input_state" type="Node" parent="."]
 script = ExtResource( 5 )
-
-[connection signal="physics_process" from="pivot/packed_state_machine/idle" to="pivot/packed_state_machine/idle/idle_state" method="physics_process"]
-[connection signal="physics_process" from="pivot/packed_state_machine/jab" to="pivot/packed_state_machine/jab/jab_state" method="physics_process"]

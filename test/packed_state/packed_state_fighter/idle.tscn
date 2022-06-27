@@ -1,7 +1,6 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://test/packed_state/packed_state.tscn" type="PackedScene" id=1]
-[ext_resource path="res://test/packed_state/packed_state_fighter/idle_state.gd" type="Script" id=2]
 
 [sub_resource type="Animation" id=1]
 loop = true
@@ -167,8 +166,3 @@ frame = 13
 __meta__ = {
 "_editor_description_": "YXNlcHJpdGVfd2l6YXJkX2NvbmZpZwpwbGF5ZXJ8PUFuaW1hdGlvblBsYXllcgpzb3VyY2V8PXJlczovL2Fzc2V0L2FzZXByaXRlL3BlcGUuYXNlcHJpdGUKbGF5ZXJ8PQpvcF9leHB8PUZhbHNlCm9fZm9sZGVyfD0Kb19uYW1lfD0Kb25seV92aXNpYmxlfD1GYWxzZQpvX2V4X3B8PQo="
 }
-
-[node name="idle_state" type="Node" parent="." index="2"]
-script = ExtResource( 2 )
-
-[connection signal="physics_process" from="." to="idle_state" method="physics_process"]
