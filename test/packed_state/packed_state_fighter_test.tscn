@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://util/physics/drawable_collision_polygon.gd" type="Script" id=1]
 [ext_resource path="res://test/packed_state/packed_state_fighter.tscn" type="PackedScene" id=2]
+[ext_resource path="res://test/packed_state/controller.gd" type="Script" id=3]
 
 [node name="Node2D" type="Node2D"]
 
@@ -15,7 +16,10 @@ script = ExtResource( 1 )
 col = NodePath("../CollisionPolygon2D")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RigidBody2D"]
-polygon = PoolVector2Array( -24, 49, 49, 30, 31, -21, -24, -21, -24, 2, -26, 2, -26, -23, 34, -23, 73, 53, -27, 53, -26, 4, -26, 2, -24, 2 )
+polygon = PoolVector2Array( -23, 253, 281, 253, 281, -19, -23, -19, -23, 4, -31, 4, -31, -27, 289, -26, 289, 261, -31, 261, -31, 4, -23, 4 )
 
 [node name="fighter" parent="." instance=ExtResource( 2 )]
 position = Vector2( 37, 19 )
+
+[node name="controller" type="Node" parent="fighter"]
+script = ExtResource( 3 )

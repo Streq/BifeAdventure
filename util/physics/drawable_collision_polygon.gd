@@ -1,6 +1,5 @@
 extends Polygon2D
-tool
-export (NodePath) onready var col = get_node(col) as CollisionPolygon2D if col else null
+export (NodePath) onready var col = get_node(col) as CollisionPolygon2D
 
 func _ready():
 	col.polygon = polygon
