@@ -15,8 +15,11 @@ var root : Node = owner
 func enter(params):
 	_enter(params)
 	var anim = root.state_animation
+	#setup
 	anim.connect("animation_finished", self, "_on_animation_finished")
 	anim.play(animation)
+	anim.advance(0)
+	
 	emit_signal("enter", params)
 	emit_signal("entered")
 	
@@ -34,7 +37,7 @@ func exit():
 	anim.advance(0)
 	_exit()
 	emit_signal("exit")
-
+	
 func process(delta: float):
 	_idle_update(delta)
 	emit_signal("process", delta)

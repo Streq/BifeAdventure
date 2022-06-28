@@ -6,4 +6,4 @@ func _ready():
 func physics_process(delta):
 	var state = get_parent()
 	var fighter = state.root
-	fighter.velocity.x = fighter.get_facing_dir()*fighter.walk_speed
+	fighter.velocity.x = lerp(fighter.velocity.x, fighter.get_facing_dir()*fighter.walk_speed, delta*4.0)
