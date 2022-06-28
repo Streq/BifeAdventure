@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://test/distributed_state/distributed_state_fighter.gd" type="Script" id=1]
 [ext_resource path="res://test/packed_state/hitbox_offensive.gd" type="Script" id=2]
@@ -9,6 +9,11 @@
 [ext_resource path="res://test/packed_state/idle_transition.gd" type="Script" id=7]
 [ext_resource path="res://test/distributed_state/hitbox_frame.gd" type="Script" id=8]
 [ext_resource path="res://test/distributed_state/distributed_state.gd" type="Script" id=9]
+[ext_resource path="res://test/distributed_state/walk_forward.gd" type="Script" id=10]
+[ext_resource path="res://test/distributed_state/stay_still.gd" type="Script" id=11]
+[ext_resource path="res://test/distributed_state/run_forward.gd" type="Script" id=12]
+[ext_resource path="res://test/distributed_state/jump.gd" type="Script" id=13]
+[ext_resource path="res://test/distributed_state/on_floor.gd" type="Script" id=14]
 
 [sub_resource type="StreamTexture" id=15]
 load_path = "res://.import/pepe.png-12cb8b3e35be4f4e2f5165b6b0efd51a.stex"
@@ -80,6 +85,34 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ 14.0, 15.0 ]
+}
+
+[sub_resource type="Animation" id=16]
+resource_name = "crouch"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("pivot/hitbox/main:active")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("pivot/Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 7.0 ]
 }
 
 [sub_resource type="Animation" id=4]
@@ -200,7 +233,7 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id=8]
-length = 0.6
+length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("pivot/hitbox/main:active")
 tracks/0/interp = 1
@@ -251,10 +284,12 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 3.0, 4.0, 5.0, 6.0 ]
+"values": [ 2.0, 4.0, 5.0, 6.0 ]
 }
 
 [sub_resource type="Animation" id=14]
+length = 0.1
+step = 0.001
 tracks/0/type = "method"
 tracks/0/path = NodePath(".")
 tracks/0/interp = 1
@@ -276,10 +311,10 @@ tracks/1/loop_wrap = false
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.3, 0.7 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.08 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 1.0, 0.0, 2.0 ]
+"values": [ 1.0, 0.0 ]
 }
 
 [sub_resource type="Animation" id=10]
@@ -333,7 +368,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.4 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 3.0, 2.0 ]
+"values": [ 2.0, 3.0 ]
 }
 
 [node name="fighter" type="KinematicBody2D"]
@@ -367,10 +402,82 @@ script = ExtResource( 5 )
 end_state = "jump"
 A = 1
 
+[node name="run" type="Node" parent="state_machine/idle/transitions"]
+script = ExtResource( 5 )
+end_state = "run"
+C = 1
+horizontal_dir = 1
+
 [node name="walk" type="Node" parent="state_machine/idle/transitions"]
 script = ExtResource( 5 )
 end_state = "walk"
 horizontal_dir = 1
+
+[node name="crouch" type="Node" parent="state_machine/idle/transitions"]
+script = ExtResource( 5 )
+end_state = "crouch"
+vertical_dir = 1
+
+[node name="stay_still" type="Node" parent="state_machine/idle"]
+script = ExtResource( 11 )
+
+[node name="on_floor" type="Node" parent="state_machine/idle"]
+script = ExtResource( 14 )
+should_be_true = false
+state_to = "air"
+
+[node name="crouch" type="Node" parent="state_machine"]
+script = ExtResource( 9 )
+animation = "crouch"
+
+[node name="transitions" type="Node" parent="state_machine/crouch"]
+script = ExtResource( 6 )
+
+[node name="turn_around" type="Node" parent="state_machine/crouch/transitions"]
+script = ExtResource( 5 )
+end_state = "turn_around"
+horizontal_dir = -1
+
+[node name="jab" type="Node" parent="state_machine/crouch/transitions"]
+script = ExtResource( 5 )
+end_state = "jab"
+B = 1
+
+[node name="jump" type="Node" parent="state_machine/crouch/transitions"]
+script = ExtResource( 5 )
+end_state = "jump"
+A = 1
+
+[node name="run" type="Node" parent="state_machine/crouch/transitions"]
+script = ExtResource( 5 )
+end_state = "run"
+C = 1
+horizontal_dir = 1
+
+[node name="walk" type="Node" parent="state_machine/crouch/transitions"]
+script = ExtResource( 5 )
+end_state = "walk"
+horizontal_dir = 1
+
+[node name="idle2" type="Node" parent="state_machine/crouch/transitions"]
+script = ExtResource( 5 )
+end_state = "idle"
+horizontal_dir = 2
+vertical_dir = -1
+
+[node name="idle" type="Node" parent="state_machine/crouch/transitions"]
+script = ExtResource( 5 )
+end_state = "idle"
+horizontal_dir = 2
+vertical_dir = 2
+
+[node name="stay_still" type="Node" parent="state_machine/crouch"]
+script = ExtResource( 11 )
+
+[node name="on_floor" type="Node" parent="state_machine/crouch"]
+script = ExtResource( 14 )
+should_be_true = false
+state_to = "air"
 
 [node name="walk" type="Node" parent="state_machine"]
 script = ExtResource( 9 )
@@ -394,10 +501,65 @@ script = ExtResource( 5 )
 end_state = "jump"
 A = 1
 
+[node name="run" type="Node" parent="state_machine/walk/transitions"]
+script = ExtResource( 5 )
+end_state = "run"
+C = 1
+horizontal_dir = 1
+
 [node name="idle" type="Node" parent="state_machine/walk/transitions"]
 script = ExtResource( 5 )
 end_state = "idle"
 horizontal_dir = 2
+
+[node name="walk_forward" type="Node" parent="state_machine/walk"]
+script = ExtResource( 10 )
+
+[node name="on_floor" type="Node" parent="state_machine/walk"]
+script = ExtResource( 14 )
+should_be_true = false
+state_to = "air"
+
+[node name="run" type="Node" parent="state_machine"]
+script = ExtResource( 9 )
+animation = "run"
+
+[node name="transitions" type="Node" parent="state_machine/run"]
+script = ExtResource( 6 )
+
+[node name="turn_around" type="Node" parent="state_machine/run/transitions"]
+script = ExtResource( 5 )
+end_state = "turn_around"
+horizontal_dir = -1
+
+[node name="jab" type="Node" parent="state_machine/run/transitions"]
+script = ExtResource( 5 )
+end_state = "jab"
+B = 1
+
+[node name="jump" type="Node" parent="state_machine/run/transitions"]
+script = ExtResource( 5 )
+end_state = "jump"
+A = 1
+
+[node name="walk" type="Node" parent="state_machine/run/transitions"]
+script = ExtResource( 5 )
+end_state = "idle"
+C = -1
+horizontal_dir = 1
+
+[node name="idle" type="Node" parent="state_machine/run/transitions"]
+script = ExtResource( 5 )
+end_state = "idle"
+horizontal_dir = 2
+
+[node name="run_forward" type="Node" parent="state_machine/run"]
+script = ExtResource( 12 )
+
+[node name="on_floor" type="Node" parent="state_machine/run"]
+script = ExtResource( 14 )
+should_be_true = false
+state_to = "air"
 
 [node name="turn_around" type="Node" parent="state_machine"]
 script = ExtResource( 9 )
@@ -410,6 +572,11 @@ end_state = "walk"
 [node name="transitions" type="Node" parent="state_machine/turn_around"]
 script = ExtResource( 6 )
 
+[node name="on_floor" type="Node" parent="state_machine/turn_around"]
+script = ExtResource( 14 )
+should_be_true = false
+state_to = "air"
+
 [node name="jab" type="Node" parent="state_machine"]
 script = ExtResource( 9 )
 animation = "jab"
@@ -417,6 +584,11 @@ animation = "jab"
 [node name="on_finish" type="Node" parent="state_machine/jab"]
 script = ExtResource( 7 )
 end_state = "idle"
+
+[node name="on_floor" type="Node" parent="state_machine/jab"]
+script = ExtResource( 14 )
+should_be_true = false
+state_to = "air"
 
 [node name="jump" type="Node" parent="state_machine"]
 script = ExtResource( 9 )
@@ -426,12 +598,24 @@ animation = "jump"
 script = ExtResource( 7 )
 end_state = "idle"
 
+[node name="jump" type="Node" parent="state_machine/jump"]
+script = ExtResource( 13 )
+
+[node name="air" type="Node" parent="state_machine"]
+script = ExtResource( 9 )
+animation = "jump"
+
+[node name="on_floor" type="Node" parent="state_machine/air"]
+script = ExtResource( 14 )
+state_to = "crouch"
+
 [node name="pivot" type="Node2D" parent="."]
 
 [node name="Sprite" type="Sprite" parent="pivot"]
 texture = SubResource( 15 )
 hframes = 4
 vframes = 4
+frame = 7
 __meta__ = {
 "_editor_description_": "YXNlcHJpdGVfd2l6YXJkX2NvbmZpZwpwbGF5ZXJ8PXN0YXRlX2FuaW1hdGlvbgpzb3VyY2V8PXJlczovL2Fzc2V0L2FzZXByaXRlL3BlcGUuYXNlcHJpdGUKbGF5ZXJ8PQpvcF9leHB8PUZhbHNlCm9fZm9sZGVyfD0Kb19uYW1lfD0Kb25seV92aXNpYmxlfD1GYWxzZQpvX2V4X3B8PQo="
 }
@@ -481,6 +665,7 @@ script = ExtResource( 4 )
 [node name="state_animation" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 12 )
 anims/air_kick = SubResource( 3 )
+anims/crouch = SubResource( 16 )
 anims/idle = SubResource( 4 )
 anims/jab = SubResource( 5 )
 anims/jab2 = SubResource( 6 )
