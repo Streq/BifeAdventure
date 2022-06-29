@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://test/distributed_state/distributed_state_fighter.gd" type="Script" id=1]
 [ext_resource path="res://test/packed_state/hitbox_offensive.gd" type="Script" id=2]
@@ -17,6 +17,7 @@
 [ext_resource path="res://test/distributed_state/air_movement.gd" type="Script" id=15]
 [ext_resource path="res://test/distributed_state/on_wall.gd" type="Script" id=16]
 [ext_resource path="res://test/distributed_state/wall_state.gd" type="Script" id=17]
+[ext_resource path="res://util/direction.tscn" type="PackedScene" id=18]
 
 [sub_resource type="StreamTexture" id=18]
 load_path = "res://.import/pepe.png-12cb8b3e35be4f4e2f5165b6b0efd51a.stex"
@@ -603,7 +604,7 @@ script = ExtResource( 6 )
 
 [node name="jump" type="Node" parent="state_machine/wall/transitions"]
 script = ExtResource( 5 )
-end_state = "jump"
+end_state = "wall_jump"
 A = 1
 
 [node name="stay_still" type="Node" parent="state_machine/wall"]
@@ -744,6 +745,21 @@ end_state = "idle"
 [node name="jump" type="Node" parent="state_machine/jump"]
 script = ExtResource( 13 )
 
+[node name="wall_jump" type="Node" parent="state_machine"]
+script = ExtResource( 9 )
+animation = "jump"
+
+[node name="on_finish" type="Node" parent="state_machine/wall_jump"]
+script = ExtResource( 7 )
+end_state = "air"
+
+[node name="jump" type="Node" parent="state_machine/wall_jump"]
+script = ExtResource( 13 )
+
+[node name="direction" parent="state_machine/wall_jump/jump" instance=ExtResource( 18 )]
+direction = Vector2( 0.5, -0.866025 )
+direction_degrees = -60.0
+
 [node name="air" type="Node" parent="state_machine"]
 script = ExtResource( 9 )
 animation = "air"
@@ -766,6 +782,7 @@ script = ExtResource( 15 )
 [node name="on_wall" type="Node" parent="state_machine/air"]
 script = ExtResource( 16 )
 state_to = "wall"
+side = 1
 
 [node name="air_kick" type="Node" parent="state_machine"]
 script = ExtResource( 9 )

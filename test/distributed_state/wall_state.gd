@@ -15,5 +15,6 @@ func entered():
 func physics_process(delta):
 	var state = get_parent()
 	var fighter = state.root
+	fighter.velocity.y = 0
 	
 #	fighter.velocity.x = lerp(fighter.velocity.x, fighter.get_facing_dir(), delta * 4.0)

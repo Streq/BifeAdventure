@@ -1,11 +1,18 @@
 extends Node
 
+export var multiplier := 1.0
+
+onready var direction : Vector2 = $direction.direction if has_node("direction") else Vector2.UP
+
+var strength = 0.0
+var pressing = false
+
 func _ready():
 	get_parent().connect("animation_finished", self, "jump")
 	get_parent().connect("physics_process", self, "physics_process")
 	get_parent().connect("entered", self, "entered")
-var strength = 0.0
-var pressing = false
+	
+
 func entered():
 	strength = 0.0
 	pressing = true
@@ -36,5 +43,6 @@ func jump():
 	else:
 		#full jump
 		jump_impulse = fighter.jump_speed
-
-	fighter.velocity.y -= jump_impulse
+	var facing_direction = direction
+	facing_direction.x *= fighter.get_facing_dir()
+	fighter.velocity += jump_impulse*multiplier*facing_direction
