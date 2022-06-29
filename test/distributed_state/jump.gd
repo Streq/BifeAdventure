@@ -20,17 +20,17 @@ func physics_process(delta):
 	
 	
 func jump():
-	
+	strength += get_physics_process_delta_time()
 	var fighter = get_parent().root
 	#dirty stuff to get animation length
-	var anim_length = fighter.state_animation.get_animation("jump").length-get_physics_process_delta_time()
+	var anim_length = fighter.state_animation.get_animation("jump").length
 	
 	var jump_impulse
 	
-	if strength < anim_length/3.0:
+	if strength < anim_length/2.0:
 		#low jump
 		jump_impulse = fighter.jump_speed/3
-	elif strength < anim_length*0.9:
+	elif strength < anim_length*0.99:
 		#mid jump
 		jump_impulse = fighter.jump_speed*2.0/3
 	else:
