@@ -10,7 +10,8 @@ func _ready():
 func entered():
 	var state = get_parent()
 	var fighter = state.root
-	fighter.facing_right = !fighter.facing_right
+	if fighter.is_against_wall(1):
+		fighter.facing_right = !fighter.facing_right
 	
 func physics_process(delta):
 	var state = get_parent()

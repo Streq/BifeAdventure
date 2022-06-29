@@ -47,5 +47,5 @@ func is_against_wall(side: int):
 			var collision : KinematicCollision2D = get_slide_collision(i)
 			if sign(collision.normal.x) == modifier*get_facing_dir():
 				return true
-			
+		return false
 		

@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://test/distributed_state/distributed_state_fighter.gd" type="Script" id=1]
 [ext_resource path="res://test/packed_state/hitbox_offensive.gd" type="Script" id=2]
@@ -9,9 +9,7 @@
 [ext_resource path="res://test/packed_state/idle_transition.gd" type="Script" id=7]
 [ext_resource path="res://test/distributed_state/hitbox_frame.gd" type="Script" id=8]
 [ext_resource path="res://test/distributed_state/distributed_state.gd" type="Script" id=9]
-[ext_resource path="res://test/distributed_state/walk_forward.gd" type="Script" id=10]
 [ext_resource path="res://test/distributed_state/stay_still.gd" type="Script" id=11]
-[ext_resource path="res://test/distributed_state/run_forward.gd" type="Script" id=12]
 [ext_resource path="res://test/distributed_state/jump.gd" type="Script" id=13]
 [ext_resource path="res://test/distributed_state/on_floor.gd" type="Script" id=14]
 [ext_resource path="res://test/distributed_state/air_movement.gd" type="Script" id=15]
@@ -508,26 +506,10 @@ script = ExtResource( 5 )
 end_state = "turn_around"
 horizontal_dir = -1
 
-[node name="jab" type="Node" parent="state_machine/idle/transitions"]
-script = ExtResource( 5 )
-end_state = "jab"
-B = 1
-
 [node name="jump" type="Node" parent="state_machine/idle/transitions"]
 script = ExtResource( 5 )
 end_state = "jump"
 A = 1
-
-[node name="run" type="Node" parent="state_machine/idle/transitions"]
-script = ExtResource( 5 )
-end_state = "run"
-C = 1
-horizontal_dir = 1
-
-[node name="walk" type="Node" parent="state_machine/idle/transitions"]
-script = ExtResource( 5 )
-end_state = "walk"
-horizontal_dir = 1
 
 [node name="crouch" type="Node" parent="state_machine/idle/transitions"]
 script = ExtResource( 5 )
@@ -536,6 +518,7 @@ vertical_dir = 1
 
 [node name="stay_still" type="Node" parent="state_machine/idle"]
 script = ExtResource( 11 )
+friction = 60.0
 
 [node name="on_floor" type="Node" parent="state_machine/idle"]
 script = ExtResource( 14 )
@@ -554,26 +537,10 @@ script = ExtResource( 5 )
 end_state = "turn_around"
 horizontal_dir = -1
 
-[node name="jab" type="Node" parent="state_machine/crouch/transitions"]
-script = ExtResource( 5 )
-end_state = "jab"
-B = 1
-
 [node name="jump" type="Node" parent="state_machine/crouch/transitions"]
 script = ExtResource( 5 )
 end_state = "jump"
 A = 1
-
-[node name="run" type="Node" parent="state_machine/crouch/transitions"]
-script = ExtResource( 5 )
-end_state = "run"
-C = 1
-horizontal_dir = 1
-
-[node name="walk" type="Node" parent="state_machine/crouch/transitions"]
-script = ExtResource( 5 )
-end_state = "walk"
-horizontal_dir = 1
 
 [node name="idle2" type="Node" parent="state_machine/crouch/transitions"]
 script = ExtResource( 5 )
@@ -589,6 +556,7 @@ vertical_dir = 2
 
 [node name="stay_still" type="Node" parent="state_machine/crouch"]
 script = ExtResource( 11 )
+friction = 60.0
 
 [node name="on_floor" type="Node" parent="state_machine/crouch"]
 script = ExtResource( 14 )
@@ -620,95 +588,13 @@ script = ExtResource( 17 )
 [node name="air_movement" type="Node" parent="state_machine/wall"]
 script = ExtResource( 15 )
 
-[node name="walk" type="Node" parent="state_machine"]
-script = ExtResource( 9 )
-animation = "walk"
-
-[node name="transitions" type="Node" parent="state_machine/walk"]
-script = ExtResource( 6 )
-
-[node name="turn_around" type="Node" parent="state_machine/walk/transitions"]
-script = ExtResource( 5 )
-end_state = "turn_around"
-horizontal_dir = -1
-
-[node name="jab" type="Node" parent="state_machine/walk/transitions"]
-script = ExtResource( 5 )
-end_state = "jab"
-B = 1
-
-[node name="jump" type="Node" parent="state_machine/walk/transitions"]
-script = ExtResource( 5 )
-end_state = "jump"
-A = 1
-
-[node name="run" type="Node" parent="state_machine/walk/transitions"]
-script = ExtResource( 5 )
-end_state = "run"
-C = 1
-horizontal_dir = 1
-
-[node name="idle" type="Node" parent="state_machine/walk/transitions"]
-script = ExtResource( 5 )
-end_state = "idle"
-horizontal_dir = 2
-
-[node name="walk_forward" type="Node" parent="state_machine/walk"]
-script = ExtResource( 10 )
-
-[node name="on_floor" type="Node" parent="state_machine/walk"]
-script = ExtResource( 14 )
-should_be_true = false
-state_to = "air"
-
-[node name="run" type="Node" parent="state_machine"]
-script = ExtResource( 9 )
-animation = "run"
-
-[node name="transitions" type="Node" parent="state_machine/run"]
-script = ExtResource( 6 )
-
-[node name="turn_around" type="Node" parent="state_machine/run/transitions"]
-script = ExtResource( 5 )
-end_state = "turn_around"
-horizontal_dir = -1
-
-[node name="jab" type="Node" parent="state_machine/run/transitions"]
-script = ExtResource( 5 )
-end_state = "jab"
-B = 1
-
-[node name="jump" type="Node" parent="state_machine/run/transitions"]
-script = ExtResource( 5 )
-end_state = "jump"
-A = 1
-
-[node name="walk" type="Node" parent="state_machine/run/transitions"]
-script = ExtResource( 5 )
-end_state = "idle"
-C = -1
-horizontal_dir = 1
-
-[node name="idle" type="Node" parent="state_machine/run/transitions"]
-script = ExtResource( 5 )
-end_state = "idle"
-horizontal_dir = 2
-
-[node name="run_forward" type="Node" parent="state_machine/run"]
-script = ExtResource( 12 )
-
-[node name="on_floor" type="Node" parent="state_machine/run"]
-script = ExtResource( 14 )
-should_be_true = false
-state_to = "air"
-
 [node name="turn_around" type="Node" parent="state_machine"]
 script = ExtResource( 9 )
 animation = "turn_around"
 
 [node name="on_finish" type="Node" parent="state_machine/turn_around"]
 script = ExtResource( 7 )
-end_state = "walk"
+end_state = "idle"
 
 [node name="transitions" type="Node" parent="state_machine/turn_around"]
 script = ExtResource( 6 )
@@ -782,7 +668,6 @@ script = ExtResource( 15 )
 [node name="on_wall" type="Node" parent="state_machine/air"]
 script = ExtResource( 16 )
 state_to = "wall"
-side = 1
 
 [node name="air_kick" type="Node" parent="state_machine"]
 script = ExtResource( 9 )
