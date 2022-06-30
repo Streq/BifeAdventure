@@ -11,3 +11,7 @@ func set_active(val):
 	monitorable = val
 	monitoring = val
 	visible = val
+
+
+func get_body():
+	return get_parent().get_body()

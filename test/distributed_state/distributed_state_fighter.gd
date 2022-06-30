@@ -8,6 +8,8 @@ export var jump_speed := 200.0
 
 onready var input_state = $input_state
 onready var state_animation = $state_animation
+onready var state = $state_machine
+
 onready var pivot = $pivot
 
 
@@ -48,4 +50,6 @@ func is_against_wall(side: int):
 			if sign(collision.normal.x) == modifier*get_facing_dir():
 				return true
 		return false
-		
+
+func be_hurt():
+	state._change_state("hurt", null)

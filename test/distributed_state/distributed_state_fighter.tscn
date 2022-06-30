@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://test/distributed_state/distributed_state_fighter.gd" type="Script" id=1]
 [ext_resource path="res://test/packed_state/hitbox_offensive.gd" type="Script" id=2]
@@ -9,7 +9,9 @@
 [ext_resource path="res://test/packed_state/idle_transition.gd" type="Script" id=7]
 [ext_resource path="res://test/distributed_state/hitbox_frame.gd" type="Script" id=8]
 [ext_resource path="res://test/distributed_state/distributed_state.gd" type="Script" id=9]
+[ext_resource path="res://test/distributed_state/hurtbox.tscn" type="PackedScene" id=10]
 [ext_resource path="res://test/distributed_state/stay_still.gd" type="Script" id=11]
+[ext_resource path="res://test/distributed_state/offensive_hitbox.tscn" type="PackedScene" id=12]
 [ext_resource path="res://test/distributed_state/jump.gd" type="Script" id=13]
 [ext_resource path="res://test/distributed_state/on_floor.gd" type="Script" id=14]
 [ext_resource path="res://test/distributed_state/air_movement.gd" type="Script" id=15]
@@ -17,8 +19,14 @@
 [ext_resource path="res://test/distributed_state/wall_state.gd" type="Script" id=17]
 [ext_resource path="res://util/direction.tscn" type="PackedScene" id=18]
 
-[sub_resource type="StreamTexture" id=18]
-load_path = "res://.import/pepe.png-12cb8b3e35be4f4e2f5165b6b0efd51a.stex"
+[sub_resource type="StreamTexture" id=20]
+load_path = "res://.import/pepe.png-de24f1fef4f3932fda49cbf9ac55c4ba.stex"
+
+[sub_resource type="RectangleShape2D" id=23]
+extents = Vector2( 5, 6.5 )
+
+[sub_resource type="RectangleShape2D" id=24]
+extents = Vector2( 5.25, 2 )
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5, 6.5 )
@@ -43,7 +51,7 @@ tracks/1/path = NodePath("pivot/Sprite:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/enabled = false
+tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -90,6 +98,7 @@ tracks/4/keys = {
 [sub_resource type="Animation" id=17]
 resource_name = "air"
 length = 0.001
+loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("pivot/hitbox/main:active")
 tracks/0/interp = 1
@@ -124,7 +133,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 0.0 ]
+"values": [ 11.0 ]
 }
 
 [sub_resource type="Animation" id=3]
@@ -175,7 +184,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 3.0, 2.0 ]
+"values": [ 5.0, 4.0 ]
 }
 
 [sub_resource type="Animation" id=16]
@@ -203,12 +212,27 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 10.0 ]
+"values": [ 12.0 ]
+}
+
+[sub_resource type="Animation" id=21]
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("pivot/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1.0 ]
 }
 
 [sub_resource type="Animation" id=4]
 length = 0.5
-loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("pivot/hitbox/main:active")
 tracks/0/interp = 1
@@ -231,7 +255,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 9.0 ]
+"values": [ 10.0 ]
 }
 
 [sub_resource type="Animation" id=5]
@@ -270,7 +294,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 8.0, 6.0 ]
+"values": [ 0.0, 8.0 ]
 }
 
 [sub_resource type="Animation" id=6]
@@ -297,7 +321,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 8.0, 5.0 ]
+"values": [ 0.0, 7.0 ]
 }
 
 [sub_resource type="Animation" id=7]
@@ -324,7 +348,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 8.0, 4.0 ]
+"values": [ 0.0, 6.0 ]
 }
 
 [sub_resource type="Animation" id=8]
@@ -351,11 +375,27 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 10.0, 0.0 ]
+"values": [ 12.0, 11.0 ]
+}
+
+[sub_resource type="Animation" id=22]
+length = 0.15
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("pivot/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 2.0 ]
 }
 
 [sub_resource type="Animation" id=9]
-length = 0.6
+length = 0.75
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("pivot/hitbox/main:active")
@@ -376,10 +416,10 @@ tracks/1/loop_wrap = false
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.15, 0.3, 0.45 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 15.0, 13.0, 12.0, 11.0 ]
+"values": [ 17.0, 15.0, 14.0, 13.0, 13.0 ]
 }
 
 [sub_resource type="Animation" id=14]
@@ -409,7 +449,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.075 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 16.0, 9.0 ]
+"values": [ 18.0, 10.0 ]
 }
 
 [sub_resource type="Animation" id=10]
@@ -436,11 +476,11 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 8.0, 7.0 ]
+"values": [ 0.0, 9.0 ]
 }
 
 [sub_resource type="Animation" id=11]
-length = 0.8
+length = 1.2
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("pivot/hitbox/main:active")
@@ -461,10 +501,10 @@ tracks/1/loop_wrap = false
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.4 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.4, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ 15.0, 14.0 ]
+"values": [ 17.0, 16.0, 16.0 ]
 }
 
 [sub_resource type="Animation" id=19]
@@ -479,7 +519,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 1.0 ]
+"values": [ 3.0 ]
 }
 
 [node name="fighter" type="KinematicBody2D"]
@@ -528,6 +568,26 @@ script = ExtResource( 11 )
 friction = 60.0
 
 [node name="on_floor" type="Node" parent="state_machine/idle"]
+script = ExtResource( 14 )
+should_be_true = false
+state_to = "air"
+
+[node name="hurt" type="Node" parent="state_machine"]
+script = ExtResource( 9 )
+animation = "hurt"
+
+[node name="on_finish" type="Node" parent="state_machine/hurt"]
+script = ExtResource( 7 )
+end_state = "idle"
+
+[node name="transitions" type="Node" parent="state_machine/hurt"]
+script = ExtResource( 6 )
+
+[node name="stay_still" type="Node" parent="state_machine/hurt"]
+script = ExtResource( 11 )
+friction = 5.0
+
+[node name="on_floor" type="Node" parent="state_machine/hurt"]
 script = ExtResource( 14 )
 should_be_true = false
 state_to = "air"
@@ -756,12 +816,11 @@ end_state = "air"
 [node name="pivot" type="Node2D" parent="."]
 
 [node name="Sprite" type="Sprite" parent="pivot"]
-texture = SubResource( 18 )
+texture = SubResource( 20 )
 hframes = 5
 vframes = 4
-frame = 1
 __meta__ = {
-"_editor_description_": "YXNlcHJpdGVfd2l6YXJkX2NvbmZpZwpwbGF5ZXJ8PXN0YXRlX2FuaW1hdGlvbgpzb3VyY2V8PXJlczovL2Fzc2V0L2FzZXByaXRlL3BlcGUuYXNlcHJpdGUKbGF5ZXJ8PQpvcF9leHB8PUZhbHNlCm9fZm9sZGVyfD0Kb19uYW1lfD0Kb25seV92aXNpYmxlfD1GYWxzZQpvX2V4X3B8PQo="
+"_editor_description_": "YXNlcHJpdGVfd2l6YXJkX2NvbmZpZwpwbGF5ZXJ8PXN0YXRlX2FuaW1hdGlvbgpzb3VyY2V8PXJlczovL2Fzc2V0L2FzZXByaXRlL3BlcGUuYXNlcHJpdGUKbGF5ZXJ8PQpvcF9leHB8PVRydWUKb19mb2xkZXJ8PXJlczovL2Fzc2V0L3RleHR1cmUKb19uYW1lfD0Kb25seV92aXNpYmxlfD1GYWxzZQpvX2V4X3B8PQo="
 }
 
 [node name="hitbox" type="Node2D" parent="pivot"]
@@ -770,18 +829,14 @@ __meta__ = {
 script = ExtResource( 8 )
 active = true
 
-[node name="hurtbox" type="Area2D" parent="pivot/hitbox/main"]
-visible = false
-monitoring = false
-monitorable = false
-script = ExtResource( 2 )
-active = false
-direction = Vector2( 0, 0 )
-direction_degrees = nan
+[node name="hurtbox" parent="pivot/hitbox/main" instance=ExtResource( 10 )]
+visible = true
+monitoring = true
+monitorable = true
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="pivot/hitbox/main/hurtbox"]
-position = Vector2( -8, 1 )
-polygon = PoolVector2Array( 3, 6, 13, 6, 13, -8, 3, -8 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="pivot/hitbox/main/hurtbox"]
+position = Vector2( 0, 1.5 )
+shape = SubResource( 23 )
 
 [node name="air_hurtbox" type="Node2D" parent="pivot/hitbox"]
 script = ExtResource( 8 )
@@ -818,17 +873,14 @@ polygon = PoolVector2Array( 6, 4, 16, 4, 16, 0, 6, 0 )
 [node name="air_kick" type="Node2D" parent="pivot/hitbox"]
 script = ExtResource( 8 )
 
-[node name="hitbox" type="Area2D" parent="pivot/hitbox/air_kick"]
-visible = false
-script = ExtResource( 2 )
-knockback = 100.0
-damage = 10.0
-direction = Vector2( 0.957826, 0.287347 )
-direction_degrees = 16.6992
+[node name="hitbox" parent="pivot/hitbox/air_kick" instance=ExtResource( 12 )]
+knockback = 200.0
+direction = Vector2( 0.866025, -0.5 )
+direction_degrees = -30.0
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="pivot/hitbox/air_kick/hitbox"]
-position = Vector2( -2, -2 )
-polygon = PoolVector2Array( 6, 4, 16, 4, 16, 0, 6, 0 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="pivot/hitbox/air_kick/hitbox"]
+position = Vector2( 8.75, 0 )
+shape = SubResource( 24 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 1.5 )
@@ -842,11 +894,13 @@ anims/RESET = SubResource( 12 )
 anims/air = SubResource( 17 )
 anims/air_kick = SubResource( 3 )
 anims/crouch = SubResource( 16 )
+anims/hurt = SubResource( 21 )
 anims/idle = SubResource( 4 )
 anims/jab = SubResource( 5 )
 anims/jab2 = SubResource( 6 )
 anims/jab3 = SubResource( 7 )
 anims/jump = SubResource( 8 )
+anims/missile_kick = SubResource( 22 )
 anims/run = SubResource( 9 )
 anims/turn_around = SubResource( 14 )
 anims/ukick = SubResource( 10 )

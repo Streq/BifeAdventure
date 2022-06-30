@@ -11,4 +11,7 @@ func deactivate():
 	
 func set_active(val):
 	for hitbox in get_children():
-		hitbox.set_active(val)
+		hitbox.call_deferred("set_active",val)
+
+func get_body():
+	return owner
