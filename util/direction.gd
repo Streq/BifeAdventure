@@ -27,11 +27,13 @@ func set_direction_degrees(val : float):
 		direction = Vector2.RIGHT.rotated(deg2rad(val))
 	direction_degrees = val
 	direction_rads = deg2rad(val)
-	if Engine.editor_hint:
-		#shitty hack to prevent update during sliding
-		timeout_counter += 1
-		yield(get_tree().create_timer(0.5),"timeout")
-		timeout_counter -= 1
-		if !timeout_counter:
-			property_list_changed_notify()
+	property_list_changed_notify()
+#	if Engine.editor_hint:
+#		#shitty hack to prevent update during sliding
+#		timeout_counter += 1
+#		yield(get_tree().create_timer(0.5),"timeout")
+#		timeout_counter -= 1
+#		if !timeout_counter:
+#			property_list_changed_notify()
+	
 	

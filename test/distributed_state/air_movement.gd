@@ -10,9 +10,10 @@ func physics_process(delta):
 	
 	var target_speed = 0.0
 	if input.dir.x:
-		if input.C:
-			target_speed = fighter.run_speed
-		else:
-			target_speed = fighter.walk_speed
-	if input.dir.x:
-		fighter.velocity.x = lerp(fighter.velocity.x, target_speed*input.dir.x, delta*2.0)
+#		if input.C:
+		target_speed = fighter.run_speed
+#		else:
+#			target_speed = fighter.walk_speed
+		if (sign(input.dir.x) != sign(fighter.velocity.x) 
+		or abs(fighter.velocity.x) < target_speed):
+			fighter.velocity.x = lerp(fighter.velocity.x, input.dir.x*target_speed, delta*2.0)

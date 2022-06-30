@@ -486,6 +486,7 @@ tracks/0/keys = {
 script = ExtResource( 1 )
 gravity = 400.0
 walk_speed = 40.0
+run_speed = 150.0
 jump_speed = 400.0
 
 [node name="state_machine" type="Node" parent="."]
@@ -505,6 +506,12 @@ script = ExtResource( 6 )
 script = ExtResource( 5 )
 end_state = "turn_around"
 horizontal_dir = -1
+
+[node name="front_jump" type="Node" parent="state_machine/idle/transitions"]
+script = ExtResource( 5 )
+end_state = "front_jump"
+A = 1
+horizontal_dir = 1
 
 [node name="jump" type="Node" parent="state_machine/idle/transitions"]
 script = ExtResource( 5 )
@@ -537,6 +544,12 @@ script = ExtResource( 5 )
 end_state = "turn_around"
 horizontal_dir = -1
 
+[node name="front_jump" type="Node" parent="state_machine/crouch/transitions"]
+script = ExtResource( 5 )
+end_state = "front_jump"
+A = 1
+horizontal_dir = 1
+
 [node name="jump" type="Node" parent="state_machine/crouch/transitions"]
 script = ExtResource( 5 )
 end_state = "jump"
@@ -545,13 +558,11 @@ A = 1
 [node name="idle2" type="Node" parent="state_machine/crouch/transitions"]
 script = ExtResource( 5 )
 end_state = "idle"
-horizontal_dir = 2
 vertical_dir = -1
 
 [node name="idle" type="Node" parent="state_machine/crouch/transitions"]
 script = ExtResource( 5 )
 end_state = "idle"
-horizontal_dir = 2
 vertical_dir = 2
 
 [node name="stay_still" type="Node" parent="state_machine/crouch"]
@@ -570,10 +581,23 @@ animation = "wall"
 [node name="transitions" type="Node" parent="state_machine/wall"]
 script = ExtResource( 6 )
 
-[node name="jump" type="Node" parent="state_machine/wall/transitions"]
+[node name="wall_jump_up" type="Node" parent="state_machine/wall/transitions"]
 script = ExtResource( 5 )
-end_state = "wall_jump"
+end_state = "wall_jump_up"
 A = 1
+vertical_dir = -1
+
+[node name="wall_jump_mid" type="Node" parent="state_machine/wall/transitions"]
+script = ExtResource( 5 )
+end_state = "wall_jump_mid"
+A = 1
+vertical_dir = 2
+
+[node name="wall_jump_down" type="Node" parent="state_machine/wall/transitions"]
+script = ExtResource( 5 )
+end_state = "wall_jump_down"
+A = 1
+vertical_dir = 1
 
 [node name="stay_still" type="Node" parent="state_machine/wall"]
 script = ExtResource( 11 )
@@ -626,25 +650,70 @@ animation = "jump"
 
 [node name="on_finish" type="Node" parent="state_machine/jump"]
 script = ExtResource( 7 )
-end_state = "idle"
+end_state = "air"
 
 [node name="jump" type="Node" parent="state_machine/jump"]
 script = ExtResource( 13 )
 
-[node name="wall_jump" type="Node" parent="state_machine"]
+[node name="front_jump" type="Node" parent="state_machine"]
 script = ExtResource( 9 )
 animation = "jump"
 
-[node name="on_finish" type="Node" parent="state_machine/wall_jump"]
+[node name="on_finish" type="Node" parent="state_machine/front_jump"]
 script = ExtResource( 7 )
 end_state = "air"
 
-[node name="jump" type="Node" parent="state_machine/wall_jump"]
+[node name="jump" type="Node" parent="state_machine/front_jump"]
 script = ExtResource( 13 )
 
-[node name="direction" parent="state_machine/wall_jump/jump" instance=ExtResource( 18 )]
+[node name="direction" parent="state_machine/front_jump/jump" instance=ExtResource( 18 )]
+direction = Vector2( 0.707107, -0.707107 )
+direction_degrees = -45.0
+
+[node name="wall_jump_up" type="Node" parent="state_machine"]
+script = ExtResource( 9 )
+animation = "jump"
+
+[node name="on_finish" type="Node" parent="state_machine/wall_jump_up"]
+script = ExtResource( 7 )
+end_state = "air"
+
+[node name="jump" type="Node" parent="state_machine/wall_jump_up"]
+script = ExtResource( 13 )
+
+[node name="direction" parent="state_machine/wall_jump_up/jump" instance=ExtResource( 18 )]
 direction = Vector2( 0.5, -0.866025 )
 direction_degrees = -60.0
+
+[node name="wall_jump_mid" type="Node" parent="state_machine"]
+script = ExtResource( 9 )
+animation = "jump"
+
+[node name="on_finish" type="Node" parent="state_machine/wall_jump_mid"]
+script = ExtResource( 7 )
+end_state = "air"
+
+[node name="jump" type="Node" parent="state_machine/wall_jump_mid"]
+script = ExtResource( 13 )
+
+[node name="direction" parent="state_machine/wall_jump_mid/jump" instance=ExtResource( 18 )]
+direction = Vector2( 0.866025, -0.5 )
+direction_degrees = -30.0
+
+[node name="wall_jump_down" type="Node" parent="state_machine"]
+script = ExtResource( 9 )
+animation = "jump"
+
+[node name="on_finish" type="Node" parent="state_machine/wall_jump_down"]
+script = ExtResource( 7 )
+end_state = "air"
+
+[node name="jump" type="Node" parent="state_machine/wall_jump_down"]
+script = ExtResource( 13 )
+
+[node name="direction" parent="state_machine/wall_jump_down/jump" instance=ExtResource( 18 )]
+direction = Vector2( 0.939693, 0.34202 )
+direction_degrees = 20.0
 
 [node name="air" type="Node" parent="state_machine"]
 script = ExtResource( 9 )
