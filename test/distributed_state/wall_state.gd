@@ -1,7 +1,7 @@
 extends Node
 
-export var should_be_true := true
 export var state_to := "air"
+export (float, 0.0, 60.0) var friction := 0.0
 
 func _ready():
 	get_parent().connect("physics_process", self, "physics_process")
@@ -16,6 +16,10 @@ func entered():
 func physics_process(delta):
 	var state = get_parent()
 	var fighter = state.root
-	fighter.velocity.y = 0
-	
-#	fighter.velocity.x = lerp(fighter.velocity.x, fighter.get_facing_dir(), delta * 4.0)
+	fighter.velocity.y = lerp(fighter.velocity.y, 0.0, delta * friction)
+	#to prevent flickering between air and wall states
+	if fighter.input_state.dir.x != fighter.get_facing_dir():
+		fighter.velocity.x -= fighter.get_facing_dir()
+	else:
+		fighter.velocity.x += fighter.get_facing_dir()
+

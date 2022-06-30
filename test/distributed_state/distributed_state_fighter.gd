@@ -12,6 +12,9 @@ onready var state = $state_machine
 
 onready var pivot = $pivot
 
+func _ready():
+	state_animation.play("RESET")
+	state_animation.advance(0)
 
 func set_facing_right(val):
 	facing_right = val

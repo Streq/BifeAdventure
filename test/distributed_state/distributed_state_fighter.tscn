@@ -523,6 +523,7 @@ tracks/0/keys = {
 }
 
 [node name="fighter" type="KinematicBody2D"]
+collision_mask = 2
 script = ExtResource( 1 )
 gravity = 400.0
 walk_speed = 40.0
@@ -588,6 +589,7 @@ script = ExtResource( 11 )
 friction = 5.0
 
 [node name="on_floor" type="Node" parent="state_machine/hurt"]
+process_priority = -1
 script = ExtResource( 14 )
 should_be_true = false
 state_to = "air"
@@ -630,6 +632,7 @@ script = ExtResource( 11 )
 friction = 60.0
 
 [node name="on_floor" type="Node" parent="state_machine/crouch"]
+process_priority = -1
 script = ExtResource( 14 )
 should_be_true = false
 state_to = "air"
@@ -665,12 +668,16 @@ script = ExtResource( 11 )
 [node name="on_wall" type="Node" parent="state_machine/wall"]
 script = ExtResource( 16 )
 should_be_true = false
+frames = 2
+
+[node name="on_floor" type="Node" parent="state_machine/wall"]
+process_priority = -1
+script = ExtResource( 14 )
+state_to = "idle"
 
 [node name="wall_state" type="Node" parent="state_machine/wall"]
 script = ExtResource( 17 )
-
-[node name="air_movement" type="Node" parent="state_machine/wall"]
-script = ExtResource( 15 )
+friction = 60.0
 
 [node name="turn_around" type="Node" parent="state_machine"]
 script = ExtResource( 9 )
@@ -697,6 +704,7 @@ script = ExtResource( 7 )
 end_state = "idle"
 
 [node name="on_floor" type="Node" parent="state_machine/jab"]
+process_priority = -1
 script = ExtResource( 14 )
 should_be_true = false
 state_to = "air"
@@ -787,27 +795,27 @@ script = ExtResource( 5 )
 end_state = "air_kick"
 B = 1
 
+[node name="on_wall" type="Node" parent="state_machine/air"]
+process_priority = -1
+script = ExtResource( 16 )
+state_to = "wall"
+
 [node name="on_floor" type="Node" parent="state_machine/air"]
+process_priority = -1
 script = ExtResource( 14 )
 state_to = "crouch"
 
 [node name="air_movement" type="Node" parent="state_machine/air"]
 script = ExtResource( 15 )
 
-[node name="on_wall" type="Node" parent="state_machine/air"]
-script = ExtResource( 16 )
-state_to = "wall"
-
 [node name="air_kick" type="Node" parent="state_machine"]
 script = ExtResource( 9 )
 animation = "air_kick"
 
 [node name="on_floor" type="Node" parent="state_machine/air_kick"]
+process_priority = -1
 script = ExtResource( 14 )
 state_to = "crouch"
-
-[node name="air_movement" type="Node" parent="state_machine/air_kick"]
-script = ExtResource( 15 )
 
 [node name="on_finish" type="Node" parent="state_machine/air_kick"]
 script = ExtResource( 7 )
@@ -830,9 +838,6 @@ script = ExtResource( 8 )
 active = true
 
 [node name="hurtbox" parent="pivot/hitbox/main" instance=ExtResource( 10 )]
-visible = true
-monitoring = true
-monitorable = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="pivot/hitbox/main/hurtbox"]
 position = Vector2( 0, 1.5 )
@@ -841,18 +846,11 @@ shape = SubResource( 23 )
 [node name="air_hurtbox" type="Node2D" parent="pivot/hitbox"]
 script = ExtResource( 8 )
 
-[node name="hurtbox" type="Area2D" parent="pivot/hitbox/air_hurtbox"]
-visible = false
-monitoring = false
-monitorable = false
-script = ExtResource( 2 )
-active = false
-direction = Vector2( 0, 0 )
-direction_degrees = nan
+[node name="hurtbox" parent="pivot/hitbox/air_hurtbox" instance=ExtResource( 10 )]
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="pivot/hitbox/air_hurtbox/hurtbox"]
-position = Vector2( -9, 0 )
-polygon = PoolVector2Array( 3, 6, 13, 6, 13, -8, 3, -8 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="pivot/hitbox/air_hurtbox/hurtbox"]
+position = Vector2( 0, -1 )
+shape = SubResource( 23 )
 
 [node name="jab" type="Node2D" parent="pivot/hitbox"]
 script = ExtResource( 8 )

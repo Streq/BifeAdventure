@@ -9,10 +9,11 @@ signal animation_finished
 
 export var animation := ""
 var root : Node = owner
-
+var active = false
 
 
 func enter(params):
+	active = true
 	_enter(params)
 	var anim = root.state_animation
 	#setup
@@ -30,6 +31,7 @@ func _on_animation_finished(name):
 	
 
 func exit():
+	active = false
 	var anim = root.state_animation
 	anim.disconnect("animation_finished", self, "_on_animation_finished")
 	#cleanup
@@ -67,9 +69,11 @@ func _handle_input(event: InputEvent):
 	return
 
 func goto(state: String):
-	emit_signal("finish", state, null)
+	if active:
+		emit_signal("finish", state, null)
 
 func goto_args(state: String, args: Array):
-	emit_signal("finish", state, args)
+	if active:
+		emit_signal("finish", state, args)
 
 
