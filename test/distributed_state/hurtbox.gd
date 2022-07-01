@@ -9,19 +9,16 @@ func _on_area_entered(area : Area2D):
 		area.affect(self)
 	
 
-func receive_knockback(knockback : Vector2) -> bool:
-	var body = get_body()
-	body.velocity = knockback
-	if knockback.x:
-		body.facing_right = knockback.x < 0
+func receive_knockback(knockback:Vector2) -> bool:
+	get_body().receive_knockback(knockback)
 	return true
 
-func receive_flinch() -> bool:
-	get_body().be_hurt()
+func receive_flinch(direction: Vector2) -> bool:
+	get_body().flinch(direction)
 	return true
 
 func receive_damage(damage : float) -> bool:
-	get_body().health -= damage
+	get_body().receive_damage(damage)
 	return true
 
 func receive_grab() -> bool:

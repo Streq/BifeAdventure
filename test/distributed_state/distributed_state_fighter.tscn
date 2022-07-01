@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://test/distributed_state/distributed_state_fighter.gd" type="Script" id=1]
 [ext_resource path="res://test/packed_state/hitbox_offensive.gd" type="Script" id=2]
@@ -18,6 +18,8 @@
 [ext_resource path="res://test/distributed_state/on_wall.gd" type="Script" id=16]
 [ext_resource path="res://test/distributed_state/wall_state.gd" type="Script" id=17]
 [ext_resource path="res://util/direction.tscn" type="PackedScene" id=18]
+[ext_resource path="res://HUD/healthbar.gd" type="Script" id=19]
+[ext_resource path="res://test/distributed_state/finish_on_flinch_frames_reach_zero.gd" type="Script" id=20]
 
 [sub_resource type="StreamTexture" id=20]
 load_path = "res://.import/pepe.png-de24f1fef4f3932fda49cbf9ac55c4ba.stex"
@@ -522,6 +524,12 @@ tracks/0/keys = {
 "values": [ 3.0 ]
 }
 
+[sub_resource type="StyleBoxFlat" id=25]
+bg_color = Color( 0, 1, 0, 1 )
+
+[sub_resource type="StyleBoxFlat" id=26]
+bg_color = Color( 0.341176, 0, 0, 1 )
+
 [node name="fighter" type="KinematicBody2D"]
 collision_mask = 2
 script = ExtResource( 1 )
@@ -573,26 +581,46 @@ script = ExtResource( 14 )
 should_be_true = false
 state_to = "air"
 
-[node name="hurt" type="Node" parent="state_machine"]
+[node name="flinch" type="Node" parent="state_machine"]
 script = ExtResource( 9 )
 animation = "hurt"
 
-[node name="on_finish" type="Node" parent="state_machine/hurt"]
+[node name="on_finish" type="Node" parent="state_machine/flinch"]
 script = ExtResource( 7 )
 end_state = "idle"
 
-[node name="transitions" type="Node" parent="state_machine/hurt"]
+[node name="transitions" type="Node" parent="state_machine/flinch"]
 script = ExtResource( 6 )
 
-[node name="stay_still" type="Node" parent="state_machine/hurt"]
+[node name="stay_still" type="Node" parent="state_machine/flinch"]
 script = ExtResource( 11 )
 friction = 5.0
 
-[node name="on_floor" type="Node" parent="state_machine/hurt"]
-process_priority = -1
+[node name="on_floor" type="Node" parent="state_machine/flinch"]
 script = ExtResource( 14 )
 should_be_true = false
-state_to = "air"
+state_to = "air_flinch"
+
+[node name="finish_on_flinch_frames_reach_zero" type="Node" parent="state_machine/flinch"]
+script = ExtResource( 20 )
+
+[node name="air_flinch" type="Node" parent="state_machine"]
+script = ExtResource( 9 )
+animation = "hurt"
+
+[node name="on_finish" type="Node" parent="state_machine/air_flinch"]
+script = ExtResource( 7 )
+end_state = "air"
+
+[node name="transitions" type="Node" parent="state_machine/air_flinch"]
+script = ExtResource( 6 )
+
+[node name="on_floor" type="Node" parent="state_machine/air_flinch"]
+script = ExtResource( 14 )
+state_to = "flinch"
+
+[node name="finish_on_flinch_frames_reach_zero" type="Node" parent="state_machine/air_flinch"]
+script = ExtResource( 20 )
 
 [node name="crouch" type="Node" parent="state_machine"]
 script = ExtResource( 9 )
@@ -873,6 +901,7 @@ script = ExtResource( 8 )
 
 [node name="hitbox" parent="pivot/hitbox/air_kick" instance=ExtResource( 12 )]
 knockback = 200.0
+damage = 10.0
 direction = Vector2( 0.866025, -0.5 )
 direction_degrees = -30.0
 
@@ -904,3 +933,14 @@ anims/turn_around = SubResource( 14 )
 anims/ukick = SubResource( 10 )
 anims/walk = SubResource( 11 )
 anims/wall = SubResource( 19 )
+
+[node name="healthbar" type="ProgressBar" parent="."]
+margin_left = -26.0
+margin_top = -16.0
+margin_right = 26.0
+margin_bottom = -15.0
+custom_styles/fg = SubResource( 25 )
+custom_styles/bg = SubResource( 26 )
+value = 100.0
+percent_visible = false
+script = ExtResource( 19 )

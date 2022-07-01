@@ -2525,7 +2525,6 @@ __meta__ = {
 label = "velocity"
 what = "velocity"
 
-[connection signal="health_changed" from="." to="healthbar" method="_on_health_changed"]
 [connection signal="state_exit" from="." to="pivot/hitbox" method="clear"]
 [connection signal="state_exit" from="." to="pivot/hurtbox" method="clear"]
 [connection signal="applied_knockback" from="pivot/hitbox/air_kick" to="pivot/hitbox/air_kick/spring" method="trigger"]
