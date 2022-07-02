@@ -12,12 +12,12 @@ collision_layer = 2
 mode = 1
 
 [node name="Polygon2D" type="Polygon2D" parent="RigidBody2D"]
-polygon = PoolVector2Array( -23, 253, 281, 253, 281, -19, -23, -19, -23, 4, -31, 4, -31, -27, 289, -26, 289, 261, -31, 261, -31, 4, -23, 4 )
+polygon = PoolVector2Array( -23, 253, 281, 253, 281, -19, -23, -19, -23, 4, -31, 4, -31, -27, 289, -27, 289, 261, -31, 261, -31, 4, -23, 4 )
 script = ExtResource( 1 )
 col = NodePath("../CollisionPolygon2D")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RigidBody2D"]
-polygon = PoolVector2Array( -23, 253, 281, 253, 281, -19, -23, -19, -23, 4, -31, 4, -31, -27, 289, -26, 289, 261, -31, 261, -31, 4, -23, 4 )
+polygon = PoolVector2Array( -23, 253, 281, 253, 281, -19, -23, -19, -23, 4, -31, 4, -31, -27, 289, -27, 289, 261, -31, 261, -31, 4, -23, 4 )
 
 [node name="fighter2" parent="." instance=ExtResource( 4 )]
 position = Vector2( 212, 262 )
@@ -27,3 +27,4 @@ script = ExtResource( 3 )
 
 [node name="fighter3" parent="." instance=ExtResource( 4 )]
 position = Vector2( 118, 272 )
+health = 10.0

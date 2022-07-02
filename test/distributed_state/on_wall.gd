@@ -18,12 +18,12 @@ func _ready():
 
 
 func physics_process(delta):
-	current_frames += 1
 	var state = get_parent()
 	var fighter = state.root
 	if fighter.is_against_wall(side) == should_be_true:
 		current_frames += 1
 		if current_frames >= frames:
 			state.goto(state_to)
+			current_frames = 0
 	else:
 		current_frames = 0

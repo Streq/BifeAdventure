@@ -27,11 +27,11 @@ func initialize():
 	current.enter(null)
 	pause(false)
 	
-func _process(delta: float):
-	process(delta)
+#func _process(delta: float):
+#	process(delta)
 
-func _physics_process(delta: float):
-	physics_process(delta)
+#func _physics_process(delta: float):
+#	physics_process(delta)
 
 func process(delta: float):
 	current.process(delta)
