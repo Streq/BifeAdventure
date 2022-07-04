@@ -3,7 +3,7 @@ signal health_changed(value, nax_value)
 signal terrain_collision(velocity, collision)
 signal dead()
 
-export var health := 100.0
+export var health := 100.0 setget set_health
 export var max_health := 100.0
 export var gravity := 200.0
 export var facing_right := true setget set_facing_right
@@ -15,6 +15,8 @@ export (float, 0.0, 1000.0) var knockback_resistance := 0.0
 export (float, 0.0, 10.0) var knockback_lightness_multiplier := 1.0
 export (float, 0.0, 10.0) var flinch_multiplier := 0.1
 export (float, 0.0, 1.0) var bounce
+export var pause := false setget set_pause
+
 
 onready var input_state = $input_state
 onready var state_animation = $state_animation
@@ -30,10 +32,17 @@ func _ready():
 	state_animation.play("RESET")
 	state_animation.advance(0)
 	connect("terrain_collision", self, "collided")
+	self.health = health
+	self.facing_right = facing_right
+
+func set_health(val):
+	health = clamp(val, 0.0, max_health)
+	emit_signal("health_changed", health, max_health)
 
 func set_facing_right(val):
 	facing_right = val
-	pivot.scale.x = 1.0 if val else -1.0
+	if pivot:
+		pivot.scale.x = 1.0 if val else -1.0
 
 func get_facing_dir():
 	return 1.0 if facing_right else -1.0
@@ -51,6 +60,7 @@ func _physics_process(delta):
 	velocity = res_vel
 	velocity.y += gravity * delta
 	state.physics_process(delta)
+	state_animation.advance(delta)
 	if dead and !(state.current.name in ["dead", "dead_air", "flinch", "air_flinch"]):
 		velocity.y-=20.0
 		state._change_state("dead_air", null)
@@ -90,14 +100,17 @@ func flinch(knockback: Vector2):
 		set_facing_right(!(knockback.x>0.0))
 	flinch_frames = int(power*flinch_multiplier)
 	state._change_state("flinch", null)
-	
+
 func receive_damage(damage : float):
 	if damage>0.0:
 		damage_animation.play("damage")
-	health = clamp(health - damage, 0.0, max_health)
+	self.health = health - damage
 	if health == 0.0 and !dead:
 		die()
-	emit_signal("health_changed", health, max_health)
+
+func rebound(frames: int):
+	state._change_state("rebound", [frames])
+	
 
 func die():
 	dead = true
@@ -105,5 +118,12 @@ func die():
 	pass
 
 func collided(velocity, collision):
-	if velocity.length_squared()>100.0:
-		print("collided with velocity ", velocity, ", collision: ", collision)
+	pass
+#	if velocity.length_squared()>100.0:
+#		print("collided with velocity ", velocity, ", collision: ", collision)
+
+func set_pause(val):
+	pause = val
+	set_physics_process(!pause)
+		
+	

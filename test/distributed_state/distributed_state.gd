@@ -1,4 +1,6 @@
 extends Node
+class_name FighterState
+
 signal finish(next_state, params)
 signal enter(params)
 signal entered()

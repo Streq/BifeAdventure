@@ -20,7 +20,8 @@ col = NodePath("../CollisionPolygon2D")
 polygon = PoolVector2Array( -23, 253, 281, 253, 281, -19, -23, -19, -23, 4, -31, 4, -31, -27, 289, -27, 289, 261, -31, 261, -31, 4, -23, 4 )
 
 [node name="fighter2" parent="." instance=ExtResource( 4 )]
-position = Vector2( 212, 262 )
+position = Vector2( 135, 272 )
+facing_right = false
 
 [node name="controller" type="Node" parent="fighter2"]
 script = ExtResource( 3 )
@@ -28,3 +29,6 @@ script = ExtResource( 3 )
 [node name="fighter3" parent="." instance=ExtResource( 4 )]
 position = Vector2( 118, 272 )
 health = 10.0
+
+[node name="controller" type="Node" parent="fighter3"]
+script = ExtResource( 3 )

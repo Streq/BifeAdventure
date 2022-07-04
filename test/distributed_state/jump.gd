@@ -6,6 +6,7 @@ onready var direction : Vector2 = $direction.direction if has_node("direction") 
 
 var strength = 0.0
 var pressing = false
+export (float, 0.0, 1.0) var low_jump_threshold := 0.9
 
 func _ready():
 	get_parent().connect("animation_finished", self, "jump")
@@ -36,7 +37,7 @@ func jump():
 	
 	var jump_impulse
 	
-	if strength < anim_length/2.0:
+	if strength < anim_length * low_jump_threshold:
 		#low jump
 		jump_impulse = fighter.jump_speed/3
 	elif !strong_jump:

@@ -1,23 +1,96 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://fighting/dude/hitbox_manager.gd" type="Script" id=9]
+[ext_resource path="res://HUD/healthbar.gd" type="Script" id=1]
+[ext_resource path="res://shader/red_dither.tres" type="Material" id=2]
+[ext_resource path="res://test/packed_state/packed_state_machine.gd" type="Script" id=3]
+[ext_resource path="res://test/packed_state/input_state.gd" type="Script" id=4]
+[ext_resource path="res://asset/texture/pepe.png" type="Texture" id=5]
+[ext_resource path="res://test/distributed_state/distributed_state_fighter.gd" type="Script" id=6]
 
-[node name="KinematicBody2D" type="KinematicBody2D"]
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 5, 6.5 )
+
+[sub_resource type="StyleBoxFlat" id=22]
+bg_color = Color( 0, 1, 0, 1 )
+
+[sub_resource type="StyleBoxFlat" id=23]
+bg_color = Color( 0.341176, 0, 0, 1 )
+
+[sub_resource type="Animation" id=24]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:material")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ null ]
+}
+
+[sub_resource type="Animation" id=25]
+resource_name = "damage"
+length = 0.0833333
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:material")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.0833333 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 2 ), null ]
+}
+
+[node name="fighter" type="KinematicBody2D"]
+script = ExtResource( 6 )
+
+[node name="state_machine" type="Node" parent="."]
+script = ExtResource( 3 )
+start_state = "idle"
+root = NodePath("..")
+autostart = true
 
 [node name="pivot" type="Node2D" parent="."]
-
-[node name="display" type="Node2D" parent="pivot"]
-
-[node name="Sprite" type="Sprite" parent="pivot/display"]
 use_parent_material = true
-hframes = 8
-vframes = 8
-frame = 26
+
+[node name="Sprite" type="Sprite" parent="pivot"]
+use_parent_material = true
+texture = ExtResource( 5 )
+hframes = 5
+vframes = 5
+__meta__ = {
+"_editor_description_": ""
+}
 
 [node name="hitbox" type="Node2D" parent="pivot"]
-modulate = Color( 1, 0, 0, 1 )
-script = ExtResource( 9 )
 
-[node name="hurtbox" type="Node2D" parent="pivot"]
-modulate = Color( 1, 1, 0, 1 )
-script = ExtResource( 9 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 1.5 )
+shape = SubResource( 1 )
+
+[node name="input_state" type="Node" parent="."]
+script = ExtResource( 4 )
+
+[node name="healthbar" type="ProgressBar" parent="."]
+margin_left = -8.0
+margin_top = -16.0
+margin_right = 8.0
+margin_bottom = -15.0
+custom_styles/fg = SubResource( 22 )
+custom_styles/bg = SubResource( 23 )
+value = 100.0
+percent_visible = false
+script = ExtResource( 1 )
+
+[node name="state_animation" type="AnimationPlayer" parent="."]
+
+[node name="damage_animation" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 24 )
+anims/damage = SubResource( 25 )

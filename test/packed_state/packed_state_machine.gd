@@ -3,7 +3,7 @@ signal state_changed(state)
 
 export (String) var start_state
 export (NodePath) onready var root = (get_node(root) if is_instance_valid(root) else owner) as Node
-
+export var auto_process := false setget set_auto_process
 
 
 var current = null
@@ -58,3 +58,7 @@ func pause(paused: bool):
 	set_physics_process(val)
 	set_physics_process_internal(val)
 
+func set_auto_process(val):
+	auto_process = val
+	set_physics_process(val)
+	set_process(val)

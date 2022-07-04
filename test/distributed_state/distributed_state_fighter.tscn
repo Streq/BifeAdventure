@@ -1,6 +1,7 @@
-[gd_scene load_steps=47 format=2]
+[gd_scene load_steps=50 format=2]
 
 [ext_resource path="res://test/distributed_state/distributed_state_fighter.gd" type="Script" id=1]
+[ext_resource path="res://test/distributed_state/rebound.gd" type="Script" id=2]
 [ext_resource path="res://test/packed_state/packed_state_machine.gd" type="Script" id=3]
 [ext_resource path="res://test/packed_state/input_state.gd" type="Script" id=4]
 [ext_resource path="res://test/packed_state/jab_transition.gd" type="Script" id=5]
@@ -21,7 +22,7 @@
 [ext_resource path="res://test/distributed_state/finish_on_flinch_frames_reach_zero.gd" type="Script" id=20]
 [ext_resource path="res://shader/red_dither.tres" type="Material" id=21]
 
-[sub_resource type="StreamTexture" id=32]
+[sub_resource type="StreamTexture" id=36]
 load_path = "res://.import/pepe.png-de24f1fef4f3932fda49cbf9ac55c4ba.stex"
 
 [sub_resource type="RectangleShape2D" id=23]
@@ -96,6 +97,18 @@ tracks/4/keys = {
 "update": 0,
 "values": [ false ]
 }
+tracks/5/type = "value"
+tracks/5/path = NodePath("pivot/Sprite:rotation_degrees")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
 
 [sub_resource type="Animation" id=17]
 resource_name = "air"
@@ -135,7 +148,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 13.0 ]
+"values": [ 16.0 ]
 }
 
 [sub_resource type="Animation" id=3]
@@ -186,7 +199,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 7.0, 6.0 ]
+"values": [ 10.0, 9.0 ]
 }
 
 [sub_resource type="Animation" id=16]
@@ -214,7 +227,38 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 14.0 ]
+"values": [ 17.0 ]
+}
+
+[sub_resource type="Animation" id=37]
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("pivot/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1.0 ]
+}
+
+[sub_resource type="Animation" id=35]
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("pivot/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 3.0, 2.0 ]
 }
 
 [sub_resource type="Animation" id=21]
@@ -229,7 +273,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 3.0 ]
+"values": [ 6.0 ]
 }
 
 [sub_resource type="Animation" id=4]
@@ -257,7 +301,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 11.0 ]
+"values": [ 12.0 ]
 }
 
 [sub_resource type="Animation" id=5]
@@ -296,7 +340,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 12.0, 10.0 ]
+"values": [ 15.0, 13.0 ]
 }
 
 [sub_resource type="Animation" id=6]
@@ -323,7 +367,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 12.0, 9.0 ]
+"values": [ 15.0, 0.0 ]
 }
 
 [sub_resource type="Animation" id=7]
@@ -350,7 +394,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 12.0, 8.0 ]
+"values": [ 15.0, 11.0 ]
 }
 
 [sub_resource type="Animation" id=8]
@@ -374,10 +418,10 @@ tracks/1/loop_wrap = false
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 14.0 ]
+"values": [ 17.0, 16.0 ]
 }
 
 [sub_resource type="Animation" id=33]
@@ -392,7 +436,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 1.0 ]
+"values": [ 4.0 ]
 }
 
 [sub_resource type="Animation" id=31]
@@ -407,7 +451,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 2.0 ]
+"values": [ 5.0 ]
 }
 
 [sub_resource type="Animation" id=22]
@@ -422,7 +466,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 4.0 ]
+"values": [ 7.0 ]
 }
 
 [sub_resource type="Animation" id=9]
@@ -450,7 +494,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.15, 0.3, 0.45, 0.6 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 19.0, 17.0, 16.0, 15.0, 15.0 ]
+"values": [ 22.0, 20.0, 19.0, 18.0, 18.0 ]
 }
 
 [sub_resource type="Animation" id=14]
@@ -480,7 +524,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.075 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 20.0, 11.0 ]
+"values": [ 23.0, 12.0 ]
 }
 
 [sub_resource type="Animation" id=10]
@@ -507,7 +551,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 12.0, 0.0 ]
+"values": [ 15.0, 14.0 ]
 }
 
 [sub_resource type="Animation" id=11]
@@ -535,7 +579,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.4, 0.8 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ 19.0, 18.0, 18.0 ]
+"values": [ 22.0, 21.0, 21.0 ]
 }
 
 [sub_resource type="Animation" id=19]
@@ -550,7 +594,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 5.0 ]
+"values": [ 8.0 ]
 }
 
 [sub_resource type="StyleBoxFlat" id=25]
@@ -609,6 +653,15 @@ autostart = true
 script = ExtResource( 9 )
 animation = "idle"
 
+[node name="on_floor" type="Node" parent="state_machine/idle"]
+script = ExtResource( 14 )
+should_be_true = false
+state_to = "air"
+
+[node name="stay_still" type="Node" parent="state_machine/idle"]
+script = ExtResource( 11 )
+friction = 60.0
+
 [node name="transitions" type="Node" parent="state_machine/idle"]
 script = ExtResource( 6 )
 
@@ -637,15 +690,6 @@ A = 1
 script = ExtResource( 5 )
 end_state = "crouch"
 vertical_dir = 1
-
-[node name="stay_still" type="Node" parent="state_machine/idle"]
-script = ExtResource( 11 )
-friction = 60.0
-
-[node name="on_floor" type="Node" parent="state_machine/idle"]
-script = ExtResource( 14 )
-should_be_true = false
-state_to = "air"
 
 [node name="dead" type="Node" parent="state_machine"]
 script = ExtResource( 9 )
@@ -691,6 +735,14 @@ state_to = "air_flinch"
 
 [node name="finish_on_flinch_frames_reach_zero" type="Node" parent="state_machine/flinch"]
 script = ExtResource( 20 )
+
+[node name="rebound" type="Node" parent="state_machine"]
+script = ExtResource( 2 )
+animation = "air"
+
+[node name="stay_still" type="Node" parent="state_machine/rebound"]
+script = ExtResource( 11 )
+friction = 5.0
 
 [node name="air_flinch" type="Node" parent="state_machine"]
 script = ExtResource( 9 )
@@ -903,6 +955,9 @@ direction_degrees = 20.0
 script = ExtResource( 9 )
 animation = "air"
 
+[node name="air_movement" type="Node" parent="state_machine/air"]
+script = ExtResource( 15 )
+
 [node name="transitions" type="Node" parent="state_machine/air"]
 script = ExtResource( 6 )
 
@@ -920,9 +975,6 @@ state_to = "wall"
 process_priority = -1
 script = ExtResource( 14 )
 state_to = "crouch"
-
-[node name="air_movement" type="Node" parent="state_machine/air"]
-script = ExtResource( 15 )
 
 [node name="air_kick" type="Node" parent="state_machine"]
 script = ExtResource( 9 )
@@ -942,7 +994,7 @@ use_parent_material = true
 
 [node name="Sprite" type="Sprite" parent="pivot"]
 use_parent_material = true
-texture = SubResource( 32 )
+texture = SubResource( 36 )
 hframes = 5
 vframes = 5
 __meta__ = {
@@ -1004,10 +1056,13 @@ shape = SubResource( 1 )
 script = ExtResource( 4 )
 
 [node name="state_animation" type="AnimationPlayer" parent="."]
+playback_process_mode = 2
 anims/RESET = SubResource( 12 )
 anims/air = SubResource( 17 )
 anims/air_kick = SubResource( 3 )
 anims/crouch = SubResource( 16 )
+anims/fast_fall = SubResource( 37 )
+anims/flounder_up = SubResource( 35 )
 anims/hurt = SubResource( 21 )
 anims/idle = SubResource( 4 )
 anims/jab = SubResource( 5 )

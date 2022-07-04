@@ -468,9 +468,6 @@ margin_bottom = -2.0
 theme = ExtResource( 1 )
 align = 1
 script = ExtResource( 8 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="state" type="Node" parent="."]
 script = ExtResource( 5 )
