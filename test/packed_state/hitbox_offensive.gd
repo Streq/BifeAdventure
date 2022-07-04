@@ -45,21 +45,26 @@ func on_hurtbox(hurtbox: Hurtbox):
 #		get_tree().current_scene.add_child(splash)
 #		splash.global_position = fighter.global_position + (target.global_position-fighter.global_position)/2.0
 
+		
 		#HITSTUN
+		var stun_time = get_physics_process_delta_time()*clamp(damage, 5.0, 20.0)
+		
 		fighter.pause = true
-		target.pause = true 
-		#TODO DAR PLAY A ANIMACION DE SACUDIDA
-		yield(get_tree().create_timer(get_physics_process_delta_time()*10, false),"timeout")
+		var hitsplash_pos = fighter.global_position + (target.global_position-fighter.global_position)/2.0
+		hitsplash(hitsplash_pos, int(damage))
+		target.hitstun(stun_time)
+		yield(get_tree().create_timer(stun_time, false),"timeout")
 		fighter.pause = false
-		target.pause = false 
 		
-		var hit_splash : CPUParticles2D = HIT_SPLASH.instance()
-		hit_splash.emitting = true
-		hit_splash.modulate = Color.darkorange
-		hit_splash.amount = int(damage)
-		get_tree().current_scene.add_child(hit_splash)
-		hit_splash.global_position = fighter.global_position + (target.global_position-fighter.global_position)/2.0
 		
+func hitsplash(global_pos : Vector2, amount: int):
+	var hit_splash : CPUParticles2D = HIT_SPLASH.instance()
+	hit_splash.emitting = true
+	hit_splash.modulate = Color.darkorange
+	hit_splash.amount = amount
+	get_tree().current_scene.add_child(hit_splash)
+	hit_splash.global_position = global_pos
+
 func on_hitbox(hitbox: OffensiveHitbox):
 	if clang and hitbox.clang:
 		var target = hitbox.get_body()
@@ -79,7 +84,7 @@ func on_hitbox(hitbox: OffensiveHitbox):
 			
 			fighter.pause = false
 			if damage < target_damage + 5.0:
-				get_body().rebound(int(max(target_damage, damage))*1.0)
+				get_body().rebound(int(max(knockback, hitbox.knockback)*0.1), hitbox.get_knockback_vector()*0.75)
 			
 			
 func set_direction(val : Vector2):
@@ -110,6 +115,8 @@ func should_affect(target):
 		and !ignore_this_frame.has(target)
 	)
 
+func get_knockback_vector():
+	return Vector2(get_body().get_facing_dir()*direction.x, direction.y)*knockback
 
 func _on_area_entered(area:Hitbox):
 	area._on_hitbox(self)

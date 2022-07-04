@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=2]
+[gd_scene load_steps=52 format=2]
 
 [ext_resource path="res://test/distributed_state/distributed_state_fighter.gd" type="Script" id=1]
 [ext_resource path="res://test/distributed_state/rebound.gd" type="Script" id=2]
@@ -635,6 +635,39 @@ tracks/0/keys = {
 "values": [ ExtResource( 21 ), null ]
 }
 
+[sub_resource type="Animation" id=38]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("pivot/Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=39]
+resource_name = "hitstun"
+length = 0.0333333
+loop = true
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/path = NodePath("pivot/Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.0166667 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector2( -1, 0 ), Vector2( 1, 0 ) ]
+}
+
 [node name="fighter" type="KinematicBody2D"]
 collision_mask = 2
 script = ExtResource( 1 )
@@ -1025,7 +1058,7 @@ shape = SubResource( 23 )
 script = ExtResource( 8 )
 
 [node name="hitbox2" parent="pivot/hitbox/jab" instance=ExtResource( 12 )]
-knockback = 1.0
+knockback = 100.0
 damage = 10.0
 direction = Vector2( 0.939693, -0.34202 )
 direction_degrees = -20.0
@@ -1091,3 +1124,7 @@ script = ExtResource( 19 )
 [node name="damage_animation" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 27 )
 anims/damage = SubResource( 28 )
+
+[node name="hitstun_animation" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 38 )
+anims/hitstun = SubResource( 39 )

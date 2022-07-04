@@ -13,7 +13,7 @@ export var jump_speed := 200.0
 export (float, 0.0, 1000.0) var knockback_resistance := 0.0
 #multiplies received knockback by this value
 export (float, 0.0, 10.0) var knockback_lightness_multiplier := 1.0
-export (float, 0.0, 10.0) var flinch_multiplier := 1
+export (float, 0.0, 10.0) var flinch_multiplier := 0.2
 export (float, 0.0, 1.0) var bounce
 export var pause := false setget set_pause
 
@@ -21,6 +21,7 @@ export var pause := false setget set_pause
 onready var input_state = $input_state
 onready var state_animation = $state_animation
 onready var damage_animation = $damage_animation
+onready var hitstun_animation = $hitstun_animation
 onready var state = $state_machine
 
 onready var pivot = $pivot
@@ -108,10 +109,18 @@ func receive_damage(damage : float):
 	if health == 0.0 and !dead:
 		die()
 
-func rebound(frames: int):
+func rebound(frames: int, knockback: Vector2):
+	velocity = knockback
 	state._change_state("rebound", [frames])
 	
-
+func hitstun(time:float):
+	self.pause = true
+	hitstun_animation.play("hitstun")
+	yield(get_tree().create_timer(time, false), "timeout")
+	hitstun_animation.play("RESET")
+	self.pause = false
+	
+	
 func die():
 	dead = true
 	emit_signal("dead")
