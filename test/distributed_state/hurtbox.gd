@@ -13,8 +13,8 @@ func receive_knockback(knockback:Vector2) -> bool:
 	get_body().receive_knockback(knockback)
 	return true
 
-func receive_flinch(direction: Vector2) -> bool:
-	get_body().flinch(direction)
+func receive_flinch(knockback: Vector2, damage: float) -> bool:
+	get_body().flinch(knockback, damage)
 	return true
 
 func receive_damage(damage : float) -> bool:

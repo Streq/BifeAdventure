@@ -742,7 +742,6 @@ animation = "air"
 
 [node name="stay_still" type="Node" parent="state_machine/rebound"]
 script = ExtResource( 11 )
-friction = 5.0
 
 [node name="air_flinch" type="Node" parent="state_machine"]
 script = ExtResource( 9 )
@@ -1026,7 +1025,7 @@ shape = SubResource( 23 )
 script = ExtResource( 8 )
 
 [node name="hitbox2" parent="pivot/hitbox/jab" instance=ExtResource( 12 )]
-knockback = 100.0
+knockback = 1.0
 damage = 10.0
 direction = Vector2( 0.939693, -0.34202 )
 direction_degrees = -20.0
@@ -1079,9 +1078,9 @@ anims/walk = SubResource( 11 )
 anims/wall = SubResource( 19 )
 
 [node name="healthbar" type="ProgressBar" parent="."]
-margin_left = -26.0
+margin_left = -8.0
 margin_top = -16.0
-margin_right = 26.0
+margin_right = 8.0
 margin_bottom = -15.0
 custom_styles/fg = SubResource( 25 )
 custom_styles/bg = SubResource( 26 )

@@ -5,6 +5,8 @@ tool
 export var knockback := 0.0
 export var damage := 0.0
 export var can_hit_same_fighter_more_than_once := false
+export var SPLASH : PackedScene
+export var HIT_SPLASH : PackedScene
 
 #if several hitboxes of this attack land on the same frame, only the one with lowest priority will land
 export var hit_priority := 0
@@ -34,10 +36,30 @@ func on_hurtbox(hurtbox: Hurtbox):
 		hit_fighters.append(target)
 		var fighter = get_body()
 		var dir = direction * Vector2(fighter.get_facing_dir(), 1.0)
-		hurtbox.receive_flinch(dir * knockback)
+		hurtbox.receive_flinch(dir * knockback, damage)
 		hurtbox.receive_damage(damage)
 		hurtbox.receive_knockback(dir * knockback)
+		
+#		var splash = SPLASH.instance()
+#		splash.modulate = Color.orangered
+#		get_tree().current_scene.add_child(splash)
+#		splash.global_position = fighter.global_position + (target.global_position-fighter.global_position)/2.0
 
+		#HITSTUN
+		fighter.pause = true
+		target.pause = true 
+		#TODO DAR PLAY A ANIMACION DE SACUDIDA
+		yield(get_tree().create_timer(get_physics_process_delta_time()*10, false),"timeout")
+		fighter.pause = false
+		target.pause = false 
+		
+		var hit_splash : CPUParticles2D = HIT_SPLASH.instance()
+		hit_splash.emitting = true
+		hit_splash.modulate = Color.darkorange
+		hit_splash.amount = int(damage)
+		get_tree().current_scene.add_child(hit_splash)
+		hit_splash.global_position = fighter.global_position + (target.global_position-fighter.global_position)/2.0
+		
 func on_hitbox(hitbox: OffensiveHitbox):
 	if clang and hitbox.clang:
 		var target = hitbox.get_body()
@@ -47,14 +69,18 @@ func on_hitbox(hitbox: OffensiveHitbox):
 			var target_damage = hitbox.damage
 			fighter.pause = true
 			yield(get_tree(), "physics_frame")
-			ignore_this_frame = []
 			
-			for i in 5:
-				yield(get_tree(), "physics_frame")
-
+			ignore_this_frame = []
+			var splash = SPLASH.instance()
+			fighter.add_child(splash)
+			splash.global_position = fighter.global_position + (target.global_position-fighter.global_position)/2.0
+			
+			yield(get_tree().create_timer(get_physics_process_delta_time()*5, false),"timeout")
+			
 			fighter.pause = false
 			if damage < target_damage + 5.0:
 				get_body().rebound(int(max(target_damage, damage))*1.0)
+			
 			
 func set_direction(val : Vector2):
 	if val:

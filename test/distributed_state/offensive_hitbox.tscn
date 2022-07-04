@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://test/packed_state/hitbox_offensive.gd" type="Script" id=1]
+[ext_resource path="res://fighting/splash.tscn" type="PackedScene" id=2]
+[ext_resource path="res://fighting/hit_splash.tscn" type="PackedScene" id=3]
 
 [node name="hitbox" type="Area2D"]
 modulate = Color( 1, 0, 0, 1 )
@@ -8,3 +10,5 @@ collision_layer = 8
 collision_mask = 12
 priority = 2.0
 script = ExtResource( 1 )
+SPLASH = ExtResource( 2 )
+HIT_SPLASH = ExtResource( 3 )

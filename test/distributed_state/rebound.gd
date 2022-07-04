@@ -9,4 +9,7 @@ func _enter(params):
 func _physics_update(delta: float):
 	frames -= 1
 	if frames <= 0:
-		goto("idle")
+		if root.is_on_floor():
+			goto("idle")
+		else:
+			goto("air")

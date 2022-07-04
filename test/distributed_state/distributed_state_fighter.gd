@@ -13,7 +13,7 @@ export var jump_speed := 200.0
 export (float, 0.0, 1000.0) var knockback_resistance := 0.0
 #multiplies received knockback by this value
 export (float, 0.0, 10.0) var knockback_lightness_multiplier := 1.0
-export (float, 0.0, 10.0) var flinch_multiplier := 0.1
+export (float, 0.0, 10.0) var flinch_multiplier := 1
 export (float, 0.0, 1.0) var bounce
 export var pause := false setget set_pause
 
@@ -93,12 +93,12 @@ func receive_knockback(knockback: Vector2):
 	if power > knockback_resistance:
 		velocity = knockback*(1.0 - knockback_resistance/power)
 
-func flinch(knockback: Vector2):
+func flinch(knockback: Vector2, damage: float):
 	knockback *= knockback_lightness_multiplier
 	var power = max(0,knockback.length() - knockback_resistance)
 	if knockback.x:
 		set_facing_right(!(knockback.x>0.0))
-	flinch_frames = int(power*flinch_multiplier)
+	flinch_frames = int(max(power, damage)*flinch_multiplier)
 	state._change_state("flinch", null)
 
 func receive_damage(damage : float):
