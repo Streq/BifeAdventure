@@ -22,7 +22,7 @@
 [ext_resource path="res://test/distributed_state/finish_on_flinch_frames_reach_zero.gd" type="Script" id=20]
 [ext_resource path="res://shader/red_dither.tres" type="Material" id=21]
 [ext_resource path="res://asset/font/proggy_clean.tres" type="DynamicFont" id=22]
-[ext_resource path="res://test/distributed_state/bounce_off_walls.gd" type="Script" id=23]
+[ext_resource path="res://test/distributed_state/bounce_off_walls.tscn" type="PackedScene" id=23]
 
 [sub_resource type="StreamTexture" id=36]
 load_path = "res://.import/pepe.png-de24f1fef4f3932fda49cbf9ac55c4ba.stex"
@@ -743,15 +743,12 @@ state_to = "dead_air"
 script = ExtResource( 9 )
 animation = "launch"
 
-[node name="bounce_off_walls" type="Node" parent="state_machine/dead_air"]
-script = ExtResource( 23 )
-bounce = 0.75
-threshold = 120.0
-
 [node name="on_floor" type="Node" parent="state_machine/dead_air"]
 process_priority = -1
 script = ExtResource( 14 )
 state_to = "dead"
+
+[node name="bounce_off_walls" parent="state_machine/dead_air" instance=ExtResource( 23 )]
 
 [node name="flinch" type="Node" parent="state_machine"]
 script = ExtResource( 9 )
@@ -776,6 +773,8 @@ state_to = "air_flinch"
 [node name="finish_on_flinch_frames_reach_zero" type="Node" parent="state_machine/flinch"]
 script = ExtResource( 20 )
 
+[node name="bounce_off_walls" parent="state_machine/flinch" instance=ExtResource( 23 )]
+
 [node name="rebound" type="Node" parent="state_machine"]
 script = ExtResource( 2 )
 animation = "air"
@@ -791,17 +790,14 @@ animation = "hurt"
 script = ExtResource( 7 )
 end_state = "air"
 
-[node name="bounce_off_walls" type="Node" parent="state_machine/air_flinch"]
-script = ExtResource( 23 )
-bounce = 0.75
-threshold = 150.0
-
 [node name="on_floor" type="Node" parent="state_machine/air_flinch"]
 script = ExtResource( 14 )
 state_to = "flinch"
 
 [node name="finish_on_flinch_frames_reach_zero" type="Node" parent="state_machine/air_flinch"]
 script = ExtResource( 20 )
+
+[node name="bounce_off_walls" parent="state_machine/air_flinch" instance=ExtResource( 23 )]
 
 [node name="crouch" type="Node" parent="state_machine"]
 script = ExtResource( 9 )
@@ -1067,8 +1063,8 @@ shape = SubResource( 23 )
 script = ExtResource( 8 )
 
 [node name="hitbox2" parent="pivot/hitbox/jab" instance=ExtResource( 12 )]
-knockback = 1000.0
-damage = 100.0
+knockback = 100.0
+damage = 10.0
 direction = Vector2( 0.939693, -0.34202 )
 direction_degrees = -20.0
 

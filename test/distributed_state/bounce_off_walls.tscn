@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://test/distributed_state/bounce_off_walls.gd" type="Script" id=1]
+[ext_resource path="res://fighting/wall_splash.tscn" type="PackedScene" id=2]
+
+[node name="bounce_off_walls" type="Node"]
+script = ExtResource( 1 )
+SPLASH = ExtResource( 2 )
+bounce = 0.6
+threshold = 150.0

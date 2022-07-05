@@ -1,5 +1,7 @@
 extends Node
 
+
+export var SPLASH : PackedScene
 export (float, 0.0, 1.0) var bounce := 1.0
 export (float, 0.0, 1000.0) var threshold := 90.0
 
@@ -31,7 +33,21 @@ func terrain_collision(velocity : Vector2, collision : KinematicCollision2D):
 		if normal.dot(velocity)<0:
 			var bounced = velocity.bounce(normal)
 			fighter.velocity = bounced*bounce
-			fighter.facing_right = fighter.velocity.x<0.0
+			if fighter.velocity.x:
+				fighter.facing_right = fighter.velocity.x<0.0
+			
+			#splash particles
+			var splash : CPUParticles2D = SPLASH.instance()
+			splash.direction = normal
+			splash.color = Color.cornflower
+			splash.spread = 90
+			splash.initial_velocity = velocity.length()/5.0
+			splash.gravity = Vector2()
+			splash.emitting = true
+			get_tree().current_scene.add_child(splash)
+			splash.global_position = collision.position
+			
+			
 		else:
 			fighter.velocity = velocity
 		
