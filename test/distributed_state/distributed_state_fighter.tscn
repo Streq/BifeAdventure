@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=2]
+[gd_scene load_steps=54 format=2]
 
 [ext_resource path="res://test/distributed_state/distributed_state_fighter.gd" type="Script" id=1]
 [ext_resource path="res://test/distributed_state/rebound.gd" type="Script" id=2]
@@ -21,6 +21,8 @@
 [ext_resource path="res://HUD/healthbar.gd" type="Script" id=19]
 [ext_resource path="res://test/distributed_state/finish_on_flinch_frames_reach_zero.gd" type="Script" id=20]
 [ext_resource path="res://shader/red_dither.tres" type="Material" id=21]
+[ext_resource path="res://asset/font/proggy_clean.tres" type="DynamicFont" id=22]
+[ext_resource path="res://test/distributed_state/bounce_off_walls.gd" type="Script" id=23]
 
 [sub_resource type="StreamTexture" id=36]
 load_path = "res://.import/pepe.png-de24f1fef4f3932fda49cbf9ac55c4ba.stex"
@@ -730,7 +732,7 @@ animation = "knocked"
 
 [node name="stay_still" type="Node" parent="state_machine/dead"]
 script = ExtResource( 11 )
-friction = 60.0
+friction = 5.0
 
 [node name="on_floor" type="Node" parent="state_machine/dead"]
 script = ExtResource( 14 )
@@ -740,6 +742,11 @@ state_to = "dead_air"
 [node name="dead_air" type="Node" parent="state_machine"]
 script = ExtResource( 9 )
 animation = "launch"
+
+[node name="bounce_off_walls" type="Node" parent="state_machine/dead_air"]
+script = ExtResource( 23 )
+bounce = 0.75
+threshold = 120.0
 
 [node name="on_floor" type="Node" parent="state_machine/dead_air"]
 process_priority = -1
@@ -784,8 +791,10 @@ animation = "hurt"
 script = ExtResource( 7 )
 end_state = "air"
 
-[node name="transitions" type="Node" parent="state_machine/air_flinch"]
-script = ExtResource( 6 )
+[node name="bounce_off_walls" type="Node" parent="state_machine/air_flinch"]
+script = ExtResource( 23 )
+bounce = 0.75
+threshold = 150.0
 
 [node name="on_floor" type="Node" parent="state_machine/air_flinch"]
 script = ExtResource( 14 )
@@ -1058,8 +1067,8 @@ shape = SubResource( 23 )
 script = ExtResource( 8 )
 
 [node name="hitbox2" parent="pivot/hitbox/jab" instance=ExtResource( 12 )]
-knockback = 100.0
-damage = 10.0
+knockback = 1000.0
+damage = 100.0
 direction = Vector2( 0.939693, -0.34202 )
 direction_degrees = -20.0
 
@@ -1128,3 +1137,17 @@ anims/damage = SubResource( 28 )
 [node name="hitstun_animation" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 38 )
 anims/hitstun = SubResource( 39 )
+
+[node name="state_label" type="Label" parent="."]
+margin_left = -19.0
+margin_top = -32.0
+margin_right = 21.0
+margin_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = ExtResource( 22 )
+text = "state"
+align = 1
+valign = 1
+
+[connection signal="state_changed" from="state_machine" to="state_label" method="set_text"]

@@ -55,10 +55,10 @@ var velocity := Vector2()
 
 func _physics_process(delta):
 	
-	var res_vel = move_and_slide(velocity, Vector2.UP)
+	var pre_collision_velocity = velocity
+	velocity = move_and_slide(velocity, Vector2.UP)
 	for i in get_slide_count():
-		emit_signal("terrain_collision", velocity, get_slide_collision(i))
-	velocity = res_vel
+		emit_signal("terrain_collision", pre_collision_velocity, get_slide_collision(i))
 	velocity.y += gravity * delta
 	state.physics_process(delta)
 	state_animation.advance(delta)

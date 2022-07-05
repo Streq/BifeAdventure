@@ -35,10 +35,10 @@ func on_hurtbox(hurtbox: Hurtbox):
 	if should_affect(target):
 		hit_fighters.append(target)
 		var fighter = get_body()
-		var dir = direction * Vector2(fighter.get_facing_dir(), 1.0)
-		hurtbox.receive_flinch(dir * knockback, damage)
+		var knockback_vec = get_knockback_vector()
+		hurtbox.receive_flinch(knockback_vec, damage)
 		hurtbox.receive_damage(damage)
-		hurtbox.receive_knockback(dir * knockback)
+		hurtbox.receive_knockback(knockback_vec)
 		
 #		var splash = SPLASH.instance()
 #		splash.modulate = Color.orangered
@@ -51,17 +51,24 @@ func on_hurtbox(hurtbox: Hurtbox):
 		
 		fighter.pause = true
 		var hitsplash_pos = fighter.global_position + (target.global_position-fighter.global_position)/2.0
-		hitsplash(hitsplash_pos, int(damage))
 		target.hitstun(stun_time)
+		hitsplash(hitsplash_pos, int(damage), get_facing_dir(), knockback)
 		yield(get_tree().create_timer(stun_time, false),"timeout")
 		fighter.pause = false
 		
 		
-func hitsplash(global_pos : Vector2, amount: int):
+func hitsplash(global_pos : Vector2, amount: int, direction : Vector2, velocity: float):
 	var hit_splash : CPUParticles2D = HIT_SPLASH.instance()
 	hit_splash.emitting = true
 	hit_splash.modulate = Color.darkorange
 	hit_splash.amount = amount
+	if velocity>100.0:
+		hit_splash.direction = direction
+		hit_splash.initial_velocity = velocity
+	else:
+		hit_splash.initial_velocity = 100
+		hit_splash.spread = 180
+#	hit_splash.damping = velocity*2.5
 	get_tree().current_scene.add_child(hit_splash)
 	hit_splash.global_position = global_pos
 
@@ -77,7 +84,7 @@ func on_hitbox(hitbox: OffensiveHitbox):
 			
 			ignore_this_frame = []
 			var splash = SPLASH.instance()
-			fighter.add_child(splash)
+			get_tree().current_scene.add_child(splash)
 			splash.global_position = fighter.global_position + (target.global_position-fighter.global_position)/2.0
 			
 			yield(get_tree().create_timer(get_physics_process_delta_time()*5, false),"timeout")
@@ -114,7 +121,8 @@ func should_affect(target):
 		and (can_hit_same_fighter_more_than_once or !hit_fighters.has(target))
 		and !ignore_this_frame.has(target)
 	)
-
+func get_facing_dir():
+	return Vector2(get_body().get_facing_dir()*direction.x, direction.y)
 func get_knockback_vector():
 	return Vector2(get_body().get_facing_dir()*direction.x, direction.y)*knockback
 

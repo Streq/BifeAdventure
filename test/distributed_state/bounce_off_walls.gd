@@ -1,0 +1,39 @@
+extends Node
+
+export (float, 0.0, 1.0) var bounce := 1.0
+export (float, 0.0, 1000.0) var threshold := 90.0
+
+
+
+func _ready():
+	get_parent().connect("physics_process", self, "physics_process")
+	get_parent().connect("entered", self, "entered")
+	get_parent().connect("exit", self, "exit")
+	
+
+func entered():
+	var state = get_parent()
+	var fighter = state.root
+	fighter.connect("terrain_collision", self, "terrain_collision")
+
+func exit():
+	var state = get_parent()
+	var fighter = state.root
+	fighter.disconnect("terrain_collision", self, "terrain_collision")
+
+
+func terrain_collision(velocity : Vector2, collision : KinematicCollision2D):
+	var state = get_parent()
+	var fighter = state.root
+	var normal = collision.normal
+	var projected = velocity.project(normal)
+	if projected.length_squared()>threshold*threshold:
+		if normal.dot(velocity)<0:
+			var bounced = velocity.bounce(normal)
+			fighter.velocity = bounced*bounce
+			fighter.facing_right = fighter.velocity.x<0.0
+		else:
+			fighter.velocity = velocity
+		
+func physics_process(delta):
+	pass
