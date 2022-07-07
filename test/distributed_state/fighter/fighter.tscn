@@ -1,0 +1,112 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://test/distributed_state/fighter/fighter.gd" type="Script" id=1]
+[ext_resource path="res://test/packed_state/packed_state_machine.gd" type="Script" id=3]
+[ext_resource path="res://test/packed_state/input_state.gd" type="Script" id=4]
+[ext_resource path="res://HUD/healthbar.gd" type="Script" id=19]
+[ext_resource path="res://shader/red_dither.tres" type="Material" id=21]
+[ext_resource path="res://asset/font/proggy_clean.tres" type="DynamicFont" id=22]
+
+[sub_resource type="StyleBoxFlat" id=25]
+bg_color = Color( 0, 1, 0, 1 )
+
+[sub_resource type="StyleBoxFlat" id=26]
+bg_color = Color( 0.341176, 0, 0, 1 )
+
+[sub_resource type="Animation" id=27]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:material")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ null ]
+}
+
+[sub_resource type="Animation" id=28]
+resource_name = "damage"
+length = 0.0833333
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:material")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.0833333 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 21 ), null ]
+}
+
+[sub_resource type="Animation" id=38]
+length = 0.001
+
+[sub_resource type="Animation" id=39]
+resource_name = "hitstun"
+length = 0.0333333
+loop = true
+step = 0.0166667
+
+[node name="fighter" type="KinematicBody2D"]
+collision_mask = 2
+script = ExtResource( 1 )
+gravity = 400.0
+walk_speed = 40.0
+run_speed = 150.0
+jump_speed = 400.0
+
+[node name="state_machine" type="Node" parent="."]
+script = ExtResource( 3 )
+start_state = "idle"
+root = NodePath("..")
+autostart = true
+
+[node name="pivot" type="Node2D" parent="."]
+use_parent_material = true
+
+[node name="hitbox" type="Node2D" parent="pivot"]
+
+[node name="input_state" type="Node" parent="."]
+script = ExtResource( 4 )
+
+[node name="healthbar" type="ProgressBar" parent="."]
+margin_left = -8.0
+margin_top = -16.0
+margin_right = 8.0
+margin_bottom = -15.0
+custom_styles/fg = SubResource( 25 )
+custom_styles/bg = SubResource( 26 )
+value = 100.0
+percent_visible = false
+script = ExtResource( 19 )
+
+[node name="damage_animation" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 27 )
+anims/damage = SubResource( 28 )
+
+[node name="hitstun_animation" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 38 )
+anims/hitstun = SubResource( 39 )
+
+[node name="state_label" type="Label" parent="."]
+margin_left = -19.0
+margin_top = -32.0
+margin_right = 21.0
+margin_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = ExtResource( 22 )
+text = "state"
+align = 1
+valign = 1
+
+[node name="state_animation" type="AnimationPlayer" parent="."]
+
+[connection signal="state_changed" from="state_machine" to="state_label" method="set_text"]

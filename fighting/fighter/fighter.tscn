@@ -5,7 +5,7 @@
 [ext_resource path="res://test/packed_state/packed_state_machine.gd" type="Script" id=3]
 [ext_resource path="res://test/packed_state/input_state.gd" type="Script" id=4]
 [ext_resource path="res://asset/texture/pepe.png" type="Texture" id=5]
-[ext_resource path="res://test/distributed_state/distributed_state_fighter.gd" type="Script" id=6]
+[ext_resource path="res://test/distributed_state/fighter/fighter.gd" type="Script" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5, 6.5 )
