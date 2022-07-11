@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://fighting/distributed_fighter/state/jump.gd" type="Script" id=1]
+
+[node name="jump" type="Node"]
+script = ExtResource( 1 )
+animation = "jump"
+jump_lag = 0.2
+jump_config = [ [ 1.0, 1.0 ], [ 0.5, 0.7 ], [ 0.0, 0.3 ] ]
+
+[node name="jump_lag" type="Timer" parent="."]
+process_priority = 1
+process_mode = 0
+one_shot = true
+
+[node name="jump_charge" type="Timer" parent="."]
+process_mode = 0
+one_shot = true

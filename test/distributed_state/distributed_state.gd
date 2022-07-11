@@ -50,6 +50,16 @@ func physics_process(delta: float):
 	_physics_update(delta)
 	emit_signal("physics_process", delta)
 
+func goto(state: String):
+	if active:
+		emit_signal("finish", state, null)
+
+func goto_args(state: String, args: Array):
+	if active:
+		emit_signal("finish", state, args)
+
+#OVERRIDABLE FUNCTIONS
+
 # Initialize the state. E.g. change the animation
 func _enter(params):
 	pass
@@ -69,13 +79,4 @@ func _physics_update(delta: float):
 # Called during _input
 func _handle_input(event: InputEvent):
 	return
-
-func goto(state: String):
-	if active:
-		emit_signal("finish", state, null)
-
-func goto_args(state: String, args: Array):
-	if active:
-		emit_signal("finish", state, args)
-
 

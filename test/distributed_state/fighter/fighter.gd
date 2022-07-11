@@ -7,8 +7,25 @@ export var health := 100.0 setget set_health
 export var max_health := 100.0
 export var gravity := 200.0
 export var facing_right := true setget set_facing_right
+
 export var walk_speed := 100.0
+export (float, 0.0, 60.0) var walk_lerp := 4.0
+
 export var run_speed := 200.0
+export (float, 0.0, 60.0) var run_lerp := 4.0
+
+export var air_walk_speed := 100.0
+export (float, 0.0, 60.0) var air_walk_lerp := 4.0
+
+export var air_run_speed := 200.0
+export (float, 0.0, 60.0) var air_run_lerp := 4.0
+
+export (float, 0.0, 60.0) var air_idle_lerp := 4.0
+export (float, 0.0, 60.0) var idle_lerp := 4.0
+
+export (float, 0.0, 60.0) var wall_lerp := 10.0
+
+
 export var jump_speed := 200.0
 export (float, 0.0, 1000.0) var knockback_resistance := 0.0
 #multiplies received knockback by this value

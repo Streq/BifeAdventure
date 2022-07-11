@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://test/distributed_state/distributed_state.gd" type="Script" id=1]
+[ext_resource path="res://test/packed_state/idle_transition.gd" type="Script" id=2]
+[ext_resource path="res://test/distributed_state/on_floor.gd" type="Script" id=3]
+
+[node name="turn_around" type="Node"]
+script = ExtResource( 1 )
+animation = "turn_around"
+
+[node name="on_finish" type="Node" parent="."]
+script = ExtResource( 2 )
+end_state = "idle"
+
+[node name="on_floor" type="Node" parent="."]
+script = ExtResource( 3 )
+should_be_true = false
+state_to = "air"

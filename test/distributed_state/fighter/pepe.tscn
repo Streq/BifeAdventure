@@ -23,7 +23,7 @@
 [ext_resource path="res://test/packed_state/input_state.gd" type="Script" id=21]
 [ext_resource path="res://test/distributed_state/offensive_hitbox.tscn" type="PackedScene" id=22]
 [ext_resource path="res://asset/font/proggy_clean.tres" type="DynamicFont" id=23]
-[ext_resource path="res://test/distributed_state/hitbox/hitbox_group.tscn" type="PackedScene" id=24]
+[ext_resource path="res://fighting/distributed_fighter/state/turn_around.tscn" type="PackedScene" id=24]
 
 [sub_resource type="StreamTexture" id=36]
 load_path = "res://.import/pepe.png-de24f1fef4f3932fda49cbf9ac55c4ba.stex"
@@ -885,21 +885,7 @@ state_to = "idle"
 script = ExtResource( 17 )
 friction = 60.0
 
-[node name="turn_around" type="Node" parent="state_machine"]
-script = ExtResource( 5 )
-animation = "turn_around"
-
-[node name="on_finish" type="Node" parent="state_machine/turn_around"]
-script = ExtResource( 9 )
-end_state = "idle"
-
-[node name="transitions" type="Node" parent="state_machine/turn_around"]
-script = ExtResource( 16 )
-
-[node name="on_floor" type="Node" parent="state_machine/turn_around"]
-script = ExtResource( 11 )
-should_be_true = false
-state_to = "air"
+[node name="turn_around" parent="state_machine" instance=ExtResource( 24 )]
 
 [node name="jab" type="Node" parent="state_machine"]
 script = ExtResource( 5 )
@@ -1085,8 +1071,6 @@ direction_degrees = -30.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="pivot/hitbox/air_kick/hitbox"]
 position = Vector2( 8.75, 0 )
 shape = SubResource( 24 )
-
-[node name="hitbox_group" parent="pivot/hitbox" instance=ExtResource( 24 )]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 1.5 )
