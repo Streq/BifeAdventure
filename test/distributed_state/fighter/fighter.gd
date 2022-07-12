@@ -1,4 +1,5 @@
 extends KinematicBody2D
+class_name DistributedFighter
 signal health_changed(value, nax_value)
 signal terrain_collision(velocity, collision)
 signal dead()
@@ -152,5 +153,3 @@ func collided(velocity, collision):
 func set_pause(val):
 	pause = val
 	set_physics_process(!pause)
-		
-	

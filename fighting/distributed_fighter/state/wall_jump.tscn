@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://fighting/distributed_fighter/state/triggers/face_away_from_wall.gd" type="Script" id=1]
+[ext_resource path="res://fighting/distributed_fighter/state/jump.gd" type="Script" id=2]
+[ext_resource path="res://util/direction.tscn" type="PackedScene" id=3]
+
+[node name="wall_jump" type="Node"]
+script = ExtResource( 2 )
+animation = "jump"
+jump_lag = 0.1
+jump_config = [ [ 1.0, 1.0 ], [ 0.4, 0.7 ], [ 0.0, 0.3 ] ]
+
+[node name="jump_lag" type="Timer" parent="."]
+process_priority = 1
+process_mode = 0
+one_shot = true
+
+[node name="jump_charge" type="Timer" parent="."]
+process_mode = 0
+one_shot = true
+
+[node name="direction" parent="." instance=ExtResource( 3 )]
+direction = Vector2( 0.707107, -0.707107 )
+isolated_direction_x = 0.707107
+isolated_direction_y = -0.707107
+direction_degrees = -45.0
+
+[node name="face_away_from_wall" type="Node" parent="."]
+script = ExtResource( 1 )
+
+[connection signal="entered" from="." to="face_away_from_wall" method="trigger"]

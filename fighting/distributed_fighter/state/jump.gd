@@ -30,7 +30,7 @@ func _enter(params):
 	
 	jump_charge.paused=false
 	jump_charge.start()
-		
+	
 
 
 func _exit():
@@ -44,7 +44,6 @@ func _physics_update(delta):
 		
 		
 func jump():
-	
 	var jump_speed : float = root.jump_speed
 	var press_time = jump_lag - jump_charge.time_left
 	

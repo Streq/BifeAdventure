@@ -1,10 +1,9 @@
 extends Node
 
 
-var A : ButtonState = null
-var B = false
-var C = false
-var shift = false
+var A : ButtonState = ButtonState.new()
+var B : ButtonState = ButtonState.new()
+var C : ButtonState = ButtonState.new()
 var dir = Vector2()
 
 func get_facing_dir():

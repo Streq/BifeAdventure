@@ -25,6 +25,11 @@ _global_script_classes=[ {
 "path": "res://fighting/controller.gd"
 }, {
 "base": "KinematicBody2D",
+"class": "DistributedFighter",
+"language": "GDScript",
+"path": "res://test/distributed_state/fighter/fighter.gd"
+}, {
+"base": "KinematicBody2D",
 "class": "Fighter",
 "language": "GDScript",
 "path": "res://fighting/dude/fighter.gd"
@@ -73,6 +78,7 @@ _global_script_class_icons={
 "Bool": "",
 "ButtonState": "",
 "Controller": "",
+"DistributedFighter": "",
 "Fighter": "",
 "FighterState": "",
 "Hitbox": "",
