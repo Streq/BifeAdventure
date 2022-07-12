@@ -12,6 +12,7 @@ export (Array, Array, float) var jump_config
 
 onready var jump_lag_timer = $jump_lag
 onready var jump_charge = $jump_charge
+onready var direction = $direction
 
 var pressing = false
 var jump_factor := 0.0
@@ -54,6 +55,6 @@ func jump():
 		if press_time >= config_press_req:
 			jump_factor = config_jump_factor
 			break
-	root.velocity.y -= jump_speed * jump_factor
+	root.velocity += direction.direction * Vector2(root.get_facing_dir(), 1.0) * jump_speed * jump_factor
 	goto("air")
 

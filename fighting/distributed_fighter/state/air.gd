@@ -25,6 +25,8 @@ func _physics_update(delta: float):
 		else:
 			speed = root.air_walk_speed  
 			speed_lerp = root.air_walk_lerp
+		if sign(dir.x) == sign(root.velocity.x):
+			speed = max(speed, root.velocity.x)
 		root.velocity.x = lerp(root.velocity.x, speed*dir.x, delta*speed_lerp)
 	else:
 		root.velocity.x = lerp(root.velocity.x, 0, delta*root.air_idle_lerp)

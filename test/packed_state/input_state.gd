@@ -1,6 +1,7 @@
 extends Node
 
-var A = false
+
+var A : ButtonState = null
 var B = false
 var C = false
 var shift = false

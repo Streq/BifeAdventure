@@ -14,13 +14,13 @@ position = Vector2( 31, 27 )
 collision_layer = 2
 mode = 1
 
-[node name="Polygon2D" type="Polygon2D" parent="RigidBody2D"]
-polygon = PoolVector2Array( -23, 253, 281, 253, 281, -19, -23, -19, -23, 4, -31, 4, -31, -27, 289, -27, 289, 261, -31, 261, -31, 4, -23, 4 )
-script = ExtResource( 1 )
-col = NodePath("../CollisionPolygon2D")
-
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RigidBody2D"]
-polygon = PoolVector2Array( -23, 253, 281, 253, 281, -19, -23, -19, -23, 4, -31, 4, -31, -27, 289, -27, 289, 261, -31, 261, -31, 4, -23, 4 )
+polygon = PoolVector2Array( -23, 253, 137, 253, 145, 197, 161.313, 253, 281, 253, 281, 157, 217, 101, 169, 149, 177, 197, 169, 197, 161, 141, 217, 85, 281, 127.031, 281, -19, -23, -19, -23, 4, -31, 4, -31, -27, 289, -27, 289, 261, -31, 261, -31, 4, -23, 4, -23, 13, 9, 13, 121, 165, 73, 173, 47.421, 173, 97, 157, 65, 109, 25, 117, 9, 173, 9, 221, 65, 221, 65, 229, 1, 229, 1, 21, -23, 21 )
+
+[node name="Polygon2D" type="Polygon2D" parent="RigidBody2D"]
+polygon = PoolVector2Array( -23, 253, 137, 253, 145, 197, 161.313, 253, 281, 253, 281, 157, 217, 101, 169, 149, 177, 197, 169, 197, 161, 141, 217, 85, 281, 127.031, 281, -19, -23, -19, -23, 4, -31, 4, -31, -27, 289, -27, 289, 261, -31, 261, -31, 4, -23, 4, -23, 13, 9, 13, 121, 165, 73, 173, 47.421, 173, 97, 157, 65, 109, 25, 117, 9, 173, 9, 221, 65, 221, 65, 229, 1, 229, 1, 21, -23, 21 )
+script = ExtResource( 1 )
+col_path = NodePath("../CollisionPolygon2D")
 
 [node name="fighter2" parent="." instance=ExtResource( 4 )]
 position = Vector2( 135, 272 )
