@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://test/distributed_state/fighter/fighter.tscn" type="PackedScene" id=1]
 [ext_resource path="res://test/distributed_state/offensive_hitbox.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://test/packed_state/transitions.gd" type="Script" id=6]
 [ext_resource path="res://test/packed_state/jab_transition.gd" type="Script" id=7]
 [ext_resource path="res://fighting/distributed_fighter/state/wall.tscn" type="PackedScene" id=8]
+[ext_resource path="res://fighting/distributed_fighter/state/jab.tscn" type="PackedScene" id=9]
 [ext_resource path="res://fighting/distributed_fighter/state/walk.tscn" type="PackedScene" id=10]
 [ext_resource path="res://fighting/distributed_fighter/state/turn_around.tscn" type="PackedScene" id=11]
 [ext_resource path="res://fighting/distributed_fighter/state/jump.tscn" type="PackedScene" id=12]
@@ -544,9 +545,11 @@ script = ExtResource( 7 )
 end_state = "turn_around"
 horizontal_dir = -1
 
-[node name="air" parent="state_machine" index="1" instance=ExtResource( 15 )]
+[node name="jab" parent="state_machine" index="1" instance=ExtResource( 9 )]
 
-[node name="wall" parent="state_machine" index="2" instance=ExtResource( 8 )]
+[node name="air" parent="state_machine" index="2" instance=ExtResource( 15 )]
+
+[node name="wall" parent="state_machine" index="3" instance=ExtResource( 8 )]
 
 [node name="transitions" type="Node" parent="state_machine/wall" index="2"]
 script = ExtResource( 6 )
@@ -561,7 +564,7 @@ script = ExtResource( 7 )
 end_state = "air"
 horizontal_dir = 1
 
-[node name="walk" parent="state_machine" index="3" instance=ExtResource( 10 )]
+[node name="walk" parent="state_machine" index="4" instance=ExtResource( 10 )]
 
 [node name="transitions" type="Node" parent="state_machine/walk" index="0"]
 script = ExtResource( 6 )
@@ -587,7 +590,7 @@ script = ExtResource( 7 )
 end_state = "turn_around"
 horizontal_dir = -1
 
-[node name="run" parent="state_machine" index="4" instance=ExtResource( 4 )]
+[node name="run" parent="state_machine" index="5" instance=ExtResource( 4 )]
 
 [node name="transitions" type="Node" parent="state_machine/run" index="0"]
 script = ExtResource( 6 )
@@ -613,13 +616,13 @@ script = ExtResource( 7 )
 end_state = "turn_around"
 horizontal_dir = -1
 
-[node name="turn_around" parent="state_machine" index="5" instance=ExtResource( 11 )]
+[node name="turn_around" parent="state_machine" index="6" instance=ExtResource( 11 )]
 
-[node name="jump" parent="state_machine" index="6" instance=ExtResource( 12 )]
+[node name="jump" parent="state_machine" index="7" instance=ExtResource( 12 )]
 jump_lag = 0.1
 jump_config = [ [ 1.0, 1.0 ], [ 0.4, 0.7 ], [ 0.0, 0.3 ] ]
 
-[node name="wall_jump" parent="state_machine" index="7" instance=ExtResource( 3 )]
+[node name="wall_jump" parent="state_machine" index="8" instance=ExtResource( 3 )]
 
 [node name="Sprite" type="Sprite" parent="pivot" index="0"]
 use_parent_material = true

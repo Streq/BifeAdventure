@@ -1,6 +1,7 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://test/distributed_state/fighter/fighter.gd" type="Script" id=1]
+[ext_resource path="res://fighting/combo/state_buffer.tscn" type="PackedScene" id=2]
 [ext_resource path="res://test/packed_state/packed_state_machine.gd" type="Script" id=3]
 [ext_resource path="res://test/packed_state/input_state.gd" type="Script" id=4]
 [ext_resource path="res://HUD/healthbar.gd" type="Script" id=19]
@@ -109,4 +110,8 @@ valign = 1
 
 [node name="state_animation" type="AnimationPlayer" parent="."]
 
+[node name="state_buffer" parent="." instance=ExtResource( 2 )]
+
+[connection signal="physics_process" from="state_machine" to="state_buffer" method="_physics_update"]
 [connection signal="state_changed" from="state_machine" to="state_label" method="set_text"]
+[connection signal="state_changed" from="state_machine" to="state_buffer" method="_on_state_changed"]

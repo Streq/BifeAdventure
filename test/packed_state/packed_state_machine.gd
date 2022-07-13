@@ -1,5 +1,7 @@
 extends Node
 signal state_changed(state)
+signal physics_process(delta)
+signal process(delta)
 
 export (String) var start_state
 export (NodePath) onready var root = (get_node(root) if is_instance_valid(root) else owner) as Node
@@ -34,9 +36,11 @@ func initialize():
 
 func process(delta: float):
 	current.process(delta)
+	emit_signal("process", delta)
 	
 func physics_process(delta: float):
 	current.physics_process(delta)
+	emit_signal("physics_process", delta)
 
 func _input(event: InputEvent):
 	current._handle_input(event)
