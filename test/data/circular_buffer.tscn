@@ -1,12 +1,15 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://test/data/circular_buffer_test.gd" type="Script" id=1]
 [ext_resource path="res://test/data/box.tscn" type="PackedScene" id=2]
+[ext_resource path="res://test/data/label.tscn" type="PackedScene" id=3]
+[ext_resource path="res://asset/font/proggy_clean.tres" type="DynamicFont" id=4]
 
 [node name="circular_buffer_test" type="Node2D"]
 script = ExtResource( 1 )
-buffer_size = 20
+buffer_size = 50
 BOX = ExtResource( 2 )
+LABEL = ExtResource( 3 )
 
 [node name="get_index" type="LineEdit" parent="."]
 anchor_left = 0.5
@@ -22,13 +25,32 @@ placeholder_text = "index"
 [node name="center" type="Node2D" parent="."]
 position = Vector2( 160, 144 )
 
-[node name="label" type="Label" parent="."]
+[node name="labelw" type="Label" parent="."]
+anchor_right = 0.515
+anchor_bottom = 0.5
+margin_left = 104.0
+margin_top = 56.0
+margin_right = 218.0
+margin_bottom = 121.0
+custom_fonts/font = ExtResource( 4 )
+text = "down - push_front
+up - pop_front
+right - push_back
+left - pop_back"
+align = 1
+valign = 1
+
+[node name="labelw2" type="Label" parent="."]
+anchor_right = 0.515
+anchor_bottom = 0.5
 margin_left = 131.0
 margin_top = 116.0
 margin_right = 190.0
 margin_bottom = 147.0
 text = "get index
 "
+align = 1
+valign = 1
 
 [node name="box" parent="." instance=ExtResource( 2 )]
 position = Vector2( 160, 172 )
