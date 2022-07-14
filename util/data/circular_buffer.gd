@@ -1,12 +1,18 @@
 class_name CircularBuffer
 
-var buffer := []
-var SIZE := 0
+var buffer : Array= []
+var SIZE := 2
 
 var front_index := 0
 var end_index := 0
 
 var size = 1
+var NULL_VALUE = null
+
+func _init(size: int, null_value = null):
+	NULL_VALUE = null_value
+	SIZE  = size
+	initialize()
 
 func _offset(index, value):
 	return (index + (value%SIZE) + SIZE)%SIZE
@@ -42,30 +48,39 @@ func push_front(val):
 	return deleted
 
 func pop_back():
-	assert(end_index != front_index, "the circular buffer cannot decrease in size as it has the minimum amount of elements(1)")
+	if size==1:
+		return null
 	size -= 1
 	var deleted = buffer[end_index]
+	buffer[end_index] = null
 	end_index = _decrement(end_index)
 	return deleted
 
 func pop_front():
-	assert(end_index != front_index, "the circular buffer cannot decrease in size as it has the minimum amount of elements(1)")
+	if size==1:
+		return null
 	size -= 1
 	var deleted = buffer[front_index]
-	front_index = _increment(end_index)
+	buffer[front_index] = null
+	front_index = _increment(front_index)
 	return deleted
 
-func get(index):
-	index = index%SIZE
-	if index >= 0:
-		return buffer[(front_index + index)%SIZE]
+func at(index):
+	if index >= 0 and size > index:
+		index = (front_index + index)%SIZE
+	elif index < 0 and size >= -index:
+		index = (end_index + index+1 + SIZE)%SIZE
 	else:
-		return buffer[(end_index - index+1 + SIZE)%SIZE]
-func clear(starter_val = null):
-	size = 1
+		return null
+	return buffer[index]
+
+func clear():
 	buffer.clear()
+	initialize()
+
+func initialize():
+	size = 1
 	front_index = SIZE/2
 	end_index = SIZE/2
 	buffer.resize(SIZE)
-	buffer[front_index] = starter_val
-	
+	buffer[front_index] = NULL_VALUE

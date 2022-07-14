@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://test/data/circular_buffer_test.gd" type="Script" id=1]
+[ext_resource path="res://test/data/box.tscn" type="PackedScene" id=2]
+
+[node name="circular_buffer_test" type="Node2D"]
+script = ExtResource( 1 )
+buffer_size = 20
+BOX = ExtResource( 2 )
+
+[node name="get_index" type="LineEdit" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 131.0
+margin_top = 132.0
+margin_right = 189.0
+margin_bottom = 156.0
+placeholder_text = "index"
+
+[node name="center" type="Node2D" parent="."]
+position = Vector2( 160, 144 )
+
+[node name="label" type="Label" parent="."]
+margin_left = 131.0
+margin_top = 116.0
+margin_right = 190.0
+margin_bottom = 147.0
+text = "get index
+"
+
+[node name="box" parent="." instance=ExtResource( 2 )]
+position = Vector2( 160, 172 )
+
+[connection signal="text_entered" from="get_index" to="." method="_on_get_index_text_entered"]
