@@ -9,3 +9,5 @@ material = ExtResource( 2 )
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 1 )
 script = ExtResource( 3 )
+
+[connection signal="tree_entered" from="." to="." method="_on_box_tree_entered"]

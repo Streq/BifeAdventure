@@ -7,20 +7,31 @@
 
 [node name="circular_buffer_test" type="Node2D"]
 script = ExtResource( 1 )
-buffer_size = 50
+buffer_size = 100
 BOX = ExtResource( 2 )
 LABEL = ExtResource( 3 )
 
-[node name="get_index" type="LineEdit" parent="."]
+[node name="size" type="LineEdit" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = 131.0
+margin_left = 88.0
 margin_top = 132.0
-margin_right = 189.0
+margin_right = 146.0
 margin_bottom = 156.0
-placeholder_text = "index"
+placeholder_text = "size"
+
+[node name="get" type="LineEdit" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 172.0
+margin_top = 132.0
+margin_right = 230.0
+margin_bottom = 156.0
+placeholder_text = "get"
 
 [node name="center" type="Node2D" parent="."]
 position = Vector2( 160, 144 )
@@ -28,31 +39,30 @@ position = Vector2( 160, 144 )
 [node name="labelw" type="Label" parent="."]
 anchor_right = 0.515
 anchor_bottom = 0.5
-margin_left = 104.0
-margin_top = 56.0
-margin_right = 218.0
-margin_bottom = 121.0
+margin_left = 100.0
+margin_top = 72.0
+margin_right = 219.0
+margin_bottom = 223.0
 custom_fonts/font = ExtResource( 4 )
 text = "down - push_front
 up - pop_front
+
+
+
+
 right - push_back
 left - pop_back"
-align = 1
-valign = 1
-
-[node name="labelw2" type="Label" parent="."]
-anchor_right = 0.515
-anchor_bottom = 0.5
-margin_left = 131.0
-margin_top = 116.0
-margin_right = 190.0
-margin_bottom = 147.0
-text = "get index
-"
 align = 1
 valign = 1
 
 [node name="box" parent="." instance=ExtResource( 2 )]
 position = Vector2( 160, 172 )
 
-[connection signal="text_entered" from="get_index" to="." method="_on_get_index_text_entered"]
+[node name="clear" type="Button" parent="."]
+margin_right = 48.0
+margin_bottom = 20.0
+text = "clear"
+
+[connection signal="text_entered" from="size" to="." method="_on_size_text_entered"]
+[connection signal="text_entered" from="get" to="." method="_on_get_text_entered"]
+[connection signal="pressed" from="clear" to="." method="_on_clear_pressed"]

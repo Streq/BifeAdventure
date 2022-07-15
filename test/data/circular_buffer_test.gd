@@ -18,39 +18,92 @@ func _ready():
 
 var increments = 10
 var current_color = 10
+var alt = false
 func new_color():
 	current_color += increments
 	current_color %= 256
+	var color = (current_color + (100 if alt else 0))%256
+	alt = !alt
+	
 	var ret = BOX.instance()
-	ret.modulate = Color8(current_color,randi()%256,256-current_color)
+	ret.modulate = Color8(color,randi()%256,256-color)
 	return ret
 	
 func get_box(index):
 	pass
 
-func _input(event):
+var right = false
+var left = false
+var down = false
+var up = false
+
+func _process(delta):
 	var u = false
 	var deleted = null
-	if event.is_action_pressed("right0", true):
+	if right:
 		deleted = buffer.push_back(new_color())
+		delete(deleted)
 		u = true
-	elif event.is_action_pressed("left0", true):
+	if left:
 		deleted = buffer.pop_back()
+		delete(deleted)
 		u = true
-	elif event.is_action_pressed("down0", true):
+	if down:
 		deleted = buffer.push_front(new_color())
+		delete(deleted)
 		u = true
-	elif event.is_action_pressed("up0", true):
+	if up:
 		deleted = buffer.pop_front()
+		delete(deleted)
 		u = true
-	if deleted:
-		var t = deleted.global_transform
-		center.remove_child(deleted)
-		get_tree().current_scene.add_child(deleted)
-		deleted.global_transform = t
-		deleted.die()
+	
 	if u:
 		update_display()
+
+func delete(deleted:Node):
+	if is_instance_valid(deleted):
+		if deleted.is_inside_tree():
+			var t = deleted.global_transform
+			center.remove_child(deleted)
+			get_tree().current_scene.add_child(deleted)
+			deleted.global_transform = t
+			deleted.die()
+
+func _input(event):
+	if event.is_action("right0"):
+		right = event.is_pressed()
+	elif event.is_action("left0"):
+		left = event.is_pressed()
+	elif event.is_action("down0"):
+		down = event.is_pressed()
+	elif event.is_action("up0"):
+		up = event.is_pressed()
+		
+	var deleted = null
+	var u = false
+	
+	if event.is_action_pressed("right1"):
+		deleted = buffer.push_back(new_color())
+		delete(deleted)
+		u = true
+		
+	elif event.is_action_pressed("left1"):
+		deleted = buffer.pop_back()
+		delete(deleted)
+		u = true
+	
+	elif event.is_action_pressed("down1"):
+		deleted = buffer.push_front(new_color())
+		delete(deleted)
+		u = true
+	
+	elif event.is_action_pressed("up1"):
+		deleted = buffer.pop_front()
+		delete(deleted)
+		u = true
+	if u:
+		update_display()
+	
 
 func update_display():
 	for child in center.get_children():
@@ -78,8 +131,21 @@ func update_display():
 		node.position = Vector2.RIGHT.rotated(angle_unit*(buffer.front_index+i)) * (radius + 20)
 		node.add_child(label)
 		label.text = str(i)
-func _on_get_index_text_entered(new_text):
+
+
+
+func _on_size_text_entered(new_text):
+	buffer.resize(int(clamp(int(new_text),1,100)))
+	update_display()
+
+
+func _on_clear_pressed():
+	buffer.clear()
+	update_display()
+
+
+func _on_get_text_entered(new_text):
 	var index = int(new_text)
 	var color = buffer.at(index)
 	$box.modulate = color.modulate if color else Color.black
-	
+
