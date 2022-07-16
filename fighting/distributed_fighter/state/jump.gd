@@ -38,7 +38,7 @@ func _exit():
 	jump_charge.stop()
 
 func _physics_update(delta):
-	pressing = pressing and root.input_state.A
+	pressing = pressing and root.input_state.A.is_pressed()
 	if !pressing:
 		jump_charge.paused=true
 		

@@ -1,5 +1,5 @@
 extends Node
-
+class_name InputState
 
 var A : ButtonState = ButtonState.new()
 var B : ButtonState = ButtonState.new()

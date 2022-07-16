@@ -4,7 +4,7 @@ export var play_scene : PackedScene
 
 func _ready():
 	$menu.set_process_input(false)
-
+	
 func start_menu():
 	$menu.visible = true
 	$menu.add_entry("play", "play", true)

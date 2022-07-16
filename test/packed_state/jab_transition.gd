@@ -28,12 +28,6 @@ func check_dir(expected_dir, input_dir):
 		( expected_dir == input_dir )
 	)
 
-
-
-func bool_to_sign(b:bool):
-	return 1 if b else -1
-
-
 func check(begin_state) -> bool:
 	var input = begin_state.root.input_state
 	var d = input.get_facing_dir()

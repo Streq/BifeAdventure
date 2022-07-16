@@ -41,6 +41,7 @@ onready var state_animation = $state_animation
 onready var damage_animation = $damage_animation
 onready var hitstun_animation = $hitstun_animation
 onready var state = $state_machine
+onready var state_buffer = $state_buffer
 
 onready var pivot = $pivot
 

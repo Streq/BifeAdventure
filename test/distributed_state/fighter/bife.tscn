@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=2]
+[gd_scene load_steps=52 format=2]
 
 [ext_resource path="res://test/distributed_state/fighter/fighter.tscn" type="PackedScene" id=1]
 [ext_resource path="res://test/distributed_state/offensive_hitbox.tscn" type="PackedScene" id=2]
@@ -17,6 +17,10 @@
 [ext_resource path="res://fighting/distributed_fighter/state/air.tscn" type="PackedScene" id=15]
 [ext_resource path="res://test/distributed_state/on_floor.gd" type="Script" id=16]
 [ext_resource path="res://fighting/distributed_fighter/state/triggers/on_finish.tscn" type="PackedScene" id=17]
+[ext_resource path="res://fighting/distributed_fighter/move/move.gd" type="Script" id=18]
+[ext_resource path="res://fighting/distributed_fighter/move/state_combo_node.tscn" type="PackedScene" id=19]
+[ext_resource path="res://fighting/distributed_fighter/move/state_combo.tscn" type="PackedScene" id=20]
+[ext_resource path="res://test/distributed_state/fighter/cross.gd" type="Script" id=21]
 
 [sub_resource type="StreamTexture" id=30]
 load_path = "res://.import/bife.png-c03d0380230672766f27ae60cb45afd6.stex"
@@ -30,7 +34,7 @@ extents = Vector2( 4, 6 )
 [sub_resource type="Animation" id=26]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("pivot/hitbox/jab/jab:active")
+tracks/0/path = NodePath("pivot/hitbox/jab/box0:active")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -42,7 +46,7 @@ tracks/0/keys = {
 "values": [ false ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("pivot/hitbox/jab2:active")
+tracks/1/path = NodePath("pivot/hitbox/jab3:active")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -54,7 +58,7 @@ tracks/1/keys = {
 "values": [ false ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("pivot/hitbox/jab3:active")
+tracks/2/path = NodePath("pivot/hitbox/d_air:active")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -66,24 +70,12 @@ tracks/2/keys = {
 "values": [ false ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("pivot/hitbox/d_air:active")
+tracks/3/path = NodePath("pivot/Sprite:frame")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("pivot/Sprite:frame")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
@@ -119,6 +111,34 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ 20.0, 33.0 ]
+}
+
+[sub_resource type="Animation" id=15]
+resource_name = "cross"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("pivot/hitbox/cross:active")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("pivot/Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 1.0, 2.0, 3.0 ]
 }
 
 [sub_resource type="Animation" id=4]
@@ -299,55 +319,16 @@ tracks/1/keys = {
 [sub_resource type="Animation" id=14]
 length = 0.3
 tracks/0/type = "value"
-tracks/0/path = NodePath("pivot/hitbox/jab2:active")
+tracks/0/path = NodePath("pivot/Sprite:frame")
 tracks/0/interp = 1
-tracks/0/loop_wrap = true
+tracks/0/loop_wrap = false
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ false, true, false ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("pivot/Sprite:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = false
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
 "times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ 19.0, 9.0 ]
-}
-
-[sub_resource type="Animation" id=15]
-length = 0.5
-tracks/0/type = "value"
-tracks/0/path = NodePath("pivot/hitbox/jab3:active")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ false, true, false ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("pivot/Sprite:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = false
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ 1.0, 2.0, 3.0 ]
 }
 
 [sub_resource type="Animation" id=31]
@@ -566,7 +547,10 @@ horizontal_dir = -1
 
 [node name="jab" parent="state_machine" index="1" instance=ExtResource( 9 )]
 
-[node name="jab_return" type="Node" parent="state_machine" index="2"]
+[node name="cross" parent="state_machine" index="2" instance=ExtResource( 9 )]
+animation = "cross"
+
+[node name="jab_return" type="Node" parent="state_machine" index="3"]
 script = ExtResource( 14 )
 animation = "jab_return"
 
@@ -580,14 +564,17 @@ state_to = "air"
 [node name="transitions" type="Node" parent="state_machine/jab_return" index="2"]
 script = ExtResource( 6 )
 
-[node name="jab" type="Node" parent="state_machine/jab_return/transitions" index="0"]
+[node name="cross" type="Node" parent="state_machine/jab_return/transitions" index="0"]
+script = ExtResource( 21 )
+
+[node name="jab" type="Node" parent="state_machine/jab_return/transitions" index="1"]
 script = ExtResource( 7 )
 end_state = "jab"
 B = 3
 
-[node name="air" parent="state_machine" index="3" instance=ExtResource( 15 )]
+[node name="air" parent="state_machine" index="4" instance=ExtResource( 15 )]
 
-[node name="wall" parent="state_machine" index="4" instance=ExtResource( 8 )]
+[node name="wall" parent="state_machine" index="5" instance=ExtResource( 8 )]
 
 [node name="transitions" type="Node" parent="state_machine/wall" index="2"]
 script = ExtResource( 6 )
@@ -602,7 +589,7 @@ script = ExtResource( 7 )
 end_state = "air"
 horizontal_dir = 1
 
-[node name="walk" parent="state_machine" index="5" instance=ExtResource( 10 )]
+[node name="walk" parent="state_machine" index="6" instance=ExtResource( 10 )]
 
 [node name="transitions" type="Node" parent="state_machine/walk" index="0"]
 script = ExtResource( 6 )
@@ -628,7 +615,7 @@ script = ExtResource( 7 )
 end_state = "turn_around"
 horizontal_dir = -1
 
-[node name="run" parent="state_machine" index="6" instance=ExtResource( 4 )]
+[node name="run" parent="state_machine" index="7" instance=ExtResource( 4 )]
 
 [node name="transitions" type="Node" parent="state_machine/run" index="0"]
 script = ExtResource( 6 )
@@ -654,13 +641,13 @@ script = ExtResource( 7 )
 end_state = "turn_around"
 horizontal_dir = -1
 
-[node name="turn_around" parent="state_machine" index="7" instance=ExtResource( 11 )]
+[node name="turn_around" parent="state_machine" index="8" instance=ExtResource( 11 )]
 
-[node name="jump" parent="state_machine" index="8" instance=ExtResource( 12 )]
+[node name="jump" parent="state_machine" index="9" instance=ExtResource( 12 )]
 jump_lag = 0.1
 jump_config = [ [ 1.0, 1.0 ], [ 0.4, 0.7 ], [ 0.0, 0.3 ] ]
 
-[node name="wall_jump" parent="state_machine" index="9" instance=ExtResource( 3 )]
+[node name="wall_jump" parent="state_machine" index="10" instance=ExtResource( 3 )]
 
 [node name="Sprite" type="Sprite" parent="pivot" index="0"]
 use_parent_material = true
@@ -672,19 +659,7 @@ __meta__ = {
 "_editor_description_": "YXNlcHJpdGVfd2l6YXJkX2NvbmZpZwpwbGF5ZXJ8PXN0YXRlX2FuaW1hdGlvbgpzb3VyY2V8PXJlczovL2Fzc2V0L2FzZXByaXRlL2JpZmUuYXNlcHJpdGUKbGF5ZXJ8PQpvcF9leHB8PUZhbHNlCm9fZm9sZGVyfD1yZXM6Ly9hc3NldC90ZXh0dXJlL2ZpZ2h0ZXJfc2hlZXQKb19uYW1lfD0Kb25seV92aXNpYmxlfD1GYWxzZQpvX2V4X3B8PQo="
 }
 
-[node name="jab2" parent="pivot/hitbox" index="0" instance=ExtResource( 2 )]
-visible = false
-monitoring = false
-monitorable = false
-active = false
-knockback = 10.0
-damage = 20.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="pivot/hitbox/jab2" index="0"]
-position = Vector2( 11, -1.5 )
-shape = SubResource( 25 )
-
-[node name="jab3" parent="pivot/hitbox" index="1" instance=ExtResource( 2 )]
+[node name="jab3" parent="pivot/hitbox" index="0" instance=ExtResource( 2 )]
 visible = false
 monitoring = false
 monitorable = false
@@ -698,7 +673,7 @@ direction_degrees = -30.0
 position = Vector2( 11, -1.5 )
 shape = SubResource( 25 )
 
-[node name="d_air" parent="pivot/hitbox" index="2" instance=ExtResource( 2 )]
+[node name="d_air" parent="pivot/hitbox" index="1" instance=ExtResource( 2 )]
 visible = false
 monitoring = false
 monitorable = false
@@ -712,17 +687,33 @@ direction_degrees = 90.0
 position = Vector2( 2, 10 )
 shape = SubResource( 28 )
 
-[node name="jab" parent="pivot/hitbox" index="3" instance=ExtResource( 13 )]
+[node name="jab" parent="pivot/hitbox" index="2" instance=ExtResource( 13 )]
 
-[node name="jab" parent="pivot/hitbox/jab" index="0" instance=ExtResource( 2 )]
+[node name="box0" parent="pivot/hitbox/jab" index="0" instance=ExtResource( 2 )]
 visible = false
 monitoring = false
 monitorable = false
 active = false
 knockback = 10.0
-damage = 20.0
+damage = 5.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="pivot/hitbox/jab/jab" index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="pivot/hitbox/jab/box0" index="0"]
+position = Vector2( 11, -1.5 )
+shape = SubResource( 25 )
+
+[node name="cross" parent="pivot/hitbox" index="3" instance=ExtResource( 13 )]
+
+[node name="box0" parent="pivot/hitbox/cross" index="0" instance=ExtResource( 2 )]
+visible = false
+monitoring = false
+monitorable = false
+active = false
+knockback = 200.0
+damage = 10.0
+direction = Vector2( 0.866025, -0.5 )
+direction_degrees = -30.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="pivot/hitbox/cross/box0" index="0"]
 position = Vector2( 11, -1.5 )
 shape = SubResource( 25 )
 
@@ -731,6 +722,7 @@ playback_process_mode = 2
 anims/RESET = SubResource( 26 )
 anims/air = SubResource( 2 )
 anims/block = SubResource( 3 )
+anims/cross = SubResource( 15 )
 anims/crouch = SubResource( 4 )
 anims/d_air = SubResource( 5 )
 anims/dash = SubResource( 6 )
@@ -742,7 +734,6 @@ anims/flinch = SubResource( 11 )
 anims/idle = SubResource( 12 )
 anims/jab = SubResource( 13 )
 anims/jab2 = SubResource( 14 )
-anims/jab3 = SubResource( 15 )
 anims/jab_return = SubResource( 31 )
 anims/jump = SubResource( 16 )
 anims/knocked = SubResource( 17 )
@@ -758,3 +749,22 @@ anims/wall = SubResource( 24 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="8"]
 position = Vector2( 0, 1 )
 shape = SubResource( 27 )
+
+[node name="cross" type="Node" parent="moveset" index="0"]
+script = ExtResource( 18 )
+states_from = PoolStringArray( "jab_return" )
+state_to = "cross"
+
+[node name="state_combo" parent="moveset/cross" index="0" instance=ExtResource( 20 )]
+
+[node name="state_combo_node" parent="moveset/cross/state_combo" index="0" instance=ExtResource( 19 )]
+state_name = "jab"
+
+[node name="state_combo_node2" parent="moveset/cross/state_combo" index="1" instance=ExtResource( 19 )]
+state_name = "jab_return"
+
+[node name="state_combo_node3" parent="moveset/cross/state_combo" index="2" instance=ExtResource( 19 )]
+state_name = "jab"
+
+[node name="state_combo_node4" parent="moveset/cross/state_combo" index="3" instance=ExtResource( 19 )]
+state_name = "jab_return"
