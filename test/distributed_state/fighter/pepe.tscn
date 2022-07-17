@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=2]
+[gd_scene load_steps=57 format=2]
 
 [ext_resource path="res://HUD/healthbar.gd" type="Script" id=1]
 [ext_resource path="res://shader/red_dither.tres" type="Material" id=2]
@@ -13,7 +13,7 @@
 [ext_resource path="res://test/distributed_state/on_floor.gd" type="Script" id=11]
 [ext_resource path="res://test/distributed_state/on_wall.gd" type="Script" id=12]
 [ext_resource path="res://test/packed_state/packed_state_machine.gd" type="Script" id=13]
-[ext_resource path="res://test/distributed_state/rebound.gd" type="Script" id=14]
+[ext_resource path="res://fighting/distributed_fighter/state/rebound.tscn" type="PackedScene" id=14]
 [ext_resource path="res://test/distributed_state/stay_still.gd" type="Script" id=15]
 [ext_resource path="res://test/packed_state/transitions.gd" type="Script" id=16]
 [ext_resource path="res://test/distributed_state/wall_state.gd" type="Script" id=17]
@@ -24,8 +24,9 @@
 [ext_resource path="res://test/distributed_state/offensive_hitbox.tscn" type="PackedScene" id=22]
 [ext_resource path="res://asset/font/proggy_clean.tres" type="DynamicFont" id=23]
 [ext_resource path="res://fighting/distributed_fighter/state/turn_around.tscn" type="PackedScene" id=24]
+[ext_resource path="res://fighting/distributed_fighter/state/flinch.tscn" type="PackedScene" id=25]
 
-[sub_resource type="StreamTexture" id=36]
+[sub_resource type="StreamTexture" id=40]
 load_path = "res://.import/pepe.png-de24f1fef4f3932fda49cbf9ac55c4ba.stex"
 
 [sub_resource type="RectangleShape2D" id=23]
@@ -472,6 +473,21 @@ tracks/0/keys = {
 "values": [ 7.0 ]
 }
 
+[sub_resource type="Animation" id=41]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("pivot/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 16.0 ]
+}
+
 [sub_resource type="Animation" id=9]
 length = 0.75
 loop = true
@@ -751,37 +767,9 @@ state_to = "dead"
 
 [node name="bounce_off_walls" parent="state_machine/dead_air" instance=ExtResource( 20 )]
 
-[node name="flinch" type="Node" parent="state_machine"]
-script = ExtResource( 5 )
-animation = "hurt"
+[node name="flinch" parent="state_machine" instance=ExtResource( 25 )]
 
-[node name="on_finish" type="Node" parent="state_machine/flinch"]
-script = ExtResource( 9 )
-end_state = "idle"
-
-[node name="transitions" type="Node" parent="state_machine/flinch"]
-script = ExtResource( 16 )
-
-[node name="stay_still" type="Node" parent="state_machine/flinch"]
-script = ExtResource( 15 )
-friction = 5.0
-
-[node name="on_floor" type="Node" parent="state_machine/flinch"]
-script = ExtResource( 11 )
-should_be_true = false
-state_to = "air_flinch"
-
-[node name="finish_on_flinch_frames_reach_zero" type="Node" parent="state_machine/flinch"]
-script = ExtResource( 4 )
-
-[node name="bounce_off_walls" parent="state_machine/flinch" instance=ExtResource( 20 )]
-
-[node name="rebound" type="Node" parent="state_machine"]
-script = ExtResource( 14 )
-animation = "air"
-
-[node name="stay_still" type="Node" parent="state_machine/rebound"]
-script = ExtResource( 15 )
+[node name="rebound" parent="state_machine" instance=ExtResource( 14 )]
 
 [node name="air_flinch" type="Node" parent="state_machine"]
 script = ExtResource( 5 )
@@ -1026,7 +1014,7 @@ use_parent_material = true
 
 [node name="Sprite" type="Sprite" parent="pivot"]
 use_parent_material = true
-texture = SubResource( 36 )
+texture = SubResource( 40 )
 hframes = 5
 vframes = 5
 __meta__ = {
@@ -1104,6 +1092,7 @@ anims/jump = SubResource( 8 )
 anims/knocked = SubResource( 33 )
 anims/launch = SubResource( 31 )
 anims/missile_kick = SubResource( 22 )
+anims/rebound = SubResource( 41 )
 anims/run = SubResource( 9 )
 anims/turn_around = SubResource( 14 )
 anims/ukick = SubResource( 10 )

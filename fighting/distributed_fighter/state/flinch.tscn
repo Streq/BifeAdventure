@@ -1,0 +1,34 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://test/distributed_state/distributed_state.gd" type="Script" id=2]
+[ext_resource path="res://test/distributed_state/finish_on_flinch_frames_reach_zero.gd" type="Script" id=3]
+[ext_resource path="res://test/packed_state/idle_transition.gd" type="Script" id=4]
+[ext_resource path="res://test/distributed_state/on_floor.gd" type="Script" id=5]
+[ext_resource path="res://test/distributed_state/stay_still.gd" type="Script" id=6]
+[ext_resource path="res://test/packed_state/transitions.gd" type="Script" id=7]
+[ext_resource path="res://test/distributed_state/bounce_off_walls.tscn" type="PackedScene" id=8]
+
+[node name="flinch" type="Node"]
+script = ExtResource( 2 )
+animation = "hurt"
+
+[node name="on_finish" type="Node" parent="."]
+script = ExtResource( 4 )
+end_state = "idle"
+
+[node name="transitions" type="Node" parent="."]
+script = ExtResource( 7 )
+
+[node name="stay_still" type="Node" parent="."]
+script = ExtResource( 6 )
+friction = 5.0
+
+[node name="on_floor" type="Node" parent="."]
+script = ExtResource( 5 )
+should_be_true = false
+state_to = "air_flinch"
+
+[node name="finish_on_flinch_frames_reach_zero" type="Node" parent="."]
+script = ExtResource( 3 )
+
+[node name="bounce_off_walls" parent="." instance=ExtResource( 8 )]

@@ -118,6 +118,15 @@
    },
    {
     "filename": "pepe 13.aseprite",
+    "frame": { "x": 48, "y": 144, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 1
+   },
+   {
+    "filename": "pepe 14.aseprite",
     "frame": { "x": 0, "y": 144, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
@@ -126,7 +135,7 @@
     "duration": 100
    },
    {
-    "filename": "pepe 14.aseprite",
+    "filename": "pepe 15.aseprite",
     "frame": { "x": 192, "y": 96, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
@@ -135,7 +144,7 @@
     "duration": 300
    },
    {
-    "filename": "pepe 15.aseprite",
+    "filename": "pepe 16.aseprite",
     "frame": { "x": 0, "y": 144, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
@@ -144,7 +153,7 @@
     "duration": 100
    },
    {
-    "filename": "pepe 16.aseprite",
+    "filename": "pepe 17.aseprite",
     "frame": { "x": 144, "y": 96, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
@@ -153,7 +162,7 @@
     "duration": 200
    },
    {
-    "filename": "pepe 17.aseprite",
+    "filename": "pepe 18.aseprite",
     "frame": { "x": 0, "y": 144, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
@@ -162,7 +171,7 @@
     "duration": 100
    },
    {
-    "filename": "pepe 18.aseprite",
+    "filename": "pepe 19.aseprite",
     "frame": { "x": 0, "y": 0, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
@@ -171,7 +180,7 @@
     "duration": 200
    },
    {
-    "filename": "pepe 19.aseprite",
+    "filename": "pepe 20.aseprite",
     "frame": { "x": 0, "y": 144, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
@@ -180,7 +189,7 @@
     "duration": 100
    },
    {
-    "filename": "pepe 20.aseprite",
+    "filename": "pepe 21.aseprite",
     "frame": { "x": 48, "y": 96, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
@@ -189,7 +198,7 @@
     "duration": 400
    },
    {
-    "filename": "pepe 21.aseprite",
+    "filename": "pepe 22.aseprite",
     "frame": { "x": 0, "y": 96, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
@@ -198,7 +207,7 @@
     "duration": 100
    },
    {
-    "filename": "pepe 22.aseprite",
+    "filename": "pepe 23.aseprite",
     "frame": { "x": 192, "y": 48, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
@@ -207,7 +216,7 @@
     "duration": 500
    },
    {
-    "filename": "pepe 23.aseprite",
+    "filename": "pepe 24.aseprite",
     "frame": { "x": 144, "y": 48, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
@@ -216,7 +225,7 @@
     "duration": 1
    },
    {
-    "filename": "pepe 24.aseprite",
+    "filename": "pepe 25.aseprite",
     "frame": { "x": 96, "y": 48, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
@@ -225,7 +234,7 @@
     "duration": 150
    },
    {
-    "filename": "pepe 25.aseprite",
+    "filename": "pepe 26.aseprite",
     "frame": { "x": 48, "y": 48, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
@@ -234,7 +243,7 @@
     "duration": 400
    },
    {
-    "filename": "pepe 26.aseprite",
+    "filename": "pepe 27.aseprite",
     "frame": { "x": 0, "y": 48, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
@@ -243,7 +252,7 @@
     "duration": 400
    },
    {
-    "filename": "pepe 27.aseprite",
+    "filename": "pepe 28.aseprite",
     "frame": { "x": 192, "y": 0, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
@@ -252,7 +261,7 @@
     "duration": 400
    },
    {
-    "filename": "pepe 28.aseprite",
+    "filename": "pepe 29.aseprite",
     "frame": { "x": 144, "y": 0, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
@@ -261,7 +270,7 @@
     "duration": 100
    },
    {
-    "filename": "pepe 29.aseprite",
+    "filename": "pepe 30.aseprite",
     "frame": { "x": 96, "y": 0, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
@@ -270,7 +279,7 @@
     "duration": 100
    },
    {
-    "filename": "pepe 30.aseprite",
+    "filename": "pepe 31.aseprite",
     "frame": { "x": 48, "y": 0, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
@@ -294,18 +303,19 @@
    { "name": "_jump", "from": 11, "to": 12, "direction": "forward" },
    { "name": "_crouch", "from": 11, "to": 11, "direction": "forward" },
    { "name": "air", "from": 12, "to": 12, "direction": "forward" },
-   { "name": "_ukick", "from": 13, "to": 14, "direction": "forward" },
-   { "name": "_jab", "from": 15, "to": 16, "direction": "forward" },
-   { "name": "_jab2", "from": 17, "to": 18, "direction": "forward" },
-   { "name": "_jab3", "from": 19, "to": 20, "direction": "forward" },
-   { "name": "_air_kick", "from": 21, "to": 22, "direction": "forward" },
-   { "name": "_wall", "from": 23, "to": 23, "direction": "forward" },
-   { "name": "_missile_kick", "from": 24, "to": 24, "direction": "forward" },
-   { "name": "_hurt", "from": 25, "to": 25, "direction": "forward" },
-   { "name": "_launch", "from": 26, "to": 26, "direction": "forward" },
-   { "name": "_knocked", "from": 27, "to": 27, "direction": "forward" },
-   { "name": "flounder_up", "from": 28, "to": 29, "direction": "forward" },
-   { "name": "_fast_fall", "from": 30, "to": 30, "direction": "forward" }
+   { "name": "_rebound", "from": 13, "to": 13, "direction": "forward" },
+   { "name": "_ukick", "from": 14, "to": 15, "direction": "forward" },
+   { "name": "_jab", "from": 16, "to": 17, "direction": "forward" },
+   { "name": "_jab2", "from": 18, "to": 19, "direction": "forward" },
+   { "name": "_jab3", "from": 20, "to": 21, "direction": "forward" },
+   { "name": "_air_kick", "from": 22, "to": 23, "direction": "forward" },
+   { "name": "_wall", "from": 24, "to": 24, "direction": "forward" },
+   { "name": "_missile_kick", "from": 25, "to": 25, "direction": "forward" },
+   { "name": "_hurt", "from": 26, "to": 26, "direction": "forward" },
+   { "name": "_launch", "from": 27, "to": 27, "direction": "forward" },
+   { "name": "_knocked", "from": 28, "to": 28, "direction": "forward" },
+   { "name": "flounder_up", "from": 29, "to": 30, "direction": "forward" },
+   { "name": "_fast_fall", "from": 31, "to": 31, "direction": "forward" }
   ]
  }
 }

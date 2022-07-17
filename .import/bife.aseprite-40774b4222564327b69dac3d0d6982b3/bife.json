@@ -195,7 +195,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
     "sourceSize": { "w": 48, "h": 48 },
-    "duration": 200
+    "duration": 100
    },
    {
     "filename": "bife 22.aseprite",
@@ -204,10 +204,19 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
     "sourceSize": { "w": 48, "h": 48 },
-    "duration": 100
+    "duration": 200
    },
    {
     "filename": "bife 23.aseprite",
+    "frame": { "x": 48, "y": 144, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 100
+   },
+   {
+    "filename": "bife 24.aseprite",
     "frame": { "x": 144, "y": 48, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
@@ -216,7 +225,7 @@
     "duration": 200
    },
    {
-    "filename": "bife 24.aseprite",
+    "filename": "bife 25.aseprite",
     "frame": { "x": 48, "y": 0, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
@@ -225,7 +234,7 @@
     "duration": 100
    },
    {
-    "filename": "bife 25.aseprite",
+    "filename": "bife 26.aseprite",
     "frame": { "x": 96, "y": 0, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
@@ -234,7 +243,7 @@
     "duration": 200
    },
    {
-    "filename": "bife 26.aseprite",
+    "filename": "bife 27.aseprite",
     "frame": { "x": 144, "y": 0, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
@@ -243,7 +252,7 @@
     "duration": 200
    },
    {
-    "filename": "bife 27.aseprite",
+    "filename": "bife 28.aseprite",
     "frame": { "x": 192, "y": 0, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
@@ -252,7 +261,7 @@
     "duration": 100
    },
    {
-    "filename": "bife 28.aseprite",
+    "filename": "bife 29.aseprite",
     "frame": { "x": 240, "y": 0, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
@@ -261,7 +270,7 @@
     "duration": 200
    },
    {
-    "filename": "bife 29.aseprite",
+    "filename": "bife 30.aseprite",
     "frame": { "x": 48, "y": 144, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
@@ -270,7 +279,7 @@
     "duration": 200
    },
    {
-    "filename": "bife 30.aseprite",
+    "filename": "bife 31.aseprite",
     "frame": { "x": 0, "y": 144, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
@@ -279,7 +288,7 @@
     "duration": 100
    },
    {
-    "filename": "bife 31.aseprite",
+    "filename": "bife 32.aseprite",
     "frame": { "x": 0, "y": 48, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
@@ -288,7 +297,7 @@
     "duration": 200
    },
    {
-    "filename": "bife 32.aseprite",
+    "filename": "bife 33.aseprite",
     "frame": { "x": 48, "y": 144, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
@@ -297,7 +306,7 @@
     "duration": 200
    },
    {
-    "filename": "bife 33.aseprite",
+    "filename": "bife 34.aseprite",
     "frame": { "x": 48, "y": 48, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
@@ -306,7 +315,7 @@
     "duration": 100
    },
    {
-    "filename": "bife 34.aseprite",
+    "filename": "bife 35.aseprite",
     "frame": { "x": 96, "y": 48, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
@@ -315,7 +324,7 @@
     "duration": 200
    },
    {
-    "filename": "bife 35.aseprite",
+    "filename": "bife 36.aseprite",
     "frame": { "x": 0, "y": 0, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
@@ -324,7 +333,7 @@
     "duration": 200
    },
    {
-    "filename": "bife 36.aseprite",
+    "filename": "bife 37.aseprite",
     "frame": { "x": 192, "y": 48, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
@@ -333,7 +342,7 @@
     "duration": 100
    },
    {
-    "filename": "bife 37.aseprite",
+    "filename": "bife 38.aseprite",
     "frame": { "x": 240, "y": 48, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
@@ -342,7 +351,7 @@
     "duration": 200
    },
    {
-    "filename": "bife 38.aseprite",
+    "filename": "bife 39.aseprite",
     "frame": { "x": 0, "y": 96, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
@@ -351,7 +360,7 @@
     "duration": 200
    },
    {
-    "filename": "bife 39.aseprite",
+    "filename": "bife 40.aseprite",
     "frame": { "x": 48, "y": 96, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
@@ -360,7 +369,7 @@
     "duration": 100
    },
    {
-    "filename": "bife 40.aseprite",
+    "filename": "bife 41.aseprite",
     "frame": { "x": 96, "y": 96, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
@@ -369,7 +378,7 @@
     "duration": 200
    },
    {
-    "filename": "bife 41.aseprite",
+    "filename": "bife 42.aseprite",
     "frame": { "x": 48, "y": 96, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
@@ -378,7 +387,7 @@
     "duration": 200
    },
    {
-    "filename": "bife 42.aseprite",
+    "filename": "bife 43.aseprite",
     "frame": { "x": 144, "y": 96, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
@@ -387,7 +396,7 @@
     "duration": 100
    },
    {
-    "filename": "bife 43.aseprite",
+    "filename": "bife 44.aseprite",
     "frame": { "x": 192, "y": 96, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
@@ -396,7 +405,7 @@
     "duration": 150
    },
    {
-    "filename": "bife 44.aseprite",
+    "filename": "bife 45.aseprite",
     "frame": { "x": 240, "y": 96, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
@@ -429,14 +438,15 @@
    { "name": "_block", "from": 17, "to": 18, "direction": "forward" },
    { "name": "_jab", "from": 19, "to": 20, "direction": "forward" },
    { "name": "_jab_return", "from": 21, "to": 21, "direction": "forward" },
-   { "name": "_jab2", "from": 22, "to": 23, "direction": "forward" },
-   { "name": "_cross", "from": 24, "to": 26, "direction": "forward" },
-   { "name": "_f_tilt", "from": 27, "to": 29, "direction": "forward" },
-   { "name": "_u_tilt", "from": 30, "to": 32, "direction": "forward" },
-   { "name": "_u_air", "from": 33, "to": 35, "direction": "forward" },
-   { "name": "_d_air", "from": 36, "to": 38, "direction": "forward" },
-   { "name": "_n_air", "from": 39, "to": 41, "direction": "forward" },
-   { "name": "_f_air", "from": 42, "to": 44, "direction": "forward" }
+   { "name": "_rebound", "from": 22, "to": 22, "direction": "forward" },
+   { "name": "_jab2", "from": 23, "to": 24, "direction": "forward" },
+   { "name": "_cross", "from": 25, "to": 27, "direction": "forward" },
+   { "name": "_f_tilt", "from": 28, "to": 30, "direction": "forward" },
+   { "name": "_u_tilt", "from": 31, "to": 33, "direction": "forward" },
+   { "name": "_u_air", "from": 34, "to": 36, "direction": "forward" },
+   { "name": "_d_air", "from": 37, "to": 39, "direction": "forward" },
+   { "name": "_n_air", "from": 40, "to": 42, "direction": "forward" },
+   { "name": "_f_air", "from": 43, "to": 45, "direction": "forward" }
   ]
  }
 }

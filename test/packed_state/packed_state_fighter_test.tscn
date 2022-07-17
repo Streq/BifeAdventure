@@ -31,6 +31,9 @@ facing_right = false
 position = Vector2( 118, 272 )
 health = 10.0
 
+[node name="controller" type="Node" parent="fighter3"]
+script = ExtResource( 3 )
+
 [node name="bife" parent="." instance=ExtResource( 5 )]
 position = Vector2( 254, 264 )
 
