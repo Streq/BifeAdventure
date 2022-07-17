@@ -30,16 +30,29 @@ func check_dir(expected_dir, input_dir):
 
 func check(begin_state) -> bool:
 	var input = begin_state.root.input_state
+	
+
+	
 	var d = input.get_facing_dir()
-	if d.x:
-#		breakpoint
-		pass
-	if C == ButtonState.STATE.UNPRESSED:
-		input.C.satisfies(C)
-	return (
+	var ret = (
 		input.A.satisfies(A) &&
 		input.B.satisfies(B) &&
 		input.C.satisfies(C) &&
 		check_dir(horizontal_dir, d.x) &&
 		check_dir(vertical_dir, d.y)
 	)
+	var p = false
+	if name == "walk" and begin_state.name == "run":
+		print("##run to walk##")
+		p = true
+	if name == "run" and begin_state.name == "walk":
+		print("##walk to run##")
+		p = true
+	if p:
+		print(self)
+		print(input)
+		print("####")
+	return ret
+
+func _to_string():
+	return "InputStep(A:%s, B:%s, C:%s, dir:(%s,%s)" % [A,B,C,horizontal_dir,vertical_dir]

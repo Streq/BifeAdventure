@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://test/distributed_state/on_floor.gd" type="Script" id=1]
 [ext_resource path="res://fighting/distributed_fighter/state/idle.gd" type="Script" id=2]
-[ext_resource path="res://fighting/distributed_fighter/state/triggers/on_finish.tscn" type="PackedScene" id=3]
+[ext_resource path="res://fighting/distributed_fighter/state/transitions/buffered_transitions.tscn" type="PackedScene" id=3]
+[ext_resource path="res://test/distributed_state/fighter/cross.gd" type="Script" id=4]
+[ext_resource path="res://test/packed_state/jab_transition.gd" type="Script" id=5]
 
 [node name="jab" type="Node"]
 script = ExtResource( 2 )
@@ -13,5 +15,16 @@ script = ExtResource( 1 )
 should_be_true = false
 state_to = "air"
 
-[node name="on_finish" parent="." instance=ExtResource( 3 )]
+[node name="buffered_transitions" parent="." instance=ExtResource( 3 )]
+
+[node name="cross" type="Node" parent="buffered_transitions"]
+script = ExtResource( 4 )
+
+[node name="jab" type="Node" parent="buffered_transitions"]
+script = ExtResource( 5 )
+end_state = "jab"
+B = 3
+
+[node name="jab_return" type="Node" parent="buffered_transitions"]
+script = ExtResource( 5 )
 end_state = "jab_return"

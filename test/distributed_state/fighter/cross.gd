@@ -8,11 +8,33 @@ func check(begin_state) -> bool:
 	
 	if !input.B.is_just_pressed():
 		return false
-	var expected = ["jab","jab_return","jab","jab_return"]
-	for i in range(-1, -expected.size()-1, -1):
-		var actual_state : BufferedState = state_buffer.buffer.at(i)
-#		var expected_state : StateComboStep = expected[i]
-#		if actual_state.name != expected_state.state_name:
-		if actual_state.name != expected[i]:
+#	var expected = ["jab","jab_return","jab","jab_return"]
+	var expected = [{
+			name="jab",
+			optional=false,
+		},{
+			name="jab_return",
+			optional=true,
+		},{
+			name="jab",
+			optional=false,
+		},{
+			name="jab_return",
+			optional=true,
+		}]
+	
+	var i = -1
+	var j = -1
+	var finish_i = -expected.size()-1
+	var finish_j = -state_buffer.buffer.size-1
+	while i != finish_i:
+		var actual_state : BufferedState = state_buffer.buffer.at(j)
+		var expected_state = expected[i]
+		i-=1
+		if actual_state.name == expected_state.name:
+			j-=1
+			if j == finish_j:
+				return false
+		elif !expected_state.optional:
 			return false
 	return true

@@ -1,0 +1,34 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://test/distributed_state/fighter/cross.gd" type="Script" id=1]
+[ext_resource path="res://fighting/distributed_fighter/state/idle.gd" type="Script" id=2]
+[ext_resource path="res://test/packed_state/idle_transition.gd" type="Script" id=3]
+[ext_resource path="res://test/packed_state/jab_transition.gd" type="Script" id=4]
+[ext_resource path="res://test/distributed_state/on_floor.gd" type="Script" id=5]
+[ext_resource path="res://test/packed_state/transitions.gd" type="Script" id=6]
+[ext_resource path="res://fighting/distributed_fighter/state/triggers/on_finish.tscn" type="PackedScene" id=7]
+[ext_resource path="res://fighting/distributed_fighter/state/transitions/transitions.tscn" type="PackedScene" id=8]
+
+[node name="jab_return" type="Node"]
+script = ExtResource( 2 )
+animation = "jab_return"
+
+[node name="on_floor" type="Node" parent="."]
+script = ExtResource( 5 )
+should_be_true = false
+state_to = "air"
+
+[node name="on_finish" type="Node" parent="." instance=ExtResource( 7 )]
+script = ExtResource( 3 )
+end_state = "idle"
+
+[node name="transitions" type="Node" parent="." instance=ExtResource( 8 )]
+script = ExtResource( 6 )
+
+[node name="cross" type="Node" parent="transitions"]
+script = ExtResource( 1 )
+
+[node name="jab" type="Node" parent="transitions"]
+script = ExtResource( 4 )
+end_state = "jab"
+B = 3

@@ -239,7 +239,7 @@ valign = 0
 autowrap = true
 
 [node name="dude" parent="." instance=ExtResource( 3 )]
-position = Vector2( 2448, -40 )
+position = Vector2( 1784, 24 )
 
 [node name="Camera2D" type="Camera2D" parent="dude"]
 current = true

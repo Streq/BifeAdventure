@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://test/packed_state/jab_transition.gd" type="Script" id=1]
+
+[node name="input_step" type="Node"]
+script = ExtResource( 1 )

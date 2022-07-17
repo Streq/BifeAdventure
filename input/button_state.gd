@@ -11,10 +11,17 @@ enum STATE {
 	ANY				=0b100
 }
 
+#11 x 01 == 1
+#11 x 11 == 1
+
 func satisfies(expected) -> bool:
 	return (
 		(expected == STATE.ANY) or
-		(expected & state == expected)
+		(
+			(expected ^ state) & 0b01 == 0 and
+			expected & 0b10 & state == expected & 0b10
+			
+		) 
 	)
 
 func update(pressed : bool):
@@ -33,3 +40,5 @@ func is_just_pressed() -> bool:
 func is_just_released() -> bool:
 	return state == STATE.JUST_UNPRESSED
 
+func _to_string() -> String:
+	return "ButtonState(just_updated: %s, pressed: %s)" % [is_just_updated(), is_pressed()]

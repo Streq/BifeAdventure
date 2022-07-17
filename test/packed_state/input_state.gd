@@ -13,3 +13,5 @@ func _ready():
 	pass
 
 
+func _to_string():
+	return "InputState(A:%s, B:%s, C:%s, dir:%s)" % [A,B,C,dir]

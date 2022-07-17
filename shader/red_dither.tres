@@ -8,7 +8,8 @@ uniform vec4 color : hint_color;
 void fragment(){
 	COLOR = texture(TEXTURE, UV); //read from texture
 	vec2 pixel = UV / TEXTURE_PIXEL_SIZE;
-	COLOR.rgb = color.rgb;
+	//COLOR.rgb = color.rgb;
+	COLOR.rgb = 1.0 - COLOR.rgb;
 }"
 
 [resource]
