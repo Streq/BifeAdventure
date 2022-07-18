@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=2]
+[gd_scene load_steps=67 format=2]
 
 [ext_resource path="res://test/distributed_state/fighter/fighter.tscn" type="PackedScene" id=1]
 [ext_resource path="res://test/distributed_state/offensive_hitbox.tscn" type="PackedScene" id=2]
@@ -17,9 +17,8 @@
 [ext_resource path="res://fighting/distributed_fighter/state/air.tscn" type="PackedScene" id=15]
 [ext_resource path="res://fighting/distributed_fighter/state/cross.tscn" type="PackedScene" id=16]
 [ext_resource path="res://fighting/distributed_fighter/state/jab_return.tscn" type="PackedScene" id=17]
-[ext_resource path="res://fighting/distributed_fighter/move/move.gd" type="Script" id=18]
-[ext_resource path="res://fighting/distributed_fighter/move/state_combo_node.tscn" type="PackedScene" id=19]
-[ext_resource path="res://fighting/distributed_fighter/move/state_combo.tscn" type="PackedScene" id=20]
+[ext_resource path="res://fighting/distributed_fighter/state/dead_air.tscn" type="PackedScene" id=18]
+[ext_resource path="res://fighting/distributed_fighter/state/dead.tscn" type="PackedScene" id=19]
 [ext_resource path="res://fighting/distributed_fighter/state/ground_attack.tscn" type="PackedScene" id=21]
 [ext_resource path="res://fighting/distributed_fighter/state/rebound.tscn" type="PackedScene" id=22]
 [ext_resource path="res://test/distributed_state/hurtbox.tscn" type="PackedScene" id=23]
@@ -28,6 +27,8 @@
 [ext_resource path="res://fighting/distributed_fighter/state/air_flinch.tscn" type="PackedScene" id=26]
 [ext_resource path="res://fighting/distributed_fighter/state/air_attack.tscn" type="PackedScene" id=27]
 [ext_resource path="res://fighting/distributed_fighter/mixin/d_air_bounce.tscn" type="PackedScene" id=28]
+[ext_resource path="res://fighting/distributed_fighter/state/idle.gd" type="Script" id=29]
+[ext_resource path="res://fighting/distributed_fighter/state/triggers/on_finish.tscn" type="PackedScene" id=30]
 
 [sub_resource type="StreamTexture" id=37]
 load_path = "res://.import/bife.png-c03d0380230672766f27ae60cb45afd6.stex"
@@ -805,8 +806,11 @@ horizontal_dir = -1
 
 [node name="jab" parent="state_machine" index="1" instance=ExtResource( 9 )]
 
-[node name="dash" parent="state_machine" index="2" instance=ExtResource( 21 )]
+[node name="dash" type="Node" parent="state_machine" index="2"]
+script = ExtResource( 29 )
 animation = "dash"
+
+[node name="on_finish" parent="state_machine/dash" index="0" instance=ExtResource( 30 )]
 
 [node name="f_tilt" parent="state_machine" index="3" instance=ExtResource( 21 )]
 
@@ -911,7 +915,7 @@ script = ExtResource( 6 )
 [node name="dash" type="Node" parent="state_machine/run/transitions" index="0"]
 script = ExtResource( 7 )
 end_state = "dash"
-B = 2
+B = 3
 
 [node name="jump" type="Node" parent="state_machine/run/transitions" index="1"]
 script = ExtResource( 7 )
@@ -949,6 +953,12 @@ animation = "flinch"
 
 [node name="air_flinch" parent="state_machine" index="20" instance=ExtResource( 26 )]
 animation = "flinch"
+
+[node name="dead" parent="state_machine" index="21" instance=ExtResource( 19 )]
+animation = "dead"
+
+[node name="dead_air" parent="state_machine" index="22" instance=ExtResource( 18 )]
+animation = "dead_air"
 
 [node name="Sprite" type="Sprite" parent="pivot" index="0"]
 use_parent_material = true
@@ -1102,7 +1112,7 @@ direction_degrees = 75.0
 position = Vector2( 2, 8.5 )
 shape = SubResource( 41 )
 
-[node name="d_air_bounce" parent="pivot/hitbox/d_air" index="1" instance=ExtResource( 28 )]
+[node name="d_air_bounce" parent="pivot/hitbox/d_air/box0" index="1" instance=ExtResource( 28 )]
 impulse = -100.0
 
 [node name="hurtbox" parent="pivot/hitbox" index="9" instance=ExtResource( 13 )]
@@ -1148,26 +1158,7 @@ anims/wall = SubResource( 24 )
 position = Vector2( 0, 1 )
 shape = SubResource( 27 )
 
-[node name="cross" type="Node" parent="moveset" index="0"]
-script = ExtResource( 18 )
-states_from = PoolStringArray( "jab_return" )
-state_to = "cross"
-
-[node name="state_combo" parent="moveset/cross" index="0" instance=ExtResource( 20 )]
-
-[node name="state_combo_node" parent="moveset/cross/state_combo" index="0" instance=ExtResource( 19 )]
-state_name = "jab"
-
-[node name="state_combo_node2" parent="moveset/cross/state_combo" index="1" instance=ExtResource( 19 )]
-state_name = "jab_return"
-
-[node name="state_combo_node3" parent="moveset/cross/state_combo" index="2" instance=ExtResource( 19 )]
-state_name = "jab"
-
-[node name="state_combo_node4" parent="moveset/cross/state_combo" index="3" instance=ExtResource( 19 )]
-state_name = "jab_return"
-
-[node name="step_forward" type="Node" parent="." index="11"]
+[node name="step_forward" type="Node" parent="." index="10"]
 script = ExtResource( 24 )
 
-[connection signal="applied_knockback" from="pivot/hitbox/d_air/box0" to="pivot/hitbox/d_air/d_air_bounce" method="trigger"]
+[connection signal="applied_knockback" from="pivot/hitbox/d_air/box0" to="pivot/hitbox/d_air/box0/d_air_bounce" method="trigger"]

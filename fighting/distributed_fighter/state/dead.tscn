@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://test/distributed_state/distributed_state.gd" type="Script" id=1]
+[ext_resource path="res://test/distributed_state/on_floor.gd" type="Script" id=2]
+[ext_resource path="res://test/distributed_state/stay_still.gd" type="Script" id=3]
+[ext_resource path="res://fighting/distributed_fighter/state/triggers/property_link.tscn" type="PackedScene" id=4]
+
+[node name="dead" type="Node"]
+script = ExtResource( 1 )
+animation = "knocked"
+
+[node name="stay_still" type="Node" parent="."]
+script = ExtResource( 3 )
+friction = 5.0
+
+[node name="property_link" parent="stay_still" instance=ExtResource( 4 )]
+
+[node name="on_floor" type="Node" parent="."]
+script = ExtResource( 2 )
+should_be_true = false
+state_to = "dead_air"

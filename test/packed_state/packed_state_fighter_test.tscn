@@ -39,3 +39,10 @@ position = Vector2( 254, 264 )
 
 [node name="controller" type="Node" parent="bife"]
 script = ExtResource( 3 )
+
+[node name="bife2" parent="." instance=ExtResource( 5 )]
+position = Vector2( 288, 264 )
+facing_right = false
+
+[node name="controller" type="Node" parent="bife2"]
+script = ExtResource( 3 )
