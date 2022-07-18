@@ -2,6 +2,9 @@ extends Hitbox
 class_name OffensiveHitbox
 tool
 
+signal applied_damage(damage)
+signal applied_knockback(knockback)
+
 export var knockback := 0.0
 export var damage := 0.0
 export var can_hit_same_fighter_more_than_once := false
@@ -37,8 +40,10 @@ func on_hurtbox(hurtbox: Hurtbox):
 		var fighter = get_body()
 		var knockback_vec = get_knockback_vector()
 		hurtbox.receive_flinch(knockback_vec, damage)
-		hurtbox.receive_damage(damage)
-		hurtbox.receive_knockback(knockback_vec)
+		if hurtbox.receive_damage(damage):
+			emit_signal("applied_damage", damage)
+		if hurtbox.receive_knockback(knockback_vec):
+			emit_signal("applied_knockback", knockback_vec)
 		
 #		var splash = SPLASH.instance()
 #		splash.modulate = Color.orangered

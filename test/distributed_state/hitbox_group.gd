@@ -1,5 +1,5 @@
 extends Node2D
-
+tool
 
 export var active := false setget set_active
 
@@ -10,6 +10,7 @@ func deactivate():
 	set_active(false)
 	
 func set_active(val):
+	active = val
 	for hitbox in get_children():
 		hitbox.call_deferred("set_active",val)
 

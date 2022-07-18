@@ -1037,6 +1037,10 @@ shape = SubResource( 23 )
 script = ExtResource( 8 )
 
 [node name="hurtbox" parent="pivot/hitbox/air_hurtbox" instance=ExtResource( 7 )]
+visible = false
+monitoring = false
+monitorable = false
+active = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="pivot/hitbox/air_hurtbox/hurtbox"]
 position = Vector2( 0, -1 )
@@ -1046,6 +1050,10 @@ shape = SubResource( 23 )
 script = ExtResource( 8 )
 
 [node name="hitbox2" parent="pivot/hitbox/jab" instance=ExtResource( 22 )]
+visible = false
+monitoring = false
+monitorable = false
+active = false
 knockback = 100.0
 damage = 10.0
 direction = Vector2( 0.939693, -0.34202 )
@@ -1059,6 +1067,10 @@ shape = SubResource( 24 )
 script = ExtResource( 8 )
 
 [node name="hitbox" parent="pivot/hitbox/air_kick" instance=ExtResource( 22 )]
+visible = false
+monitoring = false
+monitorable = false
+active = false
 knockback = 200.0
 damage = 10.0
 direction = Vector2( 0.866025, -0.5 )

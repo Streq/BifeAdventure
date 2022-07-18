@@ -41,17 +41,17 @@ func check(begin_state) -> bool:
 		check_dir(horizontal_dir, d.x) &&
 		check_dir(vertical_dir, d.y)
 	)
-	var p = false
-	if name == "walk" and begin_state.name == "run":
-		print("##run to walk##")
-		p = true
-	if name == "run" and begin_state.name == "walk":
-		print("##walk to run##")
-		p = true
-	if p:
-		print(self)
-		print(input)
-		print("####")
+#	var p = false
+#	if name == "walk" and begin_state.name == "run":
+#		print("##run to walk##")
+#		p = true
+#	if name == "run" and begin_state.name == "walk":
+#		print("##walk to run##")
+#		p = true
+#	if p:
+#		print(self)
+#		print(input)
+#		print("####")
 	return ret
 
 func _to_string():
