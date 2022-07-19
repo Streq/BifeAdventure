@@ -11,7 +11,7 @@ func _ready():
 func respawn(player):
 	player.velocity = Vector2.ZERO
 	player.position = current_checkpoint
-	player.dir = 1.0
+	player.facing_right = true
 
 func _on_checkpoint(checkpoint):
 	current_checkpoint = checkpoint.position

@@ -28,6 +28,9 @@ func update(pressed : bool):
 	var v = int(pressed)
 	state = (((state ^ v) << 1) | v) & 0b11
 
+func clear_updated():
+	state &= 0b01
+
 func is_pressed() -> bool:
 	return bool(state & 1)
 
@@ -39,6 +42,9 @@ func is_just_pressed() -> bool:
 
 func is_just_released() -> bool:
 	return state == STATE.JUST_UNPRESSED
+
+func clear():
+	state = 0
 
 func _to_string() -> String:
 	return "ButtonState(just_updated: %s, pressed: %s)" % [is_just_updated(), is_pressed()]

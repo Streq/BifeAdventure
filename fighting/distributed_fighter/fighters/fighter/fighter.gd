@@ -1,5 +1,5 @@
 extends KinematicBody2D
-class_name DistributedFighter
+class_name Fighter
 signal health_changed(value, nax_value)
 signal terrain_collision(velocity, collision)
 signal dead()
@@ -75,17 +75,19 @@ var velocity := Vector2()
 func _physics_process(delta):
 	
 	var pre_collision_velocity = velocity
+	velocity.y += gravity * delta
 	velocity = move_and_slide(velocity, Vector2.UP)
 	for i in get_slide_count():
 		var collision = get_slide_collision(i)
 		emit_signal("terrain_collision", pre_collision_velocity, collision)
-	velocity.y += gravity * delta
 	state.physics_process(delta)
 	state_animation.advance(delta)
 	if dead and !(state.current.name in ["dead", "dead_air", "flinch", "air_flinch"]):
 		velocity.y-=20.0
 		state._change_state("dead_air", null)
 	flinch_frames = max(0, flinch_frames-1)
+	
+#	input_state.frame_pass()
 
 enum H_COLLISION_SIDE {
 	ANY = 0,

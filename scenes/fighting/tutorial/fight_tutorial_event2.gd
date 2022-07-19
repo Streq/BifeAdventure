@@ -2,11 +2,12 @@ extends Node2D
 signal player_is_still()
 
 
-onready var player : Fighter= get_tree().get_nodes_in_group("player")[0]
+onready var player : Fighter = get_tree().get_nodes_in_group("player")[0]
 onready var camera := $Camera2D
 onready var tween := $Tween
 onready var boundaries = $boundaries
 onready var dummy := $dummy
+onready var controller = player.get_node("controller")
 
 
 var is_player_still = false
@@ -19,7 +20,7 @@ func play(body):
 	if played:
 		return
 	played = true
-	player.controller.enabled = false
+	controller.enabled = false
 	set_physics_process(true)
 	check_player = true
 	yield(self, "player_is_still")
@@ -45,7 +46,7 @@ func play(body):
 	])
 	yield(Textbox, "text_display_finished")
 	
-	player.controller.enabled = true
+	controller.enabled = true
 	set_boundaries_disabled(false)
 	
 	$guide/text.visible = true
@@ -73,7 +74,7 @@ func play(body):
 	dummy.spawn_point.x += 64
 	
 	
-	player.controller.enabled = false
+	controller.enabled = false
 	current_camera.global_position = camera.global_position
 	current_camera.current = true
 	tween.interpolate_property(current_camera, "position", 
@@ -85,7 +86,7 @@ func play(body):
 		)
 	tween.start()
 	set_boundaries_disabled(true)
-	player.controller.enabled = true
+	controller.enabled = true
 	
 	
 func _physics_process(delta):

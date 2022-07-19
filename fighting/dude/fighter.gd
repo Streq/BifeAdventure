@@ -1,5 +1,5 @@
 extends KinematicBody2D
-class_name Fighter
+class_name OldFighter
 signal health_changed(val, max_health)
 
 signal hurt()

@@ -39,9 +39,6 @@ visible = false
 [node name="start" type="Control" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="start_text" type="Label" parent="start"]
 anchor_left = 0.5
@@ -55,8 +52,5 @@ margin_bottom = 228.16
 theme = ExtResource( 2 )
 text = "Press [Z] to start"
 script = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="blink_timer" parent="start/start_text" instance=ExtResource( 9 )]

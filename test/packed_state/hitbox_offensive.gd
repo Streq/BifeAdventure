@@ -33,18 +33,20 @@ func _ready():
 func _on_active():
 	hit_fighters = []
 
-func on_hurtbox(hurtbox: Hurtbox):
+func on_hurtbox(hurtbox: Area2D):
 	var target = hurtbox.get_body()
 	if should_affect(target):
 		hit_fighters.append(target)
 		var fighter = get_body()
 		var knockback_vec = get_knockback_vector()
+		
 		hurtbox.receive_flinch(knockback_vec, damage)
 		if hurtbox.receive_damage(damage):
 			emit_signal("applied_damage", damage)
 		if hurtbox.receive_knockback(knockback_vec):
 			emit_signal("applied_knockback", knockback_vec)
-		
+
+
 #		var splash = SPLASH.instance()
 #		splash.modulate = Color.orangered
 #		get_tree().current_scene.add_child(splash)
@@ -77,7 +79,7 @@ func hitsplash(global_pos : Vector2, amount: int, direction : Vector2, velocity:
 	get_tree().current_scene.add_child(hit_splash)
 	hit_splash.global_position = global_pos
 
-func on_hitbox(hitbox: OffensiveHitbox):
+func on_hitbox(hitbox: Area2D):
 	if clang and hitbox.clang:
 		var target = hitbox.get_body()
 		if should_affect(target):

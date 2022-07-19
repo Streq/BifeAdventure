@@ -15,8 +15,10 @@ onready var boss_healthbar : TextureProgress = get_node(boss_healthbar_path)
 
 export var boss_node : PackedScene
 
+onready var controller = player.get_node("controller")
+
 func trigger():
-	player.controller.enabled = false
+	controller.enabled = false
 	
 	yield(text_prompt(["???: ALTO AHI"]), "completed")
 	var boss = boss_node.instance()
@@ -68,7 +70,7 @@ func trigger():
 	
 	boss.set_strategy("aim_attack")
 	boss.start_spawner()
-	player.controller.enabled = true
+	controller.enabled = true
 	
 	yield(mago, "dead")
 	$boss_teleport_positions.queue_free()

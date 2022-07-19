@@ -3,15 +3,15 @@ extends Node2D
 var positions = {}
 
 func _ready():
-	$checkpoints.current_checkpoint = $dude.position
+	$checkpoints.current_checkpoint = $bife.position
 
 func load_position(key):
 	if positions.has(key):
-		$dude.position = positions[key]
-		$dude.velocity = Vector2.ZERO
+		$bife.position = positions[key]
+		$bife.velocity = Vector2.ZERO
 
 func save_position(key):
-	positions[key] = $dude.position
+	positions[key] = $bife.position
 	
 
 func _input(event):
@@ -25,4 +25,4 @@ func _input(event):
 
 func _on_killzone_body_entered(body):
 	if body.is_in_group("player"):
-		$checkpoints.respawn($dude)
+		$checkpoints.respawn($bife)

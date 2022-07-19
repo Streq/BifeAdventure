@@ -1,7 +1,13 @@
 extends Node
 
 export var flip_h : bool = false
+export var enabled : bool = true setget set_enabled
 
+func set_enabled(val):
+	enabled = val
+	set_physics_process(enabled)
+	if !enabled:
+		 get_parent().input_state.clear()
 func _physics_process(delta):
 	var input = get_parent().input_state
 	input.A.update(Input.is_action_pressed("A0"))

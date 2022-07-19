@@ -17,7 +17,8 @@ func play(body):
 	if played:
 		return
 	played = true
-	player.controller.enabled = false
+	var controller = player.get_node("controller")
+	controller.enabled = false
 	set_physics_process(true)
 	check_player = true
 	yield(self, "player_is_still")
@@ -48,11 +49,11 @@ func play(body):
 	yield(Textbox, "text_display_finished")
 	
 	$guide/text.visible = true
-	player.controller.enabled = true
+	controller.enabled = true
 	set_boundaries_disabled(false)
 	
 	yield($dummys0, "all_dead")
-	player.controller.enabled = false
+	controller.enabled = false
 	check_player = true
 	yield(self, "player_is_still")
 	Textbox.add_texts([
@@ -74,7 +75,7 @@ func play(body):
 	tween.start()
 	yield(tween, "tween_all_completed")
 	set_boundaries_disabled(true)
-	player.controller.enabled = true
+	controller.enabled = true
 	
 	current_camera.current = true
 	

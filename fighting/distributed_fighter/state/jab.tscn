@@ -3,7 +3,7 @@
 [ext_resource path="res://test/distributed_state/on_floor.gd" type="Script" id=1]
 [ext_resource path="res://fighting/distributed_fighter/state/idle.gd" type="Script" id=2]
 [ext_resource path="res://fighting/distributed_fighter/state/transitions/buffered_transitions.tscn" type="PackedScene" id=3]
-[ext_resource path="res://test/distributed_state/fighter/cross.gd" type="Script" id=4]
+[ext_resource path="res://fighting/distributed_fighter/move/cross.gd" type="Script" id=4]
 [ext_resource path="res://test/packed_state/jab_transition.gd" type="Script" id=5]
 
 [node name="jab" type="Node"]

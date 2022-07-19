@@ -18,7 +18,8 @@ func play(body):
 	if played:
 		return
 	played = true
-	player.controller.enabled = false
+	var controller = player.get_node("controller")
+	controller.enabled = false
 	set_physics_process(true)
 	check_player = true
 	yield(self, "player_is_still")
@@ -48,7 +49,7 @@ func play(body):
 	
 	
 	
-	player.controller.enabled = true
+	controller.enabled = true
 	set_boundaries_disabled(false)
 	
 	

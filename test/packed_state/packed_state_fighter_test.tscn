@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://util/physics/drawable_collision_polygon.gd" type="Script" id=1]
 [ext_resource path="res://test/packed_state/packed_state_fighter_test.gd" type="Script" id=2]
 [ext_resource path="res://test/packed_state/controller.gd" type="Script" id=3]
-[ext_resource path="res://test/distributed_state/fighter/pepe.tscn" type="PackedScene" id=4]
-[ext_resource path="res://test/distributed_state/fighter/bife.tscn" type="PackedScene" id=5]
+[ext_resource path="res://fighting/distributed_fighter/fighters/pepe/pepe.tscn" type="PackedScene" id=4]
+[ext_resource path="res://fighting/distributed_fighter/fighters/bife/bife.tscn" type="PackedScene" id=5]
+[ext_resource path="res://input/controller.tscn" type="PackedScene" id=6]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 2 )
@@ -37,12 +38,8 @@ script = ExtResource( 3 )
 [node name="bife" parent="." instance=ExtResource( 5 )]
 position = Vector2( 254, 264 )
 
-[node name="controller" type="Node" parent="bife"]
-script = ExtResource( 3 )
+[node name="controller" parent="bife" instance=ExtResource( 6 )]
 
 [node name="bife2" parent="." instance=ExtResource( 5 )]
 position = Vector2( 288, 264 )
 facing_right = false
-
-[node name="controller" type="Node" parent="bife2"]
-script = ExtResource( 3 )

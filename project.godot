@@ -35,14 +35,9 @@ _global_script_classes=[ {
 "path": "res://fighting/controller.gd"
 }, {
 "base": "KinematicBody2D",
-"class": "DistributedFighter",
-"language": "GDScript",
-"path": "res://test/distributed_state/fighter/fighter.gd"
-}, {
-"base": "KinematicBody2D",
 "class": "Fighter",
 "language": "GDScript",
-"path": "res://fighting/dude/fighter.gd"
+"path": "res://fighting/distributed_fighter/fighters/fighter/fighter.gd"
 }, {
 "base": "Node",
 "class": "FighterState",
@@ -73,6 +68,11 @@ _global_script_classes=[ {
 "class": "OffensiveHitbox",
 "language": "GDScript",
 "path": "res://test/packed_state/hitbox_offensive.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "OldFighter",
+"language": "GDScript",
+"path": "res://fighting/dude/fighter.gd"
 }, {
 "base": "Node2D",
 "class": "OverworldCharacter",
@@ -105,7 +105,6 @@ _global_script_class_icons={
 "ButtonState": "",
 "CircularBuffer": "",
 "Controller": "",
-"DistributedFighter": "",
 "Fighter": "",
 "FighterState": "",
 "FighterStateBuffer": "",
@@ -113,6 +112,7 @@ _global_script_class_icons={
 "Hurtbox": "",
 "InputState": "",
 "OffensiveHitbox": "",
+"OldFighter": "",
 "OverworldCharacter": "",
 "State": "",
 "StateComboStep": "",

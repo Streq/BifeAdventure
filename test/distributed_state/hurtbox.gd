@@ -8,7 +8,6 @@ func _ready():
 func _on_area_entered(area : Area2D):
 	area._on_hurtbox(self)
 
-
 func receive_knockback(knockback:Vector2) -> bool:
 	get_body().receive_knockback(knockback)
 	return true

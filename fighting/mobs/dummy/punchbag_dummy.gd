@@ -70,15 +70,17 @@ func _on_hitbox_area_entered(area):
 		velocity += global_position.direction_to(area.owner.global_position)*-100
 
 
-func _on_hurtbox_area_entered(area):
-	if area.body != self and !area.body.is_in_group("mob"):
-		area.apply_knockback(self)
-		area.apply_damage(self)
-		if health>0:
-			_enter_state(STATE.HURT)
-		else:
-			_enter_state(STATE.DIE)
-		
+func _on_hurtbox_area_entered(area: OffensiveHitbox):
+#	var body = area.get_body()
+#	if body != self and !body.is_in_group("mob"):
+#		area.apply_knockback(self)
+#		area.apply_damage(self)
+#		if health>0:
+#			_enter_state(STATE.HURT)
+#		else:
+#			_enter_state(STATE.DIE)
+	pass	
+
 
 func stop_monitoring():
 	$hitbox.set_deferred("monitoring",false)
