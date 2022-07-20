@@ -1,22 +1,27 @@
 extends Node2D
 signal player_is_still()
 
-
 onready var player : Fighter = get_tree().get_nodes_in_group("player")[0]
 onready var camera := $Camera2D
 onready var tween := $Tween
 onready var boundaries = $boundaries
 onready var dummy := $dummy
 onready var controller = player.get_node("controller")
+onready var progress = $progress
+
 
 
 var is_player_still = false
 var played = false
 var check_player = false
+
+var during = ""
+
 func _ready():
 	set_physics_process(false)
-
+	
 func play(body):
+	var tree = get_tree()
 	if played:
 		return
 	played = true
@@ -53,27 +58,35 @@ func play(body):
 	spawn_position.value = $spawn0.global_position
 	$guide/text.visible = true
 	$guide/text.text = "apretar X estando QUIETO hace un JAB (APRETAR VARIAS VECES PARA HACER UN COMBO)"
-	yield(wait_on_hit("jab"), "completed")
-	yield(wait_on_hit("cross"), "completed")
+	yield(wait_on_hit_times("cross", 3), "completed")
 	$guide/text.text = "X CAMINANDO es un SIDE-JAB"
+	
 	spawn_position.value = $spawn1.global_position
-	yield(wait_on_hit("f_tilt"), "completed")
+	yield(wait_on_hit_times("f_tilt", 3), "completed")
 	$guide/text.text = "X CORRIENDO es un TACKLE"
 	spawn_position.value = $spawn2.global_position
-	yield(wait_on_hit("dash"), "completed")
+	yield(wait_on_hit_times("dash", 3), "completed")
 	$guide/text.text = "X QUIETO y APRETANDO ARRIBA es un UPPERCUT"
-	yield(wait_on_hit("u_tilt"), "completed")
+	scold_on("u_air", "SIN SALTAR", "u_tilt")
+	yield(wait_on_hit_times("u_tilt", 3), "completed")
 	spawn_position.value = $spawn3.global_position
-	$guide/text.text = "X en el AIRE y apretando NADA es una PATADA VOLADORA"
-	yield(wait_on_hit("n_air"), "completed")
+	$guide/text.text = "X en el AIRE y apretando NINGUNA DIRECCION es una PATADA VOLADORA"
+	scold_on("f_air", "DIJE NINGUNA DIRECCION", "n_air")
+	
+	yield(wait_on_hit_times("n_air", 3), "completed")
 	$guide/text.text = "X en el AIRE y apretando ADELANTE es un GOLPE que hacen mucho en DRAGON BALL Z"
-	yield(wait_on_hit("f_air"), "completed")
+	yield(wait_on_hit_times("f_air", 3), "completed")
 	$guide/text.text = "X en el AIRE y apretando ARRIBA es un UPPERCUT AEREO"
 	spawn_position.value = $spawn4.global_position
 	
-	yield(wait_on_hit("u_air"), "completed")
-	$guide/text.text = "X en el AIRE y apretando ABAJO es UNA PATADA ESCALONERA (sirve para GANAR ALTURA)"
+	yield(wait_on_hit_times("u_air", 3), "completed")
+	$guide/text.text = "X en el AIRE y apretando ABAJO es UNA PATADA ESCALONERA"
 	spawn_position.value = $spawn5.global_position
+	
+	yield(wait_on_hit_times("d_air", 3), "completed")
+	$guide/text.text = "BIEN BIFE LA CONCHA DE TU MADRE"
+	spawn_position.value = $spawn6.global_position
+	
 	
 	
 	controller.enabled = false
@@ -106,8 +119,41 @@ func set_boundaries_disabled(val):
 		var shape_owner = boundaries.shape_owner_get_owner(i)
 		shape_owner.disabled = val
 		
+func wait_on_hit_times(name, times):
+	during = name
+	for i in times:
+		_progress_changed(i, times)
+		yield(wait_on_hit(name), "completed")
+	_progress_changed(times, times)
+
+	yield(get_tree().create_timer(1.0),"timeout")
+
+func _progress_changed(current, requirement):
+	progress.text = "%d/%d" % [current, requirement]
+	if current == requirement:
+		progress.modulate = Color.green
+	else:
+		progress.modulate = Color.red
+			
+
 func wait_on_hit(name):
 	while true:
 		yield(dummy, "health_changed")
 		if player.state.current.name == name:
-			return
+			break
+func scold_on(actual_attack, scold_text, expected_attack):
+	var t = $guide/text.text
+	#hack to ensure this happens AFTER the yield for the expected attack
+	while during != expected_attack:
+		yield(get_tree(),"idle_frame")
+		
+	while during == expected_attack:
+		yield(wait_on_hit(actual_attack), "completed")
+		if during == expected_attack:
+			$guide/text.text = scold_text
+		yield(get_tree().create_timer(1.0), "timeout")
+		if during == expected_attack:
+			$guide/text.text = t
+		
+		
+	

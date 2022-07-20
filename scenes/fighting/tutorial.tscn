@@ -402,7 +402,21 @@ position = Vector2( 96, -40 )
 position = Vector2( 136, -40 )
 
 [node name="spawn5" type="Position2D" parent="attack_tutorial_area2/fight_event"]
+position = Vector2( 96, -48 )
+
+[node name="spawn6" type="Position2D" parent="attack_tutorial_area2/fight_event"]
 position = Vector2( 168, -48 )
+
+[node name="progress" type="Label" parent="attack_tutorial_area2/fight_event"]
+margin_left = 92.0
+margin_top = 33.0
+margin_right = 92.0
+margin_bottom = 47.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource( 14 )
+align = 1
+valign = 1
 
 [node name="attack_tutorial_area3" type="Area2D" parent="."]
 position = Vector2( 2560, 64 )
