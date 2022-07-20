@@ -49,29 +49,31 @@ func play(body):
 	controller.enabled = true
 	set_boundaries_disabled(false)
 	
+	var spawn_position = dummy.get_node("spawn_position")
+	spawn_position.value = $spawn0.global_position
 	$guide/text.visible = true
 	$guide/text.text = "apretar X estando QUIETO hace un JAB (APRETAR VARIAS VECES PARA HACER UN COMBO)"
 	yield(wait_on_hit("jab"), "completed")
-	yield(wait_on_hit("jab2"), "completed")
-	yield(wait_on_hit("jab3"), "completed")
+	yield(wait_on_hit("cross"), "completed")
 	$guide/text.text = "X CAMINANDO es un SIDE-JAB"
-	yield(wait_on_hit("side_jab"), "completed")
+	spawn_position.value = $spawn1.global_position
+	yield(wait_on_hit("f_tilt"), "completed")
 	$guide/text.text = "X CORRIENDO es un TACKLE"
-	yield(wait_on_hit("tackle"), "completed")
+	spawn_position.value = $spawn2.global_position
+	yield(wait_on_hit("dash"), "completed")
 	$guide/text.text = "X QUIETO y APRETANDO ARRIBA es un UPPERCUT"
-	yield(wait_on_hit("utilt"), "completed")
-	
-	dummy.spawn_point.y -= 32.0
+	yield(wait_on_hit("u_tilt"), "completed")
+	spawn_position.value = $spawn3.global_position
 	$guide/text.text = "X en el AIRE y apretando NADA es una PATADA VOLADORA"
-	yield(wait_on_hit("air_kick"), "completed")
+	yield(wait_on_hit("n_air"), "completed")
 	$guide/text.text = "X en el AIRE y apretando ADELANTE es un GOLPE que hacen mucho en DRAGON BALL Z"
-	yield(wait_on_hit("fair"), "completed")
+	yield(wait_on_hit("f_air"), "completed")
 	$guide/text.text = "X en el AIRE y apretando ARRIBA es un UPPERCUT AEREO"
-	dummy.spawn_point.y -= 16.0
-	yield(wait_on_hit("uair"), "completed")
+	spawn_position.value = $spawn4.global_position
+	
+	yield(wait_on_hit("u_air"), "completed")
 	$guide/text.text = "X en el AIRE y apretando ABAJO es UNA PATADA ESCALONERA (sirve para GANAR ALTURA)"
-	dummy.spawn_point.y += 16
-	dummy.spawn_point.x += 64
+	spawn_position.value = $spawn5.global_position
 	
 	
 	controller.enabled = false
@@ -105,7 +107,7 @@ func set_boundaries_disabled(val):
 		shape_owner.disabled = val
 		
 func wait_on_hit(name):
-	while yield(player.state, "state_changed") != name:
-		pass
-	yield(dummy, "hurt")
-	
+	while true:
+		yield(dummy, "health_changed")
+		if player.state.current.name == name:
+			return

@@ -1,11 +1,11 @@
 extends KinematicBody2D
 class_name Fighter
-signal health_changed(value, nax_value)
+signal health_changed(value, max_value)
 signal terrain_collision(velocity, collision)
 signal dead()
 
-export var health := 100.0 setget set_health
 export var max_health := 100.0
+export var health := 100.0 setget set_health
 export var gravity := 200.0
 export var facing_right := true setget set_facing_right
 
@@ -130,7 +130,6 @@ func receive_damage(damage : float):
 	self.health = health - damage
 	if health == 0.0 and !dead:
 		die()
-
 func rebound(frames: int, knockback: Vector2):
 	velocity = knockback
 	state._change_state("rebound", [frames])

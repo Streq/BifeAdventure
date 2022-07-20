@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://test/distributed_state/hurtbox.gd" type="Script" id=1]
 [ext_resource path="res://test/distributed_state/hitbox/hitbox_group.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://fighting/distributed_fighter/fighters/dummy/state/dead_air.tscn" type="PackedScene" id=4]
 [ext_resource path="res://fighting/distributed_fighter/FighterSprite.tscn" type="PackedScene" id=5]
 [ext_resource path="res://fighting/distributed_fighter/fighters/dummy/state/idle.tscn" type="PackedScene" id=6]
+[ext_resource path="res://fighting/distributed_fighter/fighters/dummy/spawn_position.gd" type="Script" id=7]
 
 [sub_resource type="CircleShape2D" id=4]
 radius = 6.08276
@@ -68,11 +69,13 @@ tracks/0/keys = {
 }
 
 [node name="dummy" instance=ExtResource( 3 )]
+max_health = 20.0
 health = 20.0
 gravity = 0.0
 run_speed = 200.0
 
 [node name="idle" parent="state_machine" index="0" instance=ExtResource( 6 )]
+spawn_point_path = NodePath("../../spawn_position")
 
 [node name="dead_air" parent="state_machine" index="1" instance=ExtResource( 4 )]
 animation = "dead"
@@ -96,3 +99,6 @@ frame = 1
 anims/RESET = SubResource( 5 )
 anims/dead = SubResource( 2 )
 anims/idle = SubResource( 3 )
+
+[node name="spawn_position" type="Node2D" parent="." index="9"]
+script = ExtResource( 7 )
