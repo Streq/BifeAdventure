@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://autotile/terrain_simple.tscn" type="PackedScene" id=1]
 [ext_resource path="res://test/fighting/tilemap.tscn" type="PackedScene" id=2]
@@ -24,6 +24,7 @@
 [ext_resource path="res://scenes/fighting/tutorial/final_fight_tutorial_event.gd" type="Script" id=22]
 [ext_resource path="res://fighting/distributed_fighter/fighters/bife/bife.tscn" type="PackedScene" id=23]
 [ext_resource path="res://input/controller.tscn" type="PackedScene" id=24]
+[ext_resource path="res://fighting/distributed_fighter/fighters/dummy/dummy.tscn" type="PackedScene" id=25]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
@@ -329,13 +330,13 @@ con X"
 [node name="dummys0" type="Node2D" parent="attack_tutorial_area/fight_event"]
 script = ExtResource( 9 )
 
-[node name="dummy" parent="attack_tutorial_area/fight_event/dummys0" instance=ExtResource( 8 )]
+[node name="dummy" parent="attack_tutorial_area/fight_event/dummys0" instance=ExtResource( 25 )]
 position = Vector2( 56, 0 )
 
-[node name="dummy2" parent="attack_tutorial_area/fight_event/dummys0" instance=ExtResource( 8 )]
+[node name="dummy2" parent="attack_tutorial_area/fight_event/dummys0" instance=ExtResource( 25 )]
 position = Vector2( 96, 0 )
 
-[node name="dummy3" parent="attack_tutorial_area/fight_event/dummys0" instance=ExtResource( 8 )]
+[node name="dummy3" parent="attack_tutorial_area/fight_event/dummys0" instance=ExtResource( 25 )]
 position = Vector2( 136, 0 )
 
 [node name="attack_tutorial_area2" type="Area2D" parent="."]

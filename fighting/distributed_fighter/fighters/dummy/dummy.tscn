@@ -1,0 +1,98 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://test/distributed_state/hurtbox.gd" type="Script" id=1]
+[ext_resource path="res://test/distributed_state/hitbox/hitbox_group.tscn" type="PackedScene" id=2]
+[ext_resource path="res://fighting/distributed_fighter/fighters/fighter/fighter.tscn" type="PackedScene" id=3]
+[ext_resource path="res://fighting/distributed_fighter/fighters/dummy/state/dead_air.tscn" type="PackedScene" id=4]
+[ext_resource path="res://fighting/distributed_fighter/FighterSprite.tscn" type="PackedScene" id=5]
+[ext_resource path="res://fighting/distributed_fighter/fighters/dummy/state/idle.tscn" type="PackedScene" id=6]
+
+[sub_resource type="CircleShape2D" id=4]
+radius = 6.08276
+
+[sub_resource type="Animation" id=5]
+resource_name = "RESET"
+tracks/0/type = "value"
+tracks/0/path = NodePath("pivot/hitbox/main:active")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=2]
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("pivot/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("pivot/hitbox/main:active")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=3]
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("pivot/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0.0 ]
+}
+
+[node name="dummy" instance=ExtResource( 3 )]
+health = 20.0
+gravity = 0.0
+run_speed = 200.0
+
+[node name="idle" parent="state_machine" index="0" instance=ExtResource( 6 )]
+
+[node name="dead_air" parent="state_machine" index="1" instance=ExtResource( 4 )]
+animation = "dead"
+
+[node name="main" parent="pivot/hitbox" index="0" instance=ExtResource( 2 )]
+active = true
+
+[node name="Hurtbox" type="Area2D" parent="pivot/hitbox/main" index="0"]
+collision_layer = 4
+collision_mask = 8
+script = ExtResource( 1 )
+flinch_enabled = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="pivot/hitbox/main/Hurtbox" index="0"]
+shape = SubResource( 4 )
+
+[node name="Sprite" parent="pivot" index="1" instance=ExtResource( 5 )]
+frame = 1
+
+[node name="state_animation" parent="." index="7"]
+anims/RESET = SubResource( 5 )
+anims/dead = SubResource( 2 )
+anims/idle = SubResource( 3 )

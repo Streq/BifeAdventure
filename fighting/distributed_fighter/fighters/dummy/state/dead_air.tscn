@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://fighting/distributed_fighter/fighters/dummy/state/dead_air.gd" type="Script" id=1]
+
+[node name="dead_air" type="Node"]
+script = ExtResource( 1 )
+animation = "dead_air"
