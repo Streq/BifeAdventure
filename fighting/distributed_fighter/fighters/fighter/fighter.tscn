@@ -48,18 +48,6 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=38]
 length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath("pivot/Sprite:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ Vector2( 0, 0 ) ]
-}
 
 [sub_resource type="Animation" id=39]
 resource_name = "hitstun"
@@ -121,6 +109,7 @@ align = 1
 valign = 1
 
 [node name="state_animation" type="AnimationPlayer" parent="."]
+playback_process_mode = 2
 
 [node name="state_buffer" parent="." instance=ExtResource( 6 )]
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=2]
+[gd_scene load_steps=58 format=2]
 
 [ext_resource path="res://HUD/healthbar.gd" type="Script" id=1]
 [ext_resource path="res://shader/red_dither.tres" type="Material" id=2]
@@ -25,6 +25,7 @@
 [ext_resource path="res://fighting/distributed_fighter/state/turn_around.tscn" type="PackedScene" id=23]
 [ext_resource path="res://asset/font/proggy_clean.tres" type="DynamicFont" id=24]
 [ext_resource path="res://fighting/distributed_fighter/state/flinch.tscn" type="PackedScene" id=25]
+[ext_resource path="res://fighting/distributed_fighter/fighters/pepe/state/idle.tscn" type="PackedScene" id=26]
 
 [sub_resource type="StreamTexture" id=40]
 load_path = "res://.import/pepe.png-de24f1fef4f3932fda49cbf9ac55c4ba.stex"
@@ -701,18 +702,7 @@ start_state = "idle"
 root = NodePath("..")
 autostart = true
 
-[node name="idle" type="Node" parent="state_machine"]
-script = ExtResource( 5 )
-animation = "idle"
-
-[node name="on_floor" type="Node" parent="state_machine/idle"]
-script = ExtResource( 13 )
-should_be_true = false
-state_to = "air"
-
-[node name="stay_still" type="Node" parent="state_machine/idle"]
-script = ExtResource( 16 )
-friction = 60.0
+[node name="idle" parent="state_machine" instance=ExtResource( 26 )]
 
 [node name="transitions" type="Node" parent="state_machine/idle"]
 script = ExtResource( 17 )

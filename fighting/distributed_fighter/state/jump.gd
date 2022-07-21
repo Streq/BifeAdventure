@@ -17,6 +17,9 @@ onready var direction = $direction
 var pressing = false
 var jump_factor := 0.0
 
+#for AI's
+var chosen_config = -1
+
 func _ready():
 	jump_lag_timer.connect("timeout", self, "jump")
 
@@ -41,19 +44,22 @@ func _physics_update(delta):
 	pressing = pressing and root.input_state.A.is_pressed()
 	if !pressing:
 		jump_charge.paused=true
-		
-		
+
+
+
 func jump():
 	var jump_speed : float = root.jump_speed
 	var press_time = jump_lag - jump_charge.time_left
-	
-	for config in jump_config:
-		var config_press_req = config[0]*jump_lag
-		var config_jump_factor = config[1]
-		
-		if press_time >= config_press_req:
-			jump_factor = config_jump_factor
-			break
+	if chosen_config != -1:
+		jump_factor = jump_config[chosen_config][1]
+	else:
+		for config in jump_config:
+			var config_press_req = config[0]*jump_lag
+			var config_jump_factor = config[1]
+			
+			if press_time >= config_press_req:
+				jump_factor = config_jump_factor
+				break
 	root.velocity += direction.direction * Vector2(root.get_facing_dir(), 1.0) * jump_speed * jump_factor
 	goto("air")
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://autotile/terrain_simple.tscn" type="PackedScene" id=1]
 [ext_resource path="res://test/fighting/tilemap.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://scenes/fighting/elements/checkpoints.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/fighting/tutorial.gd" type="Script" id=6]
 [ext_resource path="res://scenes/fighting/elements/checkpoint.tscn" type="PackedScene" id=7]
+[ext_resource path="res://fighting/distributed_fighter/fighters/pepe_clone/pepe_clone.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/fighting/tutorial/dead_dummy_counter.gd" type="Script" id=9]
 [ext_resource path="res://scenes/fighting/elements/door.gd" type="Script" id=10]
 [ext_resource path="res://fighting/npc/change_text_area.tscn" type="PackedScene" id=11]
@@ -24,6 +25,7 @@
 [ext_resource path="res://fighting/distributed_fighter/fighters/bife/bife.tscn" type="PackedScene" id=23]
 [ext_resource path="res://input/controller.tscn" type="PackedScene" id=24]
 [ext_resource path="res://fighting/distributed_fighter/fighters/dummy/dummy.tscn" type="PackedScene" id=25]
+[ext_resource path="res://fighting/distributed_fighter/fighters/pepe_clone/AI/pepe_clone_ai.gd" type="Script" id=26]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
@@ -241,8 +243,15 @@ text = "cuando en una pared puedes hacer un SALTOPARED, presiona ARRIBA o ABAJO 
 valign = 0
 autowrap = true
 
+[node name="pepe_clone" parent="." instance=ExtResource( 8 )]
+position = Vector2( 2520, 136 )
+
+[node name="controller" type="Node" parent="pepe_clone"]
+script = ExtResource( 26 )
+target_path = NodePath("../../bife")
+
 [node name="bife" parent="." groups=["player"] instance=ExtResource( 23 )]
-position = Vector2( 2259, 38 )
+position = Vector2( 2663, 184 )
 
 [node name="Camera2D" type="Camera2D" parent="bife"]
 current = true

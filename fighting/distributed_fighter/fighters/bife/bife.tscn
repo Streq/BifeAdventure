@@ -1125,7 +1125,6 @@ position = Vector2( 0, 1 )
 shape = SubResource( 34 )
 
 [node name="state_animation" parent="." index="7"]
-playback_process_mode = 2
 anims/RESET = SubResource( 26 )
 anims/air = SubResource( 2 )
 anims/block = SubResource( 3 )

@@ -2,10 +2,10 @@
 
 [ext_resource path="res://util/physics/drawable_collision_polygon.gd" type="Script" id=1]
 [ext_resource path="res://test/packed_state/packed_state_fighter_test.gd" type="Script" id=2]
-[ext_resource path="res://test/packed_state/controller.gd" type="Script" id=3]
 [ext_resource path="res://fighting/distributed_fighter/fighters/pepe/pepe.tscn" type="PackedScene" id=4]
 [ext_resource path="res://fighting/distributed_fighter/fighters/bife/bife.tscn" type="PackedScene" id=5]
 [ext_resource path="res://input/controller.tscn" type="PackedScene" id=6]
+[ext_resource path="res://fighting/distributed_fighter/fighters/pepe_clone/pepe_clone.tscn" type="PackedScene" id=7]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 2 )
@@ -24,22 +24,14 @@ polygon = PoolVector2Array( -23, 253, 137, 253, 185, 253, 281, 253, 281, 141, 24
 script = ExtResource( 1 )
 col_path = NodePath("../CollisionPolygon2D")
 
-[node name="fighter2" parent="." instance=ExtResource( 4 )]
-position = Vector2( 135, 272 )
-facing_right = false
-
-[node name="fighter3" parent="." instance=ExtResource( 4 )]
-position = Vector2( 118, 272 )
-health = 10.0
-
-[node name="controller" type="Node" parent="fighter3"]
-script = ExtResource( 3 )
-
-[node name="bife" parent="." instance=ExtResource( 5 )]
-position = Vector2( 254, 264 )
-
-[node name="controller" parent="bife" instance=ExtResource( 6 )]
-
 [node name="bife2" parent="." instance=ExtResource( 5 )]
 position = Vector2( 288, 264 )
 facing_right = false
+
+[node name="pepe_clone" parent="." instance=ExtResource( 7 )]
+position = Vector2( 248, 144 )
+
+[node name="controller" parent="pepe_clone" instance=ExtResource( 6 )]
+
+[node name="fighter" parent="." instance=ExtResource( 4 )]
+position = Vector2( 208, 144 )

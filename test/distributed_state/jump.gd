@@ -39,10 +39,10 @@ func jump():
 	
 	if strength < anim_length * low_jump_threshold:
 		#low jump
-		jump_impulse = fighter.jump_speed/3
+		jump_impulse = fighter.jump_speed/3.0
 	elif !strong_jump:
 		#mid jump
-		jump_impulse = fighter.jump_speed*2.0/3
+		jump_impulse = fighter.jump_speed*2.0/3.0
 	else:
 		#full jump
 		jump_impulse = fighter.jump_speed
