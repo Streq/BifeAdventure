@@ -8,7 +8,7 @@ var input : InputState = null
 
 export var target_path : NodePath
 
-onready var target : Fighter = get_node(target_path)
+onready var target : Fighter = get_node(target_path) if target_path else null
 
 enum STATE {
 	LOW_JUMP,
@@ -49,14 +49,15 @@ func _physics_process(delta):
 	var dist = target.global_position - body.global_position
 	dir = sign(dist.x)
 	var length = abs(dist.x)
-	if length > 100:
-		state = STATE.HIGH_JUMP
-	elif length > 50:
-		state = STATE.MID_JUMP
-	elif length > 20:
-		state = STATE.LOW_JUMP
-	else:
+	
+	if $hit_detect.overlaps_body(target):
 		state = STATE.ATTACK
+	elif $low_jump_detect.overlaps_body(target):
+		state = STATE.LOW_JUMP
+	elif $mid_jump_detect.overlaps_body(target):
+		state = STATE.MID_JUMP
+	else: 
+		state = STATE.HIGH_JUMP
 	update_inputs()
 
 
@@ -102,9 +103,9 @@ func update_inputs():
 					input.C.update(false)
 		STATE.ATTACK:
 			match current.name:
-				"idle":
+				"idle","air":
 					input.A.update(false)
-					input.B.update(body.get_facing_dir() != dir)
+					input.B.update(body.get_facing_dir() == dir)
 					input.C.update(false)
 				_:
 					input.A.update(false)

@@ -6,7 +6,7 @@ onready var player : Fighter= get_tree().get_nodes_in_group("player")[0]
 onready var camera := $Camera2D
 onready var tween := $Tween
 onready var boundaries = $boundaries
-
+onready var clone = $pepe_clone
 
 var is_player_still = false
 var played = false

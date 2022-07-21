@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://fighting/distributed_fighter/fighters/fighter/fighter.tscn" type="PackedScene" id=1]
 [ext_resource path="res://test/distributed_state/hurtbox.tscn" type="PackedScene" id=2]
@@ -19,6 +19,7 @@
 [ext_resource path="res://test/distributed_state/on_floor.gd" type="Script" id=17]
 [ext_resource path="res://fighting/distributed_fighter/state/air.gd" type="Script" id=18]
 [ext_resource path="res://fighting/distributed_fighter/fighters/pepe_clone/keep_x_velocity.gd" type="Script" id=19]
+[ext_resource path="res://fighting/distributed_fighter/state/air_attack.tscn" type="PackedScene" id=20]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5, 6.5 )
@@ -42,6 +43,30 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("pivot/hitbox/n_air:active")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("pivot/Sprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 23 ]
 }
 
 [sub_resource type="Animation" id=3]
@@ -73,6 +98,18 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ 10.0, 9.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("pivot/hitbox/n_air:active")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
 }
 
 [sub_resource type="Animation" id=5]
@@ -396,7 +433,7 @@ jump_speed = 200.0
 
 [node name="jab" parent="state_machine/idle/transitions" index="0" instance=ExtResource( 6 )]
 end_state = "jab"
-B = 2
+B = 3
 
 [node name="front_jump" parent="state_machine/idle/transitions" index="1" instance=ExtResource( 6 )]
 end_state = "front_jump"
@@ -438,6 +475,12 @@ state_to = "idle"
 [node name="keep_x_velocity" type="Node" parent="state_machine/air" index="1"]
 script = ExtResource( 19 )
 
+[node name="transitions" parent="state_machine/air" index="2" instance=ExtResource( 12 )]
+
+[node name="jab" parent="state_machine/air/transitions" index="0" instance=ExtResource( 6 )]
+end_state = "n_air"
+B = 3
+
 [node name="front_jump" parent="state_machine" index="9" instance=ExtResource( 11 )]
 
 [node name="direction" parent="state_machine/front_jump" index="2"]
@@ -447,6 +490,12 @@ isolated_direction_y = -0.866025
 direction_degrees = -60.0
 
 [node name="dead_air" parent="state_machine" index="10" instance=ExtResource( 15 )]
+
+[node name="n_air" parent="state_machine" index="11" instance=ExtResource( 20 )]
+animation = "air_kick"
+
+[node name="keep_x_velocity" type="Node" parent="state_machine/n_air" index="2"]
+script = ExtResource( 19 )
 
 [node name="main" type="Node2D" parent="pivot/hitbox" index="0"]
 script = ExtResource( 13 )
@@ -475,11 +524,28 @@ direction_degrees = -45.0
 position = Vector2( 8.75, 0 )
 shape = SubResource( 2 )
 
+[node name="n_air" type="Node2D" parent="pivot/hitbox" index="2"]
+script = ExtResource( 13 )
+
+[node name="hitbox" parent="pivot/hitbox/n_air" index="0" instance=ExtResource( 5 )]
+visible = false
+monitoring = false
+monitorable = false
+active = false
+knockback = 300.0
+damage = 10.0
+direction = Vector2( 0.707107, -0.707107 )
+direction_degrees = -45.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="pivot/hitbox/n_air/hitbox" index="0"]
+position = Vector2( 8.75, 0 )
+shape = SubResource( 2 )
+
 [node name="Sprite" parent="pivot" index="1" instance=ExtResource( 16 )]
 texture = SubResource( 23 )
 hframes = 5
 vframes = 5
-frame = 5
+frame = 23
 
 [node name="state_animation" parent="." index="7"]
 anims/RESET = SubResource( 24 )
