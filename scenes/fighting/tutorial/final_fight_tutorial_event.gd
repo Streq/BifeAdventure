@@ -70,14 +70,19 @@ func play(body):
 		clone.connect("tree_exited", self, "clone_died")
 	yield(self,"clones_dead")
 	
+	
+	Globals.set_event(Globals.EVENT.tutorial_completed, true)
 	Textbox.add_texts([
 		"PEPE: la verdad BIFE me quito el sombrero, los cagaste a palos",
 		"PEPE: te diria de pelear contra mi pero la ultima vez que hice eso termine con la perimetral",
 		"PEPE: no me queda nada mas que enseñarte BIFE",
 		"PEPE: chau ANDATE"
 	])
-	
 	yield(Textbox, "text_display_finished")
+	
+	$exit_area.active = true
+	set_boundaries_disabled(true)
+	
 	
 signal clones_dead
 var clone_amount = 0

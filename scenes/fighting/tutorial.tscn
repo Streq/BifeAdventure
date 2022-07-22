@@ -256,7 +256,7 @@ valign = 0
 autowrap = true
 
 [node name="bife" parent="." groups=["player"] instance=ExtResource( 23 )]
-position = Vector2( 1189, 229 )
+position = Vector2( -296, 266 )
 
 [node name="Camera2D" type="Camera2D" parent="bife"]
 current = true
@@ -416,7 +416,7 @@ position = Vector2( 136, -40 )
 position = Vector2( 96, -35 )
 
 [node name="spawn6" type="Position2D" parent="attack_tutorial_area2/fight_event"]
-position = Vector2( 168, -48 )
+position = Vector2( 168, -40 )
 
 [node name="progress" type="Label" parent="attack_tutorial_area2/fight_event"]
 margin_left = 92.0
@@ -464,6 +464,11 @@ disabled = true
 position = Vector2( 140, -56 )
 z_index = -1
 
+[node name="exit_area" parent="attack_tutorial_area3/fight_event" instance=ExtResource( 27 )]
+position = Vector2( 240, 79 )
+where = 2
+tile = Vector2( 16, 10 )
+
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2( 594, -79 )
 collision_layer = 0
@@ -472,9 +477,6 @@ script = ExtResource( 8 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( -0.5, 0 )
 shape = SubResource( 11 )
-
-[node name="exit_area" parent="." instance=ExtResource( 27 )]
-position = Vector2( 2803, 144 )
 
 [connection signal="body_entered" from="killzone" to="." method="_on_killzone_body_entered"]
 [connection signal="body_entered" from="guide4/fall_detect" to="guide4/fall_detect" method="_on_body_entered"]
