@@ -2,10 +2,8 @@ extends Node2D
 
 
 
-export var textbox_path: NodePath
-onready var textbox : TextBox = get_node(textbox_path)
 export var player_path: NodePath
-onready var player : Fighter = get_node(player_path)
+onready var player : OldFighter = get_node(player_path)
 export var player_camera_path: NodePath
 onready var player_camera : Camera2D = get_node(player_camera_path)
 export var walls_path: NodePath
@@ -93,8 +91,8 @@ func _on_boss_fight_event_zone_body_entered(body):
 
 
 func text_prompt(text):
-	textbox.add_texts(text)
-	yield(textbox,"text_display_finished")
+	Textbox.add_texts(text)
+	yield(Textbox,"text_display_finished")
 
 func move_camera_to_focus():
 	var camera = $Camera2D

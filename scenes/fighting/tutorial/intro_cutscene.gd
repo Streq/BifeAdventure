@@ -20,10 +20,9 @@ func _on_ready():
 	else:
 		Textbox.add_texts([
 			"PEPE: hola BIFE, yo soy PEPE, ya sabes igual, porque me conoces de TODA la VIDA!",
-			"BIFE: que hace webon",
+			"BIFE: es verdad",
 			"PEPE: es la PRIMERA vez que VENIS a mi GYM! asi que te voy a enseñar TODO",
-			"BIFE: dale",
-			"PEPE: sigUeme!"
+			"PEPE: sigueme!"
 		])
 		yield(Textbox,"text_display_finished")
 		get_tree().paused = true

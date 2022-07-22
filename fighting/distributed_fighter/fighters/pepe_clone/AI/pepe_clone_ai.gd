@@ -68,7 +68,7 @@ func update_inputs():
 		STATE.LOW_JUMP:
 			match current.name:
 				"idle":
-					input.A.update(body.get_facing_dir() == dir)
+					input.A.update(!input.A.is_pressed() and body.get_facing_dir() == dir)
 					input.B.update(false)
 					input.C.update(false)
 				"front_jump":
@@ -80,7 +80,7 @@ func update_inputs():
 		STATE.MID_JUMP:
 			match current.name:
 				"idle":
-					input.A.update(body.get_facing_dir() == dir)
+					input.A.update(!input.A.is_pressed() and body.get_facing_dir() == dir)
 					input.B.update(false)
 					input.C.update(false)
 				"front_jump":
@@ -92,7 +92,7 @@ func update_inputs():
 		STATE.HIGH_JUMP:
 			match current.name:
 				"idle":
-					input.A.update(body.get_facing_dir() == dir)
+					input.A.update(!input.A.is_pressed() and body.get_facing_dir() == dir)
 					input.B.update(false)
 					input.C.update(false)
 				"front_jump":
@@ -105,7 +105,7 @@ func update_inputs():
 			match current.name:
 				"idle","air":
 					input.A.update(false)
-					input.B.update(body.get_facing_dir() == dir)
+					input.B.update(!input.B.is_pressed() and body.get_facing_dir() == dir)
 					input.C.update(false)
 				_:
 					input.A.update(false)

@@ -49,6 +49,7 @@ var flinch_frames := 0
 var dead = false
 
 func _ready():
+	state.initialize()
 	state_animation.play("RESET")
 	state_animation.advance(0)
 	connect("terrain_collision", self, "collided")

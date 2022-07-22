@@ -41,10 +41,10 @@ func play(body):
 	
 	Textbox.add_texts([
 		"PEPE: bueno, ya veo que sos un REY del PARCUR, ahora falta aprender a cagarte a PIÑAS",
-		"BIFE: 8===D",
+		"BIFE: vamo loco",
 		"PEPE: vamos primero a lo BASICO:", 
 		"PEPE: con X pegas.",
-		"Nada, eso, dale una prueba."
+		"PEPE: nada eso, dale una prueba."
 	])
 	yield(Textbox, "text_display_finished")
 	
@@ -58,10 +58,11 @@ func play(body):
 	yield(self, "player_is_still")
 	Textbox.add_texts([
 		"PEPE: muy BIEN BIFE",
-		"BIFE: 8===D",
+		"BIFE: gracias",
 		"PEPE: ahora viene lo interesante, tambien puedes hacer ataques distintos",
-		"PEPE: dependiendo la DIRECCION que estes APRETANDO al momento de ATACAR, y si estas CORRIENDO, en el AIRE, CAMINANDO, o QUIETO", 
-		"PEPE: Dejo a tu CRITERIO cuando usar que ATAQUE"
+		"PEPE: dependiendo la DIRECCION que estes APRETANDO al momento de ATACAR",
+		"PEPE: y si estas CORRIENDO, en el AIRE, CAMINANDO, o QUIETO", 
+		"PEPE: dejo a tu CRITERIO cuando usar que ATAQUE"
 	])
 	yield(Textbox, "text_display_finished")
 	

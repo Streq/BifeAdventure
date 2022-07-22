@@ -67,7 +67,6 @@ jump_speed = 400.0
 script = ExtResource( 5 )
 start_state = "idle"
 root = NodePath("..")
-autostart = true
 
 [node name="pivot" type="Node2D" parent="."]
 use_parent_material = true
