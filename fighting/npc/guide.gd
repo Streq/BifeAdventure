@@ -12,3 +12,6 @@ func _ready():
 
 func _on_change_text(text):
 	$text.text = text
+
+func leave():
+	queue_free()

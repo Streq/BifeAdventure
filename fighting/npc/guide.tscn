@@ -18,8 +18,8 @@ align = 1
 valign = 1
 
 [node name="pepe_clone" parent="." instance=ExtResource( 4 )]
-max_health = 5.0
-health = 5.0
+max_health = 7.0
+health = 7.0
 
 [connection signal="dead" from="pepe_clone" to="text" method="set_visible" binds= [ false ]]
-[connection signal="tree_exited" from="pepe_clone" to="." method="queue_free"]
+[connection signal="tree_exited" from="pepe_clone" to="." method="leave"]
