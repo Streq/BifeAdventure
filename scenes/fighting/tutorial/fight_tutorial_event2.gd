@@ -12,7 +12,7 @@ onready var progress = $progress
 
 
 var is_player_still = false
-var played = false
+onready var played = Globals.get_event(Globals.EVENT.tutorial_completed)
 var check_player = false
 
 var during = ""
@@ -21,9 +21,16 @@ func _ready():
 	set_physics_process(false)
 	
 func play(body):
+	yield(get_tree(),"idle_frame")
+	get_parent().monitoring = false
+	get_parent().monitorable = false
 	var tree = get_tree()
+	var spawn_position = dummy.get_node("spawn_position")
+	
 	if played:
+		spawn_position.value = $orbit/finish.global_position
 		return
+	
 	played = true
 	controller.enabled = false
 	set_physics_process(true)
@@ -47,6 +54,18 @@ func play(body):
 	yield(tween, "tween_all_completed")
 	
 	Textbox.add_texts([
+		"PEPE: ahora viene lo interesante, tambien puedes hacer ataques distintos",
+		"PEPE: dependiendo la DIRECCION que estes APRETANDO al momento de ATACAR",
+		"PEPE: y si estas CORRIENDO, en el AIRE, CAMINANDO, o QUIETO", 
+		"PEPE: dejo a tu CRITERIO cuando usar que ATAQUE"
+	])
+	yield(Textbox, "text_display_finished")
+	controller.enabled = true
+	set_boundaries_disabled(false)
+	
+	yield(get_tree().create_timer(1.0),"timeout")
+	
+	Textbox.add_texts([
 		"PEPE: excepto ahora, que vas a tener que usar el ATAQUE que yo te diga"
 	])
 	yield(Textbox, "text_display_finished")
@@ -54,38 +73,44 @@ func play(body):
 	controller.enabled = true
 	set_boundaries_disabled(false)
 	
-	var spawn_position = dummy.get_node("spawn_position")
-	spawn_position.value = $spawn0.global_position
 	$guide/text.visible = true
-	$guide/text.text = "apretar X estando QUIETO hace un JAB (APRETAR VARIAS VECES PARA HACER UN COMBO)"
-	yield(wait_on_hit_times("cross", 3), "completed")
-	$guide/text.text = "X CAMINANDO es un SIDE-JAB"
 	
-	spawn_position.value = $spawn1.global_position
+	$guide/text.text = "apretar X estando QUIETO hace un JAB (APRETAR VARIAS VECES PARA HACER UN COMBO)"
+	spawn_position.value = $orbit/jab.global_position
+	yield(wait_on_hit_times("cross", 3), "completed")
+	
+	$guide/text.text = "X CAMINANDO es un SIDE-JAB"
+	spawn_position.value = $orbit/f_tilt.global_position
 	yield(wait_on_hit_times("f_tilt", 3), "completed")
+	
 	$guide/text.text = "X CORRIENDO es un TACKLE"
-	spawn_position.value = $spawn2.global_position
+	spawn_position.value = $orbit/dash.global_position
 	yield(wait_on_hit_times("dash", 3), "completed")
+	
 	$guide/text.text = "X QUIETO y APRETANDO ARRIBA es un UPPERCUT"
+	spawn_position.value = $orbit/u_tilt.global_position
 	scold_on("u_air", "SIN SALTAR", "u_tilt")
 	yield(wait_on_hit_times("u_tilt", 3), "completed")
-	spawn_position.value = $spawn3.global_position
+	
 	$guide/text.text = "X en el AIRE y apretando NINGUNA DIRECCION es una PATADA VOLADORA"
+	spawn_position.value = $orbit/n_air.global_position
 	scold_on("f_air", "DIJE NINGUNA DIRECCION", "n_air")
-	
 	yield(wait_on_hit_times("n_air", 3), "completed")
+	
 	$guide/text.text = "X en el AIRE y apretando ADELANTE es un GOLPE que hacen mucho en DRAGON BALL Z"
+	spawn_position.value = $orbit/n_air.global_position
 	yield(wait_on_hit_times("f_air", 3), "completed")
+	
 	$guide/text.text = "X en el AIRE y apretando ARRIBA es un UPPERCUT AEREO"
-	spawn_position.value = $spawn4.global_position
-	
+	spawn_position.value = $orbit/u_air.global_position
 	yield(wait_on_hit_times("u_air", 3), "completed")
-	$guide/text.text = "X en el AIRE y apretando ABAJO es UNA PATADA ESCALONERA"
-	spawn_position.value = $spawn5.global_position
 	
+	$guide/text.text = "X en el AIRE y apretando ABAJO es UNA PATADA ESCALONERA"
+	spawn_position.value = $orbit/d_air.global_position
 	yield(wait_on_hit_times("d_air", 3), "completed")
+	
 	$guide/text.text = "BIEN BIFE LA CONCHA DE TU MADRE"
-	spawn_position.value = $spawn6.global_position
+	spawn_position.value = $orbit/finish.global_position
 	
 	
 	
@@ -137,10 +162,16 @@ func _progress_changed(current, requirement):
 			
 
 func wait_on_hit(name):
+	var previous_health = 0.0
+		
 	while true:
-		yield(dummy, "health_changed")
-		if player.state.current.name == name:
+		var health = yield(dummy, "health_changed")
+		var current_health = health[0]
+		var lost_health = current_health < previous_health
+		previous_health = current_health
+		if lost_health and player.state.current.name == name:
 			break
+		
 func scold_on(actual_attack, scold_text, expected_attack):
 	var t = $guide/text.text
 	#hack to ensure this happens AFTER the yield for the expected attack

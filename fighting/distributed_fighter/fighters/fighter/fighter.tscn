@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://HUD/healthbar.gd" type="Script" id=1]
 [ext_resource path="res://shader/red_dither.tres" type="Material" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://test/packed_state/packed_state_machine.gd" type="Script" id=5]
 [ext_resource path="res://fighting/combo/state_buffer.tscn" type="PackedScene" id=6]
 [ext_resource path="res://asset/font/proggy_clean.tres" type="DynamicFont" id=7]
+[ext_resource path="res://util/free_in_release.gd" type="Script" id=8]
 
 [sub_resource type="StyleBoxFlat" id=25]
 bg_color = Color( 0, 1, 0, 1 )
@@ -106,6 +107,9 @@ custom_fonts/font = ExtResource( 7 )
 text = "state"
 align = 1
 valign = 1
+
+[node name="free_in_release" type="Node" parent="state_label"]
+script = ExtResource( 8 )
 
 [node name="state_animation" type="AnimationPlayer" parent="."]
 playback_process_mode = 2

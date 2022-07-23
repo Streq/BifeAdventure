@@ -8,12 +8,15 @@ onready var tween := $Tween
 onready var boundaries = $boundaries
 
 var is_player_still = false
-var played = false
+onready var played = Globals.get_event(Globals.EVENT.tutorial_completed)
 var check_player = false
 func _ready():
 	set_physics_process(false)
 
 func play(body):
+	yield(get_tree(),"idle_frame")
+	get_parent().monitoring = false
+	get_parent().monitorable = false
 	if played:
 		return
 	played = true
@@ -48,6 +51,7 @@ func play(body):
 	])
 	yield(Textbox, "text_display_finished")
 	
+	var guide = $guide
 	$guide/text.visible = true
 	controller.enabled = true
 	set_boundaries_disabled(false)
@@ -56,15 +60,15 @@ func play(body):
 	controller.enabled = false
 	check_player = true
 	yield(self, "player_is_still")
-	Textbox.add_texts([
-		"PEPE: muy BIEN BIFE",
-		"BIFE: gracias",
-		"PEPE: ahora viene lo interesante, tambien puedes hacer ataques distintos",
-		"PEPE: dependiendo la DIRECCION que estes APRETANDO al momento de ATACAR",
-		"PEPE: y si estas CORRIENDO, en el AIRE, CAMINANDO, o QUIETO", 
-		"PEPE: dejo a tu CRITERIO cuando usar que ATAQUE"
-	])
-	yield(Textbox, "text_display_finished")
+	
+	if is_instance_valid(guide):
+		Textbox.add_texts([
+			"PEPE: muy BIEN BIFE",
+			"BIFE: gracias"
+		])
+	
+		yield(Textbox, "text_display_finished")
+	
 	
 	tween.interpolate_property(camera, "global_position", 
 		camera.global_position, 

@@ -14,6 +14,9 @@ radius = 12.0416
 
 [node name="pepe_clone" instance=ExtResource( 1 )]
 
+[node name="direction" parent="state_machine/front_jump" index="2"]
+direction = Vector2( 0.5, -0.866025 )
+
 [node name="hitbox" parent="pivot/hitbox/jab" index="0"]
 direction = Vector2( 0.707107, -0.707107 )
 
@@ -28,18 +31,21 @@ target_path = NodePath("../../bife")
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="controller/mid_jump_detect" index="0"]
+scale = Vector2( 1.23742, 0.274513 )
 shape = SubResource( 1 )
 
 [node name="low_jump_detect" type="Area2D" parent="controller" index="1"]
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="controller/low_jump_detect" index="0"]
+scale = Vector2( 1.10923, 0.344922 )
 shape = SubResource( 2 )
 
 [node name="hit_detect" type="Area2D" parent="controller" index="2"]
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="controller/hit_detect" index="0"]
+scale = Vector2( 1.02412, 0.459867 )
 shape = SubResource( 3 )
 
 [editable path="state_machine/front_jump"]

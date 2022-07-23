@@ -11,15 +11,20 @@ onready var guide = $guide
 export var CLONE : PackedScene
 
 var is_player_still = false
-var played = false
+onready var played = Globals.get_event(Globals.EVENT.tutorial_completed)
 var check_player = false
 func _ready():
 	set_physics_process(false)
 	
 
 func play(body):
+	yield(get_tree(),"idle_frame")
+	get_parent().monitoring = false
+	get_parent().monitorable = false
 	if played:
+		$exit_area.active = true
 		return
+		
 	played = true
 	var controller = player.get_node("controller")
 	controller.enabled = false

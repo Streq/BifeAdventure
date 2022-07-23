@@ -3,6 +3,8 @@ class_name Fighter
 signal health_changed(value, max_value)
 signal terrain_collision(velocity, collision)
 signal dead()
+signal received_damage(amount)
+signal flinched()
 
 export var max_health := 100.0
 export var health := 100.0 setget set_health
@@ -124,11 +126,13 @@ func flinch(knockback: Vector2, damage: float):
 		set_facing_right(!(knockback.x>0.0))
 	flinch_frames = int(max(power, damage)*flinch_multiplier)
 	state._change_state("flinch", null)
+	emit_signal("flinched")
 
 func receive_damage(damage : float):
 	if damage>0.0:
 		damage_animation.play("damage")
 	self.health = health - damage
+	emit_signal("received_damage", damage)
 	if health == 0.0 and !dead:
 		die()
 func rebound(frames: int, knockback: Vector2):

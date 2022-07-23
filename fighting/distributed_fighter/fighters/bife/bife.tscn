@@ -60,7 +60,7 @@ extents = Vector2( 5, 5 )
 [sub_resource type="Animation" id=26]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("pivot/hitbox/jab/box0:active")
+tracks/0/path = NodePath("pivot/Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -69,10 +69,10 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ false ]
+"values": [ 27 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("pivot/Sprite:frame")
+tracks/1/path = NodePath("pivot/hitbox/cross:active")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -80,11 +80,11 @@ tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 27 ]
+"update": 0,
+"values": [ false ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("pivot/hitbox/cross:active")
+tracks/2/path = NodePath("pivot/hitbox/jab:active")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -92,11 +92,11 @@ tracks/2/enabled = true
 tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 0,
+"update": 1,
 "values": [ false ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("pivot/hitbox/jab:active")
+tracks/3/path = NodePath("pivot/hitbox/f_tilt:active")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -108,7 +108,7 @@ tracks/3/keys = {
 "values": [ false ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("pivot/hitbox/f_tilt:active")
+tracks/4/path = NodePath("pivot/hitbox/hurtbox:active")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -117,10 +117,10 @@ tracks/4/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ false ]
+"values": [ true ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("pivot/hitbox/hurtbox:active")
+tracks/5/path = NodePath("pivot/hitbox/u_tilt:active")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
@@ -128,11 +128,11 @@ tracks/5/enabled = true
 tracks/5/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
+"update": 0,
+"values": [ false ]
 }
 tracks/6/type = "value"
-tracks/6/path = NodePath("pivot/hitbox/u_tilt:active")
+tracks/6/path = NodePath("pivot/hitbox/dash:active")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
@@ -144,7 +144,7 @@ tracks/6/keys = {
 "values": [ false ]
 }
 tracks/7/type = "value"
-tracks/7/path = NodePath("pivot/hitbox/dash:active")
+tracks/7/path = NodePath("pivot/hitbox/n_air:active")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/imported = false
@@ -156,7 +156,7 @@ tracks/7/keys = {
 "values": [ false ]
 }
 tracks/8/type = "value"
-tracks/8/path = NodePath("pivot/hitbox/n_air:active")
+tracks/8/path = NodePath("pivot/hitbox/f_air:active")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/imported = false
@@ -168,7 +168,7 @@ tracks/8/keys = {
 "values": [ false ]
 }
 tracks/9/type = "value"
-tracks/9/path = NodePath("pivot/hitbox/f_air:active")
+tracks/9/path = NodePath("pivot/hitbox/u_air:active")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/imported = false
@@ -180,24 +180,12 @@ tracks/9/keys = {
 "values": [ false ]
 }
 tracks/10/type = "value"
-tracks/10/path = NodePath("pivot/hitbox/u_air:active")
+tracks/10/path = NodePath("pivot/hitbox/d_air:active")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/imported = false
 tracks/10/enabled = true
 tracks/10/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ false ]
-}
-tracks/11/type = "value"
-tracks/11/path = NodePath("pivot/hitbox/d_air:active")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
-tracks/11/imported = false
-tracks/11/enabled = true
-tracks/11/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,

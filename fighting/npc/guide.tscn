@@ -1,17 +1,12 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://asset/theme/white_black_text.tres" type="Theme" id=1]
-[ext_resource path="res://asset/texture/toad.png" type="Texture" id=2]
 [ext_resource path="res://fighting/npc/guide.gd" type="Script" id=3]
+[ext_resource path="res://fighting/distributed_fighter/fighters/pepe_clone/pepe_clone.tscn" type="PackedScene" id=4]
 
 [node name="guide" type="Node2D"]
 z_index = 2
 script = ExtResource( 3 )
-
-[node name="sprite" type="Sprite" parent="."]
-texture = ExtResource( 2 )
-hframes = 8
-vframes = 8
 
 [node name="text" type="Label" parent="."]
 margin_top = -24.0
@@ -21,3 +16,10 @@ grow_vertical = 2
 theme = ExtResource( 1 )
 align = 1
 valign = 1
+
+[node name="pepe_clone" parent="." instance=ExtResource( 4 )]
+max_health = 5.0
+health = 5.0
+
+[connection signal="dead" from="pepe_clone" to="text" method="set_visible" binds= [ false ]]
+[connection signal="tree_exited" from="pepe_clone" to="." method="queue_free"]

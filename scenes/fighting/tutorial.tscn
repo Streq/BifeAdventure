@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://autotile/terrain_simple.tscn" type="PackedScene" id=1]
 [ext_resource path="res://test/fighting/tilemap.tscn" type="PackedScene" id=2]
@@ -27,6 +27,8 @@
 [ext_resource path="res://fighting/distributed_fighter/fighters/dummy/dummy.tscn" type="PackedScene" id=25]
 [ext_resource path="res://scenes/fighting/tutorial/fall_detect.gd" type="Script" id=26]
 [ext_resource path="res://fighting/event/exit_area.tscn" type="PackedScene" id=27]
+[ext_resource path="res://scenes/fighting/tutorial/refill_health.gd" type="Script" id=28]
+[ext_resource path="res://scenes/fighting/tutorial/change_text_trigger.gd" type="Script" id=29]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
@@ -102,6 +104,9 @@ points = PoolVector2Array( 32, 16, 0, 16, 0, 0, 32, 0 )
 } ]
 2/z_index = 0
 
+[sub_resource type="RectangleShape2D" id=11]
+extents = Vector2( 69.5, 10 )
+
 [sub_resource type="RectangleShape2D" id=12]
 extents = Vector2( 39, 8 )
 
@@ -116,9 +121,6 @@ extents = Vector2( 8, 192 )
 
 [sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 8, 192 )
-
-[sub_resource type="RectangleShape2D" id=11]
-extents = Vector2( 69.5, 10 )
 
 [node name="Node2D2" type="Node2D"]
 script = ExtResource( 6 )
@@ -156,35 +158,36 @@ tile_data = PoolIntArray( -1900522, 0, 0, -1900521, 0, 0, -1900520, 0, 0, -19005
 [node name="guide" parent="." instance=ExtResource( 4 )]
 position = Vector2( 216, 264 )
 
-[node name="text" parent="guide" index="1"]
+[node name="text" parent="guide" index="0"]
 text = "SALTAR con Z"
 
 [node name="guide8" parent="." instance=ExtResource( 4 )]
 position = Vector2( -40, 264 )
 
-[node name="text" parent="guide8" index="1"]
+[node name="text" parent="guide8" index="0"]
 text = "CORRER con SHIFT"
 
 [node name="guide3" parent="." instance=ExtResource( 4 )]
 position = Vector2( 680, -184 )
 
-[node name="text" parent="guide3" index="1"]
+[node name="text" parent="guide3" index="0"]
 margin_left = -88.0
 margin_top = -32.0
 margin_right = -88.0
 margin_bottom = -18.0
 
-[node name="change_text_area" parent="guide3" instance=ExtResource( 11 )]
+[node name="how_to_wall_jump" type="Area2D" parent="guide3"]
+collision_layer = 0
+script = ExtResource( 8 )
 
-[node name="text" parent="guide3/change_text_area" index="0"]
-text = "FELICIDADES por llegar aqui,
-te daria un CARAMELO pero
-lamentablemente se me terminaron"
+[node name="CollisionShape2D" type="CollisionShape2D" parent="guide3/how_to_wall_jump"]
+position = Vector2( -88, 76 )
+shape = SubResource( 11 )
 
 [node name="guide4" parent="." instance=ExtResource( 4 )]
 position = Vector2( 1128, 40 )
 
-[node name="text" parent="guide4" index="1"]
+[node name="text" parent="guide4" index="0"]
 margin_left = -96.0
 margin_top = -40.0
 margin_right = 93.0
@@ -204,7 +207,7 @@ shape = SubResource( 12 )
 [node name="guide5" parent="." instance=ExtResource( 4 )]
 position = Vector2( 1584, 40 )
 
-[node name="text" parent="guide5" index="1"]
+[node name="text" parent="guide5" index="0"]
 margin_left = -88.0
 margin_top = -48.0
 margin_right = 87.0
@@ -243,10 +246,7 @@ valign = 1
 visible = false
 position = Vector2( 552, 168 )
 
-[node name="sprite" parent="guide2" index="0"]
-position = Vector2( 40, 0 )
-
-[node name="text" parent="guide2" index="1"]
+[node name="text" parent="guide2" index="0"]
 margin_left = 72.0
 margin_top = -104.0
 margin_right = 184.0
@@ -256,7 +256,7 @@ valign = 0
 autowrap = true
 
 [node name="bife" parent="." groups=["player"] instance=ExtResource( 23 )]
-position = Vector2( -296, 266 )
+position = Vector2( -296, 265 )
 
 [node name="Camera2D" type="Camera2D" parent="bife"]
 current = true
@@ -328,7 +328,7 @@ disabled = true
 [node name="guide" parent="attack_tutorial_area/fight_event" instance=ExtResource( 4 )]
 position = Vector2( 184, 0 )
 
-[node name="text" parent="attack_tutorial_area/fight_event/guide" index="1"]
+[node name="text" parent="attack_tutorial_area/fight_event/guide" index="0"]
 visible = false
 margin_left = -176.0
 margin_top = -56.0
@@ -336,6 +336,10 @@ margin_right = -2.0
 margin_bottom = -25.0
 text = "FAJA a estos PECHOFRIO
 con X"
+
+[node name="change_text_trigger" type="Node" parent="attack_tutorial_area/fight_event/guide/text" index="0"]
+script = ExtResource( 29 )
+text = "a mi no HUEVÓN"
 
 [node name="dummys0" type="Node2D" parent="attack_tutorial_area/fight_event"]
 script = ExtResource( 9 )
@@ -381,7 +385,7 @@ disabled = true
 position = Vector2( 216, -80 )
 z_index = 0
 
-[node name="text" parent="attack_tutorial_area2/fight_event/guide" index="1"]
+[node name="text" parent="attack_tutorial_area2/fight_event/guide" index="0"]
 visible = false
 margin_left = -219.0
 margin_top = -59.0
@@ -394,29 +398,10 @@ autowrap = true
 
 [node name="dummy" parent="attack_tutorial_area2/fight_event" instance=ExtResource( 25 )]
 position = Vector2( 96, 0 )
-max_health = 100000.0
-health = 100000.0
 
-[node name="spawn0" type="Position2D" parent="attack_tutorial_area2/fight_event"]
-position = Vector2( 96, 0 )
-
-[node name="spawn1" type="Position2D" parent="attack_tutorial_area2/fight_event"]
-position = Vector2( 152, 0 )
-
-[node name="spawn2" type="Position2D" parent="attack_tutorial_area2/fight_event"]
-position = Vector2( 40, 0 )
-
-[node name="spawn3" type="Position2D" parent="attack_tutorial_area2/fight_event"]
-position = Vector2( 96, -40 )
-
-[node name="spawn4" type="Position2D" parent="attack_tutorial_area2/fight_event"]
-position = Vector2( 136, -40 )
-
-[node name="spawn5" type="Position2D" parent="attack_tutorial_area2/fight_event"]
-position = Vector2( 96, -35 )
-
-[node name="spawn6" type="Position2D" parent="attack_tutorial_area2/fight_event"]
-position = Vector2( 168, -40 )
+[node name="refill_health" type="Node" parent="attack_tutorial_area2/fight_event/dummy"]
+script = ExtResource( 28 )
+speed = 14.0
 
 [node name="progress" type="Label" parent="attack_tutorial_area2/fight_event"]
 margin_left = 92.0
@@ -428,6 +413,32 @@ grow_vertical = 2
 theme = ExtResource( 14 )
 align = 1
 valign = 1
+
+[node name="orbit" type="Node2D" parent="attack_tutorial_area2/fight_event"]
+
+[node name="jab" type="Position2D" parent="attack_tutorial_area2/fight_event/orbit"]
+position = Vector2( 96, 0 )
+
+[node name="f_tilt" type="Position2D" parent="attack_tutorial_area2/fight_event/orbit"]
+position = Vector2( 152, 0 )
+
+[node name="dash" type="Position2D" parent="attack_tutorial_area2/fight_event/orbit"]
+position = Vector2( 40, 0 )
+
+[node name="u_tilt" type="Position2D" parent="attack_tutorial_area2/fight_event/orbit"]
+position = Vector2( 40, -16 )
+
+[node name="n_air" type="Position2D" parent="attack_tutorial_area2/fight_event/orbit"]
+position = Vector2( 96, -40 )
+
+[node name="u_air" type="Position2D" parent="attack_tutorial_area2/fight_event/orbit"]
+position = Vector2( 136, -64 )
+
+[node name="d_air" type="Position2D" parent="attack_tutorial_area2/fight_event/orbit"]
+position = Vector2( 96, -35 )
+
+[node name="finish" type="Position2D" parent="attack_tutorial_area2/fight_event/orbit"]
+position = Vector2( 168, -40 )
 
 [node name="attack_tutorial_area3" type="Area2D" parent="."]
 position = Vector2( 2560, 64 )
@@ -469,29 +480,20 @@ position = Vector2( 240, 79 )
 where = 2
 tile = Vector2( 16, 10 )
 
-[node name="Area2D" type="Area2D" parent="."]
-position = Vector2( 594, -79 )
-collision_layer = 0
-script = ExtResource( 8 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2( -0.5, 0 )
-shape = SubResource( 11 )
-
 [connection signal="body_entered" from="killzone" to="." method="_on_killzone_body_entered"]
+[connection signal="body_entered" from="guide3/how_to_wall_jump" to="guide3/how_to_wall_jump" method="_on_body_entered"]
 [connection signal="body_entered" from="guide4/fall_detect" to="guide4/fall_detect" method="_on_body_entered"]
 [connection signal="fell" from="guide4/fall_detect" to="guide4/text" method="set_text"]
 [connection signal="body_entered" from="door" to="door" method="_on_door_body_entered"]
 [connection signal="body_exited" from="door" to="door" method="_on_door_body_exited"]
 [connection signal="body_entered" from="attack_tutorial_area" to="attack_tutorial_area/fight_event" method="play"]
+[connection signal="flinched" from="attack_tutorial_area/fight_event/guide/pepe_clone" to="attack_tutorial_area/fight_event/guide/text/change_text_trigger" method="trigger"]
 [connection signal="body_entered" from="attack_tutorial_area2" to="attack_tutorial_area2/fight_event" method="play"]
 [connection signal="body_entered" from="attack_tutorial_area3" to="attack_tutorial_area3/fight_event" method="play"]
-[connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
 
 [editable path="guide"]
 [editable path="guide8"]
 [editable path="guide3"]
-[editable path="guide3/change_text_area"]
 [editable path="guide4"]
 [editable path="guide5"]
 [editable path="guide7"]
