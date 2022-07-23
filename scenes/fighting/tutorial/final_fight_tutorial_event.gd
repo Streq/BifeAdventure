@@ -72,10 +72,10 @@ func play(body):
 	clone_amount = 8
 	for i in clone_amount:
 		clone = yield(create_clone(),"completed")
-		clone.connect("tree_exited", self, "clone_died")
+		clone.connect("dead", self, "clone_died")
 	yield(self,"clones_dead")
 	
-	
+	yield(get_tree().create_timer(1.0),"timeout")
 	Globals.set_event(Globals.EVENT.tutorial_completed, true)
 	Textbox.add_texts([
 		"PEPE: la verdad BIFE me quito el sombrero, los cagaste a palos",

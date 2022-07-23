@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://HUD/healthbar.gd" type="Script" id=1]
 [ext_resource path="res://shader/red_dither.tres" type="Material" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://fighting/combo/state_buffer.tscn" type="PackedScene" id=6]
 [ext_resource path="res://asset/font/proggy_clean.tres" type="DynamicFont" id=7]
 [ext_resource path="res://util/free_in_release.gd" type="Script" id=8]
+[ext_resource path="res://fighting/distributed_fighter/fighters/fighter/hitbox_manager.gd" type="Script" id=9]
 
 [sub_resource type="StyleBoxFlat" id=25]
 bg_color = Color( 0, 1, 0, 1 )
@@ -73,6 +74,7 @@ root = NodePath("..")
 use_parent_material = true
 
 [node name="hitbox" type="Node2D" parent="pivot"]
+script = ExtResource( 9 )
 
 [node name="input_state" type="Node" parent="."]
 script = ExtResource( 3 )

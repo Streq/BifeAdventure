@@ -109,7 +109,7 @@ func play(body):
 	spawn_position.value = $orbit/d_air.global_position
 	yield(wait_on_hit_times("d_air", 3), "completed")
 	
-	$guide/text.text = "BIEN BIFE LA CONCHA DE TU MADRE"
+	$guide/text.text = "SOS UN GENIO BIFE"
 	spawn_position.value = $orbit/finish.global_position
 	
 	

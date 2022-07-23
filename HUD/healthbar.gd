@@ -19,7 +19,9 @@ func _on_health_changed(val, max_val):
 	var current = val/max_val*100.0
 	set("value", current)
 	var full = get("value") == 100.0
-	if _full != full:
+	if val == 0.0:
+		self.visible = false
+	elif _full != full:
 		if !full:
 			timer.stop()
 			self.visible = true

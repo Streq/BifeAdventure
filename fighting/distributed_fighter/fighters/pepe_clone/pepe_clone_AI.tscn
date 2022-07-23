@@ -31,14 +31,14 @@ target_path = NodePath("../../bife")
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="controller/mid_jump_detect" index="0"]
-scale = Vector2( 1.23742, 0.274513 )
+scale = Vector2( 1.23742, 0.15394 )
 shape = SubResource( 1 )
 
 [node name="low_jump_detect" type="Area2D" parent="controller" index="1"]
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="controller/low_jump_detect" index="0"]
-scale = Vector2( 1.10923, 0.344922 )
+scale = Vector2( 1.14892, 0.194855 )
 shape = SubResource( 2 )
 
 [node name="hit_detect" type="Area2D" parent="controller" index="2"]

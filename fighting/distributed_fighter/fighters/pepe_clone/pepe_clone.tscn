@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=2]
+[gd_scene load_steps=51 format=2]
 
 [ext_resource path="res://fighting/distributed_fighter/fighters/fighter/fighter.tscn" type="PackedScene" id=1]
 [ext_resource path="res://test/distributed_state/hurtbox.tscn" type="PackedScene" id=2]
@@ -21,6 +21,7 @@
 [ext_resource path="res://fighting/distributed_fighter/fighters/pepe_clone/keep_x_velocity.gd" type="Script" id=19]
 [ext_resource path="res://fighting/distributed_fighter/state/air_attack.tscn" type="PackedScene" id=20]
 [ext_resource path="res://fighting/distributed_fighter/fighters/pepe_clone/fade_on_dead.gd" type="Script" id=21]
+[ext_resource path="res://asset/shader/double_team.gdshader" type="Shader" id=22]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5, 6.5 )
@@ -415,6 +416,92 @@ tracks/0/keys = {
 [sub_resource type="RectangleShape2D" id=25]
 extents = Vector2( 5, 6.5 )
 
+[sub_resource type="Animation" id=28]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("../CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("..:material")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ null ]
+}
+
+[sub_resource type="ShaderMaterial" id=30]
+shader = ExtResource( 22 )
+shader_param/time = 0.0
+
+[sub_resource type="Animation" id=29]
+resource_name = "ghost"
+length = 0.5
+step = 0.017
+tracks/0/type = "method"
+tracks/0/path = NodePath("../pivot/hitbox")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "deactivate_all"
+} ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("..:pause")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("..:material")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ SubResource( 30 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("..:material:shader_param/time")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+
 [node name="pepe_clone" instance=ExtResource( 1 )]
 max_health = 15.0
 health = 15.0
@@ -428,6 +515,7 @@ air_idle_lerp = 0.0
 idle_lerp = 60.0
 wall_lerp = 0.0
 jump_speed = 200.0
+pause = true
 
 [node name="idle" parent="state_machine" index="0" instance=ExtResource( 14 )]
 
@@ -580,7 +668,13 @@ shape = SubResource( 25 )
 script = ExtResource( 21 )
 
 [node name="Timer" type="Timer" parent="fade_on_dead" index="0"]
+wait_time = 0.4
 one_shot = true
+
+[node name="ghosting_animation" type="AnimationPlayer" parent="fade_on_dead" index="1"]
+playback_process_mode = 0
+anims/RESET = SubResource( 28 )
+anims/ghost = SubResource( 29 )
 
 [connection signal="dead" from="." to="fade_on_dead" method="_on_dead"]
 [connection signal="timeout" from="fade_on_dead/Timer" to="fade_on_dead" method="_on_timeout"]

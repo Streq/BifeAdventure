@@ -2,6 +2,9 @@ extends Area2D
 
 var active = false
 
+func _ready():
+	connect("area_entered",self,"_on_body_entered")
+
 func _on_body_entered(body):
 	if !active:
 		active = true

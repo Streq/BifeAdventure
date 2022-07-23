@@ -1,4 +1,4 @@
-[gd_scene load_steps=90 format=2]
+[gd_scene load_steps=92 format=2]
 
 [ext_resource path="res://fighting/dude/fighter.gd" type="Script" id=1]
 [ext_resource path="res://fighting/dude/idle.gd" type="Script" id=2]
@@ -33,8 +33,13 @@
 [ext_resource path="res://fighting/fighter/state/jab.gd" type="Script" id=31]
 [ext_resource path="res://fighting/hitbox/hitbox.tscn" type="PackedScene" id=32]
 [ext_resource path="res://fighting/trigger/deactivate_on_knockback.gd" type="Script" id=33]
+[ext_resource path="res://asset/shader/red_dither.gdshader" type="Shader" id=34]
 
-[sub_resource type="RectangleShape2D" id=22]
+[sub_resource type="ShaderMaterial" id=22]
+shader = ExtResource( 34 )
+shader_param/color = null
+
+[sub_resource type="RectangleShape2D" id=59]
 extents = Vector2( 10.5, 4.5 )
 
 [sub_resource type="RectangleShape2D" id=24]
@@ -2090,6 +2095,7 @@ air_speed_lerp = 3.0
 [node name="pivot" type="Node2D" parent="."]
 
 [node name="display" type="Node2D" parent="pivot"]
+material = SubResource( 22 )
 
 [node name="Sprite" type="Sprite" parent="pivot/display"]
 use_parent_material = true
@@ -2154,7 +2160,7 @@ damage = 20.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="pivot/hitbox/jab"]
 position = Vector2( 8.5, -1.5 )
-shape = SubResource( 22 )
+shape = SubResource( 59 )
 
 [node name="side_jab" parent="pivot/hitbox" instance=ExtResource( 32 )]
 visible = false
@@ -2165,7 +2171,7 @@ damage = 20.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="pivot/hitbox/side_jab"]
 position = Vector2( 8.5, -1.5 )
-shape = SubResource( 22 )
+shape = SubResource( 59 )
 
 [node name="cross" parent="pivot/hitbox" instance=ExtResource( 32 )]
 visible = false
@@ -2177,7 +2183,7 @@ knockdown = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="pivot/hitbox/cross"]
 position = Vector2( 8.5, -1.5 )
-shape = SubResource( 22 )
+shape = SubResource( 59 )
 
 [node name="air_kick" parent="pivot/hitbox" instance=ExtResource( 32 )]
 monitoring = false

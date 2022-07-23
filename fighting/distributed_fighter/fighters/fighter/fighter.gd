@@ -135,6 +135,7 @@ func receive_damage(damage : float):
 	emit_signal("received_damage", damage)
 	if health == 0.0 and !dead:
 		die()
+		
 func rebound(frames: int, knockback: Vector2):
 	velocity = knockback
 	state._change_state("rebound", [frames])
