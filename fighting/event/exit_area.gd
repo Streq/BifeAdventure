@@ -12,4 +12,4 @@ func set_active(val):
 	
 func _on_body_entered(body):
 	Globals.spawn_tile = tile
-	get_tree().change_scene_to(Overworld.get_room(where))
+	Globals.goto_room(where)

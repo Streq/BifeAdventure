@@ -81,6 +81,6 @@ position = Vector2( -1424, -32 )
 
 [node name="scene_change" parent="map/triggers" index="4" instance=ExtResource( 7 )]
 position = Vector2( -8, -248 )
-to = "res://test/textbox/texbox_test.tscn"
+to = 0
 
 [editable path="map"]

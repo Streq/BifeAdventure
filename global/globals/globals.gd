@@ -14,7 +14,26 @@ enum ROOM {
 	malovich_room_right_after_fight,
 	hometown_forest,
 	boquita,
+	SIZE
 }
+var is_indoors := []
+func _ready():
+	is_indoors.resize(ROOM.SIZE)
+	is_indoors[ROOM.my_room] = true
+	is_indoors[ROOM.my_living_room] = true
+	is_indoors[ROOM.my_hometown] = false
+	is_indoors[ROOM.my_hometown_basement] = true
+	is_indoors[ROOM.endurance_round] = true
+	is_indoors[ROOM.tutorial] = true
+	is_indoors[ROOM.pepe_house] = true
+	is_indoors[ROOM.malovich_house] = true
+	is_indoors[ROOM.malovich_fight_room] = true
+	is_indoors[ROOM.malovich_room] = true
+	is_indoors[ROOM.malovich_room_right_after_fight] = true
+	is_indoors[ROOM.hometown_forest] = true
+	is_indoors[ROOM.boquita] = false
+	
+
 const TILE_SIZE = 16
 onready var DEBUG = OS.is_debug_build()
 	
@@ -50,8 +69,14 @@ func respawn():
 
 func goto_room(to:int):
 	current_room = to
+	DoorTransition.enter(is_indoors[to])
+	get_tree().paused = true
+	yield(DoorTransition.anim,"animation_finished")
 	get_tree().change_scene_to(Overworld.get_room(to))
-
+	DoorTransition.exit(is_indoors[to])
+	get_tree().paused = false
+	yield(DoorTransition.anim,"animation_finished")
+	
 const SAVE_PATH := "user://save.res"
 
 func load_game():
