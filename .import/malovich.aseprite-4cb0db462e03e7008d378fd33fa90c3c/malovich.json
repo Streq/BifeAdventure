@@ -10,6 +10,33 @@
    },
    {
     "filename": "malovich 1.aseprite",
+    "frame": { "x": 48, "y": 0, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 100
+   },
+   {
+    "filename": "malovich 2.aseprite",
+    "frame": { "x": 96, "y": 0, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 99
+   },
+   {
+    "filename": "malovich 3.aseprite",
+    "frame": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 1
+   },
+   {
+    "filename": "malovich 4.aseprite",
     "frame": { "x": 0, "y": 0, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
@@ -18,35 +45,8 @@
     "duration": 200
    },
    {
-    "filename": "malovich 2.aseprite",
-    "frame": { "x": 48, "y": 0, "w": 48, "h": 48 },
-    "rotated": false,
-    "trimmed": false,
-    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
-    "sourceSize": { "w": 48, "h": 48 },
-    "duration": 200
-   },
-   {
-    "filename": "malovich 3.aseprite",
-    "frame": { "x": 96, "y": 0, "w": 48, "h": 48 },
-    "rotated": false,
-    "trimmed": false,
-    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
-    "sourceSize": { "w": 48, "h": 48 },
-    "duration": 100
-   },
-   {
-    "filename": "malovich 4.aseprite",
-    "frame": { "x": 0, "y": 48, "w": 48, "h": 48 },
-    "rotated": false,
-    "trimmed": false,
-    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
-    "sourceSize": { "w": 48, "h": 48 },
-    "duration": 600
-   },
-   {
     "filename": "malovich 5.aseprite",
-    "frame": { "x": 48, "y": 48, "w": 48, "h": 48 },
+    "frame": { "x": 144, "y": 0, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
@@ -55,16 +55,16 @@
    },
    {
     "filename": "malovich 6.aseprite",
-    "frame": { "x": 96, "y": 0, "w": 48, "h": 48 },
+    "frame": { "x": 144, "y": 0, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
     "sourceSize": { "w": 48, "h": 48 },
-    "duration": 100
+    "duration": 200
    },
    {
     "filename": "malovich 7.aseprite",
-    "frame": { "x": 96, "y": 48, "w": 48, "h": 48 },
+    "frame": { "x": 0, "y": 48, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
@@ -73,7 +73,25 @@
    },
    {
     "filename": "malovich 8.aseprite",
-    "frame": { "x": 0, "y": 96, "w": 48, "h": 48 },
+    "frame": { "x": 48, "y": 48, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 600
+   },
+   {
+    "filename": "malovich 9.aseprite",
+    "frame": { "x": 96, "y": 48, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 200
+   },
+   {
+    "filename": "malovich 10.aseprite",
+    "frame": { "x": 0, "y": 48, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
@@ -81,8 +99,71 @@
     "duration": 100
    },
    {
-    "filename": "malovich 9.aseprite",
+    "filename": "malovich 11.aseprite",
+    "frame": { "x": 0, "y": 48, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 100
+   },
+   {
+    "filename": "malovich 12.aseprite",
+    "frame": { "x": 144, "y": 48, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 100
+   },
+   {
+    "filename": "malovich 13.aseprite",
+    "frame": { "x": 0, "y": 96, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 500
+   },
+   {
+    "filename": "malovich 14.aseprite",
     "frame": { "x": 48, "y": 96, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 500
+   },
+   {
+    "filename": "malovich 15.aseprite",
+    "frame": { "x": 0, "y": 96, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 500
+   },
+   {
+    "filename": "malovich 16.aseprite",
+    "frame": { "x": 48, "y": 96, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 500
+   },
+   {
+    "filename": "malovich 17.aseprite",
+    "frame": { "x": 96, "y": 96, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 100
+   },
+   {
+    "filename": "malovich 18.aseprite",
+    "frame": { "x": 144, "y": 96, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
@@ -90,8 +171,8 @@
     "duration": 300
    },
    {
-    "filename": "malovich 10.aseprite",
-    "frame": { "x": 96, "y": 96, "w": 48, "h": 48 },
+    "filename": "malovich 19.aseprite",
+    "frame": { "x": 0, "y": 144, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
@@ -104,15 +185,21 @@
   "version": "1.2.38-x64",
   "image": "malovich.png",
   "format": "RGBA8888",
-  "size": { "w": 144, "h": 144 },
+  "size": { "w": 192, "h": 192 },
   "scale": "1",
   "frameTags": [
    { "name": "_idle", "from": 0, "to": 0, "direction": "forward" },
-   { "name": "walk", "from": 1, "to": 2, "direction": "forward" },
-   { "name": "_jab", "from": 3, "to": 6, "direction": "forward" },
-   { "name": "_flinch", "from": 7, "to": 7, "direction": "forward" },
-   { "name": "_knocked", "from": 8, "to": 8, "direction": "forward" },
-   { "name": "ram", "from": 9, "to": 10, "direction": "forward" }
+   { "name": "_jump", "from": 1, "to": 1, "direction": "forward" },
+   { "name": "_turn_around", "from": 2, "to": 3, "direction": "forward" },
+   { "name": "walk", "from": 4, "to": 5, "direction": "forward" },
+   { "name": "_air", "from": 6, "to": 6, "direction": "forward" },
+   { "name": "_n_air", "from": 7, "to": 10, "direction": "forward" },
+   { "name": "_jab", "from": 7, "to": 10, "direction": "forward" },
+   { "name": "_rebound", "from": 11, "to": 11, "direction": "forward" },
+   { "name": "_flinch", "from": 12, "to": 12, "direction": "forward" },
+   { "name": "_confused", "from": 13, "to": 16, "direction": "forward" },
+   { "name": "_knocked", "from": 17, "to": 17, "direction": "forward" },
+   { "name": "ram", "from": 18, "to": 19, "direction": "forward" }
   ]
  }
 }

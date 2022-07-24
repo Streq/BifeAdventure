@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://fighting/distributed_fighter/state/passives/stay_still.gd" type="Script" id=1]
+[ext_resource path="res://test/distributed_state/distributed_state.gd" type="Script" id=2]
+[ext_resource path="res://fighting/distributed_fighter/state/triggers/on_finish.tscn" type="PackedScene" id=3]
+[ext_resource path="res://fighting/distributed_fighter/state/passives/active_on_floor.gd" type="Script" id=5]
+
+[node name="confused" type="Node"]
+script = ExtResource( 2 )
+animation = "confused"
+
+[node name="stay_still" type="Node" parent="."]
+script = ExtResource( 1 )
+friction = 5.0
+
+[node name="active_on_floor" type="Node" parent="stay_still"]
+script = ExtResource( 5 )
+
+[node name="on_finish" parent="." instance=ExtResource( 3 )]

@@ -320,6 +320,7 @@ position = Vector2( 1, 0 )
 texture = ExtResource( 24 )
 hframes = 8
 vframes = 8
+frame = 8
 
 [node name="hands" type="Sprite" parent="pivot/display"]
 visible = false

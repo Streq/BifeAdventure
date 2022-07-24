@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://fighting/distributed_fighter/state/triggers/on_finish.tscn" type="PackedScene" id=2]
+[ext_resource path="res://fighting/distributed_fighter/fighters/santi/jab.gd" type="Script" id=3]
+
+[node name="jab" type="Node"]
+script = ExtResource( 3 )
+animation = "jab"
+
+[node name="on_finish" parent="." instance=ExtResource( 2 )]

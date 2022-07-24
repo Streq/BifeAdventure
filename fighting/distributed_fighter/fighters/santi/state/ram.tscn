@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://fighting/distributed_fighter/fighters/santi/state/ram.gd" type="Script" id=1]
+
+[node name="ram" type="Node"]
+script = ExtResource( 1 )
+animation = "ram"

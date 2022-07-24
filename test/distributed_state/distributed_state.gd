@@ -10,7 +10,7 @@ signal physics_process(delta)
 signal animation_finished
 
 export var animation := ""
-var root : Node = owner
+var root : Fighter = owner
 var active = false
 
 
