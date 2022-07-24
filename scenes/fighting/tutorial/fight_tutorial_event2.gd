@@ -3,6 +3,7 @@ signal player_is_still()
 
 onready var player : Fighter = get_tree().get_nodes_in_group("player")[0]
 onready var camera := $Camera2D
+onready var player_camera : Camera2D = player.get_node("Camera2D")
 onready var tween := $Tween
 onready var boundaries = $boundaries
 onready var dummy := $dummy
@@ -73,6 +74,8 @@ func play(body):
 	controller.enabled = true
 	set_boundaries_disabled(false)
 	
+	
+	
 	$guide/text.visible = true
 	
 	$guide/text.text = "apretar X estando QUIETO hace un JAB (APRETAR VARIAS VECES PARA HACER UN COMBO)"
@@ -128,7 +131,8 @@ func play(body):
 	set_boundaries_disabled(true)
 	controller.enabled = true
 	
-	
+onready var clone = $guide/pepe_clone
+var done = false
 func _physics_process(delta):
 	if player.velocity.length_squared() < 5.0:
 		if check_player:
@@ -138,6 +142,24 @@ func _physics_process(delta):
 			check_player = false
 	else:
 		is_player_still = false
+		
+	if !is_instance_valid(clone) and !done:
+		done = true
+		player_camera.global_position = camera.global_position
+		player_camera.current = true
+		tween.interpolate_property(player_camera, "position", 
+			player_camera.position, 
+			Vector2.ZERO, 
+			1.0,
+			Tween.TRANS_SINE,
+			Tween.EASE_IN_OUT
+			)
+		controller.enabled = false
+		tween.start()
+		yield(tween,"tween_all_completed")
+		controller.enabled = true
+		queue_free()
+	
 func set_boundaries_disabled(val):
 	yield(get_tree(),"idle_frame")
 	for i in boundaries.get_shape_owners():

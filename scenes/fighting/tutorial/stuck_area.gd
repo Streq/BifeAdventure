@@ -4,13 +4,18 @@ onready var timer = $Timer
 var keep_checking = true
 onready var guide = get_parent().get_node("pepe_clone")
 
+func _ready():
+	timer.start()
+	timer.paused = true
+	
+
 func _on_area_entered(area):
 	if keep_checking:
-		timer.start()
+		timer.paused = false
 
 func _on_area_exited(area):
 	if keep_checking:
-		timer.stop()
+		timer.paused = true
 
 
 func _on_timeout():

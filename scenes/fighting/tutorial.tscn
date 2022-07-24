@@ -111,7 +111,7 @@ points = PoolVector2Array( 32, 16, 0, 16, 0, 0, 32, 0 )
 extents = Vector2( 69.5, 10 )
 
 [sub_resource type="RectangleShape2D" id=14]
-extents = Vector2( 88.75, 95.25 )
+extents = Vector2( 88.75, 80.625 )
 
 [sub_resource type="RectangleShape2D" id=12]
 extents = Vector2( 39, 8 )
@@ -237,7 +237,7 @@ collision_mask = 128
 script = ExtResource( 30 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="guide3/stuck_area"]
-position = Vector2( 43, 25 )
+position = Vector2( 43, 39.625 )
 shape = SubResource( 14 )
 
 [node name="Timer" type="Timer" parent="guide3/stuck_area"]
