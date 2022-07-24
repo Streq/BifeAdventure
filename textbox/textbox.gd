@@ -55,10 +55,11 @@ func _process(delta):
 				hide_textbox()
 		State.READING:
 #			print_debug(label.percent_visible)
-			if Input.is_action_just_pressed("A0"):
+			if pressed_next():
 				end_tween_early()
+				
 		State.FINISHED:
-			if Input.is_action_just_pressed("A0"):
+			if pressed_next():
 				if !text_queue.empty():
 					var next_up = text_queue.front()
 					if next_up is Dictionary:
@@ -168,3 +169,6 @@ func finished_reading():
 
 func _on_menu_selected(name):
 	hide_choose()
+
+func pressed_next():
+	return Input.is_action_just_pressed("A0") or Input.is_action_just_pressed("B0")
