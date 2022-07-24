@@ -34,7 +34,6 @@
 [node name="Node2D" type="Node2D"]
 
 [node name="textbox" parent="." instance=ExtResource( 5 )]
-max_lines = 3
 
 [node name="terrain_simple" parent="." instance=ExtResource( 6 )]
 tile_set = SubResource( 1 )

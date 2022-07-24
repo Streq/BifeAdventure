@@ -8,4 +8,7 @@ func _ready():
 func _on_body_entered(body):
 	if !active:
 		active = true
-		Textbox.add_texts(["PEPE: para hacer SALTO PARED hay que chocar con una PARED en el AIRE y apretar Z"])
+		Textbox.add_texts(["PEPE: faaa BIFE, la tienes CLARÍSIMA"])
+		yield(Textbox,"text_display_finished")
+		get_parent().get_node("text").visible = true
+		get_parent().get_node("stuck_area").queue_free()

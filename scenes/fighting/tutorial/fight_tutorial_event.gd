@@ -47,7 +47,7 @@ func play(body):
 		"BIFE: vamo loco",
 		"PEPE: vamos primero a lo BASICO:", 
 		"PEPE: con X pegas.",
-		"PEPE: nada eso, dale una prueba."
+		"PEPE: nada eso"
 	])
 	yield(Textbox, "text_display_finished")
 	

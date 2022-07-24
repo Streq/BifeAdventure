@@ -515,7 +515,6 @@ air_idle_lerp = 0.0
 idle_lerp = 60.0
 wall_lerp = 0.0
 jump_speed = 200.0
-pause = true
 
 [node name="idle" parent="state_machine" index="0" instance=ExtResource( 14 )]
 

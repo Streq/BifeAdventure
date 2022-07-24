@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://autotile/terrain_simple.tscn" type="PackedScene" id=1]
 [ext_resource path="res://test/fighting/tilemap.tscn" type="PackedScene" id=2]
@@ -29,6 +29,9 @@
 [ext_resource path="res://fighting/event/exit_area.tscn" type="PackedScene" id=27]
 [ext_resource path="res://scenes/fighting/tutorial/refill_health.gd" type="Script" id=28]
 [ext_resource path="res://scenes/fighting/tutorial/change_text_trigger.gd" type="Script" id=29]
+[ext_resource path="res://scenes/fighting/tutorial/stuck_area.gd" type="Script" id=30]
+[ext_resource path="res://fighting/distributed_fighter/fighters/pepe_clone/pepe_clone.tscn" type="PackedScene" id=31]
+[ext_resource path="res://scenes/fighting/temp/bounce_floor.gd" type="Script" id=32]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
@@ -107,6 +110,9 @@ points = PoolVector2Array( 32, 16, 0, 16, 0, 0, 32, 0 )
 [sub_resource type="RectangleShape2D" id=11]
 extents = Vector2( 69.5, 10 )
 
+[sub_resource type="RectangleShape2D" id=14]
+extents = Vector2( 88.75, 95.25 )
+
 [sub_resource type="RectangleShape2D" id=12]
 extents = Vector2( 39, 8 )
 
@@ -121,6 +127,13 @@ extents = Vector2( 8, 192 )
 
 [sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 8, 192 )
+
+[sub_resource type="PhysicsMaterial" id=15]
+friction = 0.0
+bounce = 0.3
+
+[sub_resource type="RectangleShape2D" id=16]
+extents = Vector2( 416, 10 )
 
 [node name="Node2D2" type="Node2D"]
 script = ExtResource( 6 )
@@ -167,14 +180,46 @@ position = Vector2( -40, 264 )
 [node name="text" parent="guide8" index="0"]
 text = "CORRER con SHIFT"
 
-[node name="guide3" parent="." instance=ExtResource( 4 )]
+[node name="guide3" type="Node2D" parent="."]
 position = Vector2( 680, -184 )
+z_index = 2
+script = ExtResource( 10 )
 
-[node name="text" parent="guide3" index="0"]
-margin_left = -88.0
-margin_top = -32.0
-margin_right = -88.0
-margin_bottom = -18.0
+[node name="text" type="Label" parent="guide3"]
+visible = false
+margin_left = -245.0
+margin_top = 187.0
+margin_right = -105.0
+margin_bottom = 320.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource( 14 )
+text = "SALTOPARED 
+MANTÉN PRESIONADO Z 
+cuando estés en 
+una PARED
+y SUÉLTALO 
+cuando estés en
+el AIRE"
+align = 1
+valign = 1
+
+[node name="text" type="Label" parent="guide3/text"]
+margin_left = 177.0
+margin_top = 19.0
+margin_right = 296.0
+margin_bottom = 84.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource( 14 )
+text = "NO HACE FALTA 
+APRETAR
+NINGUNA DIRECCIÓN"
+align = 1
+valign = 1
+
+[node name="pepe_clone" parent="guide3" instance=ExtResource( 31 )]
+position = Vector2( -45, 0 )
 
 [node name="how_to_wall_jump" type="Area2D" parent="guide3"]
 collision_layer = 0
@@ -182,8 +227,25 @@ collision_mask = 128
 script = ExtResource( 8 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="guide3/how_to_wall_jump"]
-position = Vector2( -88, 76 )
+position = Vector2( -87, 36 )
 shape = SubResource( 11 )
+
+[node name="stuck_area" type="Area2D" parent="guide3"]
+position = Vector2( -105, 246 )
+collision_layer = 0
+collision_mask = 128
+script = ExtResource( 30 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="guide3/stuck_area"]
+position = Vector2( 43, 25 )
+shape = SubResource( 14 )
+
+[node name="Timer" type="Timer" parent="guide3/stuck_area"]
+wait_time = 20.0
+one_shot = true
+
+[node name="Node2D" type="Node2D" parent="guide3"]
+position = Vector2( -720, 448 )
 
 [node name="guide4" parent="." instance=ExtResource( 4 )]
 position = Vector2( 1128, 40 )
@@ -222,19 +284,6 @@ SALTARá SUAVECITO"
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="guide5/change_text_area"]
 position = Vector2( 87, -53.875 )
 shape = SubResource( 10 )
-
-[node name="guide2" parent="." instance=ExtResource( 4 )]
-visible = false
-position = Vector2( 552, 168 )
-
-[node name="text" parent="guide2" index="0"]
-margin_left = 72.0
-margin_top = -104.0
-margin_right = 184.0
-margin_bottom = 29.0
-text = "cuando en una pared puedes hacer un SALTOPARED, presiona ARRIBA o ABAJO para definir la direccion"
-valign = 0
-autowrap = true
 
 [node name="bife" parent="." groups=["player"] instance=ExtResource( 23 )]
 position = Vector2( -296, 266 )
@@ -480,7 +529,23 @@ position = Vector2( 240, 79 )
 where = 2
 tile = Vector2( 16, 10 )
 
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2( 1434, 252 )
+collision_layer = 0
+physics_material_override = SubResource( 15 )
+script = ExtResource( 32 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( 6, -3 )
+shape = SubResource( 16 )
+
 [connection signal="body_entered" from="killzone" to="." method="_on_killzone_body_entered"]
+[connection signal="dead" from="guide3/pepe_clone" to="guide3/text" method="set_visible" binds= [ false ]]
+[connection signal="tree_exited" from="guide3/pepe_clone" to="guide3" method="leave"]
+[connection signal="area_entered" from="guide3/stuck_area" to="guide3/stuck_area" method="_on_area_entered"]
+[connection signal="area_exited" from="guide3/stuck_area" to="guide3/stuck_area" method="_on_area_exited"]
+[connection signal="timeout" from="guide3/stuck_area/Timer" to="guide3/pepe_clone" method="set" binds= [ "velocity", Vector2( -10000, -100 ) ]]
+[connection signal="timeout" from="guide3/stuck_area/Timer" to="guide3/stuck_area" method="_on_timeout"]
 [connection signal="fell" from="guide4/fall_detect" to="guide4/text" method="set_text"]
 [connection signal="area_entered" from="attack_tutorial_area" to="attack_tutorial_area/fight_event" method="play"]
 [connection signal="flinched" from="attack_tutorial_area/fight_event/guide/pepe_clone" to="attack_tutorial_area/fight_event/guide/text/change_text_trigger" method="trigger"]
@@ -489,9 +554,7 @@ tile = Vector2( 16, 10 )
 
 [editable path="guide"]
 [editable path="guide8"]
-[editable path="guide3"]
 [editable path="guide4"]
 [editable path="guide5"]
-[editable path="guide2"]
 [editable path="attack_tutorial_area/fight_event/guide"]
 [editable path="attack_tutorial_area2/fight_event/guide"]

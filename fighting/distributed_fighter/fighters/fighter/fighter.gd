@@ -83,6 +83,13 @@ func _physics_process(delta):
 	for i in get_slide_count():
 		var collision = get_slide_collision(i)
 		emit_signal("terrain_collision", pre_collision_velocity, collision)
+		#bounce behavior for kinematicbodies motherfucker
+		if "physics_material_override" in collision.collider:
+			var material = collision.collider.physics_material_override
+			if is_instance_valid(material):
+				var bounce = collision.collider.physics_material_override.bounce
+				if bounce>0.0:
+					velocity -= pre_collision_velocity.project(collision.normal)*bounce
 	state.physics_process(delta)
 	state_animation.advance(delta)
 	if dead and !(state.current.name in ["dead", "dead_air", "flinch", "air_flinch"]):
