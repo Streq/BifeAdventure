@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://overworld/tilemap/pawns/controller/input_controller.tscn" type="PackedScene" id=1]
 [ext_resource path="res://overworld/tilemap/pawns/actor.gd" type="Script" id=2]
 [ext_resource path="res://shader/underwater_screen.shader" type="Shader" id=3]
 [ext_resource path="res://overworld/tilemap/pawns/step_counter.gd" type="Script" id=4]
 [ext_resource path="res://sprite/overworld_character_sprite/sprite.tscn" type="PackedScene" id=5]
+[ext_resource path="res://asset/shader/saturate_shader.tres" type="Material" id=6]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 3 )
@@ -31,10 +32,16 @@ visible = false
 material = SubResource( 1 )
 margin_right = 320.0
 margin_bottom = 288.0
-color = Color( 1, 1, 1, 0 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="ColorRect2" type="ColorRect" parent="Camera2D/CanvasLayer"]
+visible = false
+modulate = Color( 0, 0.490196, 0.282353, 1 )
+material = ExtResource( 6 )
+margin_right = 320.0
+margin_bottom = 288.0
 
 [node name="step_counter" type="Node" parent="."]
 script = ExtResource( 4 )

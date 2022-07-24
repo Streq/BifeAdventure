@@ -19,19 +19,19 @@ enum ROOM {
 var is_indoors := []
 func _ready():
 	is_indoors.resize(ROOM.SIZE)
-	is_indoors[ROOM.my_room] = true
-	is_indoors[ROOM.my_living_room] = true
-	is_indoors[ROOM.my_hometown] = false
-	is_indoors[ROOM.my_hometown_basement] = true
-	is_indoors[ROOM.endurance_round] = true
-	is_indoors[ROOM.tutorial] = true
-	is_indoors[ROOM.pepe_house] = true
-	is_indoors[ROOM.malovich_house] = true
-	is_indoors[ROOM.malovich_fight_room] = true
-	is_indoors[ROOM.malovich_room] = true
-	is_indoors[ROOM.malovich_room_right_after_fight] = true
-	is_indoors[ROOM.hometown_forest] = true
-	is_indoors[ROOM.boquita] = false
+	is_indoors[ROOM.my_room] = 2
+	is_indoors[ROOM.my_living_room] = 1
+	is_indoors[ROOM.my_hometown] = 0
+	is_indoors[ROOM.my_hometown_basement] = 1
+	is_indoors[ROOM.endurance_round] = 1
+	is_indoors[ROOM.tutorial] = 1
+	is_indoors[ROOM.pepe_house] = 1
+	is_indoors[ROOM.malovich_house] = 1
+	is_indoors[ROOM.malovich_fight_room] = 2
+	is_indoors[ROOM.malovich_room] = 2
+	is_indoors[ROOM.malovich_room_right_after_fight] = 2
+	is_indoors[ROOM.hometown_forest] = 1
+	is_indoors[ROOM.boquita] = 0
 	
 
 const TILE_SIZE = 16
@@ -68,12 +68,13 @@ func respawn():
 	
 
 func goto_room(to:int):
+	var dark = is_indoors[to]>is_indoors[current_room]
 	current_room = to
-	DoorTransition.enter(is_indoors[to])
+	DoorTransition.enter(dark)
 	get_tree().paused = true
 	yield(DoorTransition.anim,"animation_finished")
 	get_tree().change_scene_to(Overworld.get_room(to))
-	DoorTransition.exit(is_indoors[to])
+	DoorTransition.exit(dark)
 	get_tree().paused = false
 	yield(DoorTransition.anim,"animation_finished")
 	

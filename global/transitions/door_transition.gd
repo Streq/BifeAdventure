@@ -2,9 +2,11 @@ extends CanvasLayer
 onready var anim = $AnimationPlayer
 
 func enter(is_indoors : bool):
-	var anim_name = "enter_indoors" if is_indoors else "enter"
-	anim.play(anim_name)
+	anim.play(_get_anim(is_indoors))
 	
 func exit(is_indoors : bool):
-	var anim_name = "enter_indoors" if is_indoors else "enter"
-	anim.play_backwards(anim_name)
+	anim.play_backwards(_get_anim(is_indoors))
+	
+func _get_anim(is_indoors: bool):
+	return "enter_light"
+#	return "enter_dark" if is_indoors else "enter_light"

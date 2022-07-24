@@ -51,6 +51,7 @@ var flinch_frames := 0
 var dead = false
 
 func _ready():
+	state_animation.playback_process_mode = AnimationPlayer.ANIMATION_PROCESS_MANUAL
 	state.initialize()
 	state_animation.play("RESET")
 	state_animation.advance(0)

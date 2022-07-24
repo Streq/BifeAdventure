@@ -15,7 +15,7 @@ func _on_area_exited(area):
 
 func _on_timeout():
 	keep_checking = false
-	yield(get_tree().create_timer(2.0),"timeout")
+	yield(get_tree().create_timer(1.5),"timeout")
 	if is_instance_valid(guide) and !guide.dead:
 		Textbox.add_texts(["PEPE: PERDÓN me colgué un poquito",
 		"PEPE: para hacer un buen SALTOPARED tienes que chocar con una pared en el aire",

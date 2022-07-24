@@ -134,7 +134,7 @@ Signals="*res://global/signals/signals.gd"
 Slowmo="*res://global/slowmo.gd"
 Overworld="*res://global/overworld.gd"
 Textbox="*res://textbox/textbox.tscn"
-DoorTransition="*res://global/transitions/door_transition.tscn"
+DoorTransition="*res://global/transitions/door_transition_saturation.tscn"
 
 [debug]
 

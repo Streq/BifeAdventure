@@ -114,7 +114,7 @@ valign = 1
 script = ExtResource( 8 )
 
 [node name="state_animation" type="AnimationPlayer" parent="."]
-playback_process_mode = 2
+playback_process_mode = 0
 
 [node name="state_buffer" parent="." instance=ExtResource( 6 )]
 
