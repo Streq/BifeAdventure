@@ -128,11 +128,10 @@ func receive_knockback(knockback: Vector2):
 		velocity = knockback*(1.0 - knockback_resistance/power)
 
 func flinch(knockback: Vector2, damage: float):
-	knockback *= knockback_lightness_multiplier
-	var power = max(0,knockback.length() - knockback_resistance)
+	var power = max(0,knockback.length()*knockback_lightness_multiplier - knockback_resistance)
 	if knockback.x:
 		set_facing_right(!(knockback.x>0.0))
-	flinch_frames = int(max(power, damage)*flinch_multiplier)
+	flinch_frames = int(power*flinch_multiplier)
 	state._change_state("flinch", null)
 	emit_signal("flinched")
 

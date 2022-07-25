@@ -96,7 +96,7 @@ func clone_died():
 	if clone_amount == 0:
 		emit_signal("clones_dead")
 
-var clone_side = -1.0
+var clone_side = 1.0
 func create_clone():
 	var clone = CLONE.instance()
 	get_tree().current_scene.add_child(clone)

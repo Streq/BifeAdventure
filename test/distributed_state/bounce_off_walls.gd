@@ -39,7 +39,7 @@ func terrain_collision(velocity : Vector2, collision : KinematicCollision2D):
 			#splash particles
 			var splash : CPUParticles2D = SPLASH.instance()
 			splash.direction = normal
-			splash.color = Color.cornflower
+#			splash.color = Color.cornflower
 			splash.spread = 90
 			splash.initial_velocity = velocity.length()/5.0
 			splash.gravity = Vector2()
