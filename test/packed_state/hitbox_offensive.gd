@@ -98,7 +98,7 @@ func on_hitbox(hitbox: Area2D):
 			
 			fighter.pause = false
 			if damage < target_damage + 5.0:
-				get_body().rebound(int(max(knockback, hitbox.knockback)*0.075), hitbox.get_knockback_vector()*0.75)
+				get_body().rebound(int(max(knockback, hitbox.knockback)*0.075), hitbox.get_knockback_vector()*0.5)
 			
 			
 func set_direction(val : Vector2):

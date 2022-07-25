@@ -118,6 +118,7 @@ playback_process_mode = 0
 
 [node name="state_buffer" parent="." instance=ExtResource( 6 )]
 
+[connection signal="health_changed" from="." to="healthbar" method="_on_health_changed"]
 [connection signal="physics_process" from="state_machine" to="state_buffer" method="_physics_update"]
 [connection signal="state_changed" from="state_machine" to="state_label" method="set_text"]
 [connection signal="state_changed" from="state_machine" to="state_buffer" method="_on_state_changed"]

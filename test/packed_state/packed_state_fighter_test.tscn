@@ -25,7 +25,6 @@ col_path = NodePath("../CollisionPolygon2D")
 
 [node name="fighter2" parent="." instance=ExtResource( 3 )]
 position = Vector2( 176, 240 )
-jump_speed = 125.0
 
 [node name="controller" parent="fighter2" instance=ExtResource( 6 )]
 

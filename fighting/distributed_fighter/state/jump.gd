@@ -2,6 +2,7 @@ extends FighterState
 
 #how much it takes for the jump to conclude
 export var jump_lag := 0.0
+export var additive_velocity := true 
 
 # [[1.0,1.0],[0.6,0.8],[0.2,0.5],[0.0,0.1]]
 # press >= 1.0 seconds -> 1.0 times the jump_speed
@@ -60,6 +61,10 @@ func jump():
 			if press_time >= config_press_req:
 				jump_factor = config_jump_factor
 				break
-	root.velocity += direction.direction * Vector2(root.get_facing_dir(), 1.0) * jump_speed * jump_factor
+	var velocity = direction.direction * Vector2(root.get_facing_dir(), 1.0) * jump_speed * jump_factor
+	if additive_velocity:
+		root.velocity += velocity
+	else:
+		root.velocity = velocity
 	goto("air")
 

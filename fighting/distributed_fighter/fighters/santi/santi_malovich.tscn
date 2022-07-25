@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://fighting/distributed_fighter/fighters/fighter/fighter.tscn" type="PackedScene" id=1]
 [ext_resource path="res://fighting/distributed_fighter/FighterSprite.tscn" type="PackedScene" id=2]
@@ -15,7 +15,7 @@
 [ext_resource path="res://fighting/distributed_fighter/state/flinch.tscn" type="PackedScene" id=13]
 [ext_resource path="res://fighting/distributed_fighter/state/transitions/transitions.tscn" type="PackedScene" id=14]
 [ext_resource path="res://fighting/distributed_fighter/state/air_no_wall.tscn" type="PackedScene" id=15]
-[ext_resource path="res://fighting/distributed_fighter/fighters/dummy/state/dead_air.tscn" type="PackedScene" id=16]
+[ext_resource path="res://fighting/distributed_fighter/state/dead_air.tscn" type="PackedScene" id=16]
 [ext_resource path="res://fighting/distributed_fighter/state/walk.tscn" type="PackedScene" id=17]
 [ext_resource path="res://fighting/distributed_fighter/state/jump.tscn" type="PackedScene" id=18]
 [ext_resource path="res://fighting/distributed_fighter/state/turn_around.tscn" type="PackedScene" id=19]
@@ -25,6 +25,8 @@
 [ext_resource path="res://test/distributed_state/distributed_state.gd" type="Script" id=23]
 [ext_resource path="res://fighting/distributed_fighter/state/passives/active_on_floor.gd" type="Script" id=24]
 [ext_resource path="res://fighting/distributed_fighter/fighters/santi/state/jab.tscn" type="PackedScene" id=25]
+[ext_resource path="res://util/direction.tscn" type="PackedScene" id=26]
+[ext_resource path="res://fighting/distributed_fighter/state/jump.gd" type="Script" id=27]
 
 [sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 9, 6 )
@@ -35,7 +37,7 @@ extents = Vector2( 2.5, 6 )
 [sub_resource type="RectangleShape2D" id=12]
 extents = Vector2( 5, 7 )
 
-[sub_resource type="StreamTexture" id=27]
+[sub_resource type="StreamTexture" id=29]
 load_path = "res://.import/malovich.png-5a6035b439311291d2a354acd39448aa.stex"
 
 [sub_resource type="Animation" id=14]
@@ -163,7 +165,7 @@ tracks/1/keys = {
 "args": [ 50.0 ],
 "method": "trigger"
 }, {
-"args": [ 100.0 ],
+"args": [ 200.0 ],
 "method": "trigger"
 } ]
 }
@@ -181,7 +183,7 @@ tracks/2/keys = {
 }
 
 [sub_resource type="Animation" id=28]
-length = 0.1
+length = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("pivot/Sprite:frame")
 tracks/0/interp = 1
@@ -233,7 +235,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0.7 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
-"args": [ 100.0 ],
+"args": [ 200.0 ],
 "method": "trigger"
 } ]
 }
@@ -346,9 +348,12 @@ max_health = 250.0
 health = 250.0
 walk_speed = 75.0
 run_speed = 75.0
-air_walk_speed = 75.0
-air_run_speed = 75.0
-jump_speed = 100.0
+air_walk_speed = 0.0
+air_walk_lerp = 0.0
+air_run_speed = 0.0
+air_run_lerp = 0.0
+air_idle_lerp = 0.0
+jump_speed = 125.0
 
 [node name="idle" parent="state_machine" index="0" instance=ExtResource( 12 )]
 
@@ -363,15 +368,20 @@ C = 1
 end_state = "jab"
 B = 3
 
-[node name="jump" parent="state_machine/idle/transitions" index="2" instance=ExtResource( 8 )]
+[node name="back_jump" parent="state_machine/idle/transitions" index="2" instance=ExtResource( 8 )]
+end_state = "back_jump"
+A = 1
+vertical_dir = 1
+
+[node name="jump" parent="state_machine/idle/transitions" index="3" instance=ExtResource( 8 )]
 end_state = "jump"
 A = 1
 
-[node name="turn_around" parent="state_machine/idle/transitions" index="3" instance=ExtResource( 8 )]
+[node name="turn_around" parent="state_machine/idle/transitions" index="4" instance=ExtResource( 8 )]
 end_state = "turn_around"
 horizontal_dir = -1
 
-[node name="walk" parent="state_machine/idle/transitions" index="4" instance=ExtResource( 8 )]
+[node name="walk" parent="state_machine/idle/transitions" index="5" instance=ExtResource( 8 )]
 end_state = "walk"
 horizontal_dir = 1
 
@@ -436,15 +446,38 @@ animation = "flinch"
 
 [node name="dead" parent="state_machine" index="9" instance=ExtResource( 10 )]
 
-[node name="dead_air" parent="state_machine" index="10" instance=ExtResource( 16 )]
-animation = "flinch"
+[node name="rebound" parent="state_machine" index="10" instance=ExtResource( 6 )]
 
-[node name="rebound" parent="state_machine" index="11" instance=ExtResource( 6 )]
+[node name="jump" parent="state_machine" index="11" instance=ExtResource( 18 )]
+jump_lag = 0.1
+jump_config = [ [ 0.9, 1.0 ], [ 0.0, 1.0 ] ]
 
-[node name="jump" parent="state_machine" index="12" instance=ExtResource( 18 )]
-jump_config = [ [ 0.9, 1.0 ], [ 0.0, 0.5 ] ]
+[node name="back_jump" type="Node" parent="state_machine" index="12"]
+script = ExtResource( 27 )
+animation = "jump"
+jump_lag = 0.1
+additive_velocity = false
+jump_config = [ [ 0.9, 1.0 ], [ 0.0, 1.0 ] ]
+
+[node name="jump_lag" type="Timer" parent="state_machine/back_jump" index="0"]
+process_priority = 1
+process_mode = 0
+one_shot = true
+
+[node name="jump_charge" type="Timer" parent="state_machine/back_jump" index="1"]
+process_mode = 0
+one_shot = true
+
+[node name="direction" parent="state_machine/back_jump" index="2" instance=ExtResource( 26 )]
+direction = Vector2( -0.894427, -0.447214 )
+isolated_direction_x = -0.894427
+isolated_direction_y = -0.447214
+direction_degrees = -153.435
 
 [node name="turn_around" parent="state_machine" index="13" instance=ExtResource( 19 )]
+
+[node name="dead_air" parent="state_machine" index="14" instance=ExtResource( 16 )]
+animation = "flinch"
 
 [node name="jab" parent="pivot/hitbox" index="0" instance=ExtResource( 4 )]
 
@@ -488,10 +521,10 @@ position = Vector2( -1, 1 )
 shape = SubResource( 12 )
 
 [node name="Sprite" parent="pivot" index="1" instance=ExtResource( 2 )]
-texture = SubResource( 27 )
+texture = SubResource( 29 )
 hframes = 4
 vframes = 4
-frame = 1
+frame = 4
 
 [node name="state_animation" parent="." index="7"]
 anims/RESET = SubResource( 14 )
