@@ -16,7 +16,6 @@ var moving := false
 
 export (float) var speed := 1.0 setget set_speed
 
-
 func _ready():
 	update_look_direction(Vector2.DOWN)
 	set_speed(speed)

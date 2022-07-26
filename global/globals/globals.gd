@@ -1,5 +1,14 @@
 extends Node
 
+signal events_changed
+
+export var force_release_mode := false
+
+var DEBUG setget,is_debug_build
+
+func is_debug_build():
+	return !force_release_mode and OS.is_debug_build()
+
 enum ROOM {
 	my_room,
 	my_living_room,
@@ -35,12 +44,13 @@ func _ready():
 	
 
 const TILE_SIZE = 16
-onready var DEBUG = OS.is_debug_build()
 	
 enum EVENT {
 	tutorial_completed,
 	malovich_defeated,
-	malovich_defeated_cutscene_over
+	malovich_defeated_cutscene_over,
+	pepe_talks_about_boca,
+	started_sopapa_sidequest,
 }
 
 export (ROOM) var checkpoint_room : int = ROOM.my_room
@@ -57,6 +67,7 @@ func get_event(event:int):
 
 func set_event(event:int, val:bool):
 	event_flags |= 1<<event
+	emit_signal("events_changed")
 
 func set_step_counter(val):
 	step_counter = val

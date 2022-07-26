@@ -305,13 +305,12 @@ event = 2
 
 [node name="event_check_trigger" type="Node" parent="."]
 script = ExtResource( 17 )
-event = 2
+mustve_happened = 4
 
-[connection signal="ready" from="." to="event_check_trigger" method="trigger"]
 [connection signal="over" from="cutscene" to="event_trigger" method="trigger"]
-[connection signal="happened" from="event_check_trigger" to="ko_malovich/hider" method="trigger"]
-[connection signal="happened" from="event_check_trigger" to="map/grid/malovich/displayer" method="trigger"]
-[connection signal="not_happened" from="event_check_trigger" to="cutscene" method="trigger"]
+[connection signal="conditions_met" from="event_check_trigger" to="ko_malovich/hider" method="trigger"]
+[connection signal="conditions_met" from="event_check_trigger" to="cutscene" method="queue_free"]
+[connection signal="conditions_not_met" from="event_check_trigger" to="cutscene" method="trigger"]
 
 [editable path="map"]
 [editable path="map/grid/malovich"]

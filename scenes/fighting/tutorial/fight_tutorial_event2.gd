@@ -115,7 +115,7 @@ func play(body):
 	$guide/text.text = "SOS UN GENIO BIFE"
 	spawn_position.value = $orbit/finish.global_position
 	
-	
+	done = true
 	
 	controller.enabled = false
 	current_camera.global_position = camera.global_position

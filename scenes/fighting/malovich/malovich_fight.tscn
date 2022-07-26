@@ -48,6 +48,7 @@ hide_if_full = false
 [node name="bife" parent="." instance=ExtResource( 2 )]
 position = Vector2( 276, 185 )
 facing_right = false
+hide_health_bar = true
 
 [node name="controller" parent="bife" instance=ExtResource( 4 )]
 
@@ -56,6 +57,7 @@ position = Vector2( 31, 183 )
 collision_mask = 2
 script = ExtResource( 9 )
 gravity = 400.0
+hide_health_bar = true
 
 [node name="target_bife" type="Node" parent="malovich"]
 script = ExtResource( 10 )

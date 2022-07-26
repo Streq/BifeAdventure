@@ -37,6 +37,7 @@ export (float, 0.0, 10.0) var flinch_multiplier := 0.2
 export (float, 0.0, 1.0) var bounce
 export var pause := false setget set_pause
 
+export var hide_health_bar := false
 
 onready var input_state = $input_state
 onready var state_animation = $state_animation
@@ -58,6 +59,8 @@ func _ready():
 	connect("terrain_collision", self, "collided")
 	self.health = health
 	self.facing_right = facing_right
+	if hide_health_bar:
+		disconnect("health_changed", $healthbar, "_on_health_changed")
 
 func set_health(val):
 	health = clamp(val, 0.0, max_health)
