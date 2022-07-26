@@ -309,6 +309,7 @@ mustve_happened = 4
 
 [connection signal="over" from="cutscene" to="event_trigger" method="trigger"]
 [connection signal="conditions_met" from="event_check_trigger" to="ko_malovich/hider" method="trigger"]
+[connection signal="conditions_met" from="event_check_trigger" to="map/grid/malovich" method="set_visible" binds= [ true ]]
 [connection signal="conditions_met" from="event_check_trigger" to="cutscene" method="queue_free"]
 [connection signal="conditions_not_met" from="event_check_trigger" to="cutscene" method="trigger"]
 

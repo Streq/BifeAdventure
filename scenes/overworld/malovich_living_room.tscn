@@ -171,13 +171,12 @@ script = ExtResource( 4 )
 
 [node name="event_check_trigger" type="Node" parent="."]
 script = ExtResource( 16 )
-event = 2
+mustve_happened = 2
 
-[connection signal="ready" from="." to="event_check_trigger" method="trigger"]
 [connection signal="text_display_finished" from="textbox" to="." method="_on_textbox_text_display_finished"]
 [connection signal="text_display_started" from="textbox" to="." method="_on_textbox_text_display_started"]
-[connection signal="happened" from="event_check_trigger" to="map/grid/mom/parent_deleter" method="trigger"]
-[connection signal="happened" from="event_check_trigger" to="map/grid/pop/parent_deleter" method="trigger"]
+[connection signal="conditions_met" from="event_check_trigger" to="map/grid/mom/parent_deleter" method="trigger"]
+[connection signal="conditions_met" from="event_check_trigger" to="map/grid/pop/parent_deleter" method="trigger"]
 
 [editable path="map"]
 [editable path="map/grid/mom"]
