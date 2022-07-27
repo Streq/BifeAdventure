@@ -1,12 +1,30 @@
 { "frames": [
    {
-    "filename": "buho.aseprite",
+    "filename": "buho 0.aseprite",
     "frame": { "x": 0, "y": 0, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
     "sourceSize": { "w": 48, "h": 48 },
-    "duration": 100
+    "duration": 250
+   },
+   {
+    "filename": "buho 1.aseprite",
+    "frame": { "x": 48, "y": 0, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 250
+   },
+   {
+    "filename": "buho 2.aseprite",
+    "frame": { "x": 0, "y": 48, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 250
    }
  ],
  "meta": {
@@ -14,9 +32,10 @@
   "version": "1.2.38-x64",
   "image": "buho.png",
   "format": "RGBA8888",
-  "size": { "w": 48, "h": 48 },
+  "size": { "w": 96, "h": 96 },
   "scale": "1",
   "frameTags": [
+   { "name": "Loop", "from": 1, "to": 2, "direction": "forward" }
   ]
  }
 }

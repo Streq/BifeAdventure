@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/forest_ceil.png-e9db8cdb81b12124ccc8ca91fe7309ab.stex"
+path="res://.import/ground_tilemap.png-13f14f070d9256a785006a1e6212af55.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://asset/texture/background/forest_ceil.png"
-dest_files=[ "res://.import/forest_ceil.png-e9db8cdb81b12124ccc8ca91fe7309ab.stex" ]
+source_file="res://asset/texture/ground_tilemap.png"
+dest_files=[ "res://.import/ground_tilemap.png-13f14f070d9256a785006a1e6212af55.stex" ]
 
 [params]
 
