@@ -1,5 +1,4 @@
 extends "interact_action.gd"
-signal interacted(interacted, interactor, direction, grid)
 export (PoolStringArray) var interact_text := PoolStringArray(["mucho texto"])
 
 func interact(interacted, interactor, direction, grid):
@@ -8,4 +7,5 @@ func interact(interacted, interactor, direction, grid):
 	Signals.emit_signal("display_text", interact_text)
 	var textbox = get_tree().get_nodes_in_group("textbox")[0]
 	yield(textbox, "text_display_finished")
-	emit_signal("interacted")
+	emit_signal("interacted", interacted, interactor, direction, grid)
+	emit_signal("interact")

@@ -7,5 +7,6 @@ export var source_prop : String
 
 
 func trigger():
-	var val = get_node(source_node).get_indexed(source_prop)
+	var source = get_node(source_node)
+	var val = source.get_indexed(source_prop) if source_prop else source
 	get_node(dest_node).set_indexed(dest_prop, val)

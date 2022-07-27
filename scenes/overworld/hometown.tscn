@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://scenes/overworld/overworld_skel.gd" type="Script" id=1]
 [ext_resource path="res://overworld/tilemap/trigger/scene_change_trigger.tscn" type="PackedScene" id=2]
@@ -22,6 +22,8 @@
 [ext_resource path="res://overworld/tilemap/trigger/checkpoint_trigger.gd" type="Script" id=20]
 [ext_resource path="res://overworld/tilemap/pawns/controller/state_controller.gd" type="Script" id=21]
 [ext_resource path="res://overworld/tilemap/pawns/interact_action/signal_interact.gd" type="Script" id=22]
+[ext_resource path="res://events/event_trigger.tscn" type="PackedScene" id=23]
+[ext_resource path="res://fighting/distributed_fighter/state/triggers/property_link.tscn" type="PackedScene" id=24]
 
 [sub_resource type="TileSet" id=1]
 0/name = "pokemon_gsc_tileset_day.png 0"
@@ -264,8 +266,22 @@ idle_down_frame = 30
 [node name="interact_action" parent="map/grid/pelado" instance=ExtResource( 12 )]
 interact_text = PoolStringArray( "PELADO: buenas, vas a cruzar el bosque\?", "BIFE: si", "PELADO: a que no te animas cagon", "BIFE: me re animo", "PELADO: puto cagon no te animas nada", "BIFE: vas a ver como me animo tarado", "PELADO: no para", "PELADO: no te vayas", "PELADO: tengo miedo", "PELADO: tengo que ir a comprar una sopapa porque se tapó el inodoro", "PELADO: (no lo tapé yo)", "PELADO: pero de este lado no venden, y no me animo a cruzar porque hay bichos", "BIFE: pobechito :(", "PELADO: :((", "BIFE: :((((", "PELADO: podés ir a comprarme una sopapa\?", "BIFE: vos me trataste muy mal a mí recién", "PELADO: tenés razón, perdón", "BIFE: me parece que no va, no te tendría que ayudar", "PELADO: me parece justo", "PELADO: hoy aprendí una lección valiosa sobre el respeto", "BIFE: mirá", "BIFE: yo ahora tengo que cruzar a cagarme a palos con la hinchada de Boca", "BIFE: termino y te lo traigo", "PELADO: vas a hacer eso después de cómo te traté\?", "BIFE: si", "PELADO: gracias flaco, no te puedo creer, quiero llorar", "BIFE: denada", "BIFE: pero tenés que prometerme que vas a ser más responsable con tu trato hacia los demás", "PELADO: sí, te lo prometo, me lo prometo a mí y a mis hijos, cómo te llamás\?", "BIFE: bife", "PELADO: yo me llamo Raúl", "BIFE: mirá", "BIFE: bueno Raúl me voy", "PELADO: bueno Bife, gracias y perdón" )
 
+[node name="interact_action2" parent="map/grid/pelado" instance=ExtResource( 12 )]
+interact_text = PoolStringArray( "RAUL: Gracias Bife, espero la sopapa!" )
+
+[node name="set_interact_to_interact2" parent="map/grid/pelado" instance=ExtResource( 24 )]
+dest_node = NodePath("..")
+dest_prop = "interact_action"
+source_node = NodePath("../interact_action2")
+
 [node name="controller" type="Node" parent="map/grid/pelado"]
 script = ExtResource( 19 )
+
+[node name="event_trigger" parent="map/grid/pelado" instance=ExtResource( 23 )]
+event = 4
+
+[node name="trigger_on_sopapa_quest" parent="map/grid/pelado" instance=ExtResource( 14 )]
+mustve_happened = 16
 
 [node name="pepe_guardian" parent="map/grid" instance=ExtResource( 11 )]
 position = Vector2( 152, 360 )
@@ -418,6 +434,8 @@ bife_path = NodePath("../map/grid/player")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="pepe_talk_about_boca"]
 shape = SubResource( 6 )
 
+[connection signal="interact" from="map/grid/pelado/interact_action" to="map/grid/pelado/event_trigger" method="trigger"]
+[connection signal="conditions_met" from="map/grid/pelado/trigger_on_sopapa_quest" to="map/grid/pelado/set_interact_to_interact2" method="trigger"]
 [connection signal="conditions_met" from="on_tutorial_trigger" to="map/grid/closed_door/parent_deleter" method="trigger"]
 [connection signal="conditions_met" from="on_malovich_defeated_trigger" to="map/grid/pepe_guardian/parent_deleter" method="trigger"]
 [connection signal="conditions_not_met" from="on_malovich_defeated_trigger" to="map/grid/pepe/parent_deleter" method="trigger"]

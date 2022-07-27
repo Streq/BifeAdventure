@@ -8,13 +8,13 @@
 [ext_resource path="res://overworld/tilemap/pawns/character/character.tscn" type="PackedScene" id=6]
 [ext_resource path="res://overworld/tilemap/pawns/player.tscn" type="PackedScene" id=7]
 [ext_resource path="res://autotile/terrain_simple.tscn" type="PackedScene" id=8]
+[ext_resource path="res://events/event_trigger.tscn" type="PackedScene" id=9]
 [ext_resource path="res://overworld/tilemap/pawns/interact_action/interact_text.tscn" type="PackedScene" id=10]
 [ext_resource path="res://overworld/tilemap/pawns/controller/nothing_controller.tscn" type="PackedScene" id=11]
 [ext_resource path="res://asset/texture/malovich.png" type="Texture" id=12]
 [ext_resource path="res://overworld/tilemap/trigger/trigger_grid.gd" type="Script" id=13]
 [ext_resource path="res://scenes/overworld/overworld_skel.gd" type="Script" id=14]
 [ext_resource path="res://scenes/overworld/malovich_room_right_after_fight/cutscene.gd" type="Script" id=15]
-[ext_resource path="res://events/event_node.gd" type="Script" id=16]
 [ext_resource path="res://util/event_check_trigger.gd" type="Script" id=17]
 [ext_resource path="res://util/remote_method_call_trigger.gd" type="Script" id=18]
 
@@ -299,19 +299,17 @@ bife_path = NodePath("../map/grid/player")
 malovich_muerto_path = NodePath("../ko_malovich")
 malovich_path = NodePath("../map/grid/malovich")
 
-[node name="event_trigger" type="Node" parent="."]
-script = ExtResource( 16 )
-event = 2
+[node name="event_trigger" parent="." instance=ExtResource( 9 )]
 
-[node name="event_check_trigger" type="Node" parent="."]
+[node name="cutscene_over_check" type="Node" parent="."]
 script = ExtResource( 17 )
 mustve_happened = 4
 
 [connection signal="over" from="cutscene" to="event_trigger" method="trigger"]
-[connection signal="conditions_met" from="event_check_trigger" to="ko_malovich/hider" method="trigger"]
-[connection signal="conditions_met" from="event_check_trigger" to="map/grid/malovich" method="set_visible" binds= [ true ]]
-[connection signal="conditions_met" from="event_check_trigger" to="cutscene" method="queue_free"]
-[connection signal="conditions_not_met" from="event_check_trigger" to="cutscene" method="trigger"]
+[connection signal="conditions_met" from="cutscene_over_check" to="ko_malovich/hider" method="trigger"]
+[connection signal="conditions_met" from="cutscene_over_check" to="map/grid/malovich" method="set_visible" binds= [ true ]]
+[connection signal="conditions_met" from="cutscene_over_check" to="cutscene" method="queue_free"]
+[connection signal="conditions_not_met" from="cutscene_over_check" to="cutscene" method="trigger"]
 
 [editable path="map"]
 [editable path="map/grid/malovich"]
