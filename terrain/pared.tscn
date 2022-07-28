@@ -81,7 +81,7 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 [sub_resource type="ConvexPolygonShape2D" id=32]
 points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 
-[sub_resource type="TileSet" id=6]
+[sub_resource type="TileSet" id=33]
 0/name = "wooden_wall"
 0/texture = ExtResource( 1 )
 0/tex_offset = Vector2( 0, 0 )
@@ -368,7 +368,7 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 5/z_index = 0
 
 [node name="pared" type="TileMap"]
-tile_set = SubResource( 6 )
+tile_set = SubResource( 33 )
 cell_size = Vector2( 16, 16 )
 collision_layer = 2
 format = 1
