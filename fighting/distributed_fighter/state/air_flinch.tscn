@@ -4,12 +4,9 @@
 
 [node name="air_flinch" instance=ExtResource( 1 )]
 
-[node name="on_finish" parent="." index="0"]
-end_state = "air"
-
-[node name="stay_still" parent="." index="2"]
+[node name="stay_still" parent="." index="1"]
 friction = 0.0
 
-[node name="on_floor" parent="." index="3"]
+[node name="on_floor" parent="." index="2"]
 should_be_true = true
 state_to = "flinch"

@@ -51,7 +51,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
     "sourceSize": { "w": 48, "h": 48 },
-    "duration": 300
+    "duration": 500
    },
    {
     "filename": "cosito 6.aseprite",
@@ -60,7 +60,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
     "sourceSize": { "w": 48, "h": 48 },
-    "duration": 300
+    "duration": 100
    },
    {
     "filename": "cosito 7.aseprite",
@@ -100,7 +100,7 @@
    },
    {
     "filename": "cosito 11.aseprite",
-    "frame": { "x": 0, "y": 96, "w": 48, "h": 48 },
+    "frame": { "x": 144, "y": 48, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
@@ -109,7 +109,7 @@
    },
    {
     "filename": "cosito 12.aseprite",
-    "frame": { "x": 48, "y": 96, "w": 48, "h": 48 },
+    "frame": { "x": 0, "y": 96, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
@@ -118,7 +118,7 @@
    },
    {
     "filename": "cosito 13.aseprite",
-    "frame": { "x": 96, "y": 96, "w": 48, "h": 48 },
+    "frame": { "x": 48, "y": 96, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
@@ -127,7 +127,7 @@
    },
    {
     "filename": "cosito 14.aseprite",
-    "frame": { "x": 144, "y": 96, "w": 48, "h": 48 },
+    "frame": { "x": 96, "y": 96, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
@@ -136,6 +136,15 @@
    },
    {
     "filename": "cosito 15.aseprite",
+    "frame": { "x": 144, "y": 96, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 100
+   },
+   {
+    "filename": "cosito 16.aseprite",
     "frame": { "x": 48, "y": 0, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
@@ -160,10 +169,10 @@
    { "name": "_air", "from": 9, "to": 9, "direction": "forward", "color": "#000000ff" },
    { "name": "_flinch", "from": 10, "to": 10, "direction": "forward", "color": "#000000ff" },
    { "name": "_air_flinch", "from": 11, "to": 11, "direction": "forward", "color": "#000000ff" },
-   { "name": "_turn_around", "from": 12, "to": 12, "direction": "forward", "color": "#000000ff" },
-   { "name": "_dead", "from": 13, "to": 13, "direction": "forward", "color": "#000000ff" },
-   { "name": "_dead_air", "from": 14, "to": 14, "direction": "forward", "color": "#000000ff" },
-   { "name": "_rebound", "from": 15, "to": 15, "direction": "forward", "color": "#000000ff" }
+   { "name": "_turn_around", "from": 13, "to": 13, "direction": "forward", "color": "#000000ff" },
+   { "name": "_dead", "from": 14, "to": 14, "direction": "forward", "color": "#000000ff" },
+   { "name": "_dead_air", "from": 15, "to": 15, "direction": "forward", "color": "#000000ff" },
+   { "name": "_rebound", "from": 16, "to": 16, "direction": "forward", "color": "#000000ff" }
   ]
  }
 }

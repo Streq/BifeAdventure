@@ -39,6 +39,8 @@ export var pause := false setget set_pause
 
 export var hide_health_bar := false
 
+export var team := 0
+
 onready var input_state = $input_state
 onready var state_animation = $state_animation
 onready var damage_animation = $damage_animation

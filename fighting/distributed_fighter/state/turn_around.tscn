@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://test/distributed_state/distributed_state.gd" type="Script" id=1]
-[ext_resource path="res://fighting/distributed_fighter/state/triggers/on_floor.tscn" type="PackedScene" id=2]
+[ext_resource path="res://fighting/distributed_fighter/state/triggers/change_state_on_floor.tscn" type="PackedScene" id=2]
 [ext_resource path="res://fighting/distributed_fighter/state/triggers/on_finish.tscn" type="PackedScene" id=3]
 
 [node name="turn_around" type="Node"]
