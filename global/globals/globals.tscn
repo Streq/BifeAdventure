@@ -5,4 +5,3 @@
 [node name="Node" type="Node"]
 script = ExtResource( 1 )
 force_release_mode = true
-event_flags = 1

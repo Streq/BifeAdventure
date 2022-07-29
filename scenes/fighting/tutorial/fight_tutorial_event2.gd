@@ -56,8 +56,8 @@ func play(body):
 	
 	Textbox.add_texts([
 		"PEPE: ahora viene lo interesante, tambien puedes hacer ataques distintos",
-		"PEPE: dependiendo la DIRECCION que estes APRETANDO al momento de ATACAR",
-		"PEPE: y si estas CORRIENDO, en el AIRE, CAMINANDO, o QUIETO", 
+		"PEPE: dependiendo la DIRECCION que estes APRETANDO al momento de ATACAR,",
+		"PEPE: y si estas CORRIENDO, en el AIRE, CAMINANDO, o QUIETO.", 
 		"PEPE: dejo a tu CRITERIO cuando usar que ATAQUE"
 	])
 	yield(Textbox, "text_display_finished")
