@@ -2,9 +2,9 @@
 
 [ext_resource path="res://fighting/distributed_fighter/fighters/bife/bife.tscn" type="PackedScene" id=1]
 [ext_resource path="res://input/controller.tscn" type="PackedScene" id=2]
+[ext_resource path="res://fighting/distributed_fighter/fighters/cosito_tirapiña/cosito_tirapiña.tscn" type="PackedScene" id=3]
 [ext_resource path="res://util/physics/drawable_collision_polygon.gd" type="Script" id=4]
 [ext_resource path="res://test/fighting/fighter_test.gd" type="Script" id=5]
-[ext_resource path="res://fighting/distributed_fighter/fighters/fighter/fighter.gd" type="Script" id=7]
 [ext_resource path="res://fighting/distributed_fighter/fighters/cosito/cosito_AI.tscn" type="PackedScene" id=8]
 [ext_resource path="res://terrain/pared.tscn" type="PackedScene" id=9]
 
@@ -28,8 +28,6 @@ col_path = NodePath("../CollisionPolygon2D")
 [node name="bife" parent="." instance=ExtResource( 1 )]
 position = Vector2( 192, 184 )
 
-[node name="controller" parent="bife" instance=ExtResource( 2 )]
-
 [node name="pared" parent="." instance=ExtResource( 9 )]
 tile_data = PoolIntArray( 589825, 2, 1, 589826, 2, 2, 589827, 2, 3, 655375, 2, 1, 655376, 2, 2, 655377, 2, 3, 786438, 2, 1, 786439, 2, 2, 786440, 2, 2, 786441, 2, 2, 786442, 2, 2, 786443, 2, 2, 786444, 2, 3, 851982, 2, 1, 851983, 2, 2, 851984, 2, 2, 851985, 2, 3, 1114120, 2, 1, 1114121, 2, 2, 1114122, 2, 3 )
 
@@ -42,49 +40,29 @@ color = Color( 0.454902, 0.203922, 0.203922, 1 )
 
 [node name="cosito_AI" parent="." instance=ExtResource( 8 )]
 position = Vector2( 80, 272 )
-collision_mask = 2
-script = ExtResource( 7 )
-walk_speed = 40.0
 team = 1
 
 [node name="cosito_AI2" parent="." instance=ExtResource( 8 )]
 position = Vector2( 256, 200 )
-collision_mask = 2
-script = ExtResource( 7 )
-walk_speed = 40.0
 team = 1
 
 [node name="cosito_AI3" parent="." instance=ExtResource( 8 )]
 position = Vector2( 256, 152 )
-collision_mask = 2
-script = ExtResource( 7 )
-walk_speed = 40.0
 team = 1
 
 [node name="cosito_AI4" parent="." instance=ExtResource( 8 )]
 position = Vector2( 40, 136 )
-collision_mask = 2
-script = ExtResource( 7 )
-walk_speed = 40.0
 team = 1
 
 [node name="cosito_AI5" parent="." instance=ExtResource( 8 )]
 position = Vector2( 152, 64 )
-collision_mask = 2
-script = ExtResource( 7 )
-walk_speed = 40.0
 team = 1
 
 [node name="cosito_AI6" parent="." instance=ExtResource( 8 )]
 position = Vector2( 152, 184 )
-collision_mask = 2
-script = ExtResource( 7 )
-walk_speed = 40.0
 team = 1
 
-[connection signal="health_changed" from="cosito_AI" to="cosito_AI/healthbar" method="_on_health_changed"]
-[connection signal="health_changed" from="cosito_AI2" to="cosito_AI2/healthbar" method="_on_health_changed"]
-[connection signal="health_changed" from="cosito_AI3" to="cosito_AI3/healthbar" method="_on_health_changed"]
-[connection signal="health_changed" from="cosito_AI4" to="cosito_AI4/healthbar" method="_on_health_changed"]
-[connection signal="health_changed" from="cosito_AI5" to="cosito_AI5/healthbar" method="_on_health_changed"]
-[connection signal="health_changed" from="cosito_AI6" to="cosito_AI6/healthbar" method="_on_health_changed"]
+[node name="cosito" parent="." instance=ExtResource( 3 )]
+position = Vector2( 168, 256 )
+
+[node name="controller" parent="cosito" instance=ExtResource( 2 )]

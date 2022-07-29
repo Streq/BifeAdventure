@@ -39,7 +39,7 @@ func on_hurtbox(hurtbox: Area2D):
 		hit_fighters.append(target)
 		var fighter = get_body()
 		var knockback_vec = get_knockback_vector()
-		
+		var pre_health = target.health
 		hurtbox.receive_flinch(knockback_vec, damage)
 		if hurtbox.receive_damage(damage):
 			emit_signal("applied_damage", damage)
@@ -59,25 +59,26 @@ func on_hurtbox(hurtbox: Area2D):
 		fighter.pause = true
 		var hitsplash_pos = fighter.global_position + (target.global_position-fighter.global_position)/2.0
 		target.hitstun(stun_time)
-		hitsplash(hitsplash_pos, int(damage), get_facing_dir(), knockback)
+		hitsplash(hitsplash_pos, int(pre_health-target.health), get_facing_dir(), knockback)
 		yield(get_tree().create_timer(stun_time, false),"timeout")
 		fighter.pause = false
 		
 		
 func hitsplash(global_pos : Vector2, amount: int, direction : Vector2, velocity: float):
-	var hit_splash : CPUParticles2D = HIT_SPLASH.instance()
-	hit_splash.emitting = true
-	hit_splash.modulate = Color.darkorange
-	hit_splash.amount = amount
-	if velocity>100.0:
-		hit_splash.direction = direction
-		hit_splash.initial_velocity = velocity
-	else:
-		hit_splash.initial_velocity = 100
-		hit_splash.spread = 180
-#	hit_splash.damping = velocity*2.5
-	get_tree().current_scene.add_child(hit_splash)
-	hit_splash.global_position = global_pos
+	if amount > 0:
+		var hit_splash : CPUParticles2D = HIT_SPLASH.instance()
+		hit_splash.emitting = true
+		hit_splash.modulate = Color.darkorange
+		hit_splash.amount = amount
+		if velocity>100.0:
+			hit_splash.direction = direction
+			hit_splash.initial_velocity = velocity
+		else:
+			hit_splash.initial_velocity = 100
+			hit_splash.spread = 180
+	#	hit_splash.damping = velocity*2.5
+		get_tree().current_scene.add_child(hit_splash)
+		hit_splash.global_position = global_pos
 
 func on_hitbox(hitbox: Area2D):
 	if clang and hitbox.clang:
