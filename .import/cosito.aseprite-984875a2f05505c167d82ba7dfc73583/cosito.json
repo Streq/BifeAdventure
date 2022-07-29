@@ -10,7 +10,7 @@
    },
    {
     "filename": "cosito 1.aseprite",
-    "frame": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "frame": { "x": 48, "y": 0, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
@@ -19,7 +19,7 @@
    },
    {
     "filename": "cosito 2.aseprite",
-    "frame": { "x": 48, "y": 0, "w": 48, "h": 48 },
+    "frame": { "x": 0, "y": 0, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
@@ -33,10 +33,19 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
     "sourceSize": { "w": 48, "h": 48 },
-    "duration": 300
+    "duration": 400
    },
    {
     "filename": "cosito 4.aseprite",
+    "frame": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 400
+   },
+   {
+    "filename": "cosito 5.aseprite",
     "frame": { "x": 144, "y": 0, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
@@ -45,22 +54,13 @@
     "duration": 300
    },
    {
-    "filename": "cosito 5.aseprite",
+    "filename": "cosito 6.aseprite",
     "frame": { "x": 0, "y": 48, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
     "sourceSize": { "w": 48, "h": 48 },
-    "duration": 1000
-   },
-   {
-    "filename": "cosito 6.aseprite",
-    "frame": { "x": 96, "y": 0, "w": 48, "h": 48 },
-    "rotated": false,
-    "trimmed": false,
-    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
-    "sourceSize": { "w": 48, "h": 48 },
-    "duration": 100
+    "duration": 300
    },
    {
     "filename": "cosito 7.aseprite",
@@ -69,11 +69,11 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
     "sourceSize": { "w": 48, "h": 48 },
-    "duration": 100
+    "duration": 1000
    },
    {
     "filename": "cosito 8.aseprite",
-    "frame": { "x": 96, "y": 48, "w": 48, "h": 48 },
+    "frame": { "x": 144, "y": 0, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
@@ -82,7 +82,7 @@
    },
    {
     "filename": "cosito 9.aseprite",
-    "frame": { "x": 144, "y": 48, "w": 48, "h": 48 },
+    "frame": { "x": 96, "y": 48, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
@@ -91,7 +91,7 @@
    },
    {
     "filename": "cosito 10.aseprite",
-    "frame": { "x": 0, "y": 96, "w": 48, "h": 48 },
+    "frame": { "x": 144, "y": 48, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
@@ -100,7 +100,7 @@
    },
    {
     "filename": "cosito 11.aseprite",
-    "frame": { "x": 48, "y": 96, "w": 48, "h": 48 },
+    "frame": { "x": 0, "y": 96, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
@@ -109,7 +109,7 @@
    },
    {
     "filename": "cosito 12.aseprite",
-    "frame": { "x": 96, "y": 96, "w": 48, "h": 48 },
+    "frame": { "x": 48, "y": 96, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
@@ -118,6 +118,24 @@
    },
    {
     "filename": "cosito 13.aseprite",
+    "frame": { "x": 96, "y": 96, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 100
+   },
+   {
+    "filename": "cosito 14.aseprite",
+    "frame": { "x": 144, "y": 96, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 100
+   },
+   {
+    "filename": "cosito 15.aseprite",
     "frame": { "x": 48, "y": 0, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
@@ -135,16 +153,17 @@
   "scale": "1",
   "frameTags": [
    { "name": "_idle", "from": 0, "to": 0, "direction": "forward", "color": "#000000ff" },
-   { "name": "walk", "from": 1, "to": 2, "direction": "forward", "color": "#000000ff" },
-   { "name": "_attack", "from": 3, "to": 5, "direction": "forward", "color": "#000000ff" },
-   { "name": "_jump", "from": 6, "to": 6, "direction": "forward", "color": "#000000ff" },
-   { "name": "_air", "from": 7, "to": 7, "direction": "forward", "color": "#000000ff" },
-   { "name": "_flinch", "from": 8, "to": 8, "direction": "forward", "color": "#000000ff" },
-   { "name": "_air_flinch", "from": 9, "to": 9, "direction": "forward", "color": "#000000ff" },
-   { "name": "_turn_around", "from": 10, "to": 10, "direction": "forward", "color": "#000000ff" },
-   { "name": "_dead", "from": 11, "to": 11, "direction": "forward", "color": "#000000ff" },
-   { "name": "_dead_air", "from": 12, "to": 12, "direction": "forward", "color": "#000000ff" },
-   { "name": "_rebound", "from": 13, "to": 13, "direction": "forward", "color": "#000000ff" }
+   { "name": "walk", "from": 1, "to": 4, "direction": "forward", "color": "#000000ff" },
+   { "name": "_attack", "from": 5, "to": 7, "direction": "forward", "color": "#000000ff" },
+   { "name": "_attack_landed", "from": 7, "to": 7, "direction": "forward", "color": "#000000ff" },
+   { "name": "_jump", "from": 8, "to": 8, "direction": "forward", "color": "#000000ff" },
+   { "name": "_air", "from": 9, "to": 9, "direction": "forward", "color": "#000000ff" },
+   { "name": "_flinch", "from": 10, "to": 10, "direction": "forward", "color": "#000000ff" },
+   { "name": "_air_flinch", "from": 11, "to": 11, "direction": "forward", "color": "#000000ff" },
+   { "name": "_turn_around", "from": 12, "to": 12, "direction": "forward", "color": "#000000ff" },
+   { "name": "_dead", "from": 13, "to": 13, "direction": "forward", "color": "#000000ff" },
+   { "name": "_dead_air", "from": 14, "to": 14, "direction": "forward", "color": "#000000ff" },
+   { "name": "_rebound", "from": 15, "to": 15, "direction": "forward", "color": "#000000ff" }
   ]
  }
 }

@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://fighting/distributed_fighter/state/triggers/on_finish.tscn" type="PackedScene" id=2]
+[ext_resource path="res://fighting/distributed_fighter/state/triggers/on_floor.tscn" type="PackedScene" id=4]
+[ext_resource path="res://fighting/distributed_fighter/fighters/cosito/state/attack_landed.gd" type="Script" id=5]
+
+[node name="attack_landed" type="Node"]
+script = ExtResource( 5 )
+animation = "attack_landed"
+_lerp = 4.0
+
+[node name="on_floor" parent="." instance=ExtResource( 4 )]
+
+[node name="on_finish" parent="." instance=ExtResource( 2 )]

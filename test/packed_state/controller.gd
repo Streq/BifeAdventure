@@ -4,13 +4,16 @@ export var flip_h : bool = false
 export var enabled : bool = true setget set_enabled
 
 func set_enabled(val):
+	if !get_parent():
+		yield(self, "ready")
+		yield(get_parent(), "ready")
 	enabled = val
 	set_physics_process(enabled)
 	if enabled:
 		#to prevent jumping at the end of a dialog
 		update_inputs()
 		get_parent().input_state.clear_updated()
-	if !enabled:
+	else:
 		get_parent().input_state.clear()
 	
 func _physics_process(delta):
