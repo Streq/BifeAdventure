@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://fighting/distributed_fighter/fighters/common_fighter/common_fighter.tscn" type="PackedScene" id=1]
 [ext_resource path="res://test/distributed_state/offensive_hitbox.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://fighting/distributed_fighter/fighters/cosito/state/attack_landed.tscn" type="PackedScene" id=6]
 [ext_resource path="res://fighting/distributed_fighter/fighters/cosito/state/attack.tscn" type="PackedScene" id=7]
 [ext_resource path="res://fighting/distributed_fighter/state/transitions/input_step.tscn" type="PackedScene" id=8]
+[ext_resource path="res://shader/red_dither.tres" type="Material" id=9]
 
 [sub_resource type="RectangleShape2D" id=16]
 extents = Vector2( 5, 4 )
@@ -17,6 +18,53 @@ extents = Vector2( 4, 4 )
 
 [sub_resource type="StreamTexture" id=20]
 load_path = "res://.import/cosito.png-92f22c2c560749dde1266e4d0166bea9.stex"
+
+[sub_resource type="StyleBoxFlat" id=25]
+bg_color = Color( 0, 1, 0, 1 )
+
+[sub_resource type="StyleBoxFlat" id=26]
+bg_color = Color( 0.341176, 0, 0, 1 )
+
+[sub_resource type="Animation" id=27]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:material")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ null ]
+}
+
+[sub_resource type="Animation" id=28]
+resource_name = "damage"
+length = 0.0833333
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:material")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.0833333 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 9 ), null ]
+}
+
+[sub_resource type="Animation" id=38]
+length = 0.001
+
+[sub_resource type="Animation" id=39]
+resource_name = "hitstun"
+length = 0.133333
+loop = true
+step = 0.0333333
 
 [sub_resource type="Animation" id=14]
 resource_name = "RESET"
@@ -348,6 +396,18 @@ texture = SubResource( 20 )
 hframes = 4
 vframes = 3
 frame = 7
+
+[node name="healthbar" parent="." index="3"]
+custom_styles/fg = SubResource( 25 )
+custom_styles/bg = SubResource( 26 )
+
+[node name="damage_animation" parent="." index="4"]
+anims/RESET = SubResource( 27 )
+anims/damage = SubResource( 28 )
+
+[node name="hitstun_animation" parent="." index="5"]
+anims/RESET = SubResource( 38 )
+anims/hitstun = SubResource( 39 )
 
 [node name="state_animation" parent="." index="7"]
 anims/RESET = SubResource( 14 )

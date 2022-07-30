@@ -9,6 +9,8 @@ var strategy = STATE.WALK
 onready var attack_area = $attack_area
 onready var floor_detect = $floor_detect
 onready var wall_detect = $wall_detect
+onready var attack_cooldown = $attack_cooldown
+
 var attacked = false
 var dir
 func _ready():
@@ -32,7 +34,7 @@ func update_strategy(state, delta):
 		STATE.WALK:
 			var targets = attack_area.get_overlapping_bodies()
 			for target in targets:
-				if target.team != owner.team:
+				if target.team != owner.team and attack_cooldown.is_stopped():
 					strategy = STATE.ATTACK
 			if (floors == 0 or walls != 0) and !(state.name in ["air","rebound","flinch","air_flinch"]):
 				dir = -dir
@@ -43,14 +45,18 @@ func update_strategy(state, delta):
 		STATE.ATTACK:
 			if !attacked:
 				attacked = state.name == "attack"
-			if attacked and !(state.name in ["attack", "attack_landed"]):
+			if attacked and !(state.name in ["attack"]):
 				strategy = STATE.WALK
+				attack_cooldown.start()
 	
 	
 func update_inputs(input, state, delta):
 	match strategy:
 		STATE.WALK:
-			input.dir.x = dir
+			if attack_cooldown.is_stopped():
+				input.dir.x = dir
+			else:
+				input.dir.x = 0.0
 			input.A.update(false)
 			input.B.update(false)
 			input.C.update(false)

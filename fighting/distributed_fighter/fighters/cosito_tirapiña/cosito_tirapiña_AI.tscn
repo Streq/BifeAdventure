@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://fighting/distributed_fighter/fighters/cosito/AI/cosito_AI_controller.gd" type="Script" id=1]
-[ext_resource path="res://fighting/distributed_fighter/fighters/cosito/cosito.tscn" type="PackedScene" id=2]
+[ext_resource path="res://fighting/distributed_fighter/fighters/cosito_tirapiña/AI/cosito_tirapiña_AI_controller.gd" type="Script" id=1]
+[ext_resource path="res://fighting/distributed_fighter/fighters/cosito_tirapiña/cosito_tirapiña.tscn" type="PackedScene" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 33.5, 4 )
@@ -12,16 +12,9 @@ extents = Vector2( 3.5, 0.5 )
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 0.5, 4 )
 
-[node name="cosito_AI" instance=ExtResource( 2 )]
+[node name="cosito_tirapiña" instance=ExtResource( 2 )]
 
-[node name="hitbox" parent="pivot/hitbox/attack" index="0"]
-knockback = 125.0
-damage = 10.0
-
-[node name="Sprite" parent="pivot" index="1"]
-frame = 5
-
-[node name="controller" type="Node2D" parent="pivot" index="2"]
+[node name="controller" type="Node2D" parent="pivot" index="3"]
 script = ExtResource( 1 )
 
 [node name="attack_area" type="Area2D" parent="pivot/controller" index="0"]
@@ -48,3 +41,9 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="pivot/controller/wall_detect" index="0"]
 position = Vector2( 4.5, -4 )
 shape = SubResource( 3 )
+
+[node name="attack_cooldown" type="Timer" parent="pivot/controller" index="3"]
+process_mode = 0
+one_shot = true
+
+[editable path="state_machine/air"]

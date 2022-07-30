@@ -23,7 +23,7 @@ func exit():
 	var fighter = state.root
 	fighter.disconnect("terrain_collision", self, "terrain_collision")
 
-
+const EPSILON = 0.002
 func terrain_collision(velocity : Vector2, collision : KinematicCollision2D):
 	var state = get_parent()
 	var fighter = state.root
@@ -33,7 +33,7 @@ func terrain_collision(velocity : Vector2, collision : KinematicCollision2D):
 		if normal.dot(velocity)<0:
 			var bounced = velocity.bounce(normal)
 			fighter.velocity = bounced*bounce
-			if fighter.velocity.x:
+			if abs(fighter.velocity.x)>EPSILON:
 				fighter.facing_right = fighter.velocity.x<0.0
 			
 			#splash particles

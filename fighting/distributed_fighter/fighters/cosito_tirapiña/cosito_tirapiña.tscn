@@ -1,12 +1,11 @@
-[gd_scene load_steps=51 format=2]
+[gd_scene load_steps=52 format=2]
 
 [ext_resource path="res://test/packed_state/input_state.gd" type="Script" id=1]
 [ext_resource path="res://HUD/healthbar.gd" type="Script" id=2]
 [ext_resource path="res://test/distributed_state/hitbox/hitbox_group.tscn" type="PackedScene" id=3]
 [ext_resource path="res://test/distributed_state/hurtbox.tscn" type="PackedScene" id=4]
 [ext_resource path="res://fighting/distributed_fighter/mixin/step_forward.tscn" type="PackedScene" id=5]
-[ext_resource path="res://fighting/distributed_fighter/fighters/cosito/state/attack_landed.tscn" type="PackedScene" id=6]
-[ext_resource path="res://fighting/distributed_fighter/fighters/cosito/state/attack.tscn" type="PackedScene" id=7]
+[ext_resource path="res://fighting/distributed_fighter/state/passives/stay_still.tscn" type="PackedScene" id=7]
 [ext_resource path="res://fighting/distributed_fighter/state/transitions/input_step.tscn" type="PackedScene" id=8]
 [ext_resource path="res://shader/red_dither.tres" type="Material" id=9]
 [ext_resource path="res://asset/font/proggy_clean.tres" type="DynamicFont" id=10]
@@ -28,11 +27,13 @@
 [ext_resource path="res://fighting/distributed_fighter/state/air_no_wall.tscn" type="PackedScene" id=26]
 [ext_resource path="res://fighting/distributed_fighter/state/triggers/on_finish.tscn" type="PackedScene" id=27]
 [ext_resource path="res://fighting/distributed_fighter/state/triggers/change_state_on_floor.tscn" type="PackedScene" id=28]
+[ext_resource path="res://fighting/distributed_fighter/fighters/cosito_tirapiña/state/attack.gd" type="Script" id=29]
+[ext_resource path="res://fighting/distributed_fighter/fighters/cosito_tirapiña/projectile/projectile.tscn" type="PackedScene" id=30]
 
 [sub_resource type="RectangleShape2D" id=17]
 extents = Vector2( 4, 4 )
 
-[sub_resource type="StreamTexture" id=40]
+[sub_resource type="StreamTexture" id=42]
 load_path = "res://.import/cosito_tirapiña.png-85fbfdfb39a67d0b8aa2dce79fa15fdd.stex"
 
 [sub_resource type="StyleBoxFlat" id=25]
@@ -97,6 +98,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [ true ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
 
 [sub_resource type="Animation" id=2]
 length = 0.1
@@ -129,18 +142,44 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=4]
-length = 0.6
-tracks/0/type = "value"
-tracks/0/path = NodePath("pivot/Sprite:frame")
+length = 0.8
+tracks/0/type = "method"
+tracks/0/path = NodePath("state_machine/attack")
 tracks/0/interp = 1
-tracks/0/loop_wrap = false
+tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5 ),
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "throw"
+} ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.6 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 0.0, 3.0 ]
+"values": [ Color( 0.85098, 0.627451, 0.4, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("pivot/Sprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = false
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 0.0, 3.0, 0.0 ]
 }
 
 [sub_resource type="Animation" id=5]
@@ -302,7 +341,7 @@ script = ExtResource( 11 )
 max_health = 10.0
 health = 10.0
 gravity = 300.0
-walk_speed = 40.0
+walk_speed = 30.0
 walk_lerp = 30.0
 run_speed = 60.0
 air_walk_speed = 0.0
@@ -390,11 +429,16 @@ jump_config = [ [ 0.9, 1.0 ], [ 0.0, 1.0 ] ]
 [node name="dead_air" parent="state_machine" instance=ExtResource( 24 )]
 animation = "dead_air"
 
-[node name="attack" parent="state_machine" instance=ExtResource( 7 )]
+[node name="attack" type="Node" parent="state_machine"]
+script = ExtResource( 29 )
 animation = "attack"
-jumping = false
+projectile = ExtResource( 30 )
+shoot_point_path = NodePath("../../pivot/shoot_point")
 
-[node name="attack_landed" parent="state_machine" instance=ExtResource( 6 )]
+[node name="stay_still" parent="state_machine/attack" instance=ExtResource( 7 )]
+friction = 4.0
+
+[node name="on_finish" parent="state_machine/attack" instance=ExtResource( 27 )]
 
 [node name="pivot" type="Node2D" parent="."]
 use_parent_material = true
@@ -413,13 +457,15 @@ shape = SubResource( 17 )
 
 [node name="Sprite" type="Sprite" parent="pivot"]
 use_parent_material = true
-texture = SubResource( 40 )
+texture = SubResource( 42 )
 hframes = 3
 vframes = 3
-frame = 2
 __meta__ = {
 "_editor_description_": "YXNlcHJpdGVfd2l6YXJkX2NvbmZpZwpwbGF5ZXJ8PXN0YXRlX2FuaW1hdGlvbgpzb3VyY2V8PXJlczovL2Fzc2V0L2FzZXByaXRlL2Nvc2l0b190aXJhcGnDsWEuYXNlcHJpdGUKbGF5ZXJ8PQpvcF9leHB8PUZhbHNlCm9fZm9sZGVyfD1yZXM6Ly9hc3NldC90ZXh0dXJlL2ZpZ2h0ZXJfc2hlZXQKb19uYW1lfD0Kb25seV92aXNpYmxlfD1UcnVlCm9fZXhfcHw9Cg=="
 }
+
+[node name="shoot_point" type="Position2D" parent="pivot"]
+position = Vector2( 8, 4 )
 
 [node name="input_state" type="Node" parent="."]
 script = ExtResource( 1 )

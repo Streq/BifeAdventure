@@ -6,6 +6,7 @@ export var force_release_mode := false
 
 var DEBUG setget,is_debug_build
 
+
 func is_debug_build():
 	return !force_release_mode and OS.is_debug_build()
 

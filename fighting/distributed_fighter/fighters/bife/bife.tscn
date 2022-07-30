@@ -1147,4 +1147,5 @@ shape = SubResource( 27 )
 
 [node name="step_forward" parent="." index="10" instance=ExtResource( 5 )]
 
-[connection signal="applied_knockback" from="pivot/hitbox/d_air/box0" to="pivot/hitbox/d_air/box0/d_air_bounce" method="trigger"]
+[connection signal="applied_knockback" from="pivot/hitbox/d_air/box0" to="pivot/hitbox/d_air/box0/d_air_bounce" method="trigger_one_arg"]
+[connection signal="lost_rebound" from="pivot/hitbox/d_air/box0" to="pivot/hitbox/d_air/box0/d_air_bounce" method="trigger"]

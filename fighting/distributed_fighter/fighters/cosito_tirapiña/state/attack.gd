@@ -1,6 +1,9 @@
 extends FighterState
 
 export var projectile : PackedScene
+export var speed := 75.0
+export var shoot_point_path : NodePath
+onready var shoot_point : Node2D = get_node(shoot_point_path)
 
 func _enter(params):
 	pass
@@ -10,7 +13,9 @@ func _physics_update(delta):
 func throw():
 	var inst = projectile.instance()
 	
-	inst.dir = Vector2(root.get_facing_dir(), 0.0)
 	get_tree().current_scene.add_child(inst)
-	inst.global_position = root.global_position
-	
+	var dir  = Vector2(root.get_facing_dir(), 0.0).rotated(root.global_rotation)
+	inst.facing_right = root.facing_right
+	inst.velocity = dir*speed
+	inst.global_position = shoot_point.global_position
+	inst.team = root.team

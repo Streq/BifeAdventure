@@ -4,8 +4,14 @@ tool
 
 signal applied_damage(damage)
 signal applied_knockback(knockback)
+signal lost_rebound()
+signal won_rebound()
+
 
 export var knockback := 0.0
+
+#var global_knockback setget , get_global_knockback
+
 export var damage := 0.0
 export var can_hit_same_fighter_more_than_once := false
 export var SPLASH : PackedScene
@@ -100,6 +106,9 @@ func on_hitbox(hitbox: Area2D):
 			fighter.pause = false
 			if damage < target_damage + 5.0:
 				get_body().rebound(int(max(knockback, hitbox.knockback)*0.075), hitbox.get_knockback_vector()*0.5)
+				emit_signal("lost_rebound")
+			else:
+				emit_signal("won_rebound")
 			
 			
 func set_direction(val : Vector2):
@@ -130,9 +139,9 @@ func should_affect(target):
 		and !ignore_this_frame.has(target)
 	)
 func get_facing_dir():
-	return Vector2(get_body().get_facing_dir()*direction.x, direction.y)
+	return Vector2(get_body().get_facing_dir()*direction.x, direction.y).rotated(get_body().global_rotation)
 func get_knockback_vector():
-	return Vector2(get_body().get_facing_dir()*direction.x, direction.y)*knockback
+	return get_facing_dir()*knockback
 
 func _on_area_entered(area:Hitbox):
 	area._on_hitbox(self)

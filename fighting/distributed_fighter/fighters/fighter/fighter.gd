@@ -55,9 +55,9 @@ var dead = false
 
 func _ready():
 	state_animation.playback_process_mode = AnimationPlayer.ANIMATION_PROCESS_MANUAL
-	state.initialize()
 	state_animation.play("RESET")
 	state_animation.advance(0)
+	state.initialize()
 	connect("terrain_collision", self, "collided")
 	self.health = health
 	self.facing_right = facing_right
@@ -86,7 +86,10 @@ func _physics_process(delta):
 	var pre_collision_velocity = velocity
 	velocity.y += gravity * delta
 	velocity = move_and_slide(velocity, Vector2.UP)
-	for i in get_slide_count():
+	var slides = get_slide_count()
+#	for i in slides:
+	var i = 0
+	if slides:
 		var collision = get_slide_collision(i)
 		emit_signal("terrain_collision", pre_collision_velocity, collision)
 		#bounce behavior for kinematicbodies motherfucker
@@ -132,9 +135,11 @@ func receive_knockback(knockback: Vector2):
 	if power > knockback_resistance:
 		velocity = knockback*(1.0 - knockback_resistance/power)
 
+const EPSILON = 0.002
+
 func flinch(knockback: Vector2, damage: float):
 	var power = max(0,knockback.length()*knockback_lightness_multiplier - knockback_resistance)
-	if knockback.x:
+	if abs(knockback.x)>EPSILON:
 		set_facing_right(!(knockback.x>0.0))
 	flinch_frames = int(power*flinch_multiplier)
 	state._change_state("flinch", null)
