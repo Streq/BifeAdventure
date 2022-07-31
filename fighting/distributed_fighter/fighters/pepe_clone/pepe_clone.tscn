@@ -29,7 +29,7 @@ extents = Vector2( 5, 6.5 )
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 5.25, 2 )
 
-[sub_resource type="StreamTexture" id=23]
+[sub_resource type="StreamTexture" id=31]
 load_path = "res://.import/pepe_clone.png-254449d519e4771fcb97199db94763f5.stex"
 
 [sub_resource type="Animation" id=24]
@@ -88,29 +88,30 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=4]
+length = 0.9
 tracks/0/type = "value"
-tracks/0/path = NodePath("pivot/Sprite:frame")
+tracks/0/path = NodePath("pivot/hitbox/n_air:active")
 tracks/0/interp = 1
-tracks/0/loop_wrap = false
+tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0, 0.4 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 10.0, 9.0 ]
+"values": [ false, true ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("pivot/hitbox/n_air:active")
+tracks/1/path = NodePath("pivot/Sprite:frame")
 tracks/1/interp = 1
-tracks/1/loop_wrap = true
+tracks/1/loop_wrap = false
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0, 0.4 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ false, true ]
+"values": [ 10.0, 9.0 ]
 }
 
 [sub_resource type="Animation" id=5]
@@ -193,32 +194,32 @@ tracks/0/keys = {
 [sub_resource type="Animation" id=10]
 length = 0.7
 tracks/0/type = "value"
-tracks/0/path = NodePath("pivot/Sprite:frame")
+tracks/0/path = NodePath("pivot/hitbox/jab:active")
 tracks/0/interp = 1
-tracks/0/loop_wrap = false
+tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0, 0.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 15.0, 13.0 ]
+"values": [ false, true ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("pivot/hitbox/jab:active")
+tracks/1/path = NodePath("pivot/Sprite:frame")
 tracks/1/interp = 1
-tracks/1/loop_wrap = true
+tracks/1/loop_wrap = false
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0, 0.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ false, true ]
+"values": [ 15.0, 13.0 ]
 }
 
 [sub_resource type="Animation" id=11]
-length = 0.3
+length = 0.7
 tracks/0/type = "value"
 tracks/0/path = NodePath("pivot/Sprite:frame")
 tracks/0/interp = 1
@@ -226,7 +227,7 @@ tracks/0/loop_wrap = false
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1 ),
+"times": PoolRealArray( 0, 0.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ 15.0, 0.0 ]
@@ -340,31 +341,31 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=19]
 length = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath("pivot/Sprite:frame")
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
 tracks/0/interp = 1
-tracks/0/loop_wrap = false
+tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.075 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ 23.0, 12.0 ]
-}
-tracks/1/type = "method"
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
 "times": PoolRealArray( 0.1 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
 "method": "turn_around"
 } ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("pivot/Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.075 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 12.0, 23.0 ]
 }
 
 [sub_resource type="Animation" id=20]
@@ -631,7 +632,7 @@ position = Vector2( 8.75, 0 )
 shape = SubResource( 2 )
 
 [node name="Sprite" parent="pivot" index="1" instance=ExtResource( 16 )]
-texture = SubResource( 23 )
+texture = SubResource( 31 )
 hframes = 5
 vframes = 5
 frame = 23
