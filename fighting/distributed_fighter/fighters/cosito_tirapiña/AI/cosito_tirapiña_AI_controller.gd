@@ -47,6 +47,7 @@ func update_strategy(state, delta):
 				attacked = state.name == "attack"
 			if attacked and !(state.name in ["attack"]):
 				strategy = STATE.WALK
+				attacked = false
 				attack_cooldown.start()
 	
 	
