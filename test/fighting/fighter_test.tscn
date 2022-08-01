@@ -34,18 +34,22 @@ tile_data = PoolIntArray( 589825, 2, 1, 589826, 2, 2, 589827, 2, 3, 655375, 2, 1
 
 [node name="fighter2" parent="." instance=ExtResource( 3 )]
 position = Vector2( 104, 216 )
+knockback_resistance = 0.0
 
 [node name="fighter3" parent="." instance=ExtResource( 3 )]
 position = Vector2( 48, 168 )
+knockback_resistance = 0.0
 
 [node name="fighter4" parent="." instance=ExtResource( 3 )]
 position = Vector2( 176, 88 )
 
 [node name="fighter5" parent="." instance=ExtResource( 3 )]
 position = Vector2( 240, 232 )
+knockback_resistance = 0.0
 
 [node name="fighter6" parent="." instance=ExtResource( 3 )]
 position = Vector2( 32, 56 )
+knockback_resistance = 0.0
 
 [node name="bife" parent="." instance=ExtResource( 1 )]
 position = Vector2( 40, 264 )

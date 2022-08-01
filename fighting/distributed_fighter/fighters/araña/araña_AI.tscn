@@ -6,19 +6,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6, 43.5 )
 
-[node name="fighter" instance=ExtResource( 1 )]
-
-[node name="right_hitbox" parent="pivot/hitbox/bite" index="0"]
-visible = false
-monitoring = false
-monitorable = false
-active = false
-
-[node name="left_hitbox" parent="pivot/hitbox/bite" index="1"]
-visible = false
-monitoring = false
-monitorable = false
-active = false
+[node name="araña_AI" instance=ExtResource( 1 )]
 
 [node name="controller" type="Node2D" parent="pivot" index="2"]
 script = ExtResource( 2 )

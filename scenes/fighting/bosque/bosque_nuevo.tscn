@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scenes/fighting/bosque/background.tscn" type="PackedScene" id=1]
 [ext_resource path="res://fighting/distributed_fighter/fighters/cosito/cosito_AI.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://terrain/pared.tscn" type="PackedScene" id=4]
 [ext_resource path="res://fighting/distributed_fighter/fighters/bife/bife.tscn" type="PackedScene" id=5]
 [ext_resource path="res://input/controller.tscn" type="PackedScene" id=6]
+[ext_resource path="res://fighting/distributed_fighter/fighters/araña/araña_AI.tscn" type="PackedScene" id=7]
 
 [node name="fighting_level" type="Node2D"]
 position = Vector2( 0, 149 )
@@ -75,5 +76,8 @@ position = Vector2( 245, 54 )
 
 [node name="cosito_tirapiña2" parent="." instance=ExtResource( 3 )]
 position = Vector2( -137, 166 )
+
+[node name="araña_AI" parent="." instance=ExtResource( 7 )]
+position = Vector2( 489, 112 )
 
 [editable path="background"]

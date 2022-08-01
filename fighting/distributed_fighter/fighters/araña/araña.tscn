@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://HUD/healthbar.gd" type="Script" id=1]
 [ext_resource path="res://shader/red_dither.tres" type="Material" id=2]
@@ -21,6 +21,7 @@
 [ext_resource path="res://fighting/distributed_fighter/state/triggers/on_finish.tscn" type="PackedScene" id=19]
 [ext_resource path="res://test/distributed_state/finish_on_flinch_frames_reach_zero.gd" type="Script" id=20]
 [ext_resource path="res://fighting/distributed_fighter/fighters/araña/state/rebound.gd" type="Script" id=21]
+[ext_resource path="res://fighting/distributed_fighter/fighters/araña/string.gd" type="Script" id=22]
 
 [sub_resource type="RectangleShape2D" id=55]
 extents = Vector2( 2, 3 )
@@ -28,7 +29,7 @@ extents = Vector2( 2, 3 )
 [sub_resource type="RectangleShape2D" id=59]
 extents = Vector2( 4, 5.5 )
 
-[sub_resource type="StreamTexture" id=57]
+[sub_resource type="StreamTexture" id=62]
 load_path = "res://.import/spider.png-413bfbc477f5b29e439a525dbe72921d.stex"
 
 [sub_resource type="StyleBoxFlat" id=25]
@@ -79,7 +80,8 @@ loop = true
 step = 0.0333333
 
 [sub_resource type="Animation" id=54]
-length = 0.001
+length = 0.1
+loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("pivot/hitbox/bite:active")
 tracks/0/interp = 1
@@ -87,6 +89,42 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("pivot/hitbox/main:active")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("pivot/Sprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = false
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("string:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
@@ -99,24 +137,74 @@ resource_name = "air"
 [sub_resource type="Animation" id=58]
 length = 0.1
 tracks/0/type = "value"
-tracks/0/path = NodePath("pivot/Sprite:frame")
+tracks/0/path = NodePath("pivot/hitbox/main:active")
 tracks/0/interp = 1
-tracks/0/loop_wrap = false
+tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 6.0 ]
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("pivot/Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 7.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("string:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
 }
 
 [sub_resource type="Animation" id=44]
 resource_name = "flinch"
 length = 0.1
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("string:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
 [sub_resource type="Animation" id=45]
 resource_name = "flinch_air"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("string:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
 [sub_resource type="Animation" id=46]
 resource_name = "hang"
@@ -146,10 +234,22 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 0.0, 1.0 ]
+"values": [ 5.0, 6.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("string:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
 }
 
-[sub_resource type="Animation" id=52]
+[sub_resource type="Animation" id=61]
 length = 0.2
 loop = true
 tracks/0/type = "value"
@@ -162,7 +262,35 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 2.0, 3.0 ]
+"values": [ 1.0, 2.0 ]
+}
+
+[sub_resource type="Animation" id=52]
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("pivot/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 3.0, 4.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("string:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
 }
 
 [sub_resource type="Animation" id=53]
@@ -180,21 +308,17 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 0.0 ]
 }
-
-[sub_resource type="Animation" id=48]
-length = 0.2
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("pivot/Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = false
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1 ),
-"transitions": PoolRealArray( 1, 1 ),
+tracks/1/type = "value"
+tracks/1/path = NodePath("string:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 4.0, 5.0 ]
+"values": [ true ]
 }
 
 [sub_resource type="Animation" id=49]
@@ -203,7 +327,10 @@ resource_name = "walk"
 [sub_resource type="RectangleShape2D" id=56]
 extents = Vector2( 4, 5.5 )
 
-[node name="fighter" type="KinematicBody2D"]
+[sub_resource type="RectangleShape2D" id=63]
+extents = Vector2( 4, 1 )
+
+[node name="araña" type="KinematicBody2D"]
 collision_mask = 2
 script = ExtResource( 4 )
 max_health = 1.0
@@ -212,6 +339,17 @@ gravity = 0.0
 walk_speed = 40.0
 run_speed = 150.0
 jump_speed = 400.0
+knockback_resistance = 1.536
+knockback_lightness_multiplier = 0.0
+
+[node name="string" type="Node2D" parent="."]
+visible = false
+script = ExtResource( 22 )
+terrain_layer = 2
+
+[node name="Line2D" type="Line2D" parent="string"]
+width = 1.0
+default_color = Color( 1, 1, 1, 1 )
 
 [node name="state_machine" type="Node" parent="."]
 script = ExtResource( 6 )
@@ -241,6 +379,7 @@ end_state = "hang_idle"
 
 [node name="finish_on_flinch_frames_reach_zero" type="Node" parent="state_machine/flinch"]
 script = ExtResource( 20 )
+finish_state = "hang_idle"
 
 [node name="hang_crawl_down" type="Node" parent="state_machine"]
 script = ExtResource( 12 )
@@ -294,6 +433,10 @@ script = ExtResource( 7 )
 [node name="bite" parent="pivot/hitbox" instance=ExtResource( 15 )]
 
 [node name="right_hitbox" parent="pivot/hitbox/bite" instance=ExtResource( 14 )]
+visible = false
+monitoring = false
+monitorable = false
+active = false
 knockback = 100.0
 damage = 10.0
 direction = Vector2( 0.866025, -0.5 )
@@ -304,7 +447,11 @@ position = Vector2( 2, 3 )
 shape = SubResource( 55 )
 
 [node name="left_hitbox" parent="pivot/hitbox/bite" instance=ExtResource( 14 )]
+visible = false
 position = Vector2( -4, 0 )
+monitoring = false
+monitorable = false
+active = false
 knockback = 100.0
 damage = 10.0
 direction = Vector2( -0.866025, -0.5 )
@@ -315,9 +462,9 @@ position = Vector2( 2, 3 )
 shape = SubResource( 55 )
 
 [node name="main" parent="pivot/hitbox" instance=ExtResource( 15 )]
+active = true
 
 [node name="hurtbox" parent="pivot/hitbox/main" instance=ExtResource( 11 )]
-knockback_enabled = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="pivot/hitbox/main/hurtbox"]
 position = Vector2( 0, -2.5 )
@@ -325,10 +472,9 @@ shape = SubResource( 59 )
 
 [node name="Sprite" type="Sprite" parent="pivot"]
 use_parent_material = true
-texture = SubResource( 57 )
+texture = SubResource( 62 )
 hframes = 3
 vframes = 3
-frame = 6
 __meta__ = {
 "_editor_description_": "YXNlcHJpdGVfd2l6YXJkX2NvbmZpZwpwbGF5ZXJ8PXN0YXRlX2FuaW1hdGlvbgpzb3VyY2V8PXJlczovL2Fzc2V0L2FzZXByaXRlL3NwaWRlci5hc2Vwcml0ZQpsYXllcnw9Cm9wX2V4cHw9RmFsc2UKb19mb2xkZXJ8PXJlczovL2Fzc2V0L3RleHR1cmUvZmlnaHRlcl9zaGVldApvX25hbWV8PQpvbmx5X3Zpc2libGV8PUZhbHNlCm9fZXhfcHw9Cg=="
 }
@@ -379,9 +525,9 @@ anims/flinch = SubResource( 44 )
 anims/flinch_air = SubResource( 45 )
 anims/hang = SubResource( 46 )
 anims/hang_crawl_down = SubResource( 51 )
+anims/hang_crawl_down2 = SubResource( 61 )
 anims/hang_crawl_up = SubResource( 52 )
 anims/hang_idle = SubResource( 53 )
-anims/piernasabajo = SubResource( 48 )
 anims/walk = SubResource( 49 )
 
 [node name="state_buffer" parent="." instance=ExtResource( 8 )]
@@ -389,6 +535,14 @@ anims/walk = SubResource( 49 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -2.5 )
 shape = SubResource( 56 )
+
+[node name="ass_platform" type="KinematicBody2D" parent="."]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ass_platform"]
+position = Vector2( 0, -7 )
+shape = SubResource( 63 )
+one_way_collision = true
 
 [connection signal="health_changed" from="." to="healthbar" method="_on_health_changed"]
 [connection signal="physics_process" from="state_machine" to="state_buffer" method="_physics_update"]

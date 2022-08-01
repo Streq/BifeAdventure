@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=2]
+[gd_scene load_steps=58 format=2]
 
 [ext_resource path="res://asset/texture/terrain_simple.png" type="Texture" id=1]
 [ext_resource path="res://asset/texture/ground_tilemap.png" type="Texture" id=2]
@@ -100,9 +100,6 @@ points = PoolVector2Array( 16, 8, 0, 8, 0, 0, 16, 0 )
 [sub_resource type="ConvexPolygonShape2D" id=39]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 8 )
 
-[sub_resource type="ConvexPolygonShape2D" id=40]
-points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
-
 [sub_resource type="ConvexPolygonShape2D" id=41]
 points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 
@@ -156,6 +153,39 @@ points = PoolVector2Array( 16, 16, 0, 16, 16, 8 )
 
 [sub_resource type="ConvexPolygonShape2D" id=58]
 points = PoolVector2Array( 16, 8, 0, 16, 0, 8, 16, 0 )
+
+[sub_resource type="ConvexPolygonShape2D" id=59]
+points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
+
+[sub_resource type="GDScript" id=60]
+script/source = "extends TileSet
+
+export var flip_these := PoolVector2Array([
+	Vector2(6,0),
+	Vector2(7,0),
+	Vector2(8,0),
+	Vector2(9,0),
+	Vector2(7,2),
+	Vector2(6,3),
+	Vector2(7,3),
+	Vector2(1,4),
+	Vector2(2,4),
+	Vector2(3,4),
+	Vector2(4,4),
+	Vector2(6,4)
+])
+
+
+func _init():
+	var branches = find_tile_by_name(\"branches\")
+	for flip in flip_these:
+		var shape = RectangleShape2D.new()
+		var transform = Transform2D.FLIP_Y
+		transform = transform.translated(Vector2(8,-8))
+		tile_add_shape(branches, shape, transform , true, flip)
+
+	pass
+"
 
 [sub_resource type="TileSet" id=33]
 0/name = "wooden_wall"
@@ -488,31 +518,25 @@ points = PoolVector2Array( 16, 8, 0, 16, 0, 8, 16, 0 )
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 }, {
 "autotile_coord": Vector2( 6, 0 ),
-"one_way": false,
+"one_way": true,
 "one_way_margin": 1.0,
 "shape": SubResource( 38 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 }, {
 "autotile_coord": Vector2( 7, 0 ),
-"one_way": false,
+"one_way": true,
 "one_way_margin": 1.0,
 "shape": SubResource( 39 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 }, {
-"autotile_coord": Vector2( 8, 0 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 40 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
-}, {
 "autotile_coord": Vector2( 9, 0 ),
-"one_way": false,
+"one_way": true,
 "one_way_margin": 1.0,
 "shape": SubResource( 41 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 }, {
 "autotile_coord": Vector2( 7, 2 ),
-"one_way": false,
+"one_way": true,
 "one_way_margin": 1.0,
 "shape": SubResource( 42 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
@@ -524,7 +548,7 @@ points = PoolVector2Array( 16, 8, 0, 16, 0, 8, 16, 0 )
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 }, {
 "autotile_coord": Vector2( 7, 3 ),
-"one_way": false,
+"one_way": true,
 "one_way_margin": 1.0,
 "shape": SubResource( 44 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
@@ -566,25 +590,25 @@ points = PoolVector2Array( 16, 8, 0, 16, 0, 8, 16, 0 )
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 }, {
 "autotile_coord": Vector2( 4, 4 ),
-"one_way": false,
+"one_way": true,
 "one_way_margin": 1.0,
 "shape": SubResource( 51 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 }, {
 "autotile_coord": Vector2( 3, 4 ),
-"one_way": false,
+"one_way": true,
 "one_way_margin": 1.0,
 "shape": SubResource( 52 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 }, {
 "autotile_coord": Vector2( 2, 4 ),
-"one_way": false,
+"one_way": true,
 "one_way_margin": 1.0,
 "shape": SubResource( 53 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 }, {
 "autotile_coord": Vector2( 1, 4 ),
-"one_way": false,
+"one_way": true,
 "one_way_margin": 1.0,
 "shape": SubResource( 54 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
@@ -608,12 +632,20 @@ points = PoolVector2Array( 16, 8, 0, 16, 0, 8, 16, 0 )
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 }, {
 "autotile_coord": Vector2( 6, 3 ),
-"one_way": false,
+"one_way": true,
 "one_way_margin": 1.0,
 "shape": SubResource( 58 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 8, 0 ),
+"one_way": true,
+"one_way_margin": 1.0,
+"shape": SubResource( 59 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 6/z_index = 0
+script = SubResource( 60 )
+flip_these = PoolVector2Array( 6, 0, 7, 0, 8, 0, 9, 0, 7, 2, 6, 3, 7, 3, 1, 4, 2, 4, 3, 4, 4, 4, 6, 4 )
 
 [node name="pared" type="TileMap"]
 tile_set = SubResource( 33 )

@@ -154,7 +154,8 @@ func receive_damage(damage : float):
 		die()
 		
 func rebound(frames: int, knockback: Vector2):
-	velocity = knockback
+	receive_knockback(knockback)
+#	velocity = knockback
 	state._change_state("rebound", [frames])
 	
 func hitstun(time:float):
