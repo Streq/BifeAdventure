@@ -31,4 +31,7 @@ func _physics_process(delta):
 			input.dir.y = 0.0
 		STATE.ATTACK:
 			input.dir.y = 1.0
-	
+
+func _on_capped():
+	if state == STATE.RETREAT:
+		state = STATE.IDLE

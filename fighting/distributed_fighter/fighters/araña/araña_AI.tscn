@@ -17,3 +17,5 @@ collision_layer = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="pivot/controller/enemy_detect" index="0"]
 position = Vector2( 0, 43.5 )
 shape = SubResource( 1 )
+
+[connection signal="capped" from="state_machine/hang_crawl_up" to="pivot/controller" method="_on_capped"]

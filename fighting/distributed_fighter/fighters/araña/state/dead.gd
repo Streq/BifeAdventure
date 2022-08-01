@@ -12,11 +12,11 @@ func _ready():
 func _enter(params):
 	timer.connect("timeout", root, "queue_free")
 	timer.start()
-	root.gravity = 100.0
+	root.gravity = 150.0
 	root.collision_layer = 0
 	root.collision_mask = 0
 	root.velocity = Vector2(-root.get_facing_dir()*50.0, -50.0)
-	
+	root.z_index = 5
 # Clean up the state. Reinitialize values like a timer
 func _exit():
 	return

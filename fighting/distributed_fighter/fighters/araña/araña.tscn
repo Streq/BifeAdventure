@@ -346,6 +346,7 @@ knockback_lightness_multiplier = 0.0
 visible = false
 script = ExtResource( 22 )
 terrain_layer = 2
+ignore_paths = [ NodePath("../ass_platform") ]
 
 [node name="Line2D" type="Line2D" parent="string"]
 width = 1.0

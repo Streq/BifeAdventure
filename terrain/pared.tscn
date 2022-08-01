@@ -177,13 +177,16 @@ export var flip_these := PoolVector2Array([
 
 
 func _init():
+#	add_flipped_colliders()
+	pass
+func add_flipped_colliders():
 	var branches = find_tile_by_name(\"branches\")
 	for flip in flip_these:
 		var shape = RectangleShape2D.new()
+		shape.extents = Vector2(8,4)
 		var transform = Transform2D.FLIP_Y
-		transform = transform.translated(Vector2(8,-8))
+		transform = transform.translated(Vector2(8,-4))
 		tile_add_shape(branches, shape, transform , true, flip)
-
 	pass
 "
 
