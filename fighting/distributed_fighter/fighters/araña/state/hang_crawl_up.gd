@@ -1,7 +1,7 @@
 extends FighterState
 
 signal capped
-export var shortest_string_length := 16.0
+export var shortest_string_length := 24.0
 
 func _physics_update(delta):
 	root.velocity.y = -50.0
