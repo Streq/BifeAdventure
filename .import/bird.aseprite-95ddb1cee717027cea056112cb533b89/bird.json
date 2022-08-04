@@ -1,7 +1,7 @@
 { "frames": [
    {
     "filename": "bird 0.aseprite",
-    "frame": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "frame": { "x": 0, "y": 96, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
@@ -10,7 +10,7 @@
    },
    {
     "filename": "bird 1.aseprite",
-    "frame": { "x": 48, "y": 0, "w": 48, "h": 48 },
+    "frame": { "x": 144, "y": 144, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
@@ -19,7 +19,7 @@
    },
    {
     "filename": "bird 2.aseprite",
-    "frame": { "x": 96, "y": 0, "w": 48, "h": 48 },
+    "frame": { "x": 96, "y": 144, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
@@ -28,7 +28,7 @@
    },
    {
     "filename": "bird 3.aseprite",
-    "frame": { "x": 144, "y": 0, "w": 48, "h": 48 },
+    "frame": { "x": 48, "y": 144, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
@@ -37,7 +37,7 @@
    },
    {
     "filename": "bird 4.aseprite",
-    "frame": { "x": 0, "y": 48, "w": 48, "h": 48 },
+    "frame": { "x": 0, "y": 144, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
@@ -46,7 +46,7 @@
    },
    {
     "filename": "bird 5.aseprite",
-    "frame": { "x": 48, "y": 48, "w": 48, "h": 48 },
+    "frame": { "x": 192, "y": 96, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
@@ -55,7 +55,7 @@
    },
    {
     "filename": "bird 6.aseprite",
-    "frame": { "x": 96, "y": 48, "w": 48, "h": 48 },
+    "frame": { "x": 144, "y": 96, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
@@ -64,7 +64,7 @@
    },
    {
     "filename": "bird 7.aseprite",
-    "frame": { "x": 144, "y": 48, "w": 48, "h": 48 },
+    "frame": { "x": 96, "y": 96, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
@@ -73,15 +73,6 @@
    },
    {
     "filename": "bird 8.aseprite",
-    "frame": { "x": 0, "y": 96, "w": 48, "h": 48 },
-    "rotated": false,
-    "trimmed": false,
-    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
-    "sourceSize": { "w": 48, "h": 48 },
-    "duration": 300
-   },
-   {
-    "filename": "bird 9.aseprite",
     "frame": { "x": 48, "y": 96, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
@@ -90,8 +81,17 @@
     "duration": 300
    },
    {
+    "filename": "bird 9.aseprite",
+    "frame": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 300
+   },
+   {
     "filename": "bird 10.aseprite",
-    "frame": { "x": 96, "y": 96, "w": 48, "h": 48 },
+    "frame": { "x": 192, "y": 48, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
@@ -100,7 +100,7 @@
    },
    {
     "filename": "bird 11.aseprite",
-    "frame": { "x": 144, "y": 96, "w": 48, "h": 48 },
+    "frame": { "x": 144, "y": 48, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
@@ -109,7 +109,7 @@
    },
    {
     "filename": "bird 12.aseprite",
-    "frame": { "x": 0, "y": 144, "w": 48, "h": 48 },
+    "frame": { "x": 96, "y": 48, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
@@ -118,7 +118,7 @@
    },
    {
     "filename": "bird 13.aseprite",
-    "frame": { "x": 48, "y": 144, "w": 48, "h": 48 },
+    "frame": { "x": 48, "y": 48, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
@@ -127,7 +127,43 @@
    },
    {
     "filename": "bird 14.aseprite",
-    "frame": { "x": 96, "y": 144, "w": 48, "h": 48 },
+    "frame": { "x": 0, "y": 48, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 200
+   },
+   {
+    "filename": "bird 15.aseprite",
+    "frame": { "x": 192, "y": 0, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 200
+   },
+   {
+    "filename": "bird 16.aseprite",
+    "frame": { "x": 144, "y": 0, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 200
+   },
+   {
+    "filename": "bird 17.aseprite",
+    "frame": { "x": 96, "y": 0, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 200
+   },
+   {
+    "filename": "bird 18.aseprite",
+    "frame": { "x": 48, "y": 0, "w": 48, "h": 48 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
@@ -140,7 +176,7 @@
   "version": "1.3-beta20-x64",
   "image": "bird.png",
   "format": "RGBA8888",
-  "size": { "w": 192, "h": 192 },
+  "size": { "w": 240, "h": 192 },
   "scale": "1",
   "frameTags": [
    { "name": "idle", "from": 0, "to": 0, "direction": "forward", "color": "#000000ff" },
@@ -154,7 +190,13 @@
    { "name": "fly", "from": 12, "to": 13, "direction": "forward", "color": "#000000ff" },
    { "name": "_glide", "from": 12, "to": 12, "direction": "forward", "color": "#000000ff" },
    { "name": "_flap", "from": 13, "to": 13, "direction": "forward", "color": "#000000ff" },
-   { "name": "_air", "from": 14, "to": 14, "direction": "forward", "color": "#000000ff" }
+   { "name": "fly_up", "from": 14, "to": 15, "direction": "forward", "color": "#000000ff" },
+   { "name": "_glide_up", "from": 14, "to": 14, "direction": "forward", "color": "#000000ff" },
+   { "name": "_flap_up", "from": 15, "to": 15, "direction": "forward", "color": "#000000ff" },
+   { "name": "fly_down", "from": 16, "to": 17, "direction": "forward", "color": "#000000ff" },
+   { "name": "_glide_down", "from": 16, "to": 16, "direction": "forward", "color": "#000000ff" },
+   { "name": "_flap_down", "from": 17, "to": 17, "direction": "forward", "color": "#000000ff" },
+   { "name": "_air", "from": 18, "to": 18, "direction": "forward", "color": "#000000ff" }
   ]
  }
 }
