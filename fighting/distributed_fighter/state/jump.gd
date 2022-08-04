@@ -15,17 +15,21 @@ onready var jump_lag_timer = $jump_lag
 onready var jump_charge = $jump_charge
 onready var direction = $direction
 
+onready var on_finish = $on_finish
+
 var pressing = false
 var jump_factor := 0.0
 
 #for AI's
 var chosen_config = -1
 
+var anim_finished = false 
 func _ready():
 	jump_lag_timer.connect("timeout", self, "jump")
 
-
 func _enter(params):
+	on_finish.enabled = false
+	anim_finished = false
 	pressing = true
 	jump_factor = 0.0
 	jump_lag_timer.wait_time = jump_lag
@@ -46,7 +50,9 @@ func _physics_update(delta):
 	if !pressing:
 		jump_charge.paused=true
 
-
+func _on_animation_finished(name):
+	anim_finished = true
+	
 
 func jump():
 	var jump_speed : float = root.jump_speed
@@ -66,5 +72,10 @@ func jump():
 		root.velocity += velocity
 	else:
 		root.velocity = velocity
-	goto("air")
+	if anim_finished:
+		goto("air")
+	else:
+		on_finish.enabled = true
+	
+#	goto("air")
 

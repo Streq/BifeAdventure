@@ -19,7 +19,7 @@ func _physics_update(delta: float):
 	if(dir.x):
 		var speed : float
 		var speed_lerp : float
-		if input.C:
+		if input.C.is_pressed():
 			speed = root.air_run_speed  
 			speed_lerp = root.air_run_lerp
 		else:

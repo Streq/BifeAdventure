@@ -19,7 +19,7 @@ func enter(params):
 	_enter(params)
 	var anim = root.state_animation
 	#setup
-	anim.connect("animation_finished", self, "_on_animation_finished")
+	anim.connect("animation_finished", self, "on_animation_finished")
 	anim.play(animation)
 	anim.advance(0)
 	
@@ -27,7 +27,8 @@ func enter(params):
 	emit_signal("entered")
 	
 	
-func _on_animation_finished(name):
+func on_animation_finished(name):
+	_on_animation_finished(name)
 	if name == animation:
 		emit_signal("animation_finished")
 	
@@ -35,7 +36,7 @@ func _on_animation_finished(name):
 func exit():
 	active = false
 	var anim = root.state_animation
-	anim.disconnect("animation_finished", self, "_on_animation_finished")
+	anim.disconnect("animation_finished", self, "on_animation_finished")
 	#cleanup
 	anim.play("RESET")
 	anim.advance(0)
@@ -80,3 +81,5 @@ func _physics_update(delta: float):
 func _handle_input(event: InputEvent):
 	return
 
+func _on_animation_finished(name: String):
+	return

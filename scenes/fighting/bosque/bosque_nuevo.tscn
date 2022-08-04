@@ -8,7 +8,7 @@
 [ext_resource path="res://input/controller.tscn" type="PackedScene" id=6]
 [ext_resource path="res://fighting/distributed_fighter/fighters/araña/araña_AI.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/fighting/bosque/bosque_nuevo.gd" type="Script" id=8]
-[ext_resource path="res://fighting/distributed_fighter/fighters/fighter/fighter.gd" type="Script" id=9]
+[ext_resource path="res://fighting/distributed_fighter/fighters/bird/bird.tscn" type="PackedScene" id=9]
 
 [node name="fighting_level" type="Node2D"]
 position = Vector2( 0, 149 )
@@ -57,40 +57,20 @@ tile_data = PoolIntArray( 327668, 6, 6 )
 position = Vector2( 612, 141 )
 team = 1
 
-[node name="Camera2D" type="Camera2D" parent="bife"]
-current = true
-
-[node name="controller" parent="bife" instance=ExtResource( 6 )]
-
 [node name="cosito_AI" parent="." instance=ExtResource( 2 )]
 position = Vector2( 478, 87 )
-collision_mask = 2
-script = ExtResource( 9 )
-walk_speed = 40.0
 
 [node name="cosito_AI2" parent="." instance=ExtResource( 2 )]
 position = Vector2( 43, 312 )
-collision_mask = 2
-script = ExtResource( 9 )
-walk_speed = 40.0
 
 [node name="cosito_AI3" parent="." instance=ExtResource( 2 )]
 position = Vector2( -213, 170 )
-collision_mask = 2
-script = ExtResource( 9 )
-walk_speed = 40.0
 
 [node name="cosito_AI4" parent="." instance=ExtResource( 2 )]
 position = Vector2( -171, 165 )
-collision_mask = 2
-script = ExtResource( 9 )
-walk_speed = 40.0
 
 [node name="cosito_AI5" parent="." instance=ExtResource( 2 )]
 position = Vector2( -171, 165 )
-collision_mask = 2
-script = ExtResource( 9 )
-walk_speed = 40.0
 
 [node name="cosito_tirapiña" parent="." instance=ExtResource( 3 )]
 position = Vector2( 245, 54 )
@@ -109,5 +89,12 @@ position = Vector2( 202, 130.25 )
 
 [node name="araña_AI4" parent="." instance=ExtResource( 7 )]
 position = Vector2( 128, 87 )
+
+[node name="fighter" parent="." instance=ExtResource( 9 )]
+
+[node name="controller" parent="fighter" instance=ExtResource( 6 )]
+
+[node name="Camera2D" type="Camera2D" parent="fighter"]
+current = true
 
 [editable path="background"]

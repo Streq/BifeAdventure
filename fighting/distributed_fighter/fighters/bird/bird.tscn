@@ -1,9 +1,108 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://fighting/distributed_fighter/fighters/fighter/fighter.tscn" type="PackedScene" id=1]
+[ext_resource path="res://fighting/distributed_fighter/state/transitions/input_step.tscn" type="PackedScene" id=2]
+[ext_resource path="res://fighting/distributed_fighter/state/idle.tscn" type="PackedScene" id=3]
+[ext_resource path="res://fighting/distributed_fighter/state/transitions/transitions.tscn" type="PackedScene" id=4]
+[ext_resource path="res://fighting/distributed_fighter/state/walk.tscn" type="PackedScene" id=5]
+[ext_resource path="res://fighting/distributed_fighter/state/air_no_wall.tscn" type="PackedScene" id=6]
+[ext_resource path="res://fighting/distributed_fighter/state/turn_around.tscn" type="PackedScene" id=7]
+[ext_resource path="res://fighting/distributed_fighter/state/jump.tscn" type="PackedScene" id=8]
+[ext_resource path="res://fighting/distributed_fighter/state/dead_air.tscn" type="PackedScene" id=9]
+[ext_resource path="res://fighting/distributed_fighter/state/rebound.tscn" type="PackedScene" id=10]
+[ext_resource path="res://fighting/distributed_fighter/state/air_flinch.tscn" type="PackedScene" id=11]
+[ext_resource path="res://fighting/distributed_fighter/state/dead.tscn" type="PackedScene" id=12]
+[ext_resource path="res://fighting/distributed_fighter/state/flinch.tscn" type="PackedScene" id=13]
+[ext_resource path="res://test/distributed_state/hitbox/hitbox_group.tscn" type="PackedScene" id=14]
+[ext_resource path="res://test/distributed_state/hurtbox.tscn" type="PackedScene" id=15]
+[ext_resource path="res://test/distributed_state/on_floor.gd" type="Script" id=16]
+[ext_resource path="res://fighting/distributed_fighter/fighters/bird/state/glide.gd" type="Script" id=17]
+[ext_resource path="res://test/packed_state/jab_transition.gd" type="Script" id=18]
+[ext_resource path="res://test/distributed_state/distributed_state.gd" type="Script" id=19]
+[ext_resource path="res://fighting/distributed_fighter/state/triggers/on_finish.tscn" type="PackedScene" id=20]
+[ext_resource path="res://fighting/distributed_fighter/state/triggers/change_state_on_floor.tscn" type="PackedScene" id=21]
 
-[sub_resource type="StreamTexture" id=1]
+[sub_resource type="RectangleShape2D" id=19]
+extents = Vector2( 5, 5 )
+
+[sub_resource type="StreamTexture" id=23]
 load_path = "res://.import/bird.png-f5b86b7a40e744a443122b214612fa4b.stex"
+
+[sub_resource type="Animation" id=11]
+resource_name = "RESET"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("pivot/hitbox/main:active")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=13]
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("pivot/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 14.0 ]
+}
+
+[sub_resource type="Animation" id=6]
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("pivot/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 4.0 ]
+}
+
+[sub_resource type="Animation" id=14]
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("pivot/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 13.0 ]
+}
+
+[sub_resource type="Animation" id=7]
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("pivot/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 3.0 ]
+}
 
 [sub_resource type="Animation" id=2]
 length = 0.4
@@ -18,7 +117,22 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 5.0, 6.0 ]
+"values": [ 12.0, 13.0 ]
+}
+
+[sub_resource type="Animation" id=15]
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("pivot/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 12.0 ]
 }
 
 [sub_resource type="Animation" id=3]
@@ -37,6 +151,95 @@ tracks/0/keys = {
 "values": [ 0.0 ]
 }
 
+[sub_resource type="Animation" id=17]
+length = 0.15
+tracks/0/type = "value"
+tracks/0/path = NodePath("pivot/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 1.0, 2.0 ]
+}
+
+[sub_resource type="Animation" id=8]
+length = 0.1
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "turn_around"
+} ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("pivot/Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 5.0 ]
+}
+
+[sub_resource type="Animation" id=21]
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("pivot/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 6.0 ]
+}
+
+[sub_resource type="Animation" id=22]
+length = 0.1
+step = 0.05
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.05 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "turn_around"
+} ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("pivot/Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 7.0 ]
+}
+
 [sub_resource type="Animation" id=4]
 length = 1.2
 loop = true
@@ -50,32 +253,163 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.3, 0.6, 0.9 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 1.0, 2.0, 3.0, 4.0 ]
+"values": [ 8.0, 9.0, 10.0, 11.0 ]
 }
 
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 5, 5 )
+
 [node name="fighter" instance=ExtResource( 1 )]
+run_speed = 40.0
+run_lerp = 2.0
+air_walk_speed = 40.0
+air_walk_lerp = 2.0
+air_run_speed = 40.0
+air_run_lerp = 2.0
+air_idle_lerp = 0.0
+jump_speed = 125.0
 
-[node name="idle" type="Node" parent="state_machine" index="0"]
+[node name="idle" parent="state_machine" index="0" instance=ExtResource( 3 )]
 
-[node name="walk" type="Node" parent="state_machine" index="1"]
+[node name="transitions" parent="state_machine/idle" index="1" instance=ExtResource( 4 )]
 
-[node name="fly" type="Node" parent="state_machine" index="2"]
+[node name="jump" parent="state_machine/idle/transitions" index="0" instance=ExtResource( 2 )]
+end_state = "jump"
+A = 1
 
-[node name="hurt" type="Node" parent="state_machine" index="3"]
+[node name="turn_around" parent="state_machine/idle/transitions" index="1" instance=ExtResource( 2 )]
+end_state = "turn_around"
+horizontal_dir = -1
 
-[node name="dead" type="Node" parent="state_machine" index="4"]
+[node name="walk" parent="state_machine/idle/transitions" index="2" instance=ExtResource( 2 )]
+end_state = "walk"
+horizontal_dir = 1
 
-[node name="flinch" type="Node" parent="state_machine" index="5"]
+[node name="walk" parent="state_machine" index="1" instance=ExtResource( 5 )]
+
+[node name="transitions" parent="state_machine/walk" index="0" instance=ExtResource( 4 )]
+
+[node name="jump" parent="state_machine/walk/transitions" index="0" instance=ExtResource( 2 )]
+end_state = "jump"
+A = 1
+
+[node name="turn_around" parent="state_machine/walk/transitions" index="1" instance=ExtResource( 2 )]
+end_state = "turn_around"
+horizontal_dir = -1
+
+[node name="idle" parent="state_machine/walk/transitions" index="2" instance=ExtResource( 2 )]
+end_state = "idle"
+horizontal_dir = 2
+
+[node name="air" parent="state_machine" index="2" instance=ExtResource( 6 )]
+
+[node name="transitions" parent="state_machine/air" index="1" instance=ExtResource( 4 )]
+
+[node name="input_step" parent="state_machine/air/transitions" index="0" instance=ExtResource( 2 )]
+end_state = "glide"
+A = 1
+
+[node name="glide" type="Node" parent="state_machine" index="3"]
+script = ExtResource( 17 )
+animation = "glide"
+_normal = Vector2( 0.1, -1 )
+drag = 0.2
+
+[node name="on_floor" type="Node" parent="state_machine/glide" index="0"]
+process_priority = -1
+script = ExtResource( 16 )
+state_to = "idle"
+
+[node name="transitions" parent="state_machine/glide" index="1" instance=ExtResource( 4 )]
+
+[node name="input_step" parent="state_machine/glide/transitions" index="0" instance=ExtResource( 2 )]
+end_state = "flap"
+A = 0
+
+[node name="turn_around" type="Node" parent="state_machine/glide/transitions" index="1"]
+script = ExtResource( 18 )
+end_state = "turn_around_glide"
+horizontal_dir = -1
+
+[node name="turn_around" parent="state_machine" index="4" instance=ExtResource( 7 )]
+
+[node name="turn_around_glide" type="Node" parent="state_machine" index="5"]
+script = ExtResource( 19 )
+animation = "turn_around_glide"
+
+[node name="on_finish" parent="state_machine/turn_around_glide" index="0" instance=ExtResource( 20 )]
+end_state = "glide"
+
+[node name="on_floor" parent="state_machine/turn_around_glide" index="1" instance=ExtResource( 21 )]
+should_be_true = true
+state_to = "idle"
+
+[node name="jump" parent="state_machine" index="6" instance=ExtResource( 8 )]
+jump_lag = 0.1
+jump_config = [ [ 0.9, 1.0 ], [ 0.0, 1.0 ] ]
+
+[node name="flap" parent="state_machine" index="7" instance=ExtResource( 8 )]
+animation = "flap"
+jump_lag = 0.01
+jump_config = [ [ 0.9, 1.0 ], [ 0.0, 1.0 ] ]
+
+[node name="direction" parent="state_machine/flap" index="2"]
+direction = Vector2( 0.173648, -0.984808 )
+isolated_direction_x = 0.173648
+isolated_direction_y = -0.984808
+direction_degrees = -80.0
+
+[node name="flinch" parent="state_machine" index="8" instance=ExtResource( 13 )]
+animation = "flinch"
+
+[node name="air_flinch" parent="state_machine" index="9" instance=ExtResource( 11 )]
+animation = "flinch"
+
+[node name="dead" parent="state_machine" index="10" instance=ExtResource( 12 )]
+animation = "dead"
+
+[node name="rebound" parent="state_machine" index="11" instance=ExtResource( 10 )]
+animation = "flinch"
+
+[node name="dead_air" parent="state_machine" index="12" instance=ExtResource( 9 )]
+animation = "dead"
+
+[node name="main" parent="pivot/hitbox" index="0" instance=ExtResource( 14 )]
+active = true
+
+[node name="hurtbox" parent="pivot/hitbox/main" index="0" instance=ExtResource( 15 )]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="pivot/hitbox/main/hurtbox" index="0"]
+position = Vector2( 0, 1 )
+shape = SubResource( 19 )
 
 [node name="Sprite" type="Sprite" parent="pivot" index="1"]
-texture = SubResource( 1 )
-hframes = 3
-vframes = 3
+use_parent_material = true
+texture = SubResource( 23 )
+hframes = 4
+vframes = 4
+frame = 7
 __meta__ = {
 "_editor_description_": "YXNlcHJpdGVfd2l6YXJkX2NvbmZpZwpwbGF5ZXJ8PXN0YXRlX2FuaW1hdGlvbgpzb3VyY2V8PXJlczovL2Fzc2V0L2FzZXByaXRlL2JpcmQuYXNlcHJpdGUKbGF5ZXJ8PQpvcF9leHB8PUZhbHNlCm9fZm9sZGVyfD1yZXM6Ly9hc3NldC90ZXh0dXJlL2ZpZ2h0ZXJfc2hlZXQKb19uYW1lfD0Kb25seV92aXNpYmxlfD1UcnVlCm9fZXhfcHw9Cg=="
 }
 
 [node name="state_animation" parent="." index="7"]
+anims/RESET = SubResource( 11 )
+anims/air = SubResource( 13 )
+anims/dead = SubResource( 6 )
+anims/flap = SubResource( 14 )
+anims/flinch = SubResource( 7 )
 anims/fly = SubResource( 2 )
+anims/glide = SubResource( 15 )
 anims/idle = SubResource( 3 )
+anims/jump = SubResource( 17 )
+anims/turn_around = SubResource( 8 )
+anims/turn_around_air = SubResource( 21 )
+anims/turn_around_glide = SubResource( 22 )
 anims/walk = SubResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="9"]
+position = Vector2( 0, 1 )
+shape = SubResource( 9 )
+
+[editable path="state_machine/flap"]

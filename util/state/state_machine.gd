@@ -50,7 +50,7 @@ func _on_animation_finished(anim_name):
 	if !animation_queue.empty():
 		_change_state(animation_queue.pop_front(), null)
 	else:
-		current_state._on_animation_finished(anim_name)
+		current_state.on_animation_finished(anim_name)
 
 func _change_state(state_name, param):
 	if not _active:
