@@ -1,3 +1,4 @@
 # BifeAdventure
-a los bife man es asi la vida en GODOT (web game)  
-Jugalo [ACÁ](https://streq.github.io/BifeAdventure)
+Plataformero Beat Em Up con narrativa top down RPG (como Zelda II)
+Controlás a Bife, un ser con poderes para curar la tristeza a los sopapos, y tenés que curar a todo el mundo.
+(work in progress)
