@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://test/palette_shader/palette.gd" type="Script" id=1]
+
+[sub_resource type="Image" id=1]
+data = {
+"data": PoolByteArray( 0, 0, 0, 0, 0, 0, 0, 255, 255, 131, 131, 255, 255, 0, 0, 255 ),
+"format": "RGBA8",
+"height": 1,
+"mipmaps": false,
+"width": 4
+}
+
+[sub_resource type="ImageTexture" id=2]
+flags = 0
+flags = 0
+image = SubResource( 1 )
+size = Vector2( 4, 1 )
+
+[node name="palette" type="Node2D"]
+script = ExtResource( 1 )
+main_colors2 = [ PoolColorArray( 0, 0, 0, 0, 0, 0, 0, 1, 1, 0.517647, 0.517647, 1, 1, 0, 0, 1 ) ]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_right = 64.0
+margin_bottom = 64.0
+texture = SubResource( 2 )

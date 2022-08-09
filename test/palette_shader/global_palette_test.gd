@@ -1,11 +1,12 @@
 extends Node2D
 tool
-onready var texture_rect = $TextureRect
+
 onready var sprite = $Sprite
-onready var texture_rect_2 = $TextureRect2
-onready var texture_rect_3 = $TextureRect3
-onready var texture_rect_4 = $TextureRect4
+onready var red_palette = $red_palette
+onready var somber_palette = $somber_palette
+onready var green_palette = $green_palette
+
 
 func _ready():
-	sprite.palette = texture_rect_4.texture
+	sprite.palette = green_palette.texture
 	

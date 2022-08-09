@@ -1,80 +1,46 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://test/palette_shader/global_palette_test.gd" type="Script" id=1]
 [ext_resource path="res://test/palette_shader/palette_sprite.tscn" type="PackedScene" id=2]
-[ext_resource path="res://test/palette_shader/gradient_tex.gd" type="Script" id=3]
-[ext_resource path="res://asset/texture/palette/palette_width_shades.png" type="Texture" id=4]
+[ext_resource path="res://test/palette_shader/palette.tscn" type="PackedScene" id=3]
+[ext_resource path="res://asset/texture/test_palette_sprite/test_palette.png" type="Texture" id=4]
 
-[sub_resource type="Gradient" id=3]
-interpolation_mode = 1
-offsets = PoolRealArray( 0, 0.25, 0.5, 0.75 )
-colors = PoolColorArray( 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 0.851562, 1, 0, 1 )
+[sub_resource type="Image" id=1]
+data = {
+"data": PoolByteArray( 0, 0, 0, 0, 0, 0, 0, 255, 0, 133, 26, 255, 255, 175, 133, 255 ),
+"format": "RGBA8",
+"height": 1,
+"mipmaps": false,
+"width": 4
+}
 
-[sub_resource type="GradientTexture2D" id=4]
+[sub_resource type="ImageTexture" id=2]
 flags = 0
-gradient = SubResource( 3 )
-width = 4
-height = 1
-use_hdr = true
-
-[sub_resource type="Gradient" id=7]
-interpolation_mode = 1
-offsets = PoolRealArray( 0, 0.333, 0.667 )
-colors = PoolColorArray( 0, 0, 0, 1, 1, 0, 0, 1, 0.851562, 1, 0, 1 )
-
-[sub_resource type="GradientTexture2D" id=8]
 flags = 0
-gradient = SubResource( 7 )
-width = 3
-height = 1
-use_hdr = true
-
-[sub_resource type="Gradient" id=5]
-interpolation_mode = 1
-offsets = PoolRealArray( 0, 0.25, 0.5, 0.75 )
-colors = PoolColorArray( 0, 0, 0, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0.945312, 1, 0, 1 )
-
-[sub_resource type="GradientTexture" id=6]
-gradient = SubResource( 5 )
-width = 4
+image = SubResource( 1 )
+size = Vector2( 4, 1 )
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 1 )
 
-[node name="TextureRect" type="TextureRect" parent="."]
-margin_left = 128.0
-margin_right = 320.0
-margin_bottom = 24.0
-texture = SubResource( 4 )
-expand = true
-stretch_mode = 1
-script = ExtResource( 3 )
-
-[node name="TextureRect3" type="TextureRect" parent="."]
-margin_left = 128.0
-margin_top = 24.0
-margin_right = 320.0
-margin_bottom = 48.0
-texture = SubResource( 8 )
-expand = true
-stretch_mode = 1
-script = ExtResource( 3 )
-
 [node name="Sprite" parent="." instance=ExtResource( 2 )]
-position = Vector2( 0, 0 )
-centered = false
-palette = ExtResource( 4 )
+palette = SubResource( 2 )
 
-[node name="TextureRect2" type="TextureRect" parent="."]
-margin_left = 128.0
-margin_top = 64.0
-margin_right = 320.0
-margin_bottom = 112.0
-texture = SubResource( 6 )
-expand = true
-script = ExtResource( 3 )
+[node name="red_palette" parent="." instance=ExtResource( 3 )]
+position = Vector2( 128, 0 )
+scale = Vector2( 8, 8 )
+main_colors = PoolColorArray( 0, 0, 0, 0, 0, 0, 0, 1, 1, 0.305882, 0, 1, 1, 0.690196, 0.521569, 1 )
+main_colors2 = [ PoolColorArray( 0, 0, 0, 0, 0, 0, 0, 1, 1, 0.305882, 0, 1, 1, 0.690196, 0.521569, 1 ) ]
 
-[node name="TextureRect4" type="TextureRect" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
-texture = ExtResource( 4 )
+[node name="green_palette" parent="." instance=ExtResource( 3 )]
+position = Vector2( 128, 16 )
+scale = Vector2( 8, 8 )
+main_colors = PoolColorArray( 0, 0, 0, 0, 0, 0, 0, 1, 0, 0.521569, 0.105882, 1, 1, 0.690196, 0.521569, 1 )
+main_colors2 = [ PoolColorArray( 0, 0, 0, 0, 0, 0, 0, 1, 1, 0.305882, 0, 1, 1, 0.690196, 0.521569, 1 ) ]
+
+[node name="somber_palette" parent="." instance=ExtResource( 3 )]
+position = Vector2( 128, 8 )
+scale = Vector2( 8, 8 )
+main_colors = PoolColorArray( 0.34902, 0.337255, 0.321569, 0, 0.34902, 0.337255, 0.321569, 1, 0.541176, 0.435294, 0.188235, 1, 1, 0.862745, 0.933333, 1 )
+main_colors2 = [ PoolColorArray( 0, 0, 0, 0, 0, 0, 0, 1, 0.45098, 0.45098, 0.45098, 1, 1, 0, 0, 1 ) ]
+import = ExtResource( 4 )
