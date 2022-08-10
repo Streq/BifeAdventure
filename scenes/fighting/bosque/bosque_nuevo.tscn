@@ -57,6 +57,11 @@ tile_data = PoolIntArray( 327668, 6, 6 )
 position = Vector2( 612, 141 )
 team = 1
 
+[node name="controller" parent="bife" instance=ExtResource( 6 )]
+
+[node name="Camera2D" type="Camera2D" parent="bife"]
+current = true
+
 [node name="cosito_AI" parent="." instance=ExtResource( 2 )]
 position = Vector2( 478, 87 )
 
@@ -91,10 +96,5 @@ position = Vector2( 202, 130.25 )
 position = Vector2( 128, 87 )
 
 [node name="fighter" parent="." instance=ExtResource( 9 )]
-
-[node name="controller" parent="fighter" instance=ExtResource( 6 )]
-
-[node name="Camera2D" type="Camera2D" parent="fighter"]
-current = true
 
 [editable path="background"]

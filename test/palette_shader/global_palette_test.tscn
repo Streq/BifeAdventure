@@ -1,11 +1,34 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://test/palette_shader/global_palette_test.gd" type="Script" id=1]
 [ext_resource path="res://test/palette_shader/palette_sprite.tscn" type="PackedScene" id=2]
 [ext_resource path="res://test/palette_shader/palette.tscn" type="PackedScene" id=3]
 [ext_resource path="res://asset/texture/test_palette_sprite/test_palette.png" type="Texture" id=4]
+[ext_resource path="res://test/palette_shader/main_palette.gd" type="Script" id=5]
 
-[sub_resource type="Image" id=1]
+[sub_resource type="Shader" id=3]
+code = "shader_type canvas_item;
+//uniform Texture color0;
+uniform highp int palette_size = 4;
+uniform float offset : hint_range(0, 8, 1);
+uniform sampler2D palette;
+
+
+void fragment(){
+	vec4 tex = texture(TEXTURE, UV);
+	//used as index for the palette texture
+	float blue_1 = tex.b;
+	
+	float palette_index = mod(blue_1 * (255.0) + offset+0.5,float(palette_size));
+	float h_pixel_size = 1.0/float(palette_size);
+	vec2 palette_pixel = vec2(palette_index*(h_pixel_size), 0.0);
+	
+	COLOR.rgb = texture(palette, palette_pixel).rgb;
+	COLOR.a = tex.a;
+	
+}"
+
+[sub_resource type="Image" id=8]
 data = {
 "data": PoolByteArray( 0, 0, 0, 0, 0, 0, 0, 255, 0, 133, 26, 255, 255, 175, 133, 255 ),
 "format": "RGBA8",
@@ -17,30 +40,54 @@ data = {
 [sub_resource type="ImageTexture" id=2]
 flags = 0
 flags = 0
-image = SubResource( 1 )
+image = SubResource( 8 )
 size = Vector2( 4, 1 )
+
+[sub_resource type="ShaderMaterial" id=5]
+shader = SubResource( 3 )
+shader_param/palette_size = 4
+shader_param/offset = 4.0
+shader_param/palette = SubResource( 2 )
+
+[sub_resource type="ImageTexture" id=7]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 1 )
 
 [node name="Sprite" parent="." instance=ExtResource( 2 )]
+material = SubResource( 5 )
 palette = SubResource( 2 )
 
 [node name="red_palette" parent="." instance=ExtResource( 3 )]
-position = Vector2( 128, 0 )
+position = Vector2( 160, 0 )
 scale = Vector2( 8, 8 )
 main_colors = PoolColorArray( 0, 0, 0, 0, 0, 0, 0, 1, 1, 0.305882, 0, 1, 1, 0.690196, 0.521569, 1 )
 main_colors2 = [ PoolColorArray( 0, 0, 0, 0, 0, 0, 0, 1, 1, 0.305882, 0, 1, 1, 0.690196, 0.521569, 1 ) ]
 
 [node name="green_palette" parent="." instance=ExtResource( 3 )]
-position = Vector2( 128, 16 )
+position = Vector2( 160, 16 )
 scale = Vector2( 8, 8 )
 main_colors = PoolColorArray( 0, 0, 0, 0, 0, 0, 0, 1, 0, 0.521569, 0.105882, 1, 1, 0.690196, 0.521569, 1 )
 main_colors2 = [ PoolColorArray( 0, 0, 0, 0, 0, 0, 0, 1, 1, 0.305882, 0, 1, 1, 0.690196, 0.521569, 1 ) ]
 
+[node name="blue_palette" parent="." instance=ExtResource( 3 )]
+position = Vector2( 160, 24 )
+scale = Vector2( 8, 8 )
+main_colors = PoolColorArray( 0, 0, 0, 0, 0, 0, 0, 1, 0, 0.196078, 0.866667, 1, 1, 0.690196, 0.521569, 1 )
+main_colors2 = [ PoolColorArray( 0, 0, 0, 0, 0, 0, 0, 1, 1, 0.305882, 0, 1, 1, 0.690196, 0.521569, 1 ) ]
+
 [node name="somber_palette" parent="." instance=ExtResource( 3 )]
-position = Vector2( 128, 8 )
+position = Vector2( 160, 8 )
 scale = Vector2( 8, 8 )
 main_colors = PoolColorArray( 0.34902, 0.337255, 0.321569, 0, 0.34902, 0.337255, 0.321569, 1, 0.541176, 0.435294, 0.188235, 1, 1, 0.862745, 0.933333, 1 )
 main_colors2 = [ PoolColorArray( 0, 0, 0, 0, 0, 0, 0, 1, 0.45098, 0.45098, 0.45098, 1, 1, 0, 0, 1 ) ]
 import = ExtResource( 4 )
+
+[node name="main_palette" type="TextureRect" parent="."]
+margin_left = 128.0
+margin_right = 160.0
+margin_bottom = 8.0
+texture = SubResource( 7 )
+expand = true
+script = ExtResource( 5 )
+palette_path = NodePath("../somber_palette")

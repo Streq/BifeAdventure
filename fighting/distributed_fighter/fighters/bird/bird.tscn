@@ -450,10 +450,10 @@ end_state = "turn_around_glide"
 horizontal_dir = -1
 
 [node name="normal" parent="state_machine/glide" index="2" instance=ExtResource( 22 )]
-direction = Vector2( 0.173648, -0.984808 )
-isolated_direction_x = 0.173648
-isolated_direction_y = -0.984808
-direction_degrees = -80.0
+direction = Vector2( -4.37114e-08, -1 )
+isolated_direction_x = -4.37114e-08
+isolated_direction_y = -1.0
+direction_degrees = -90.0
 
 [node name="glide_up" type="Node" parent="state_machine" index="4"]
 script = ExtResource( 17 )
@@ -484,10 +484,10 @@ end_state = "turn_around_glide"
 horizontal_dir = -1
 
 [node name="normal" parent="state_machine/glide_up" index="2" instance=ExtResource( 22 )]
-direction = Vector2( -0.173648, -0.984808 )
-isolated_direction_x = -0.173648
-isolated_direction_y = -0.984808
-direction_degrees = -100.0
+direction = Vector2( -0.34202, -0.939693 )
+isolated_direction_x = -0.34202
+isolated_direction_y = -0.939693
+direction_degrees = -110.0
 
 [node name="glide_down" type="Node" parent="state_machine" index="5"]
 script = ExtResource( 17 )
@@ -518,10 +518,10 @@ end_state = "turn_around_glide"
 horizontal_dir = -1
 
 [node name="normal" parent="state_machine/glide_down" index="2" instance=ExtResource( 22 )]
-direction = Vector2( 0.5, -0.866025 )
-isolated_direction_x = 0.5
-isolated_direction_y = -0.866025
-direction_degrees = -60.0
+direction = Vector2( 0.34202, -0.939693 )
+isolated_direction_x = 0.34202
+isolated_direction_y = -0.939693
+direction_degrees = -70.0
 
 [node name="turn_around" parent="state_machine" index="6" instance=ExtResource( 7 )]
 
