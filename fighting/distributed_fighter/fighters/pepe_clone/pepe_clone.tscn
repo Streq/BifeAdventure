@@ -30,7 +30,7 @@ extents = Vector2( 5, 6.5 )
 extents = Vector2( 5.25, 2 )
 
 [sub_resource type="StreamTexture" id=31]
-load_path = "res://.import/pepe_clone.png-254449d519e4771fcb97199db94763f5.stex"
+load_path = "res://.import/pepe_clone_recolor_attempt.png-c872b12f6003554f1817d44fc9c46bd9.stex"
 
 [sub_resource type="Animation" id=24]
 length = 0.001
@@ -84,7 +84,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 16.0 ]
+"values": [ 18.0 ]
 }
 
 [sub_resource type="Animation" id=4]
@@ -126,7 +126,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 17.0 ]
+"values": [ 19.0 ]
 }
 
 [sub_resource type="Animation" id=6]
@@ -188,7 +188,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 12.0 ]
+"values": [ 14.0 ]
 }
 
 [sub_resource type="Animation" id=10]
@@ -215,7 +215,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 15.0, 13.0 ]
+"values": [ 15.0, 0.0 ]
 }
 
 [sub_resource type="Animation" id=11]
@@ -230,7 +230,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 15.0, 0.0 ]
+"values": [ 13.0, 12.0 ]
 }
 
 [sub_resource type="Animation" id=12]
@@ -245,7 +245,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 15.0, 11.0 ]
+"values": [ 13.0, 11.0 ]
 }
 
 [sub_resource type="Animation" id=13]
@@ -260,7 +260,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 17.0, 16.0 ]
+"values": [ 19.0, 18.0 ]
 }
 
 [sub_resource type="Animation" id=14]
@@ -320,7 +320,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 16.0 ]
+"values": [ 18.0 ]
 }
 
 [sub_resource type="Animation" id=18]
@@ -336,7 +336,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.15, 0.3, 0.45, 0.6 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 22.0, 20.0, 19.0, 18.0, 18.0 ]
+"values": [ 24.0, 23.0, 22.0, 21.0, 20.0 ]
 }
 
 [sub_resource type="Animation" id=19]
@@ -365,7 +365,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.075 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 12.0, 23.0 ]
+"values": [ 14.0, 27.0 ]
 }
 
 [sub_resource type="Animation" id=20]
@@ -380,7 +380,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 15.0, 14.0 ]
+"values": [ 17.0, 16.0 ]
 }
 
 [sub_resource type="Animation" id=21]
@@ -396,7 +396,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.4, 0.8 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ 22.0, 21.0, 21.0 ]
+"values": [ 26.0, 25.0, 25.0 ]
 }
 
 [sub_resource type="Animation" id=22]
@@ -633,9 +633,12 @@ shape = SubResource( 2 )
 
 [node name="Sprite" parent="pivot" index="1" instance=ExtResource( 16 )]
 texture = SubResource( 31 )
-hframes = 5
+hframes = 6
 vframes = 5
 frame = 23
+__meta__ = {
+"_editor_description_": "YXNlcHJpdGVfd2l6YXJkX2NvbmZpZwpwbGF5ZXJ8PXN0YXRlX2FuaW1hdGlvbgpzb3VyY2V8PXJlczovL2Fzc2V0L2FzZXByaXRlL3BlcGVfY2xvbmVfcmVjb2xvcl9hdHRlbXB0LmFzZXByaXRlCmxheWVyfD0Kb3BfZXhwfD1GYWxzZQpvX2ZvbGRlcnw9cmVzOi8vYXNzZXQvdGV4dHVyZS9maWdodGVyX3NoZWV0Cm9fbmFtZXw9Cm9ubHlfdmlzaWJsZXw9RmFsc2UKb19leF9wfD0K"
+}
 
 [node name="state_animation" parent="." index="7"]
 anims/RESET = SubResource( 24 )
