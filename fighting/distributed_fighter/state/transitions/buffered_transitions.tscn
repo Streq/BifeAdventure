@@ -2,5 +2,15 @@
 
 [ext_resource path="res://fighting/distributed_fighter/state/transitions/buffered_transitions.gd" type="Script" id=1]
 
-[node name="buffered_transitions" type="Node"]
+[node name="buffered_transition_select" type="Node"]
 script = ExtResource( 1 )
+__meta__ = {
+"_editor_description_": "Decides what to transition to when the current animation is finished
+The transitions are listed from higher to lower priority
+(everything else equal, nodes that appear first will be selected)
+How this works is: whatever conditions a transition has to be
+met, this node will check in order, when it finds one that fits, it
+will be triggered when the current animation ends, if on a later
+frame it finds that another, higher priority transition fits, it will
+then select that one."
+}

@@ -1,4 +1,4 @@
-extends Node2D
+extends Node
 export var buffer_size := 10
 
 var buffer : CircularBuffer
@@ -68,6 +68,10 @@ func delete(deleted:Node):
 			get_tree().current_scene.add_child(deleted)
 			deleted.global_transform = t
 			deleted.die()
+		
+		else:
+			deleted.queue_free()
+		
 
 func _input(event):
 	if event.is_action("right0"):
@@ -104,10 +108,17 @@ func _input(event):
 	if u:
 		update_display()
 	
-
+var boxes=[]
 func update_display():
+	for child in boxes:
+		child.free()
+		pass
+	boxes = []
+	
 	for child in center.get_children():
 		center.remove_child(child)
+		pass
+		
 	var angle_unit = TAU/buffer.SIZE
 	for i in buffer.SIZE:
 		if buffer.buffer[i]:
@@ -116,21 +127,25 @@ func update_display():
 			center.add_child(box)
 	if true:
 		var box = BOX.instance()
+		boxes.append(box)
 		center.add_child(box)
 		box.position = Vector2.RIGHT.rotated(angle_unit*buffer.front_index) * (radius + 20)
 		box.modulate = Color.darkgreen
 	if true:
 		var box = BOX.instance()
+		boxes.append(box)
 		center.add_child(box)
 		box.position = Vector2.RIGHT.rotated(angle_unit*buffer.end_index) * (radius + 20)
 		box.modulate = Color.darkred
-	for i in buffer.size:
-		var label = LABEL.instance()
-		var node = Node2D.new()
-		center.add_child(node)
-		node.position = Vector2.RIGHT.rotated(angle_unit*(buffer.front_index+i)) * (radius + 20)
-		node.add_child(label)
-		label.text = str(i)
+	if true:
+		for i in buffer.size:
+			var label = LABEL.instance()
+			var node = Node2D.new()
+			boxes.append(node)
+			center.add_child(node)
+			node.position = Vector2.RIGHT.rotated(angle_unit*(buffer.front_index+i)) * (radius + 20)
+			node.add_child(label)
+			label.text = str(i)
 
 
 

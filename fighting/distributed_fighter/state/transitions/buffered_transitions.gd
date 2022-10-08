@@ -2,7 +2,7 @@ extends Node
 
 onready var state = get_parent()
 
-var current_transition = -1
+var current_transition_index = -1
 
 func _ready():
 #	state.connect("physics_process", self, "physics_process")
@@ -12,7 +12,7 @@ func _ready():
 	set_physics_process(false)
 
 func entered():
-	current_transition = get_children().size()
+	current_transition_index = get_children().size()
 	set_physics_process(true)
 
 func exit():
@@ -28,13 +28,13 @@ func physics_process(delta):
 
 func check():
 	var transitions = get_children()
-	for i in current_transition:
+	for i in current_transition_index:
 		if transitions[i].check(state):
-			current_transition = i
+			current_transition_index = i
 			break
 		i+=1
 	
 
 func trigger():
-	if current_transition != get_children().size():
-		state.goto(get_children()[current_transition].end_state)
+	if current_transition_index != get_children().size():
+		state.goto(get_children()[current_transition_index].end_state)

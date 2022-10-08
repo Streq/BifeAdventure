@@ -16,7 +16,7 @@ data = {
 "width": 4
 }
 
-[sub_resource type="ImageTexture" id=5]
+[sub_resource type="ImageTexture" id=3]
 flags = 0
 flags = 0
 image = SubResource( 8 )
@@ -29,7 +29,7 @@ script = ExtResource( 1 )
 
 [node name="Sprite" parent="." instance=ExtResource( 2 )]
 material = ExtResource( 6 )
-palette = SubResource( 5 )
+palette = SubResource( 3 )
 
 [node name="red_palette" parent="." instance=ExtResource( 3 )]
 position = Vector2( 160, 0 )

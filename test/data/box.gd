@@ -22,5 +22,5 @@ func _physics_process(delta):
 
 
 func _on_box_tree_entered():
-	vector = -global_position.normalized()
+	vector = -position.normalized()
 	
