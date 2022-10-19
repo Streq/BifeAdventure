@@ -1,0 +1,24 @@
+[gd_resource type="Shader" format=2]
+
+[resource]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+//uniform Texture color0;
+uniform highp int palette_size = 4;
+uniform float offset : hint_range(0, 8, 1);
+uniform sampler2D palette;
+
+
+void fragment(){
+	vec4 tex = texture(TEXTURE, UV);
+	//used as index for the palette texture
+	float blue_1 = tex.b;
+	
+	float palette_index = mod(blue_1 * (255.0) + offset+0.5,float(palette_size));
+	float h_pixel_size = 1.0/float(palette_size);
+	vec2 palette_pixel = vec2(palette_index*(h_pixel_size), 0.0);
+	
+	COLOR.rgb = texture(palette, palette_pixel).rgb;
+	COLOR.a = tex.a;
+	
+}"

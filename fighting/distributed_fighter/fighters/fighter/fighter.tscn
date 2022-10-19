@@ -1,7 +1,6 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://HUD/healthbar.gd" type="Script" id=1]
-[ext_resource path="res://shader/red_dither.tres" type="Material" id=2]
 [ext_resource path="res://test/packed_state/input_state.gd" type="Script" id=3]
 [ext_resource path="res://fighting/distributed_fighter/fighters/fighter/fighter.gd" type="Script" id=4]
 [ext_resource path="res://test/packed_state/packed_state_machine.gd" type="Script" id=5]
@@ -18,35 +17,11 @@ bg_color = Color( 0.341176, 0, 0, 1 )
 
 [sub_resource type="Animation" id=27]
 length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:material")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ null ]
-}
 
 [sub_resource type="Animation" id=28]
 resource_name = "damage"
 length = 0.0833333
 step = 0.0166667
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:material")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.0833333 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ ExtResource( 2 ), null ]
-}
 
 [sub_resource type="Animation" id=38]
 length = 0.001
