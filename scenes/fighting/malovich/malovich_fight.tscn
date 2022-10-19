@@ -98,7 +98,6 @@ hide_health_bar = true
 [node name="controller" parent="bife" instance=ExtResource( 4 )]
 
 [node name="Camera2D" type="Camera2D" parent="bife"]
-current = true
 
 [node name="malovich" parent="." instance=ExtResource( 5 )]
 position = Vector2( 31, 183 )
