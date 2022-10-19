@@ -147,7 +147,11 @@ func flinch(knockback: Vector2, damage: float):
 
 func receive_damage(damage : float):
 	if damage>0.0:
+		var time = 0.1
 		damage_animation.play("damage")
+		yield(get_tree().create_timer(time, false), "timeout")
+		damage_animation.play("RESET")
+		
 	self.health = health - damage
 	emit_signal("received_damage", damage)
 	if health == 0.0 and !dead:

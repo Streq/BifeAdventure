@@ -31,4 +31,7 @@ valign = 1
 [node name="free_in_release" type="Node" parent="AI/state_label" index="0"]
 script = ExtResource( 4 )
 
+[node name="palette" parent="set_palette_to" index="0"]
+visible = true
+
 [connection signal="strategy_changed" from="AI" to="AI/state_label" method="set_text"]
